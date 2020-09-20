@@ -1,0 +1,37 @@
+{% extends 'AppBundle:Layout:index.html.twig' %}
+
+{% block body %}
+    {% include "AppBundle:Layout:navigation.html.twig" %}
+    <div class="container">
+        <h1 class="mt-4 mb-3">Contacto</h1>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <iframe style="width: 100%; height: 400px; border: 0;"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d554.3453002968688!2d-64.59710817692292!3d-33.62299836954812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95d1c472eb2a2def%3A0x8b3895b2338721a2!2sCentro%20educativo%20Nicol%C3%A1s%20Avellaneda!5e0!3m2!1sen!2sus!4v1600477686698!5m2!1sen!2sus"></iframe>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h3>Detalles de contacto</h3>
+                <br>
+                <p>
+                    Ubicación: Mitre 56, Coronel Moldes - Cordoba
+
+                </p>
+                <p>
+                    Telefono: (3582) 456-7890
+                </p>
+                <p>
+                    Correo electrónico:
+                    <a href="mailto:name@example.com">name@example.com</a>
+                </p>
+                <p>
+                    Horarios: Lunes a Viernes
+                    <br>8:00 - 12:00
+                    <br>13:00 - 17:00
+                </p>
+            </div>
+        </div>
+
+{% endblock %}
