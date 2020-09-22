@@ -54,6 +54,6 @@ class SiteController extends Controller
      */
     public function loginAction(Request $request)
     {
-        return $this->render('AppBundle:Layout:login.html.twig');
+        return $this->render('AppBundle:Layout:dashboard.html.twig');
     }
 }
