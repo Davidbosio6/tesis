@@ -10,45 +10,14 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href={{ path('about') }}>Sobre
-                        nosotros</a>
+                    <a class="nav-link" href={{ path('about') }}>Sobre nosotros</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href={{ path('contact') }}>Contacto</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href={{ path('create_user') }}>Usuario</a>
-                </li>
-
-                <li class="dropdown">
-                    <a class="nav-link dropdown-toggle" href="#"
-                       id="navbarDropdownMenuLink" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Iniciar Sesión
-                    </a>
-                    <div class="dropdown-menu">
-                        <form action="{{ path('login') }}" method="post">
-                            <input class="form-control"
-                                   type="text"
-                                   name="_username"
-                                   id="username"
-                                   autocomplete="off"
-                                   placeholder="Nombre de usuario"><br>
-                            <input class="form-control"
-                                   type="password"
-                                   name="_password"
-                                   id="password"
-                                   placeholder="Contraseña">
-
-                            <br>
-
-                            <input class="btn btn-primary"
-                                   type="submit"
-                                   name="submit"
-                                   value="Confirmar">
-                        </form>
-                    </div>
+                    <a class="nav-link" href={{ path('login') }}>Iniciar Sesion</a>
                 </li>
             </ul>
         </div>

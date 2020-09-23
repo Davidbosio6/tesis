@@ -54,6 +54,26 @@ class SiteController extends Controller
      */
     public function loginAction(Request $request)
     {
+        $authenticationUtils = $this->get('security.authentication_utils');
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('AppBundle:Layout:login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Route("/dashboard", name="dashboard")
+     */
+    public function dashboarAction(Request $request)
+    {
         return $this->render('AppBundle:Layout:dashboard.html.twig');
     }
 }
