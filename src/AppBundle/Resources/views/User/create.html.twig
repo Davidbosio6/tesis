@@ -1,0 +1,24 @@
+{% extends 'AppBundle:Layout:index.html.twig' %}
+
+{% block body %}
+    {% include "AppBundle:Layout:navigation.html.twig" %}
+    <div class="container">
+        <h1 class="mt-4 mb-3">Nuevo usuario</h1>
+        {{ form_start(form) }}
+
+        <div class="row">
+            <div class="col-md-8">
+                {{ form_widget(form) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" name="submit" class="btn btn-primary pull-right">
+                    Guardar
+                </button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

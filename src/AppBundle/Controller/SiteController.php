@@ -7,7 +7,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SiteController extends Controller
+/**
+ * Class SiteController.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
+class SiteController extends AbstractController
 {
     /**
      * @param Request $request
@@ -54,6 +59,25 @@ class SiteController extends Controller
      */
     public function loginAction(Request $request)
     {
-        return $this->render('AppBundle:Layout:login.html.twig');
+        $error = $this->getAuthenticationUtilsService()->getLastAuthenticationError();
+
+        $lastUsername = $this->getAuthenticationUtilsService()->getLastUsername();
+
+        return $this->render('AppBundle:Layout:login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Route("/dashboard", name="dashboard")
+     */
+    public function dashboardAction(Request $request)
+    {
+        return $this->render('AppBundle:Layout:dashboard.html.twig');
     }
 }
