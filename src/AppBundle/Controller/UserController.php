@@ -5,10 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class UserController.
@@ -17,17 +15,16 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class UserController extends Controller
+class UserController extends AbstractController
 {
     /**
      * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
      *
      * @return Response
      *
      * @Route("/create", name="create_user")
      */
-    public function indexAction(Request $request )
+    public function indexAction(Request $request)
     {
         $user = new User();
 
@@ -39,11 +36,14 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $passwordEncoder = $this->get('security.password_encoder');
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $password = $this->getPasswordEncoderService()->encodePassword(
+                $user,
+                $user->getPlainPassword()
+            );
+
             $user->setPassword($password);
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getEntityManager();
             $em->persist($user);
             $em->flush();
 

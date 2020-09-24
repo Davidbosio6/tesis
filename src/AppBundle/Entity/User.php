@@ -8,8 +8,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Class User.
+ *
  * @ORM\Table(name="User")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ *
+ * @author David Bosio <dbosio@pagos360.com>
  */
 class User implements UserInterface, Serializable
 {
@@ -41,61 +45,17 @@ class User implements UserInterface, Serializable
      */
     private $plainPassword;
 
-
-
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive = true;
 
-    public function getUsername()
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
-        return $this->username;
-    }
-
-    public function getSalt()
-    {
-        // you *may* need a real salt depending on your encoder
-        // see section on salt below
-        return null;
-    }
-
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function getRoles()
-    {
-        return ['ROLE_USER'];
-    }
-
-    public function eraseCredentials()
-    {
-    }
-
-    /** @see \Serializable::serialize() */
-    public function serialize()
-    {
-        return serialize([
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
-        ]);
-    }
-
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-            ) = unserialize($serialized, ['allowed_classes' => false]);
+        return $this->id;
     }
 
     /**
@@ -116,20 +76,30 @@ class User implements UserInterface, Serializable
         return $this;
     }
 
-    /**
-     * @param bool $isActive
-     */
-    public function setIsActive($isActive)
+    public function getUsername()
     {
-        $this->isActive = $isActive;
+        return $this->username;
     }
 
     /**
-     * @return bool
+     * @param mixed $username
      */
-    public function isActive()
+    public function setUsername($username)
     {
-        return $this->isActive;
+        $this->username = $username;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
     }
 
     public function getPlainPassword()
@@ -143,18 +113,54 @@ class User implements UserInterface, Serializable
     }
 
     /**
-     * @param mixed $password
+     * @param bool $isActive
      */
-    public function setPassword($password)
+    public function setIsActive(bool $isActive)
     {
-        $this->password = $password;
+        $this->isActive = $isActive;
     }
 
     /**
-     * @param mixed $username
+     * @return bool
      */
-    public function setUsername($username)
+    public function isActive()
     {
-        $this->username = $username;
+        return $this->isActive;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->username,
+            $this->password,
+        ]);
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function eraseCredentials()
+    {
     }
 }
