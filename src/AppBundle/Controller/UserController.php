@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class UserController.
  *
- * @Route("/user", name="index")
+ * @Route("/user")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
@@ -24,7 +24,7 @@ class UserController extends AbstractController
      *
      * @Route("/create", name="user_create")
      */
-    public function indexAction(Request $request)
+    public function createAction(Request $request)
     {
         $user = new User();
 
