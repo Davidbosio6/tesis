@@ -4,7 +4,7 @@ namespace AppBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Security\Core\Tests\Encoder\PasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -32,9 +32,9 @@ class AbstractController extends Controller
     }
 
     /**
-     * @return PasswordEncoder
+     * @return UserPasswordEncoder
      */
-    public function getPasswordEncoderService(): PasswordEncoder
+    public function getPasswordEncoderService(): UserPasswordEncoder
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->get('security.password_encoder');

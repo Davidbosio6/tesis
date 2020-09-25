@@ -22,7 +22,7 @@ class UserController extends AbstractController
      *
      * @return Response
      *
-     * @Route("/create", name="create_user")
+     * @Route("/create", name="user_create")
      */
     public function indexAction(Request $request)
     {
@@ -47,9 +47,9 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('info', 'La adhesión se editó con éxito!');
+            $this->addFlash('info', 'El usuario se creó con éxito!');
 
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('user_create');
         }
 
         return $this->render(
