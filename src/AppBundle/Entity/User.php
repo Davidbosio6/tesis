@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -12,6 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="User")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ *
+ * @UniqueEntity("email")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
@@ -49,6 +52,16 @@ class User implements UserInterface, Serializable
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive = true;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $lastName;
 
     /**
      * @return mixed
@@ -115,7 +128,7 @@ class User implements UserInterface, Serializable
     /**
      * @param bool $isActive
      */
-    public function setIsActive(bool $isActive)
+    public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
     }
@@ -138,23 +151,29 @@ class User implements UserInterface, Serializable
         ]);
     }
 
-    /** @see \Serializable::unserialize() */
+    /**
+     * @param $serialized
+     * @see \Serializable::unserialize()
+     */
     public function unserialize($serialized)
     {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-            ) = unserialize($serialized, ['allowed_classes' => false]);
+        list ($this->id, $this->username, $this->password) = unserialize(
+            $serialized,
+            ['allowed_classes' => false]
+        );
     }
 
+    /**
+     * @return null
+     */
     public function getSalt()
     {
         return null;
     }
 
+    /**
+     * @return array
+     */
     public function getRoles()
     {
         return ['ROLE_USER'];
@@ -162,5 +181,37 @@ class User implements UserInterface, Serializable
 
     public function eraseCredentials()
     {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param mixed $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param mixed $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
     }
 }
