@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class User.
  *
- * @ORM\Table(name="User")
+ * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  *
  * @UniqueEntity("email")
@@ -64,79 +64,107 @@ class User implements UserInterface, Serializable
     private $lastName;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @param mixed $email
+     * @param string $email
+     *
      * @return User
      */
-    public function setEmail($email)
-    {
+    public function setEmail(
+        string $email
+    ): self {
         $this->email = $email;
+
         return $this;
     }
 
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
     /**
-     * @param mixed $username
+     * @param string $username
+     *
+     * @return $this
      */
-    public function setUsername($username)
-    {
+    public function setUsername(
+        string $username
+    ): self {
         $this->username = $username;
+
+        return $this;
     }
 
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
 
     /**
-     * @param mixed $password
+     * @param string $password
+     *
+     * @return self
      */
-    public function setPassword($password)
-    {
+    public function setPassword(
+        string $password
+    ): self {
         $this->password = $password;
+
+        return $this;
     }
 
-    public function getPlainPassword()
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
 
-    public function setPlainPassword($password)
-    {
+    /**
+     * @param string $password
+     * @return $this
+     */
+    public function setPlainPassword(
+        string $password
+    ): self {
         $this->plainPassword = $password;
+
+        return $this;
     }
 
     /**
      * @param bool $isActive
+     *
+     * @return $this
      */
-    public function setIsActive($isActive)
-    {
+    public function setIsActive(
+        bool $isActive
+    ): self {
         $this->isActive = $isActive;
+
+        return $this;
     }
 
     /**
      * @return bool
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->isActive;
     }
@@ -174,44 +202,58 @@ class User implements UserInterface, Serializable
     /**
      * @return array
      */
-    public function getRoles()
+    public function getRoles(): array
     {
         return ['ROLE_USER'];
     }
 
+    /**
+     * @return null
+     */
     public function eraseCredentials()
     {
+        return null;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
     /**
-     * @param mixed $firstName
+     * @param string $firstName
+     *
+     * @return $this
      */
-    public function setFirstName($firstName)
-    {
+    public function setFirstName(
+        string $firstName
+    ): self {
         $this->firstName = $firstName;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
     /**
-     * @param mixed $lastName
+     * @param string $lastName
+     *
+     * @return $this
      */
-    public function setLastName($lastName)
-    {
+    public function setLastName(
+        string $lastName
+    ): self {
         $this->lastName = $lastName;
+
+        return $this;
     }
 }
