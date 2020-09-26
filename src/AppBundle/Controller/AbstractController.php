@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectRepository;
+use Knp\Component\Pager\Paginator as KnpPaginator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -24,6 +26,15 @@ class AbstractController extends Controller
     }
 
     /**
+     * @param $class
+     * @return ObjectRepository
+     */
+    public function getRepository($class): ObjectRepository
+    {
+        return $this->getDoctrine()->getManager()->getRepository($class);
+    }
+
+    /**
      * @return AuthenticationUtils
      */
     public function getAuthenticationUtilsService(): AuthenticationUtils
@@ -39,5 +50,14 @@ class AbstractController extends Controller
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->get('security.password_encoder');
+    }
+
+    /**
+     * @return KnpPaginator
+     */
+    protected function getKnpPaginator(): KnpPaginator
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return $this->get('knp_paginator');
     }
 }
