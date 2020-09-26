@@ -19,6 +19,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Fecha de creación</th>
             <th scope="col">Pais</th>
         </tr>
         </thead>
@@ -27,6 +28,7 @@
             <tr>
                 <td><i class="fa fa-search"></i></td>
                 <td>{{ province.name }}</td>
+                <td>{{ province.createdAt | date('d-m-Y H:i') }}</td>
                 <td>{{ province.country.name }}</td>
             </tr>
         {% endfor %}

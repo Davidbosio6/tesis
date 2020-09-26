@@ -19,17 +19,23 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Fecha de creación</th>
             <th scope="col">Provincia</th>
             <th scope="col">Pais</th>
         </tr>
         </thead>
         <tbody>
-        {% for country in table %}
+        {% for city in table %}
             <tr>
-                <td><i class="fa fa-search"></i></td>
-                <td>{{ country.name }}</td>
-                <td>{{ country.province.name }}</td>
-                <td>{{ country.province.country.name }}</td>
+                <td>
+                    <a href="{{ path('city_detail', {id: city.id}) }}">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </td>
+                <td>{{ city.name }}</td>
+                <td>{{ city.createdAt | date('d-m-Y H:i') }}</td>
+                <td>{{ city.province.name }}</td>
+                <td>{{ city.province.country.name }}</td>
             </tr>
         {% endfor %}
         </tbody>

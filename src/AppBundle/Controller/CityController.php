@@ -87,4 +87,21 @@ class CityController extends AbstractController
             ]
         );
     }
+
+    /**
+     * @param City $city
+     *
+     * @return Response
+     *
+     * @Route("/detail/{id}", name="city_detail")
+     */
+    public function detailAction(City $city)
+    {
+        return $this->render(
+            'AppBundle:City:detail.html.twig',
+            [
+                'city' => $city,
+            ]
+        );
+    }
 }

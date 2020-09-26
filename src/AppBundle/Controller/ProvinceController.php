@@ -48,7 +48,7 @@ class ProvinceController extends AbstractController
         return $this->render(
             'AppBundle:Province:create.html.twig',
             [
-                'form'=>$form->createView(),
+                'form' => $form->createView(),
             ]
         );
     }

@@ -48,7 +48,7 @@ class CountryController extends AbstractController
         return $this->render(
             'AppBundle:Country:create.html.twig',
             [
-                'form'=>$form->createView(),
+                'form' => $form->createView(),
             ]
         );
     }
