@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * CityRepository.
@@ -12,4 +13,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class CityRepository extends EntityRepository
 {
+    /**
+     * @return Query
+     */
+    public function findAllQuery()
+    {
+        $qb = $this->createQueryBuilder('city');
+
+        return $qb->getQuery();
+    }
 }

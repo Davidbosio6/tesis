@@ -1,7 +1,5 @@
 {% extends 'AppBundle:Layout:admin_base.html.twig' %}
 
-
-
 {% block body %}
     <div class="row">
         <div class="col-md-10">
@@ -16,28 +14,26 @@
 
     <hr>
 
-    <div class="row">
-        <table class="table">
-            <thead class="thead-dark">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre de usuario</th>
+            <th scope="col">Correo Electronico</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Activo</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in table %}
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nombre de usuario</th>
-                <th scope="col">Correo Electronico</th>
-                <th scope="col">Rol</th>
-                <th scope="col">Activo</th>
+                <td><i class="fa fa-search"></i></td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>Admin</td>
+                <td>{{ user.isActive }}</td>
             </tr>
-            </thead>
-            <tbody>
-            {% for user in table %}
-                <tr>
-                    <td><i class="fa fa-search"></i></td>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>Admin</td>
-                    <td>{{ user.isActive }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

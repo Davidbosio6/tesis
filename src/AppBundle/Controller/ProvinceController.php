@@ -2,58 +2,51 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\User;
-use AppBundle\Form\UserType;
-use AppBundle\Repository\UserRepository;
+use AppBundle\Entity\Province;
+use AppBundle\Form\ProvinceType;
+use AppBundle\Repository\ProvinceRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class UserController.
+ * Class ProvinceController.
  *
- * @Route("/user")
+ * @Route("/province")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class UserController extends AbstractController
+class ProvinceController extends AbstractController
 {
     /**
      * @param Request $request
      *
      * @return Response
      *
-     * @Route("/create", name="user_create")
+     * @Route("/create", name="province_create")
      */
     public function createAction(Request $request)
     {
-        $user = new User();
+        $province = new Province();
         $form = $this->createForm(
-            UserType::class,
-            $user
+            ProvinceType::class,
+            $province
         );
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $this->getPasswordEncoderService()->encodePassword(
-                $user,
-                $user->getPlainPassword()
-            );
-
-            $user->setPassword($password);
-
             $em = $this->getEntityManager();
-            $em->persist($user);
+            $em->persist($province);
             $em->flush();
 
-            $this->addFlash('info', 'El usuario se creó con éxito!');
+            $this->addFlash('info', 'La provincia se creó con éxito!');
 
-            return $this->redirectToRoute('user_list');
+            return $this->redirectToRoute('province_list');
         }
 
         return $this->render(
-            'AppBundle:User:create.html.twig',
+            'AppBundle:Province:create.html.twig',
             [
                 'form'=>$form->createView(),
             ]
@@ -65,15 +58,15 @@ class UserController extends AbstractController
      *
      * @return Response
      *
-     * @Route("/list", name="user_list")
+     * @Route("/list", name="province_list")
      */
     public function listAction(Request $request)
     {
         $page = $request->query->get('page') ?? 1;
         $limit = $request->query->get('limit') ?? 20;
 
-        /** @var UserRepository $repository */
-        $repository = $this->getRepository(User::class);
+        /** @var ProvinceRepository $repository */
+        $repository = $this->getRepository(Province::class);
 
         $query = $repository->findAllQuery();
 
@@ -82,13 +75,13 @@ class UserController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'user.id',
-                'defaultSortDirection' => 'DESC'
+                'defaultSortFieldName' => 'province.name',
+                'defaultSortDirection' => 'ASC'
             ]
         );
 
         return $this->render(
-            'AppBundle:User:list.html.twig',
+            'AppBundle:Province:list.html.twig',
             [
                 'table' => $data,
             ]

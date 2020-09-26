@@ -2,58 +2,51 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\User;
-use AppBundle\Form\UserType;
-use AppBundle\Repository\UserRepository;
+use AppBundle\Entity\Country;
+use AppBundle\Form\CountryType;
+use AppBundle\Repository\CountryRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class UserController.
+ * Class CountryController.
  *
- * @Route("/user")
+ * @Route("/country")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class UserController extends AbstractController
+class CountryController extends AbstractController
 {
     /**
      * @param Request $request
      *
      * @return Response
      *
-     * @Route("/create", name="user_create")
+     * @Route("/create", name="country_create")
      */
     public function createAction(Request $request)
     {
-        $user = new User();
+        $country = new Country();
         $form = $this->createForm(
-            UserType::class,
-            $user
+            CountryType::class,
+            $country
         );
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $this->getPasswordEncoderService()->encodePassword(
-                $user,
-                $user->getPlainPassword()
-            );
-
-            $user->setPassword($password);
-
             $em = $this->getEntityManager();
-            $em->persist($user);
+            $em->persist($country);
             $em->flush();
 
-            $this->addFlash('info', 'El usuario se creó con éxito!');
+            $this->addFlash('info', 'El país se creó con éxito!');
 
-            return $this->redirectToRoute('user_list');
+            return $this->redirectToRoute('country_list');
         }
 
         return $this->render(
-            'AppBundle:User:create.html.twig',
+            'AppBundle:Country:create.html.twig',
             [
                 'form'=>$form->createView(),
             ]
@@ -65,15 +58,15 @@ class UserController extends AbstractController
      *
      * @return Response
      *
-     * @Route("/list", name="user_list")
+     * @Route("/list", name="country_list")
      */
     public function listAction(Request $request)
     {
         $page = $request->query->get('page') ?? 1;
         $limit = $request->query->get('limit') ?? 20;
 
-        /** @var UserRepository $repository */
-        $repository = $this->getRepository(User::class);
+        /** @var CountryRepository $repository */
+        $repository = $this->getRepository(Country::class);
 
         $query = $repository->findAllQuery();
 
@@ -82,13 +75,13 @@ class UserController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'user.id',
-                'defaultSortDirection' => 'DESC'
+                'defaultSortFieldName' => 'country.name',
+                'defaultSortDirection' => 'ASC'
             ]
         );
 
         return $this->render(
-            'AppBundle:User:list.html.twig',
+            'AppBundle:Country:list.html.twig',
             [
                 'table' => $data,
             ]

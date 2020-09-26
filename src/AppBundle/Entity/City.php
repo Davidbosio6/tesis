@@ -61,7 +61,7 @@ class City
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -82,7 +82,7 @@ class City
     /**
      * @return Province
      */
-    public function getProvince(): Province
+    public function getProvince(): ?Province
     {
         return $this->province;
     }
