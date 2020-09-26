@@ -22,8 +22,8 @@ class LoadUserData extends AbstractFixture implements FixtureInterface
         $user->setFirstName('David');
         $user->setLastName('Bosio');
         $user->setIsActive(true);
-
         $manager->persist($user);
+
         $manager->flush();
     }
 }

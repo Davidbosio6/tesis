@@ -66,7 +66,7 @@ class User implements UserInterface, Serializable
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -74,7 +74,7 @@ class User implements UserInterface, Serializable
     /**
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -104,7 +104,7 @@ class User implements UserInterface, Serializable
      */
     public function setUsername(
         string $username
-    ): self{
+    ): self {
         $this->username = $username;
 
         return $this;
@@ -153,8 +153,9 @@ class User implements UserInterface, Serializable
      *
      * @return $this
      */
-    public function setIsActive(bool $isActive): self
-    {
+    public function setIsActive(
+        bool $isActive
+    ): self {
         $this->isActive = $isActive;
 
         return $this;

@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -85,8 +84,9 @@ class Province
      *
      * @return self
      */
-    public function setCountry(Country $country): self
-    {
+    public function setCountry(
+        Country $country
+    ): self {
         $this->country = $country;
 
         return $this;
@@ -121,7 +121,7 @@ class Province
     }
 
     /**
-     * @return Collection
+     * @return ArrayCollection
      */
     public function getProvinces()
     {
