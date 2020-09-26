@@ -40,7 +40,7 @@ class CityController extends AbstractController
             $em->persist($city);
             $em->flush();
 
-            $this->addFlash('info', 'La ciudad se creó con éxito!');
+            $this->addFlash('success', 'La ciudad se creó con éxito!');
 
             return $this->redirectToRoute('city_list');
         }
@@ -103,5 +103,23 @@ class CityController extends AbstractController
                 'city' => $city,
             ]
         );
+    }
+
+    /**
+     * @Route("/delete/{id}", name="city_delete")
+     *
+     * @param City $city
+     * @return Response
+     */
+    public function deleteAction(
+        City $city
+    ): Response {
+        $em = $this->getEntityManager();
+        $em->remove($city);
+        $em->flush();
+
+        $this->addFlash('success', 'El registro se eliminó con éxito!');
+
+        return $this->redirectToRoute('city_list');
     }
 }

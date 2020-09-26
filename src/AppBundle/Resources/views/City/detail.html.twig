@@ -9,7 +9,8 @@
             <a class="btn btn-dark pull-right" href="#">
                 <i class="fa fa-edit" aria-hidden="true"></i> Editar
             </a>
-            <a class="btn btn-dark pull-right" href="#">
+            <a class="btn btn-dark pull-right" href="{{ path('city_delete', {id: city.id}) }}"
+               onclick="return confirm('Esta acción no tiene vuelta atrás ¿Está seguro?')">
                 <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
             </a>
         </div>
