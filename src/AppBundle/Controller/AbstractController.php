@@ -19,6 +19,7 @@ class AbstractController extends Controller
      */
     public function getEntityManager(): ObjectManager
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->getDoctrine()->getManager();
     }
 
