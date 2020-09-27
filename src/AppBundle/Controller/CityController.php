@@ -65,7 +65,7 @@ class CityController extends AbstractController
         Request $request
     ): Response {
         $page = $request->query->get('page') ?? 1;
-        $limit = $request->query->get('limit') ?? 20;
+        $limit = $request->query->get('limit') ?? 5;
 
         /** @var CityRepository $repository */
         $repository = $this->getRepository(City::class);
