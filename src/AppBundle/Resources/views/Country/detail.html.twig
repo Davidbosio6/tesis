@@ -20,7 +20,7 @@
 
     <div class="card">
         <div class="card-header text-white bg-dark">
-            Datos de la ciudad
+            Datos del pais
         </div>
         <div class="card-body">
             <div class="row">
@@ -62,17 +62,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for province in country.provinces %}
-                        <tr>
-                            <td>
-                                <a href="{{ path('province_detail', {id: province.id}) }}">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </td>
-                            <td>{{ province.name }}</td>
-                            <td>{{ province.createdAt | date('d-m-Y H:i') }}</td>
-                        </tr>
-                    {% endfor %}
+                        {% for province in country.provinces %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('province_detail', {id: province.id}) }}">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </td>
+                                <td>{{ province.name }}</td>
+                                <td>{{ province.createdAt | date('d-m-Y H:i') }}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             {% endif %}

@@ -25,8 +25,9 @@ class ProvinceController extends AbstractController
      *
      * @Route("/create", name="province_create")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(
+        Request $request
+    ): Response {
         $province = new Province();
         $form = $this->createForm(
             ProvinceType::class,
@@ -60,8 +61,9 @@ class ProvinceController extends AbstractController
      *
      * @Route("/list", name="province_list")
      */
-    public function listAction(Request $request)
-    {
+    public function listAction(
+        Request $request
+    ): Response {
         $page = $request->query->get('page') ?? 1;
         $limit = $request->query->get('limit') ?? 20;
 
@@ -95,8 +97,9 @@ class ProvinceController extends AbstractController
      *
      * @Route("/detail/{id}", name="province_detail")
      */
-    public function detailAction(Province $province)
-    {
+    public function detailAction(
+        Province $province
+    ): Response {
         return $this->render(
             'AppBundle:Province:detail.html.twig',
             [
@@ -118,7 +121,7 @@ class ProvinceController extends AbstractController
         $em = $this->getEntityManager();
 
         if (!$province->getCities()->isEmpty()) {
-            $this->addFlash('error', 'Este registro no se ha podido eliminar ya que se encuentra asociado a una o mas provincias');
+            $this->addFlash('error', 'Este registro no se ha podido eliminar ya que se encuentra asociado a una o mas ciudades');
 
             return $this->redirectToRoute(
                 'province_detail',
@@ -168,7 +171,7 @@ class ProvinceController extends AbstractController
         return $this->render(
             'AppBundle:Province:edit.html.twig',
             [
-                'form'=>$form->createView(),
+                'form' => $form->createView(),
             ]
         );
     }

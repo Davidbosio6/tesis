@@ -25,19 +25,19 @@
         </tr>
         </thead>
         <tbody>
-        {% for city in table %}
-            <tr>
-                <td>
-                    <a href="{{ path('city_detail', {id: city.id}) }}">
-                        <i class="fa fa-search"></i>
-                    </a>
-                </td>
-                <td>{{ city.name }}</td>
-                <td>{{ city.createdAt | date('d-m-Y H:i') }}</td>
-                <td>{{ city.province.name }}</td>
-                <td>{{ city.province.country.name }}</td>
-            </tr>
-        {% endfor %}
+            {% for city in table %}
+                <tr>
+                    <td>
+                        <a href="{{ path('city_detail', {id: city.id}) }}">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </td>
+                    <td>{{ city.name }}</td>
+                    <td>{{ city.createdAt | date('d-m-Y H:i') }}</td>
+                    <td>{{ city.province.name }}</td>
+                    <td>{{ city.province.country.name }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}

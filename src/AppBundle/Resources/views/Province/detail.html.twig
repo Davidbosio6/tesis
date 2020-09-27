@@ -6,12 +6,10 @@
             <h3>{{ province.name }}</h3>
         </div>
         <div style="margin-right: 1em;">
-            <a class="btn btn-dark pull-right"
-               href="{{ path('province_edit', {id: province.id}) }}">
+            <a class="btn btn-dark pull-right" href="{{ path('province_edit', {id: province.id}) }}">
                 <i class="fa fa-edit" aria-hidden="true"></i> Editar
             </a>
-            <a class="btn btn-dark pull-right"
-               href="{{ path('province_delete', {id: province.id}) }}"
+            <a class="btn btn-dark pull-right" href="{{ path('province_delete', {id: province.id}) }}"
                onclick="return confirm('Esta acción no tiene vuelta atrás ¿Está seguro?')">
                 <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
             </a>
@@ -73,17 +71,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for city in province.cities %}
-                        <tr>
-                            <td>
-                                <a href="{{ path('city_detail', {id: city.id}) }}">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </td>
-                            <td>{{ city.name }}</td>
-                            <td>{{ city.createdAt | date('d-m-Y H:i') }}</td>
-                        </tr>
-                    {% endfor %}
+                        {% for city in province.cities %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('city_detail', {id: city.id}) }}">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </td>
+                                <td>{{ city.name }}</td>
+                                <td>{{ city.createdAt | date('d-m-Y H:i') }}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             {% endif %}

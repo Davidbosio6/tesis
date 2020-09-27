@@ -47,7 +47,7 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('info', 'El usuario se creó con éxito!');
+            $this->addFlash('success', 'El usuario se creó con éxito!');
 
             return $this->redirectToRoute('user_list');
         }

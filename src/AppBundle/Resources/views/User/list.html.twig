@@ -26,16 +26,16 @@
         </tr>
         </thead>
         <tbody>
-        {% for user in table %}
-            <tr>
-                <td><i class="fa fa-search"></i></td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.createdAt | date('d-m-Y H:i') }}</td>
-                <td>{{ user.email }}</td>
-                <td>Admin</td>
-                <td>{{ user.isActive }}</td>
-            </tr>
-        {% endfor %}
+            {% for user in table %}
+                <tr>
+                    <td><i class="fa fa-search"></i></td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.createdAt | date('d-m-Y H:i') }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>Admin</td>
+                    <td>{{ user.isActive }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}

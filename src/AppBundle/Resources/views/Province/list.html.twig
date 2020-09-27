@@ -24,18 +24,18 @@
         </tr>
         </thead>
         <tbody>
-        {% for province in table %}
-            <tr>
-                <td>
-                    <a href="{{ path('province_detail', {id: province.id}) }}">
-                        <i class="fa fa-search"></i>
-                    </a>
-                </td>
-                <td>{{ province.name }}</td>
-                <td>{{ province.createdAt | date('d-m-Y H:i') }}</td>
-                <td>{{ province.country.name }}</td>
-            </tr>
-        {% endfor %}
+            {% for province in table %}
+                <tr>
+                    <td>
+                        <a href="{{ path('province_detail', {id: province.id}) }}">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </td>
+                    <td>{{ province.name }}</td>
+                    <td>{{ province.createdAt | date('d-m-Y H:i') }}</td>
+                    <td>{{ province.country.name }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}

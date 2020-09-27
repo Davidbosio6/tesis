@@ -25,8 +25,9 @@ class CountryController extends AbstractController
      *
      * @Route("/create", name="country_create")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(
+        Request $request
+    ): Response {
         $country = new Country();
         $form = $this->createForm(
             CountryType::class,
@@ -60,8 +61,9 @@ class CountryController extends AbstractController
      *
      * @Route("/list", name="country_list")
      */
-    public function listAction(Request $request)
-    {
+    public function listAction(
+        Request $request
+    ): Response {
         $page = $request->query->get('page') ?? 1;
         $limit = $request->query->get('limit') ?? 20;
 
@@ -95,8 +97,9 @@ class CountryController extends AbstractController
      *
      * @Route("/detail/{id}", name="country_detail")
      */
-    public function detailAction(Country $country)
-    {
+    public function detailAction(
+        Country $country
+    ): Response {
         return $this->render(
             'AppBundle:Country:detail.html.twig',
             [
@@ -168,7 +171,7 @@ class CountryController extends AbstractController
         return $this->render(
             'AppBundle:Country:edit.html.twig',
             [
-                'form'=>$form->createView(),
+                'form' => $form->createView(),
             ]
         );
     }

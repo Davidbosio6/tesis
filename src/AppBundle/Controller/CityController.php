@@ -25,8 +25,9 @@ class CityController extends AbstractController
      *
      * @Route("/create", name="city_create")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(
+        Request $request
+    ): Response {
         $city = new City();
         $form = $this->createForm(
             CityType::class,
@@ -48,7 +49,7 @@ class CityController extends AbstractController
         return $this->render(
             'AppBundle:City:create.html.twig',
             [
-                'form'=>$form->createView(),
+                'form' => $form->createView(),
             ]
         );
     }
@@ -60,8 +61,9 @@ class CityController extends AbstractController
      *
      * @Route("/list", name="city_list")
      */
-    public function listAction(Request $request)
-    {
+    public function listAction(
+        Request $request
+    ): Response {
         $page = $request->query->get('page') ?? 1;
         $limit = $request->query->get('limit') ?? 20;
 
@@ -95,8 +97,9 @@ class CityController extends AbstractController
      *
      * @Route("/detail/{id}", name="city_detail")
      */
-    public function detailAction(City $city)
-    {
+    public function detailAction(
+        City $city
+    ): Response {
         return $this->render(
             'AppBundle:City:detail.html.twig',
             [
@@ -158,7 +161,7 @@ class CityController extends AbstractController
         return $this->render(
             'AppBundle:City:edit.html.twig',
             [
-                'form'=>$form->createView(),
+                'form' => $form->createView(),
             ]
         );
     }
