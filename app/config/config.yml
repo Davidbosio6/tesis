@@ -34,14 +34,13 @@ framework:
     php_errors:
         log: true
 
-# Twig Configuration
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     form_themes:
         - 'bootstrap_3_layout.html.twig'
 
-# Doctrine Configuration
+
 doctrine:
     dbal:
         driver: pdo_mysql
@@ -63,7 +62,7 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
-# Swiftmailer Configuration
+
 swiftmailer:
     transport: '%mailer_transport%'
     host: '%mailer_host%'
@@ -72,12 +71,12 @@ swiftmailer:
     spool: { type: memory }
 
 knp_paginator:
-    page_range: 4                      # default page range used in pagination control
+    page_range: 4
     default_options:
-        page_name: page                # page query parameter name
-        sort_field_name: sort          # sort field query parameter name
-        sort_direction_name: direction # sort direction query parameter name
-        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+        page_name: page
+        sort_field_name: sort
+        sort_direction_name: direction
+        distinct: true
     template:
-        pagination: 'KnpPaginatorBundle:Pagination:twitter_bootstrap_v4_pagination.html.twig'     # sliding pagination controls template
+        pagination: 'KnpPaginatorBundle:Pagination:twitter_bootstrap_v4_pagination.html.twig'
         sortable: 'KnpPaginatorBundle:Pagination:sortable_link.html.twig' # sort link template
