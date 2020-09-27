@@ -38,4 +38,6 @@
             {% endfor %}
         </tbody>
     </table>
+
+    {% include "AppBundle:Layout:navigation.html.twig" with {"table" : table} %}
 {% endblock %}

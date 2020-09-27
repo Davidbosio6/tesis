@@ -1,0 +1,57 @@
+<div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
+    {% if app.request.get('page') %}
+        {% if app.request.get('limit') %}
+            {% if app.request.get('page') == 1 %}
+                Vista del elemento {{ app.request.get('page') }} a {{ app.request.get('page') * app.request.get('limit') }} de {{ table.getTotalItemCount }} elementos
+            {% else %}
+                {% if table.getTotalItemCount <  (app.request.get('page') * app.request.get('limit')) %}
+                    Vista del elemento {{ app.request.get('page') * app.request.get('limit') - app.request.get('limit')}} a {{ table.getTotalItemCount }} de {{ table.getTotalItemCount }} elementos
+                {% else %}
+                    Vista del elemento {{ app.request.get('page') * app.request.get('limit') - app.request.get('limit')}} a {{ app.request.get('page') * app.request.get('limit') }} de {{ table.getTotalItemCount }} elementos
+                {% endif %}
+            {% endif %}
+        {% else %}
+            {% if app.request.get('page') == 1 %}
+                Vista del elemento {{ app.request.get('page') }} a {{ app.request.get('page') * 20 }} de {{ table.getTotalItemCount }} elementos
+            {% else %}
+                {% if table.getTotalItemCount <  (app.request.get('page') * 20) %}
+                    Vista del elemento {{ app.request.get('page') * 20 - 20}} a {{ table.getTotalItemCount }} de {{ table.getTotalItemCount }} elementos
+                {% else %}
+                    Vista del elemento {{ app.request.get('page') * 20 - 20}} a {{ app.request.get('page') * 20 }} de {{ table.getTotalItemCount }} elementos
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% else %}
+        {% if app.request.get('limit') %}
+            {% if table.getTotalItemCount < app.request.get('limit') %}
+                Vista del elemento 1 a {{ table.getTotalItemCount }} de {{ table.getTotalItemCount }} elementos
+            {% else %}
+                Vista del elemento 1 a {{ app.request.get('limit') }} de {{ table.getTotalItemCount }} elementos
+            {% endif %}
+        {% else %}
+            {% if table.getTotalItemCount < 20 %}
+                Vista del elemento 1 a {{ table.getTotalItemCount }} de {{ table.getTotalItemCount }} elementos
+            {% else %}
+                Vista del elemento 1 a 20 de {{ table.getTotalItemCount }} elementos
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+    {% if table.getTotalItemCount < 20 %}
+        <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">« Anterior</a>
+            </li>
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-disabled="true">Seguiente »</a>
+            </li>
+        </ul>
+    {% else %}
+        <div class="navigation">
+            {{ knp_pagination_render(table) }}
+        </div>
+    {% endif %}
+</div>
