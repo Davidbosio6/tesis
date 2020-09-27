@@ -1,0 +1,81 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>{{ country.name }}</h3>
+        </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('country_edit', {id: country.id}) }}">
+                <i class="fa fa-edit" aria-hidden="true"></i> Editar
+            </a>
+            <a class="btn btn-dark pull-right" href="{{ path('country_delete', {id: country.id}) }}"
+               onclick="return confirm('Esta acción no tiene vuelta atrás ¿Está seguro?')">
+                <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Datos del pais
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de creación</dt>
+                        <dd>{{ country.createdAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                </div>
+
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de actualización</dt>
+                        <dd>{{ country.updatedAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Provincias asociadas
+        </div>
+        <div class="card-body">
+            {% if country.provinces is empty %}
+                <div class="alert alert-light text-center" role="alert">
+                    No se encontraron resultados
+                </div>
+            {% else %}
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha de creación</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for province in country.provinces %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('province_detail', {id: province.id}) }}">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </td>
+                                <td>{{ province.name }}</td>
+                                <td>{{ province.createdAt | date('d-m-Y H:i') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

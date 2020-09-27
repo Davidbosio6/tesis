@@ -1,0 +1,41 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Provincias</h3>
+        </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('province_create') }}">
+                <i class="fa fa-plus" aria-hidden="true"></i> Nueva Provincia
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha de creación</th>
+            <th scope="col">Pais</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for province in table %}
+                <tr>
+                    <td>
+                        <a href="{{ path('province_detail', {id: province.id}) }}">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </td>
+                    <td>{{ province.name }}</td>
+                    <td>{{ province.createdAt | date('d-m-Y H:i') }}</td>
+                    <td>{{ province.country.name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

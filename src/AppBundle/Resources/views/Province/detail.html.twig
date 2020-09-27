@@ -1,0 +1,90 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>{{ province.name }}</h3>
+        </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('province_edit', {id: province.id}) }}">
+                <i class="fa fa-edit" aria-hidden="true"></i> Editar
+            </a>
+            <a class="btn btn-dark pull-right" href="{{ path('province_delete', {id: province.id}) }}"
+               onclick="return confirm('Esta acción no tiene vuelta atrás ¿Está seguro?')">
+                <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Datos de la provincia
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de creación</dt>
+                        <dd>{{ province.createdAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de actualización</dt>
+                        <dd>{{ province.updatedAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>País</dt>
+                        <dd>
+                            <a href="{{ path('country_detail', {id: province.country.id}) }}">
+                                {{ province.country.name }}
+                            </a>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Ciudades asociadas
+        </div>
+        <div class="card-body">
+            {% if province.cities is empty %}
+                <div class="alert alert-light text-center" role="alert">
+                    No se encontraron resultados
+                </div>
+            {% else %}
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha de creación</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for city in province.cities %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('city_detail', {id: city.id}) }}">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </td>
+                                <td>{{ city.name }}</td>
+                                <td>{{ city.createdAt | date('d-m-Y H:i') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
