@@ -32,11 +32,10 @@
                     <dl>
                         <dt>País</dt>
                         <dd>
-                            <a href="#">
+                            <a href="{{ path('country_detail', {id: city.province.country.id}) }}">
                                 {{ city.province.country.name }}
                             </a>
                         </dd>
-
                     </dl>
                 </div>
                 <div class="col-md-4">

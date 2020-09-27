@@ -117,9 +117,8 @@ class ProvinceController extends AbstractController
     ): Response {
         $em = $this->getEntityManager();
 
-
         if (!$province->getCities()->isEmpty()) {
-            $this->addFlash('error', 'Este registro no se ha podido eliminar ya que se encuentra relacionado a una o mas ciudades');
+            $this->addFlash('error', 'Este registro no se ha podido eliminar ya que se encuentra asociado a una o mas provincias');
 
             return $this->redirectToRoute(
                 'province_detail',

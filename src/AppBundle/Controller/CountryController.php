@@ -87,4 +87,89 @@ class CountryController extends AbstractController
             ]
         );
     }
+
+    /**
+     * @param Country $country
+     *
+     * @return Response
+     *
+     * @Route("/detail/{id}", name="country_detail")
+     */
+    public function detailAction(Country $country)
+    {
+        return $this->render(
+            'AppBundle:Country:detail.html.twig',
+            [
+                'country' => $country,
+            ]
+        );
+    }
+
+    /**
+     * @Route("/delete/{id}", name="country_delete")
+     *
+     * @param Country $country
+     *
+     * @return Response
+     */
+    public function deleteAction(
+        Country $country
+    ): Response {
+        $em = $this->getEntityManager();
+
+        if (!$country->getProvinces()->isEmpty()) {
+            $this->addFlash('error', 'Este registro no se ha podido eliminar ya que se encuentra asociado a una o más provincias');
+
+            return $this->redirectToRoute(
+                'country_detail',
+                ['id' => $country->getId()]
+            );
+        }
+
+        $em->remove($country);
+        $em->flush();
+
+        $this->addFlash('success', 'El registro se eliminó con éxito!');
+
+        return $this->redirectToRoute('country_list');
+    }
+
+    /**
+     * @Route("/edit/{id}", name="country_edit")
+     *
+     * @param Country $country
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function editAction(
+        Country $country,
+        Request $request
+    ): Response {
+        $form = $this->createForm(
+            CountryType::class,
+            $country
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getEntityManager();
+            $em->flush();
+
+            $this->addFlash('success', 'El pais se editó con éxito!');
+
+            return $this->redirectToRoute(
+                'country_detail',
+                ['id' => $country->getId()]
+            );
+        }
+
+        return $this->render(
+            'AppBundle:Country:edit.html.twig',
+            [
+                'form'=>$form->createView(),
+            ]
+        );
+    }
 }
