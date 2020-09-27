@@ -87,4 +87,90 @@ class ProvinceController extends AbstractController
             ]
         );
     }
+
+    /**
+     * @param Province $province
+     *
+     * @return Response
+     *
+     * @Route("/detail/{id}", name="province_detail")
+     */
+    public function detailAction(Province $province)
+    {
+        return $this->render(
+            'AppBundle:Province:detail.html.twig',
+            [
+                'province' => $province,
+            ]
+        );
+    }
+
+    /**
+     * @Route("/delete/{id}", name="province_delete")
+     *
+     * @param Province $province
+     *
+     * @return Response
+     */
+    public function deleteAction(
+        Province $province
+    ): Response {
+        $em = $this->getEntityManager();
+
+
+        if (!$province->getCities()->isEmpty()) {
+            $this->addFlash('error', 'Este registro no se ha podido eliminar ya que se encuentra relacionado a una o mas ciudades');
+
+            return $this->redirectToRoute(
+                'province_detail',
+                ['id' => $province->getId()]
+            );
+        }
+
+        $em->remove($province);
+        $em->flush();
+
+        $this->addFlash('success', 'El registro se eliminó con éxito!');
+
+        return $this->redirectToRoute('province_list');
+    }
+
+    /**
+     * @Route("/edit/{id}", name="province_edit")
+     *
+     * @param Province $province
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function editAction(
+        Province $province,
+        Request $request
+    ): Response {
+        $form = $this->createForm(
+            ProvinceType::class,
+            $province
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getEntityManager();
+            $em->flush();
+
+            $this->addFlash('success', 'La provincia se editó con éxito!');
+
+            return $this->redirectToRoute(
+                'province_detail',
+                ['id' => $province->getId()]
+            );
+        }
+
+        return $this->render(
+            'AppBundle:Province:edit.html.twig',
+            [
+                'form'=>$form->createView(),
+            ]
+        );
+    }
 }

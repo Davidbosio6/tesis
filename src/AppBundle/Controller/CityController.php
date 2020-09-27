@@ -147,7 +147,7 @@ class CityController extends AbstractController
             $em = $this->getEntityManager();
             $em->flush();
 
-            $this->addFlash('success', 'La ciudad se creó con éxito!');
+            $this->addFlash('success', 'La ciudad se editó con éxito!');
 
             return $this->redirectToRoute(
                 'city_detail',

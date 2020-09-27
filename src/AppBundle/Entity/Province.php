@@ -190,7 +190,7 @@ class Province
     /**
      * @return ArrayCollection
      */
-    public function getProvinces()
+    public function getCities()
     {
         return $this->cities;
     }
