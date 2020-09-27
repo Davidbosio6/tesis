@@ -109,6 +109,7 @@ class CityController extends AbstractController
      * @Route("/delete/{id}", name="city_delete")
      *
      * @param City $city
+     *
      * @return Response
      */
     public function deleteAction(
@@ -121,5 +122,44 @@ class CityController extends AbstractController
         $this->addFlash('success', 'El registro se eliminó con éxito!');
 
         return $this->redirectToRoute('city_list');
+    }
+
+    /**
+     * @Route("/edit/{id}", name="city_edit")
+     *
+     * @param City $city
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function editAction(
+        City $city,
+        Request $request
+    ): Response {
+        $form = $this->createForm(
+            CityType::class,
+            $city
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getEntityManager();
+            $em->flush();
+
+            $this->addFlash('success', 'La ciudad se creó con éxito!');
+
+            return $this->redirectToRoute(
+                'city_detail',
+                ['id' => $city->getId()]
+            );
+        }
+
+        return $this->render(
+            'AppBundle:City:edit.html.twig',
+            [
+                'form'=>$form->createView(),
+            ]
+        );
     }
 }
