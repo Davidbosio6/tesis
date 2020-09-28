@@ -68,6 +68,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Fecha de creación</th>
+                        <th scope="col">Código Postal</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -80,6 +81,7 @@
                                 </td>
                                 <td>{{ city.name }}</td>
                                 <td>{{ city.createdAt | date('d-m-Y H:i') }}</td>
+                                <td>{{ city.postalCode }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

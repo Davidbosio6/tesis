@@ -43,8 +43,6 @@
                         <dt>Fecha de actualización</dt>
                         <dd>{{ city.updatedAt | date('d/m/Y H:i') }}</dd>
                     </dl>
-                </div>
-                <div class="col-md-4">
                     <dl>
                         <dt>Provincia</dt>
                         <dd>
@@ -52,6 +50,12 @@
                                 {{ city.province.name }}
                             </a>
                         </dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Código Postal</dt>
+                        <dd>{{ city.postalCode }}</dd>
                     </dl>
                 </div>
             </div>
