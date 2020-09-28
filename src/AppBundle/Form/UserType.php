@@ -9,15 +9,18 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
+/**
+ * Class UserType.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class, ['label'=> 'Nombre de usuario'])
+            ->add('username', TextType::class)
             ->add('email', EmailType::class)
-            ->add('firstName', TextType::class, ['label'=> 'Nombre'])
-            ->add('lastName', TextType::class, ['label'=> 'Apellido',])
             ->add('plainPassword', PasswordType::class)
         ;
     }

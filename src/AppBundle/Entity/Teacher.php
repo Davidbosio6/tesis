@@ -3,21 +3,20 @@
 namespace AppBundle\Entity;
 
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class City.
+ * Class Teacher.
  *
  * @ORM\HasLifecycleCallbacks
  *
- * @ORM\Table(name="city")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CityRepository")
+ * @ORM\Table(name="teacher")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TeacherRepository")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class City
+class Teacher
 {
     /**
      * @ORM\Column(type="integer")
@@ -43,34 +42,31 @@ class City
     /**
      * @ORM\Column(type="string")
      */
-    private $name;
+    private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string")
      */
-    private $postalCode;
+    private $lastName;
 
     /**
-     * @var Province
+     * @var User
      *
-     * @ORM\ManyToOne(targetEntity="Province", inversedBy="cities")
-     * @ORM\JoinColumn(name="province_id", referencedColumnName="id", nullable=false)
+     * @ORM\OneToOne(targetEntity="User", inversedBy="teacher", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     *
+     */
+    private $user;
+
+    /**
+     * @var City
+     *
+     * @ORM\ManyToOne(targetEntity="City", inversedBy="teachers")
+     * @ORM\JoinColumn(name="city_id", referencedColumnName="id", nullable=false)
      *
      * @Assert\NotNull()
      */
-    private $province;
-
-    /**
-     * @var Teacher[]|ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Teacher", mappedBy="city")
-     */
-    private $teachers;
-
-    public function __construct()
-    {
-        $this->teachers = new ArrayCollection();
-    }
+    private $city;
 
     /**
      * Gets triggered every time on persist.
@@ -131,14 +127,22 @@ class City
     }
 
     /**
-     * @param string $name
+     * @return string
+     */
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
      *
      * @return $this
      */
-    public function setName(
-        string $name
+    public function setFirstName(
+        string $firstName
     ): self {
-        $this->name = $name;
+        $this->firstName = $firstName;
 
         return $this;
     }
@@ -146,78 +150,63 @@ class City
     /**
      * @return string
      */
-    public function getName(): ?string
+    public function getLastName(): ?string
     {
-        return $this->name;
+        return $this->lastName;
     }
 
     /**
-     * @param Province $province
-     *
-     * @return self
-     */
-    public function setProvince(
-        Province $province
-    ): self {
-        $this->province = $province;
-
-        return $this;
-    }
-
-    /**
-     * @return Province
-     */
-    public function getProvince(): ?Province
-    {
-        return $this->province;
-    }
-
-    /**
-     * @param string $postalCode
+     * @param string $lastName
      *
      * @return $this
      */
-    public function setPostalCode(
-        string $postalCode
+    public function setLastName(
+        string $lastName
     ): self {
-        $this->postalCode = $postalCode;
+        $this->lastName = $lastName;
 
         return $this;
     }
 
     /**
-     * @return string
-     */
-    public function getPostalCode(): ?string
-    {
-        return $this->postalCode;
-    }
-
-    /**
-     * @param Teacher $teacher
+     * @param User $user
      *
      * @return self
      */
-    public function addTeacher(Teacher $teacher)
-    {
-        $this->teachers[] = $teacher;
+    public function setUser(
+        User $user
+    ): self {
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * @param Teacher $teacher
+     * @return User
      */
-    public function removeTeacher(Teacher $teacher)
+    public function getUser(): ?User
     {
-        $this->teachers->removeElement($teacher);
+        return $this->user;
     }
 
     /**
-     * @return ArrayCollection
+     * @param City $city
+     *
+     * @return self
      */
-    public function getTeachers()
+    public function setCity(
+        City $city
+    ): self {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return City
+     */
+    public function getCity(): ?City
     {
-        return $this->teachers;
+        return $this->city;
     }
 }
