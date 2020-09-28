@@ -1,0 +1,78 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>{{ teacher.firstName }} {{ teacher.lastName }}</h3>
+        </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('teacher_edit', {id: teacher.id}) }}">
+                <i class="fa fa-edit" aria-hidden="true"></i> Editar
+            </a>
+            <a class="btn btn-dark pull-right" href="{{ path('teacher_delete', {id: teacher.id}) }}"
+               onclick="return confirm('Esta acción no tiene vuelta atrás ¿Está seguro?')">
+                <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Datos del profesor
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de creación</dt>
+                        <dd>{{ teacher.createdAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de actualización</dt>
+                        <dd>{{ teacher.updatedAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Numero de telefono</dt>
+                        <dd>3582413125</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Datos del usuario
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Nombre de usuario</dt>
+                        <dd>{{ teacher.user.username }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Correo electrónico</dt>
+                        <dd>{{ teacher.user.email }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Numero de telefono</dt>
+                        <dd>3582413125</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -3,7 +3,6 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 
 /**
  * UserRepository.
@@ -13,13 +12,5 @@ use Doctrine\ORM\Query;
  */
 class UserRepository extends EntityRepository
 {
-    /**
-     * @return Query
-     */
-    public function findAllQuery()
-    {
-        $qb = $this->createQueryBuilder('user');
 
-        return $qb->getQuery();
-    }
 }
