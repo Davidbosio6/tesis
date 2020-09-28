@@ -11,6 +11,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class LoadCityData extends AbstractFixture implements DependentFixtureInterface
 {
+    const SAMPACHO = 'c_sampacho';
     /**
      * {@inheritdoc}
      */
@@ -36,6 +37,7 @@ class LoadCityData extends AbstractFixture implements DependentFixtureInterface
         $city->setPostalCode('5829');
         $city->setProvince($cordobaProvince);
         $manager->persist($city);
+        $this->addReference(self::SAMPACHO, $city);
 
         $city = new City();
         $city->setName('Las Vertientes');

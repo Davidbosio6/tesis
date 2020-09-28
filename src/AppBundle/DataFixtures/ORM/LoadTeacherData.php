@@ -2,6 +2,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\City;
 use AppBundle\Entity\Teacher;
 use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -19,10 +20,14 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         /** @var User $user */
         $user = $this->getReference(LoadUserData::ADMIN);
 
+        /** @var City $city */
+        $city = $this->getReference(LoadCityData::SAMPACHO);
+
         $teacher = new Teacher();
         $teacher->setFirstName('Lore');
         $teacher->setLastName('Ipsum');
         $teacher->setUser($user);
+        $teacher->setCity($city);
         $manager->persist($teacher);
 
         $manager->flush();
@@ -35,6 +40,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
     {
         return [
             LoadUserData::class,
+            LoadCityData::class,
         ];
     }
 }

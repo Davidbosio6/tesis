@@ -1,7 +1,9 @@
 <?php
 namespace AppBundle\Form;
 
+use AppBundle\Entity\City;
 use AppBundle\Entity\Teacher;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,9 +19,13 @@ class TeacherType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', TextType::class, ['label'=> 'Nombre'])
-            ->add('lastName', TextType::class, ['label'=> 'Apellido'])
-            ->add('user', UserType::class, ['label'=> false])
+            ->add('firstName', TextType::class)
+            ->add('lastName', TextType::class)
+            ->add('user', UserType::class)
+            ->add('city', EntityType::class, [
+                'class' => City::class,
+                'choice_label' => 'name'
+            ])
         ;
     }
 

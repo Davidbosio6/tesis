@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Teacher.
@@ -56,6 +57,16 @@ class Teacher
      *
      */
     private $user;
+
+    /**
+     * @var City
+     *
+     * @ORM\ManyToOne(targetEntity="City", inversedBy="teachers")
+     * @ORM\JoinColumn(name="city_id", referencedColumnName="id", nullable=false)
+     *
+     * @Assert\NotNull()
+     */
+    private $city;
 
     /**
      * Gets triggered every time on persist.
@@ -176,5 +187,26 @@ class Teacher
     public function getUser(): ?User
     {
         return $this->user;
+    }
+
+    /**
+     * @param City $city
+     *
+     * @return self
+     */
+    public function setCity(
+        City $city
+    ): self {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return City
+     */
+    public function getCity(): ?City
+    {
+        return $this->city;
     }
 }

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -58,6 +59,18 @@ class City
      * @Assert\NotNull()
      */
     private $province;
+
+    /**
+     * @var Teacher[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Teacher", mappedBy="city")
+     */
+    private $teachers;
+
+    public function __construct()
+    {
+        $this->teachers = new ArrayCollection();
+    }
 
     /**
      * Gets triggered every time on persist.
@@ -178,5 +191,33 @@ class City
     public function getPostalCode(): ?string
     {
         return $this->postalCode;
+    }
+
+    /**
+     * @param Teacher $teacher
+     *
+     * @return self
+     */
+    public function addTeacher(Teacher $teacher)
+    {
+        $this->teachers[] = $teacher;
+
+        return $this;
+    }
+
+    /**
+     * @param Teacher $teacher
+     */
+    public function removeTeacher(Teacher $teacher)
+    {
+        $this->teachers->removeElement($teacher);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTeachers()
+    {
+        return $this->teachers;
     }
 }
