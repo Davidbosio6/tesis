@@ -71,14 +71,11 @@ class User implements UserInterface, Serializable
     private $isActive = true;
 
     /**
-     * @ORM\Column(type="string")
+     * @var Teacher
+     *
+     * @ORM\OneToOne(targetEntity="Teacher", mappedBy="user")
      */
-    private $firstName;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $lastName;
+    private $teacher;
 
     /**
      * Gets triggered every time on persist.
@@ -283,44 +280,23 @@ class User implements UserInterface, Serializable
     }
 
     /**
-     * @return string
-     */
-    public function getFirstName(): ?string
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * @param string $firstName
+     * @param Teacher $teacher
      *
-     * @return $this
+     * @return self
      */
-    public function setFirstName(
-        string $firstName
+    public function setTeacher(
+        Teacher $teacher
     ): self {
-        $this->firstName = $firstName;
+        $this->teacher = $teacher;
 
         return $this;
     }
 
     /**
-     * @return string
+     * @return Teacher
      */
-    public function getLastName(): ?string
+    public function getTeacher(): ?Teacher
     {
-        return $this->lastName;
-    }
-
-    /**
-     * @param string $lastName
-     *
-     * @return $this
-     */
-    public function setLastName(
-        string $lastName
-    ): self {
-        $this->lastName = $lastName;
-
-        return $this;
+        return $this->teacher;
     }
 }
