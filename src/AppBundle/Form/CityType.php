@@ -16,6 +16,7 @@ class CityType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['label'=> 'Nombre'])
+            ->add('postalCode', TextType::class, ['label'=> 'Código Postal'])
             ->add('province', EntityType::class, [
                 'class' => Province::class,
                 'choice_label' => 'name',

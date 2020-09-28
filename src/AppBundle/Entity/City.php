@@ -45,6 +45,11 @@ class City
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $postalCode;
+
+    /**
      * @var Province
      *
      * @ORM\ManyToOne(targetEntity="Province", inversedBy="cities")
@@ -152,5 +157,26 @@ class City
     public function getProvince(): ?Province
     {
         return $this->province;
+    }
+
+    /**
+     * @param string $postalCode
+     *
+     * @return $this
+     */
+    public function setPostalCode(
+        string $postalCode
+    ): self {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostalCode(): ?string
+    {
+        return $this->postalCode;
     }
 }
