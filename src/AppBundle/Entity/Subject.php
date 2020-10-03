@@ -3,20 +3,19 @@
 namespace AppBundle\Entity;
 
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Country.
+ * Class Subject.
  *
  * @ORM\HasLifecycleCallbacks
  *
- * @ORM\Table(name="country")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CountryRepository")
+ * @ORM\Table(name="subject")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SubjectRepository")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class Country
+class Subject
 {
     /**
      * @ORM\Column(type="integer")
@@ -43,18 +42,6 @@ class Country
      * @ORM\Column(type="string")
      */
     private $name;
-
-    /**
-     * @var Province[]|ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Province", mappedBy="country")
-     */
-    private $provinces;
-
-    public function __construct()
-    {
-        $this->provinces = new ArrayCollection();
-    }
 
     /**
      * Gets triggered every time on persist.
@@ -133,33 +120,5 @@ class Country
     public function getName(): ?string
     {
         return $this->name;
-    }
-
-    /**
-     * @param Province $province
-     *
-     * @return self
-     */
-    public function addProvince(Province $province)
-    {
-        $this->provinces[] = $province;
-
-        return $this;
-    }
-
-    /**
-     * @param Province $province
-     */
-    public function removeProvince(Province $province)
-    {
-        $this->provinces->removeElement($province);
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getProvinces()
-    {
-        return $this->provinces;
     }
 }

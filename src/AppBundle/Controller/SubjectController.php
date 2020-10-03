@@ -2,52 +2,52 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Country;
-use AppBundle\Form\CountryType;
-use AppBundle\Repository\CountryRepository;
+use AppBundle\Entity\Subject;
+use AppBundle\Form\SubjectType;
+use AppBundle\Repository\SubjectRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class CountryController.
+ * Class SubjectController.
  *
- * @Route("/country")
+ * @Route("/subject")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class CountryController extends AbstractController
+class SubjectController extends AbstractController
 {
     /**
      * @param Request $request
      *
      * @return Response
      *
-     * @Route("/create", name="country_create")
+     * @Route("/create", name="subject_create")
      */
     public function createAction(
         Request $request
     ): Response {
-        $country = new Country();
+        $subject = new Subject();
         $form = $this->createForm(
-            CountryType::class,
-            $country
+            SubjectType::class,
+            $subject
         );
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getEntityManager();
-            $em->persist($country);
+            $em->persist($subject);
             $em->flush();
 
-            $this->addFlash('success', 'El país se creó con éxito!');
+            $this->addFlash('success', 'La asignatura se creó con éxito!');
 
-            return $this->redirectToRoute('country_list');
+            return $this->redirectToRoute('subject_list');
         }
 
         return $this->render(
-            'AppBundle:Country:create.html.twig',
+            'AppBundle:Subject:create.html.twig',
             [
                 'form' => $form->createView(),
             ]
@@ -59,7 +59,7 @@ class CountryController extends AbstractController
      *
      * @return Response
      *
-     * @Route("/list", name="country_list")
+     * @Route("/list", name="subject_list")
      */
     public function listAction(
         Request $request
@@ -67,8 +67,8 @@ class CountryController extends AbstractController
         $page = $request->query->get('page') ?? 1;
         $limit = $request->query->get('limit') ?? 20;
 
-        /** @var CountryRepository $repository */
-        $repository = $this->getRepository(Country::class);
+        /** @var SubjectRepository $repository */
+        $repository = $this->getRepository(Subject::class);
 
         $query = $repository->findAllQuery();
 
@@ -77,13 +77,13 @@ class CountryController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'country.name',
+                'defaultSortFieldName' => 'subject.name',
                 'defaultSortDirection' => 'ASC'
             ]
         );
 
         return $this->render(
-            'AppBundle:Country:list.html.twig',
+            'AppBundle:Subject:list.html.twig',
             [
                 'table' => $data,
             ]
@@ -91,67 +91,57 @@ class CountryController extends AbstractController
     }
 
     /**
-     * @param Country $country
+     * @param Subject $subject
      *
      * @return Response
      *
-     * @Route("/detail/{id}", name="country_detail")
+     * @Route("/detail/{id}", name="subject_detail")
      */
     public function detailAction(
-        Country $country
+        Subject $subject
     ): Response {
         return $this->render(
-            'AppBundle:Country:detail.html.twig',
+            'AppBundle:Subject:detail.html.twig',
             [
-                'country' => $country,
+                'subject' => $subject,
             ]
         );
     }
 
     /**
-     * @Route("/delete/{id}", name="country_delete")
+     * @Route("/delete/{id}", name="subject_delete")
      *
-     * @param Country $country
+     * @param Subject $subject
      *
      * @return Response
      */
     public function deleteAction(
-        Country $country
+        Subject $subject
     ): Response {
         $em = $this->getEntityManager();
-
-        if (!$country->getProvinces()->isEmpty()) {
-            $this->addFlash('error', 'Este registro no se ha podido eliminar ya que se encuentra asociado a una o más provincias');
-
-            return $this->redirectToRoute(
-                'country_detail',
-                ['id' => $country->getId()]
-            );
-        }
-
-        $em->remove($country);
+        $em->remove($subject);
         $em->flush();
 
         $this->addFlash('success', 'El registro se eliminó con éxito!');
 
-        return $this->redirectToRoute('country_list');
+        return $this->redirectToRoute('subject_list');
     }
 
     /**
-     * @Route("/edit/{id}", name="country_edit")
+     * @Route("/edit/{id}", name="subject_edit")
      *
-     * @param Country $country
+     * @param Subject $subject
      * @param Request $request
      *
      * @return Response
      */
     public function editAction(
-        Country $country,
+        Subject $subject,
         Request $request
     ): Response {
         $form = $this->createForm(
-            CountryType::class,
-            $country
+            SubjectType::class,
+            $subject
         );
 
         $form->handleRequest($request);
@@ -160,16 +150,16 @@ class CountryController extends AbstractController
             $em = $this->getEntityManager();
             $em->flush();
 
-            $this->addFlash('success', 'El pais se editó con éxito!');
+            $this->addFlash('success', 'La asignatura se editó con éxito!');
 
             return $this->redirectToRoute(
-                'country_detail',
-                ['id' => $country->getId()]
+                'subject_detail',
+                ['id' => $subject->getId()]
             );
         }
 
         return $this->render(
-            'AppBundle:Country:edit.html.twig',
+            'AppBundle:Subject:edit.html.twig',
             [
                 'form' => $form->createView(),
             ]

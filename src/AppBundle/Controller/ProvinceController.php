@@ -41,7 +41,7 @@ class ProvinceController extends AbstractController
             $em->persist($province);
             $em->flush();
 
-            $this->addFlash('info', 'La provincia se creó con éxito!');
+            $this->addFlash('success', 'La provincia se creó con éxito!');
 
             return $this->redirectToRoute('province_list');
         }
