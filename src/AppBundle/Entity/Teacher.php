@@ -40,6 +40,18 @@ class Teacher
     private $updatedAt;
 
     /**
+     * @ORM\Column(type="string", length=9)
+     */
+    private $idNumber;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $birthdate;
+
+    /**
      * @ORM\Column(type="string")
      */
     private $firstName;
@@ -48,6 +60,21 @@ class Teacher
      * @ORM\Column(type="string")
      */
     private $lastName;
+
+    /**
+     * @ORM\Column(type="string", length=13)
+     */
+    private $phoneNumber;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $notes;
 
     /**
      * @var User
@@ -124,6 +151,27 @@ class Teacher
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @param string $idNumber
+     *
+     * @return $this
+     */
+    public function setIdNumber(
+        string $idNumber
+    ): self {
+        $this->idNumber = $idNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdNumber(): ?string
+    {
+        return $this->idNumber;
     }
 
     /**
@@ -208,5 +256,89 @@ class Teacher
     public function getCity(): ?City
     {
         return $this->city;
+    }
+
+    /**
+     * @param string $phoneNumber
+     *
+     * @return $this
+     */
+    public function setPhoneNumber(
+        string $phoneNumber
+    ): self {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * @param string $address
+     *
+     * @return self
+     */
+    public function setAddress(
+        string $address
+    ): self {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param DateTime $birthdate
+     *
+     * @return self
+     */
+    public function setBirthdate(
+        DateTime $birthdate
+    ): self {
+        $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getBirthdate(): ?DateTime
+    {
+        return $this->birthdate;
+    }
+
+    /**
+     * @param string|null $notes
+     *
+     * @return Teacher
+     */
+    public function setNotes(
+        string $notes = null
+    ): self {
+        $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNotes(): ?string
+    {
+        return $this->notes;
     }
 }
