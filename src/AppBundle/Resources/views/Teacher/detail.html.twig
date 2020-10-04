@@ -29,14 +29,20 @@
                         <dt>Fecha de creación</dt>
                         <dd>{{ teacher.createdAt | date('d/m/Y H:i') }}</dd>
                     </dl>
+                    <dl>
+                        <dt>Fecha de nacimiento</dt>
+                        <dd>{{ teacher.birthDate | date('d/m/Y') }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Número de Teléfono</dt>
+                        <dd>{{ teacher.phoneNumber }}</dd>
+                    </dl>
                 </div>
                 <div class="col-md-4">
                     <dl>
                         <dt>Fecha de actualización</dt>
                         <dd>{{ teacher.updatedAt | date('d/m/Y H:i') }}</dd>
                     </dl>
-                </div>
-                <div class="col-md-4">
                     <dl>
                         <dt>Localidad</dt>
                         <dd>
@@ -44,6 +50,20 @@
                                 {{ teacher.city.name }}
                             </a>
                         </dd>
+                    </dl>
+                    <dl>
+                        <dt>Notas</dt>
+                        <dd>{{ teacher.notes ? teacher.notes : '-' }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Documento de identidad</dt>
+                        <dd>{{ teacher.idNumber }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Dirección</dt>
+                        <dd>{{ teacher.address }}</dd>
                     </dl>
                 </div>
             </div>
