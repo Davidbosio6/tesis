@@ -19,6 +19,10 @@ class LoadYearData extends AbstractFixture implements FixtureInterface
         $year->setName('2019');
         $manager->persist($year);
 
+        $year = new Year();
+        $year->setName('2020');
+        $manager->persist($year);
+
         $manager->flush();
     }
 }

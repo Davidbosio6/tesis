@@ -12,6 +12,7 @@ use Doctrine\Persistence\ObjectManager;
 class LoadCityData extends AbstractFixture implements DependentFixtureInterface
 {
     const SAMPACHO = 'c_sampacho';
+
     /**
      * {@inheritdoc}
      */

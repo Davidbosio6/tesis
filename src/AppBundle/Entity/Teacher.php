@@ -96,6 +96,16 @@ class Teacher
     private $city;
 
     /**
+     * @var Subject
+     *
+     * @ORM\ManyToOne(targetEntity="Subject", inversedBy="teachers")
+     * @ORM\JoinColumn(name="subject_id", referencedColumnName="id", nullable=false)
+     *
+     * @Assert\NotNull()
+     */
+    private $subject;
+
+    /**
      * Gets triggered every time on persist.
      *
      * @ORM\PrePersist
@@ -340,5 +350,26 @@ class Teacher
     public function getNotes(): ?string
     {
         return $this->notes;
+    }
+
+    /**
+     * @param Subject $subject
+     *
+     * @return self
+     */
+    public function setSubject(
+        Subject $subject
+    ): self {
+        $this->subject = $subject;
+
+        return $this;
+    }
+
+    /**
+     * @return Subject
+     */
+    public function getSubject(): ?Subject
+    {
+        return $this->subject;
     }
 }

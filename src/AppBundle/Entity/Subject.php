@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +43,18 @@ class Subject
      * @ORM\Column(type="string")
      */
     private $name;
+
+    /**
+     * @var Teacher[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Teacher", mappedBy="subject")
+     */
+    private $teachers;
+
+    public function __construct()
+    {
+        $this->teachers = new ArrayCollection();
+    }
 
     /**
      * Gets triggered every time on persist.
@@ -120,5 +133,33 @@ class Subject
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    /**
+     * @param Teacher $teacher
+     *
+     * @return self
+     */
+    public function addTeacher(Teacher $teacher)
+    {
+        $this->teachers[] = $teacher;
+
+        return $this;
+    }
+
+    /**
+     * @param Teacher $teacher
+     */
+    public function removeTeacher(Teacher $teacher)
+    {
+        $this->teachers->removeElement($teacher);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTeachers()
+    {
+        return $this->teachers;
     }
 }
