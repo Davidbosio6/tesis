@@ -10,6 +10,8 @@ use Doctrine\Persistence\ObjectManager;
 
 class LoadSubjectData extends AbstractFixture implements FixtureInterface
 {
+    const DIBUJO = 's_dibujo';
+
     /**
      * {@inheritdoc}
      */
@@ -18,6 +20,7 @@ class LoadSubjectData extends AbstractFixture implements FixtureInterface
         $subject = new Subject();
         $subject->setName('Dibujo');
         $manager->persist($subject);
+        $this->addReference(self::DIBUJO, $subject);
 
         $subject = new Subject();
         $subject->setName('Desarrollo y aprendizaje');

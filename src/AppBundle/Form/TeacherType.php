@@ -2,6 +2,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\City;
+use AppBundle\Entity\Subject;
 use AppBundle\Entity\Teacher;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -35,8 +36,12 @@ class TeacherType extends AbstractType
                 'choice_label' => 'name'
             ])
             ->add('address', TextType::class)
-            ->add('notes', TextareaType::class)
+            ->add('notes', TextareaType::class, ['required' => false])
             ->add('user', UserType::class)
+            ->add('subject', EntityType::class, [
+                'class' => Subject::class,
+                'choice_label' => 'name'
+            ])
         ;
     }
 

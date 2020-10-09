@@ -3,6 +3,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\City;
+use AppBundle\Entity\Subject;
 use AppBundle\Entity\Teacher;
 use AppBundle\Entity\User;
 use DateTime;
@@ -24,6 +25,9 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         /** @var City $city */
         $city = $this->getReference(LoadCityData::SAMPACHO);
 
+        /** @var Subject $subject */
+        $subject = $this->getReference(LoadSubjectData::DIBUJO);
+
         $teacher = new Teacher();
         $teacher->setIdNumber(40297513);
         $teacher->setBirthdate(new DateTime('now -30 years'));
@@ -33,6 +37,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setLastName('Ipsum');
         $teacher->setUser($user);
         $teacher->setCity($city);
+        $teacher->setSubject($subject);
         $manager->persist($teacher);
 
         $manager->flush();
