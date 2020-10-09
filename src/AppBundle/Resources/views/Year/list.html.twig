@@ -1,0 +1,41 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Ciclos lectivos</h3>
+        </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('year_create') }}">
+                <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Ciclo lectivo
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha de creación</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for year in table %}
+                <tr>
+                    <td>
+                        <a href="{{ path('year_detail', {id: year.id}) }}">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </td>
+                    <td>{{ year.name }}</td>
+                    <td>{{ year.createdAt | date('d-m-Y H:i') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% include "AppBundle:Layout:navigation.html.twig" with {"table" : table} %}
+{% endblock %}
