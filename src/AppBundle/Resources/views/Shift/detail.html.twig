@@ -1,0 +1,50 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>{{ shift.name }}</h3>
+        </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('shift_edit', {id: shift.id}) }}">
+                <i class="fa fa-edit" aria-hidden="true"></i> Editar
+            </a>
+            <a class="btn btn-dark pull-right" href="{{ path('shift_delete', {id: shift.id}) }}"
+               onclick="return confirm('Esta acción no tiene vuelta atrás ¿Está seguro?')">
+                <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Datos del turno
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de creación</dt>
+                        <dd>{{ shift.createdAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                </div>
+
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de actualización</dt>
+                        <dd>{{ shift.updatedAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                </div>
+
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Notas</dt>
+                        <dd>{{ shift.notes ? shift.notes : '-' }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

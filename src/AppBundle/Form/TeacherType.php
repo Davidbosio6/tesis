@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Form;
 
 use AppBundle\Entity\City;
@@ -35,7 +36,7 @@ class TeacherType extends AbstractType
                 'choice_label' => 'name'
             ])
             ->add('address', TextType::class)
-            ->add('notes', TextareaType::class)
+            ->add('notes', TextareaType::class, ['required' => false])
             ->add('user', UserType::class)
         ;
     }
