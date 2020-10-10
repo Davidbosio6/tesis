@@ -1,0 +1,45 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Turnos</h3>
+        </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('shift_create') }}">
+                <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Turno
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha de creación</th>
+            <th scope="col">Hora de inicio</th>
+            <th scope="col">Hora de fin</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for shift in table %}
+                <tr>
+                    <td>
+                        <a href="{{ path('shift_detail', {id: shift.id}) }}">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </td>
+                    <td>{{ shift.name }}</td>
+                    <td>{{ shift.createdAt | date('d-m-Y H:i') }}</td>
+                    <td>{{ shift.startHour | date('H:i') }}</td>
+                    <td>{{ shift.endHour | date('H:i') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% include "AppBundle:Layout:navigation.html.twig" with {"table" : table} %}
+{% endblock %}

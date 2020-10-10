@@ -166,7 +166,7 @@ class Teacher
     /**
      * @param string $idNumber
      *
-     * @return $this
+     * @return self
      */
     public function setIdNumber(
         string $idNumber
@@ -195,7 +195,7 @@ class Teacher
     /**
      * @param string $firstName
      *
-     * @return $this
+     * @return self
      */
     public function setFirstName(
         string $firstName
@@ -216,7 +216,7 @@ class Teacher
     /**
      * @param string $lastName
      *
-     * @return $this
+     * @return self
      */
     public function setLastName(
         string $lastName
@@ -271,7 +271,7 @@ class Teacher
     /**
      * @param string $phoneNumber
      *
-     * @return $this
+     * @return self
      */
     public function setPhoneNumber(
         string $phoneNumber
@@ -334,7 +334,7 @@ class Teacher
     /**
      * @param string|null $notes
      *
-     * @return Teacher
+     * @return self
      */
     public function setNotes(
         string $notes = null
