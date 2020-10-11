@@ -151,7 +151,7 @@ class ClassroomController extends AbstractController
             $em = $this->getEntityManager();
             $em->flush();
 
-            $this->addFlash('success', 'El turno se editó con éxito!');
+            $this->addFlash('success', 'La sala se editó con éxito!');
 
             return $this->redirectToRoute(
                 'classroom_detail',
