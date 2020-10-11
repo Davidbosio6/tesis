@@ -1,0 +1,45 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Salas</h3>
+        </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('classroom_create') }}">
+                <i class="fa fa-plus" aria-hidden="true"></i> Nueva Sala
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha de creación</th>
+            <th scope="col">Capacidad</th>
+            <th scope="col">Capacidad disponible</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for classroom in table %}
+                <tr>
+                    <td>
+                        <a href="{{ path('classroom_detail', {id: classroom.id}) }}">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </td>
+                    <td>{{ classroom.name }}</td>
+                    <td>{{ classroom.createdAt | date('d-m-Y H:i') }}</td>
+                    <td>{{ classroom.capacity }}</td>
+                    <td>{{ classroom.capacity - 12 }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% include "AppBundle:Layout:navigation.html.twig" with {"table" : table} %}
+{% endblock %}
