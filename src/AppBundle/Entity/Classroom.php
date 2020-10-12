@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Classroom.
@@ -45,9 +46,9 @@ class Classroom
     private $name;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      */
-    private $notes;
+    private $description;
 
     /**
      * @ORM\Column(type="integer")
@@ -57,15 +58,10 @@ class Classroom
     /**
      * @var Shift
      *
-     * @ORM\ManyToMany(targetEntity="Shift", inversedBy="classrooms")
-     * @ORM\JoinTable(name="classroom_shift")
+     * @ORM\ManyToOne(targetEntity="Shift", inversedBy="classrooms")
+     * @ORM\JoinColumn(name="shift_id", referencedColumnName="id", nullable=true)
      */
-    private $shifts;
-
-    public function __construct()
-    {
-        $this->shifts = new ArrayCollection();
-    }
+    private $shift;
 
     /**
      * Gets triggered every time on persist.
@@ -147,14 +143,14 @@ class Classroom
     }
 
     /**
-     * @param string|null $notes
+     * @param string|null $description
      *
      * @return self
      */
-    public function setNotes(
-        string $notes = null
+    public function setDescription(
+        string $description = null
     ): self {
-        $this->notes = $notes;
+        $this->description = $description;
 
         return $this;
     }
@@ -162,9 +158,9 @@ class Classroom
     /**
      * @return string
      */
-    public function getNotes(): ?string
+    public function getDescription(): ?string
     {
-        return $this->notes;
+        return $this->description;
     }
 
     /**
@@ -193,26 +189,19 @@ class Classroom
      *
      * @return self
      */
-    public function addShift(Shift $shift)
-    {
-        $this->shifts[] = $shift;
+    public function setShift(
+        Shift $shift = null
+    ): self {
+        $this->shift = $shift;
 
         return $this;
     }
 
     /**
-     * @param Shift $shift
+     * @return Shift
      */
-    public function removeShift(Shift $shift)
+    public function getShift(): ?Shift
     {
-        $this->shifts->removeElement($shift);
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getShifts()
-    {
-        return $this->shifts;
+        return $this->shift;
     }
 }

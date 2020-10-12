@@ -63,7 +63,7 @@ class Shift
     /**
      * @var Classroom
      *
-     * @ORM\ManyToMany(targetEntity="Classroom", mappedBy="shifts")
+     * @ORM\OneToMany(targetEntity="Classroom", mappedBy="shift")
      *
      * @Assert\Count(min=1)
      */
@@ -227,7 +227,7 @@ class Shift
 
         foreach ($classrooms as $classroom){
             $this->classrooms[] = $classroom;
-            $classroom->addShift($this);
+            $classroom->setShift($this);
         }
 
         return $this;
@@ -239,7 +239,7 @@ class Shift
     public function removeClassroom(Classroom $classroom)
     {
         $this->classrooms->removeElement($classroom);
-        $classroom->removeShift($this);
+        $classroom->setShift(null);
     }
 
     /**

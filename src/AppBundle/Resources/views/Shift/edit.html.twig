@@ -1,5 +1,11 @@
 {% extends 'AppBundle:Layout:admin_base.html.twig' %}
 
+{%
+    form_theme form
+    'jquery.collection.html.twig'
+    'AppBundle:Shift:create_collection_theme.html.twig'
+%}
+
 {% block body %}
     {{ form_start(form) }}
 
@@ -45,6 +51,21 @@
 
     <br>
 
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Salas
+        </div>
+        <div class="card-body">
+            <div class="col-md-12">
+                <dl>
+                    <dd>{{ form_widget(form.classrooms) }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
     <div class="row">
         <div class="col-md-12">
             <button type="submit" name="submit" class="btn btn-dark pull-right">
@@ -55,3 +76,21 @@
 
     {{ form_end(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+    <script type="text/javascript">
+        $('.classrooms').collection({
+            min: 1,
+            prefix: 'classroom',
+            preserve_names: true,
+            allow_duplicate: false,
+            add: `
+                <a href="#" class="classroom-add btn btn-default" title="Agregar Sala">
+                    <i class="fa fa-plus-circle"></i>
+                </a>
+            `
+        });
+    </script>
+{% endblock javascripts %}

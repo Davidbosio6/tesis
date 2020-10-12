@@ -22,7 +22,7 @@ class ClassroomType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('capacity', IntegerType::class)
-            ->add('notes', TextareaType::class, ['required' => false])
+            ->add('description', TextareaType::class)
         ;
     }
 

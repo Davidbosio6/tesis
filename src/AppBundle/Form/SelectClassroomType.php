@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Classroom;
+use AppBundle\Entity\Shift;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,16 +21,14 @@ class SelectClassroomType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('classrooms',
+        $builder->add('name',
             EntityType::class, [
                 'class' => Classroom::class,
-                'placeholder' => '--- Seleccionar Sala ---',
+                'mapped' => false,
                 'choice_label' => 'name',
-                'required' => true,
-                'attr' => ['min' => 1]
+                'required' => true
             ]
-        )
-        ;
+        );
     }
 
     /**
