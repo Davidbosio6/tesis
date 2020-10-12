@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Shift;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,6 +36,17 @@ class ShiftType extends AbstractType
                     'widget' => 'single_text'
                 ]
             )
+            ->add('classrooms', CollectionType::class, [
+                'entry_type' => SelectClassroomType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'entry_options' => [
+                    'label' => false,
+                ],
+                'by_reference' => false,
+                'attr' => ['class' => 'classrooms']
+            ])
             ->add('notes', TextareaType::class, ['required' => false])
         ;
     }

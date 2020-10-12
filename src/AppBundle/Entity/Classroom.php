@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,6 +53,19 @@ class Classroom
      * @ORM\Column(type="integer")
      */
     private $capacity;
+
+    /**
+     * @var Shift
+     *
+     * @ORM\ManyToMany(targetEntity="Shift", inversedBy="classrooms")
+     * @ORM\JoinTable(name="classroom_shift")
+     */
+    private $shifts;
+
+    public function __construct()
+    {
+        $this->shifts = new ArrayCollection();
+    }
 
     /**
      * Gets triggered every time on persist.
@@ -172,5 +186,33 @@ class Classroom
     public function getCapacity(): ?int
     {
         return $this->capacity;
+    }
+
+    /**
+     * @param Shift $shift
+     *
+     * @return self
+     */
+    public function addShift(Shift $shift)
+    {
+        $this->shifts[] = $shift;
+
+        return $this;
+    }
+
+    /**
+     * @param Shift $shift
+     */
+    public function removeShift(Shift $shift)
+    {
+        $this->shifts->removeElement($shift);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getShifts()
+    {
+        return $this->shifts;
     }
 }
