@@ -79,7 +79,7 @@ class TeacherController extends AbstractController
 
         $query = $repository->findAllQuery();
 
-        $data = $this->getKnpPaginator()->paginate(
+        $data = $this->getKnpPaginatorService()->paginate(
             $query,
             $page,
             $limit,

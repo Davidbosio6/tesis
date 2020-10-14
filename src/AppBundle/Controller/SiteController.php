@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -14,49 +13,47 @@ use Symfony\Component\HttpFoundation\Response;
 class SiteController extends AbstractController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      *
      * @Route("/", name="index")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        return $this->render('AppBundle:Layout:index.html.twig');
+        return $this->render('AppBundle:Layout:index.html.twig', [
+            'siteName' => $this->getSiteName()
+        ]);
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      *
      * @Route("/about", name="about")
      */
-    public function aboutAction(Request $request)
+    public function aboutAction()
     {
-        return $this->render('AppBundle:Layout:about.html.twig');
+        return $this->render('AppBundle:Layout:about.html.twig', [
+            'siteName' => $this->getSiteName()
+        ]);
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      *
      * @Route("/contact", name="contact")
      */
-    public function contactAction(Request $request)
+    public function contactAction()
     {
-        return $this->render('AppBundle:Layout:contact.html.twig');
+        return $this->render('AppBundle:Layout:contact.html.twig', [
+            'siteName' => $this->getSiteName()
+        ]);
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      *
      * @Route("/login", name="login")
      */
-    public function loginAction(Request $request)
+    public function loginAction()
     {
         $error = $this->getAuthenticationUtilsService()->getLastAuthenticationError();
 
@@ -64,18 +61,18 @@ class SiteController extends AbstractController
 
         return $this->render('AppBundle:Layout:login.html.twig', [
             'last_username' => $lastUsername,
-            'error' => $error
+            'error' => $error,
+            'siteName' => $this->getSiteName()
+
         ]);
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      *
      * @Route("/dashboard", name="dashboard")
      */
-    public function dashboardAction(Request $request)
+    public function dashboardAction()
     {
         return $this->render('AppBundle:Layout:dashboard.html.twig');
     }

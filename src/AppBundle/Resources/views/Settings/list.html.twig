@@ -1,0 +1,38 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Personalización</h3>
+        </div>
+    </div>
+
+    <hr>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fecha de creación</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Valor</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for settings in table %}
+                <tr>
+                    <td>
+                        <a href="{{ path('settings_edit', {id: settings.id}) }}">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td>
+                    <td>{{ settings.createdAt | date('d-m-Y H:i') }}</td>
+                    <td>{{ settings.name }}</td>
+                    <td>{{ settings.value }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% include "AppBundle:Layout:navigation.html.twig" with {"table" : table} %}
+{% endblock %}

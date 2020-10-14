@@ -3,7 +3,6 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 
 /**
  * ClassroomRepository.
@@ -13,13 +12,4 @@ use Doctrine\ORM\Query;
  */
 class ClassroomRepository extends EntityRepository
 {
-    /**
-     * @return Query
-     */
-    public function findAllQuery()
-    {
-        $qb = $this->createQueryBuilder('classroom');
-
-        return $qb->getQuery();
-    }
 }
