@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Settings;
+use AppBundle\Repository\SettingsRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
 use Knp\Component\Pager\Paginator as KnpPaginator;
@@ -55,9 +57,21 @@ class AbstractController extends Controller
     /**
      * @return KnpPaginator
      */
-    protected function getKnpPaginator(): KnpPaginator
+    protected function getKnpPaginatorService(): KnpPaginator
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->get('knp_paginator');
+    }
+
+    /**
+     * @return string
+     */
+    public function getSiteName(): string
+    {
+        /** @var SettingsRepository $repository */
+        $repository = $this->getRepository(Settings::class);
+        $siteName = $repository->findOneByCode(SettingsRepository::SITE_NAME_CODE);
+
+        return $siteName->getValue();
     }
 }

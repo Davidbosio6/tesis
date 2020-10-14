@@ -1,5 +1,8 @@
 {% extends 'AppBundle:Layout:guest_base.html.twig' %}
 
+{% block title %}{{ siteName }}{% endblock %}
+{% block siteName %}{{ siteName }}{% endblock %}
+
 {% block body %}
     <div id="layoutAuthentication" style="background-image: url({{ asset('assets/img/login.jpg') }}">
         <div id="layoutAuthentication_content">
