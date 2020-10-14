@@ -3,7 +3,7 @@
 {% block body %}
     <div class="row">
         <div class="col-md-10">
-            <h3>Turnos</h3>
+            <h3>Turnos / Salas </h3>
         </div>
         <div style="margin-right: 1em;">
             <a class="btn btn-dark pull-right" href="{{ path('shift_create') }}">
@@ -22,6 +22,7 @@
             <th scope="col">Fecha de creación</th>
             <th scope="col">Hora de inicio</th>
             <th scope="col">Hora de fin</th>
+            <th scope="col">Cantidad de salas</th>
         </tr>
         </thead>
         <tbody>
@@ -36,6 +37,7 @@
                     <td>{{ shift.createdAt | date('d-m-Y H:i') }}</td>
                     <td>{{ shift.startHour | date('H:i') }}</td>
                     <td>{{ shift.endHour | date('H:i') }}</td>
+                    <td>{{ shift.classrooms | length }}</td>
                 </tr>
             {% endfor %}
         </tbody>

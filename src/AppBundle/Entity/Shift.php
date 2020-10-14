@@ -3,7 +3,9 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Shift.
@@ -57,6 +59,21 @@ class Shift
      * @ORM\Column(type="string", nullable=true)
      */
     private $notes;
+
+    /**
+     * @var Classroom
+     *
+     * @ORM\OneToMany(targetEntity="Classroom", mappedBy="shift", cascade={"persist", "remove"})
+     *
+     * @Assert\Count(min=1)
+     */
+    private $classrooms;
+
+
+    public function __construct()
+    {
+        $this->classrooms = new ArrayCollection();
+    }
 
     /**
      * Gets triggered every time on persist.
@@ -198,5 +215,35 @@ class Shift
     public function getNotes(): ?string
     {
         return $this->notes;
+    }
+
+    /**
+     * @param Classroom $classroom
+     *
+     * @return self
+     */
+    public function addClassroom(Classroom $classroom): self
+    {
+        $this->classrooms[] = $classroom;
+        $classroom->setShift($this);
+
+        return $this;
+    }
+
+    /**
+     * @param Classroom $classroom
+     */
+    public function removeClassroom(Classroom $classroom)
+    {
+        $this->classrooms->removeElement($classroom);
+        $classroom->setShift(null);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getClassrooms()
+    {
+        return $this->classrooms;
     }
 }

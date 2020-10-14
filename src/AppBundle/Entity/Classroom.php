@@ -44,14 +44,22 @@ class Classroom
     private $name;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      */
-    private $notes;
+    private $description;
 
     /**
      * @ORM\Column(type="integer")
      */
     private $capacity;
+
+    /**
+     * @var Shift
+     *
+     * @ORM\ManyToOne(targetEntity="Shift", inversedBy="classrooms")
+     * @ORM\JoinColumn(name="shift_id", referencedColumnName="id", nullable=true)
+     */
+    private $shift;
 
     /**
      * Gets triggered every time on persist.
@@ -133,14 +141,14 @@ class Classroom
     }
 
     /**
-     * @param string|null $notes
+     * @param string|null $description
      *
      * @return self
      */
-    public function setNotes(
-        string $notes = null
+    public function setDescription(
+        string $description = null
     ): self {
-        $this->notes = $notes;
+        $this->description = $description;
 
         return $this;
     }
@@ -148,9 +156,9 @@ class Classroom
     /**
      * @return string
      */
-    public function getNotes(): ?string
+    public function getDescription(): ?string
     {
-        return $this->notes;
+        return $this->description;
     }
 
     /**
@@ -172,5 +180,26 @@ class Classroom
     public function getCapacity(): ?int
     {
         return $this->capacity;
+    }
+
+    /**
+     * @param Shift|null $shift
+     *
+     * @return self
+     */
+    public function setShift(
+        Shift $shift = null
+    ): self {
+        $this->shift = $shift;
+
+        return $this;
+    }
+
+    /**
+     * @return Shift
+     */
+    public function getShift(): ?Shift
+    {
+        return $this->shift;
     }
 }
