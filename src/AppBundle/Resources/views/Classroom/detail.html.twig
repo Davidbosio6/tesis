@@ -23,13 +23,9 @@
                     <dl>
                         <dt>Turno</dt>
                         <dd>
-                            {% if classroom.shift is not null %}
-                                <a href="{{ path('shift_detail', {id: classroom.shift.id}) }}">
-                                    {{ classroom.shift.name }}
-                                </a>
-                            {% else %}
-                                -
-                            {% endif %}
+                            <a href="{{ path('shift_detail', {id: classroom.shift.id}) }}">
+                                {{ classroom.shift.name }}
+                            </a>
                         </dd>
                     </dl>
                 </div>
