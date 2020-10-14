@@ -41,7 +41,7 @@ class SettingsController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'settings.name',
+                'defaultSortFieldName' => 'settings.id',
                 'defaultSortDirection' => 'ASC'
             ]
         );

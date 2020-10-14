@@ -20,6 +20,21 @@ class SettingsRepository extends EntityRepository
     const SITE_NAME_CODE = 'site_name';
 
     /**
+     * This constant represents a settings code in database
+     */
+    const CONTACT_LOCATION_CODE = 'contact_location';
+
+    /**
+     * This constant represents a settings code in database
+     */
+    const CONTACT_PHONE_CODE = 'contact_phone';
+
+    /**
+     * This constant represents a settings code in database
+     */
+    const CONTACT_SCHEDULE = 'contact_schedule';
+
+    /**
      * @return Query
      */
     public function findAllQuery()
