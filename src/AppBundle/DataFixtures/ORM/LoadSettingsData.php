@@ -34,15 +34,21 @@ class LoadSettingsData extends AbstractFixture
         $manager->persist($settings);
 
         $settings = new Settings();
+        $settings->setName('Correo electrónico de contacto');
+        $settings->setValue('administracion@semilltas.com');
+        $settings->setCode(SettingsRepository::CONTACT_EMAIL_CODE);
+        $manager->persist($settings);
+
+        $settings = new Settings();
         $settings->setName('Dias de contacto');
         $settings->setValue('Lunes a Viernes');
-        $settings->setCode(SettingsRepository::CONTACT_SCHEDULE);
+        $settings->setCode(SettingsRepository::CONTACT_SCHEDULE_DAYS_CODE);
         $manager->persist($settings);
 
         $settings = new Settings();
         $settings->setName('Horarios de contacto');
         $settings->setValue('8:00 - 12:00 | 13:00 - 17:00');
-        $settings->setCode(SettingsRepository::CONTACT_SCHEDULE);
+        $settings->setCode(SettingsRepository::CONTACT_SCHEDULE_HOURS_CODE);
         $manager->persist($settings);
 
         $manager->flush();

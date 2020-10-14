@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Settings;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
@@ -32,7 +33,17 @@ class SettingsRepository extends EntityRepository
     /**
      * This constant represents a settings code in database
      */
-    const CONTACT_SCHEDULE = 'contact_schedule';
+    const CONTACT_EMAIL_CODE = 'contact_email';
+
+    /**
+     * This constant represents a settings code in database
+     */
+    const CONTACT_SCHEDULE_DAYS_CODE = 'contact_schedules_days';
+
+    /**
+     * This constant represents a settings code in database
+     */
+    const CONTACT_SCHEDULE_HOURS_CODE = 'contact_schedules_hours';
 
     /**
      * @return Query
@@ -47,7 +58,7 @@ class SettingsRepository extends EntityRepository
     /**
      * @param string $code
      *
-     * @return int|mixed|string|null
+     * @return Settings|null
      */
     public function findOneByCode(string $code)
     {

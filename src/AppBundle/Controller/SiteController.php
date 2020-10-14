@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Settings;
+use AppBundle\Repository\SettingsRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -43,8 +45,21 @@ class SiteController extends AbstractController
      */
     public function contactAction()
     {
+        /** @var SettingsRepository $repository */
+        $repository = $this->getRepository(Settings::class);
+        $location = $repository->findOneByCode(SettingsRepository::CONTACT_LOCATION_CODE);
+        $phone = $repository->findOneByCode(SettingsRepository::CONTACT_PHONE_CODE);
+        $email = $repository->findOneByCode(SettingsRepository::CONTACT_EMAIL_CODE);
+        $scheduleDays = $repository->findOneByCode(SettingsRepository::CONTACT_SCHEDULE_DAYS_CODE);
+        $scheduleHours = $repository->findOneByCode(SettingsRepository::CONTACT_SCHEDULE_HOURS_CODE);
+
         return $this->render('AppBundle:Layout:contact.html.twig', [
-            'siteName' => $this->getSiteName()
+            'siteName' => $this->getSiteName(),
+            'location' => $location->getValue(),
+            'phone' => $phone->getValue(),
+            'email' => $email->getValue(),
+            'scheduleDays' => $scheduleDays->getValue(),
+            'scheduleHours' => $scheduleHours->getValue()
         ]);
     }
 

@@ -18,19 +18,18 @@
                 <h3>Detalles de contacto</h3>
                 <br>
                 <p>
-                    Ubicación: Mitre 56, Coronel Moldes - Cordoba
+                    Ubicación: {{ location }}
                 </p>
                 <p>
-                    Teléfono: (3582) 456-7890
+                    Teléfono: {{ phone }}
                 </p>
                 <p>
                     Correo electrónico:
-                    <a href="mailto:name@example.com">name@example.com</a>
+                    <a href="{{ email }}">{{ email }}</a>
                 </p>
                 <p>
-                    Horarios: Lunes a Viernes
-                    <br>8:00 - 12:00
-                    <br>13:00 - 17:00
+                    Horarios: {{ scheduleDays }}
+                    <br>{{ scheduleHours }}
                 </p>
             </div>
         </div>
