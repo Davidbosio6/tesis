@@ -1,11 +1,30 @@
 {% block classrooms_widget %}
     <div class="row">
         <div class="col-md-4">
-            {{ form_widget(form.name) }}
+            <dl>
+                <dt>Nombre</dt>
+                <dd>{{ form_widget(form.name) }}</dd>
+            </dl>
+        </div>
+        <div class="col-md-2">
+            <dl>
+                <dt>Capacidad</dt>
+                <dd>{{ form_widget(form.capacity) }}</dd>
+            </dl>
         </div>
         <div class="col-md-4">
-            <a href="#" class="classroom-remove btn btn-default" title="Eliminar Sala"><i class="fa fa-trash" aria-hidden="true"></i></a>
-
+            <dl>
+                <dt>Descripción</dt>
+                <dd>{{ form_widget(form.description) }}</dd>
+            </dl>
+        </div>
+        <div class="col-md-2">
+            <a href="#" class="classroom-remove btn btn-default" title="Eliminar Sala">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="classroom-duplicate btn btn-default" title="Duplicar">
+                <i class="fa fa-copy"></i>
+            </a>
         </div>
     </div>
 {% endblock %}

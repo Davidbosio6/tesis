@@ -63,7 +63,7 @@ class Shift
     /**
      * @var Classroom
      *
-     * @ORM\OneToMany(targetEntity="Classroom", mappedBy="shift")
+     * @ORM\OneToMany(targetEntity="Classroom", mappedBy="shift", cascade={"persist", "remove"})
      *
      * @Assert\Count(min=1)
      */
@@ -218,17 +218,14 @@ class Shift
     }
 
     /**
-     * @param array $classrooms
+     * @param Classroom $classroom
      *
      * @return self
      */
-    public function addClassroom(array $classrooms): self
+    public function addClassroom(Classroom $classroom): self
     {
-
-        foreach ($classrooms as $classroom){
-            $this->classrooms[] = $classroom;
-            $classroom->setShift($this);
-        }
+        $this->classrooms[] = $classroom;
+        $classroom->setShift($this);
 
         return $this;
     }

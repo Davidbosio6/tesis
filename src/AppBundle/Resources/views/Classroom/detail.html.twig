@@ -5,15 +5,6 @@
         <div class="col-md-10">
             <h3>{{ classroom.name }}</h3>
         </div>
-        <div style="margin-right: 1em;">
-            <a class="btn btn-dark pull-right" href="{{ path('classroom_edit', {id: classroom.id}) }}">
-                <i class="fa fa-edit" aria-hidden="true"></i> Editar
-            </a>
-            <a class="btn btn-dark pull-right" href="{{ path('classroom_delete', {id: classroom.id}) }}"
-               onclick="return confirm('Esta acción no tiene vuelta atrás ¿Está seguro?')">
-                <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
-            </a>
-        </div>
     </div>
 
     <hr>
@@ -30,8 +21,16 @@
                         <dd>{{ classroom.createdAt | date('d/m/Y H:i') }}</dd>
                     </dl>
                     <dl>
-                        <dt>Capacidad</dt>
-                        <dd>{{ classroom.capacity }}</dd>
+                        <dt>Turno</dt>
+                        <dd>
+                            {% if classroom.shift is not null %}
+                                <a href="{{ path('shift_detail', {id: classroom.shift.id}) }}">
+                                    {{ classroom.shift.name }}
+                                </a>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </dd>
                     </dl>
                 </div>
 
@@ -41,8 +40,8 @@
                         <dd>{{ classroom.updatedAt | date('d/m/Y H:i') }}</dd>
                     </dl>
                     <dl>
-                        <dt>Capacidad disponible</dt>
-                        <dd>{{ classroom.capacity - 12 }}</dd>
+                        <dt>Capacidad</dt>
+                        <dd>{{ classroom.capacity }}</dd>
                     </dl>
                 </div>
 
@@ -50,6 +49,10 @@
                     <dl>
                         <dt>Notas</dt>
                         <dd>{{ classroom.description }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Capacidad disponible</dt>
+                        <dd>{{ classroom.capacity - 12 }}</dd>
                     </dl>
                 </div>
             </div>

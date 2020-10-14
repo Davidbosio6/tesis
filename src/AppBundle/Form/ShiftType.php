@@ -37,7 +37,7 @@ class ShiftType extends AbstractType
                 ]
             )
             ->add('classrooms', CollectionType::class, [
-                'entry_type' => SelectClassroomType::class,
+                'entry_type' => ClassroomType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'prototype' => true,
