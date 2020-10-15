@@ -49,11 +49,16 @@ class LoadCityData extends AbstractFixture implements DependentFixtureInterface
         $manager->persist($city);
 
         $city = new City();
+        $city->setName('Merlo');
+        $city->setPostalCode('5881');
+        $city->setProvince($sanLuisProvince);
+        $manager->persist($city);
+
+        $city = new City();
         $city->setName('Santa Catalina (Holmberg)');
         $city->setPostalCode('5825');
         $city->setProvince($cordobaProvince);
         $manager->persist($city);
-
 
         $city = new City();
         $city->setName('Suco');
@@ -65,18 +70,6 @@ class LoadCityData extends AbstractFixture implements DependentFixtureInterface
         $city->setName('Rio cuarto');
         $city->setPostalCode('5800');
         $city->setProvince($cordobaProvince);
-        $manager->persist($city);
-
-        $city = new City();
-        $city->setName('Villa Mercedes');
-        $city->setPostalCode('5730');
-        $city->setProvince($sanLuisProvince);
-        $manager->persist($city);
-
-        $city = new City();
-        $city->setName('Merlo');
-        $city->setPostalCode('5881');
-        $city->setProvince($sanLuisProvince);
         $manager->persist($city);
 
         $city = new City();
