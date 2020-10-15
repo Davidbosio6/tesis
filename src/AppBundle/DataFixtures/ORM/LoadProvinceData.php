@@ -13,6 +13,8 @@ class LoadProvinceData extends AbstractFixture implements DependentFixtureInterf
 {
     const CORDOBA = 'p_cordoba';
 
+    const SAN_LUIS = 'p_san_luis';
+
     /**
      * {@inheritdoc}
      */
@@ -111,6 +113,7 @@ class LoadProvinceData extends AbstractFixture implements DependentFixtureInterf
         $province->setName('San Luis');
         $province->setCountry($country);
         $manager->persist($province);
+        $this->addReference(self::SAN_LUIS, $province);
 
         $province = new Province();
         $province->setName('Santa Cruz');

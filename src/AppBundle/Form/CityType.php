@@ -24,8 +24,12 @@ class CityType extends AbstractType
             ->add('postalCode', TextType::class, ['label'=> 'Código Postal'])
             ->add('province', EntityType::class, [
                 'class' => Province::class,
+                'label' => 'Provincia',
+                'placeholder' => '-- Seleccione una provincia --',
                 'choice_label' => 'name',
-                'label' => 'Provincia'
+                'group_by' => function (Province $province) {
+                    return $province->getCountry()->getName();
+                }
             ])
         ;
     }
