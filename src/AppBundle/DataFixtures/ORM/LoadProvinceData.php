@@ -13,7 +13,7 @@ class LoadProvinceData extends AbstractFixture implements DependentFixtureInterf
 {
     const CORDOBA = 'p_cordoba';
 
-    const SAN_LUIS = 'p_villa_mercedes';
+    const SAN_LUIS = 'p_san_luis';
 
     /**
      * {@inheritdoc}
