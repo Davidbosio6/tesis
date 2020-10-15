@@ -34,13 +34,18 @@ class TeacherType extends AbstractType
             ->add('phoneNumber', NumberType::class)
             ->add('city', EntityType::class, [
                 'class' => City::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'placeholder' => '-- Seleccione una localidad --',
+                'group_by' => function (City $city) {
+                    return $city->getProvince()->getName();
+                }
             ])
             ->add('address', TextType::class)
             ->add('notes', TextareaType::class, ['required' => false])
             ->add('user', UserType::class)
             ->add('subject', EntityType::class, [
                 'class' => Subject::class,
+                'placeholder' => '-- Seleccione una asignatura --',
                 'choice_label' => 'name'
             ])
         ;
