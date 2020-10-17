@@ -150,7 +150,7 @@ class StudentController extends AbstractController
             $em = $this->getEntityManager();
             $em->flush();
 
-            $this->addFlash('success', 'El profesor se editó con éxito!');
+            $this->addFlash('success', 'El alumno se editó con éxito!');
 
             return $this->redirectToRoute(
                 'student_detail',

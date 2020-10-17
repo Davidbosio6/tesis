@@ -4,8 +4,6 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\City;
 use AppBundle\Entity\Student;
-use AppBundle\Entity\Subject;
-use AppBundle\Entity\Teacher;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
