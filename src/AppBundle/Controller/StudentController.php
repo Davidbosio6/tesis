@@ -2,59 +2,52 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Teacher;
-use AppBundle\Form\TeacherType;
-use AppBundle\Repository\TeacherRepository;
+use AppBundle\Entity\Student;
+use AppBundle\Form\StudentType;
+use AppBundle\Repository\StudentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class TeacherController.
+ * Class StudentController.
  *
- * @Route("/teacher")
+ * @Route("/student")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class TeacherController extends AbstractController
+class StudentController extends AbstractController
 {
     /**
      * @param Request $request
      *
      * @return Response
      *
-     * @Route("/create", name="teacher_create")
+     * @Route("/create", name="student_create")
      */
     public function createAction(
         Request $request
     ): Response {
-        $teacher = new Teacher();
+        $student = new Student();
         $form = $this->createForm(
-            TeacherType::class,
-            $teacher
+            StudentType::class,
+            $student
         );
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $this->getPasswordEncoderService()->encodePassword(
-                $teacher->getUser(),
-                $teacher->getUser()->getPlainPassword()
-            );
-
-            $teacher->getUser()->setPassword($password);
-
             $em = $this->getEntityManager();
-            $em->persist($teacher);
+            $em->persist($student);
             $em->flush();
 
-            $this->addFlash('success', 'El profesor se creó con éxito!');
+            $this->addFlash('success', 'El alumno se creó con éxito!');
 
-            return $this->redirectToRoute('teacher_list');
+            return $this->redirectToRoute('student_list');
         }
 
         return $this->render(
-            'AppBundle:Teacher:create.html.twig',
+            'AppBundle:Student:create.html.twig',
             [
                 'form' => $form->createView(),
             ]
@@ -66,7 +59,7 @@ class TeacherController extends AbstractController
      *
      * @return Response
      *
-     * @Route("/list", name="teacher_list")
+     * @Route("/list", name="student_list")
      */
     public function listAction(
         Request $request
@@ -74,8 +67,8 @@ class TeacherController extends AbstractController
         $page = $request->query->get('page') ?? 1;
         $limit = $request->query->get('limit') ?? 20;
 
-        /** @var TeacherRepository $repository */
-        $repository = $this->getRepository(Teacher::class);
+        /** @var StudentRepository $repository */
+        $repository = $this->getRepository(Student::class);
 
         $query = $repository->findAllQuery();
 
@@ -84,13 +77,13 @@ class TeacherController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'teacher.firstName',
+                'defaultSortFieldName' => 'student.firstName',
                 'defaultSortDirection' => 'ASC'
             ]
         );
 
         return $this->render(
-            'AppBundle:Teacher:list.html.twig',
+            'AppBundle:Student:list.html.twig',
             [
                 'table' => $data,
             ]
@@ -98,82 +91,75 @@ class TeacherController extends AbstractController
     }
 
     /**
-     * @param Teacher $teacher
+     * @param Student $student
      *
      * @return Response
      *
-     * @Route("/detail/{id}", name="teacher_detail")
+     * @Route("/detail/{id}", name="student_detail")
      */
     public function detailAction(
-        Teacher $teacher
+        Student $student
     ): Response {
         return $this->render(
-            'AppBundle:Teacher:detail.html.twig',
+            'AppBundle:Student:detail.html.twig',
             [
-                'teacher' => $teacher,
+                'student' => $student,
             ]
         );
     }
 
     /**
-     * @Route("/delete/{id}", name="teacher_delete")
+     * @Route("/delete/{id}", name="student_delete")
      *
-     * @param Teacher $teacher
+     * @param Student $student
      *
      * @return Response
      */
     public function deleteAction(
-        Teacher $teacher
+        Student $student
     ): Response {
         $em = $this->getEntityManager();
-        $em->remove($teacher);
+        $em->remove($student);
         $em->flush();
 
         $this->addFlash('success', 'El registro se eliminó con éxito!');
 
-        return $this->redirectToRoute('teacher_list');
+        return $this->redirectToRoute('student_list');
     }
 
     /**
-     * @Route("/edit/{id}", name="teacher_edit")
+     * @Route("/edit/{id}", name="student_edit")
      *
-     * @param Teacher $teacher
+     * @param Student $student
      * @param Request $request
      *
      * @return Response
      */
     public function editAction(
-        Teacher $teacher,
+        Student $student,
         Request $request
     ): Response {
         $form = $this->createForm(
-            TeacherType::class,
-            $teacher
+            StudentType::class,
+            $student
         );
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $this->getPasswordEncoderService()->encodePassword(
-                $teacher->getUser(),
-                $teacher->getUser()->getPlainPassword()
-            );
-
-            $teacher->getUser()->setPassword($password);
-
             $em = $this->getEntityManager();
             $em->flush();
 
             $this->addFlash('success', 'El profesor se editó con éxito!');
 
             return $this->redirectToRoute(
-                'teacher_detail',
-                ['id' => $teacher->getId()]
+                'student_detail',
+                ['id' => $student->getId()]
             );
         }
 
         return $this->render(
-            'AppBundle:Teacher:edit.html.twig',
+            'AppBundle:Student:edit.html.twig',
             [
                 'form' => $form->createView(),
             ]
