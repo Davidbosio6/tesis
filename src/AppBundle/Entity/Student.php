@@ -82,6 +82,16 @@ class Student
     private $city;
 
     /**
+     * @var Classroom
+     *
+     * @ORM\ManyToOne(targetEntity="Classroom", inversedBy="students")
+     * @ORM\JoinColumn(name="classroom_id", referencedColumnName="id", nullable=false)
+     *
+     * @Assert\NotNull()
+     */
+    private $classroom;
+
+    /**
      * Gets triggered every time on persist.
      *
      * @ORM\PrePersist
@@ -284,5 +294,26 @@ class Student
     public function getNotes(): ?string
     {
         return $this->notes;
+    }
+
+    /**
+     * @param Classroom $classroom
+     *
+     * @return self
+     */
+    public function setClassroom(
+        Classroom $classroom
+    ): self {
+        $this->classroom = $classroom;
+
+        return $this;
+    }
+
+    /**
+     * @return Classroom
+     */
+    public function getClassroom(): ?Classroom
+    {
+        return $this->classroom;
     }
 }

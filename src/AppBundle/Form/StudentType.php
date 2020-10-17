@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\City;
+use AppBundle\Entity\Classroom;
 use AppBundle\Entity\Student;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -36,6 +37,14 @@ class StudentType extends AbstractType
                 'placeholder' => '-- Seleccione una localidad --',
                 'group_by' => function (City $city) {
                     return $city->getProvince()->getName();
+                }
+            ])
+            ->add('classroom', EntityType::class, [
+                'class' => Classroom::class,
+                'choice_label' => 'name',
+                'placeholder' => '-- Seleccione una sala --',
+                'group_by' => function (Classroom $classroom) {
+                    return $classroom->getShift()->getName();
                 }
             ])
             ->add('address', TextType::class)
