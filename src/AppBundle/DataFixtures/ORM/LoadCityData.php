@@ -13,6 +13,8 @@ class LoadCityData extends AbstractFixture implements DependentFixtureInterface
 {
     const SAMPACHO = 'c_sampacho';
 
+    const CNEL_MOLDES = 'c_cnel_moldes';
+
     /**
      * {@inheritdoc}
      */
@@ -28,6 +30,7 @@ class LoadCityData extends AbstractFixture implements DependentFixtureInterface
         $city->setPostalCode('5847');
         $city->setProvince($cordobaProvince);
         $manager->persist($city);
+        $this->addReference(self::CNEL_MOLDES, $city);
 
         $city = new City();
         $city->setName('Bulnes');

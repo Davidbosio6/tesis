@@ -21,6 +21,7 @@
             <th scope="col">Fecha de creación</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
+            <th scope="col">Documento de identidad</th>
             <th scope="col">Asignatura</th>
             <th scope="col">Nombre de usuario</th>
             <th scope="col">Correo electrónico</th>
@@ -39,6 +40,7 @@
                     <td>{{ teacher.createdAt | date('d-m-Y H:i') }}</td>
                     <td>{{ teacher.firstName }}</td>
                     <td>{{ teacher.lastName }}</td>
+                    <td>{{ teacher.idNumber }}</td>
                     <td>{{ teacher.subject.name }}</td>
                     <td>{{ teacher.user.username }}</td>
                     <td>{{ teacher.user.email }}</td>

@@ -1,0 +1,49 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Alumnos</h3>
+        </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('student_create') }}">
+                <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Alumno
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fecha de creación</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Documento de identidad</th>
+            <th scope="col">Sala</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            {% for student in table %}
+                <tr>
+                    <td>
+                        <a href="{{ path('student_detail', {id: student.id}) }}">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </td>
+                    <td>{{ student.createdAt | date('d-m-Y H:i') }}</td>
+                    <td>{{ student.firstName }}</td>
+                    <td>{{ student.lastName }}</td>
+                    <td>{{ student.idNumber }}</td>
+                    <td>Amarilla - Turno Mañana</td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% include "AppBundle:Layout:navigation.html.twig" with {"table" : table} %}
+{% endblock %}
