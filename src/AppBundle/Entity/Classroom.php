@@ -63,7 +63,7 @@ class Classroom
     private $shift;
 
     /**
-     * @var Classroom[]|ArrayCollection
+     * @var Student[]|ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Student", mappedBy="classroom")
      */
