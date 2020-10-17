@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,6 +61,18 @@ class Classroom
      * @ORM\JoinColumn(name="shift_id", referencedColumnName="id", nullable=true)
      */
     private $shift;
+
+    /**
+     * @var Classroom[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Student", mappedBy="classroom")
+     */
+    private $students;
+
+    public function __construct()
+    {
+         $this->students = new ArrayCollection();
+    }
 
     /**
      * Gets triggered every time on persist.
@@ -201,5 +214,33 @@ class Classroom
     public function getShift(): ?Shift
     {
         return $this->shift;
+    }
+
+    /**
+     * @param Student $student
+     *
+     * @return self
+     */
+    public function addStudent(Student $student)
+    {
+        $this->students[] = $student;
+
+        return $this;
+    }
+
+    /**
+     * @param Student $student
+     */
+    public function removeStudent(Student $student)
+    {
+        $this->students->removeElement($student);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getStudents()
+    {
+        return $this->students;
     }
 }

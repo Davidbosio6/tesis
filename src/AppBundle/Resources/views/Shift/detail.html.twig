@@ -72,18 +72,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for classrooms in shift.classrooms %}
+                    {% for classroom in shift.classrooms %}
                         <tr>
                             <td>
-                                <a href="{{ path('classroom_detail', {id: classrooms.id}) }}">
+                                <a href="{{ path('classroom_detail', {id: classroom.id}) }}">
                                     <i class="fa fa-search"></i>
                                 </a>
                             </td>
-                            <td>{{ classrooms.name }}</td>
-                            <td>{{ classrooms.createdAt | date('d-m-Y H:i') }}</td>
-                            <td>{{ classrooms.description }}</td>
-                            <td>{{ classrooms.capacity }}</td>
-                            <td>{{ classrooms.capacity - 12 }}</td>
+                            <td>{{ classroom.name }}</td>
+                            <td>{{ classroom.createdAt | date('d-m-Y H:i') }}</td>
+                            <td>{{ classroom.description }}</td>
+                            <td>{{ classroom.capacity }}</td>
+                            <td>{{ classroom.capacity - classroom.students | length }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
