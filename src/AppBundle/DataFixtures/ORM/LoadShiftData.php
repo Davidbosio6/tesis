@@ -12,7 +12,6 @@ use Doctrine\Persistence\ObjectManager;
 class LoadShiftData extends AbstractFixture implements FixtureInterface
 {
     const TURNO_MANIANA = 's_maniana';
-
     const TURNO_TARDE = 's_tarde';
 
     /**

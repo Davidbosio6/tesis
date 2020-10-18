@@ -3,21 +3,20 @@
 namespace AppBundle\Entity;
 
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Student.
+ * Class Advisor.
  *
  * @ORM\HasLifecycleCallbacks
  *
- * @ORM\Table(name="student")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\StudentRepository")
+ * @ORM\Table(name="advisor")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\AdvisorRepository")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class Student
+class Advisor
 {
     /**
      * @ORM\Column(type="integer")
@@ -46,6 +45,16 @@ class Student
     private $idNumber;
 
     /**
+     * @ORM\Column(type="string", length=254)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $studentRelationship;
+
+    /**
      * @var DateTime
      *
      * @ORM\Column(type="datetime")
@@ -63,6 +72,11 @@ class Student
     private $lastName;
 
     /**
+     * @ORM\Column(type="string", length=13)
+     */
+    private $phoneNumber;
+
+    /**
      * @ORM\Column(type="string")
      */
     private $address;
@@ -75,7 +89,7 @@ class Student
     /**
      * @var City
      *
-     * @ORM\ManyToOne(targetEntity="City", inversedBy="students")
+     * @ORM\ManyToOne(targetEntity="City", inversedBy="advisors")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id", nullable=false)
      *
      * @Assert\NotNull()
@@ -83,19 +97,11 @@ class Student
     private $city;
 
     /**
-     * @var Classroom
+     * @var Student
      *
-     * @ORM\OneToMany(targetEntity="Advisor", mappedBy="student", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="advisor_id", referencedColumnName="id", nullable=true)
-     *
-     * @Assert\Count(min=1)
+     * @ORM\ManyToOne(targetEntity="Student", inversedBy="advisors")
      */
-    private $advisors;
-
-    public function __construct()
-    {
-        $this->advisors = new ArrayCollection();
-    }
+    private $student;
 
     /**
      * Gets triggered every time on persist.
@@ -177,6 +183,27 @@ class Student
     }
 
     /**
+     * @param string $email
+     *
+     * @return self
+     */
+    public function setEmail(
+        string $email
+    ): self {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
      * @return string
      */
     public function getFirstName(): ?string
@@ -237,6 +264,27 @@ class Student
     public function getCity(): ?City
     {
         return $this->city;
+    }
+
+    /**
+     * @param string $phoneNumber
+     *
+     * @return self
+     */
+    public function setPhoneNumber(
+        string $phoneNumber
+    ): self {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
     }
 
     /**
@@ -303,32 +351,44 @@ class Student
     }
 
     /**
-     * @param Advisor $advisor
+     * @param Student $student
      *
      * @return self
      */
-    public function addAdvisor(Advisor $advisor): self
-    {
-        $this->advisors[] = $advisor;
-        $advisor->setStudent($this);
+    public function setStudent (
+        Student $student
+    ): self {
+        $this->student = $student;
 
         return $this;
     }
 
     /**
-     * @param Advisor $advisor
+     * @return Student
      */
-    public function removeAdvisor(Advisor $advisor)
+    public function getStudent (): ?Student
     {
-        $this->advisors->removeElement($advisor);
-        $advisor->setStudent(null);
+        return $this->student;
     }
 
     /**
-     * @return ArrayCollection
+     * @return string
      */
-    public function getAdvisors()
+    public function getStudentRelationship(): ?string
     {
-        return $this->advisors;
+        return $this->studentRelationship;
+    }
+
+    /**
+     * @param string $studentRelationship
+     *
+     * @return self
+     */
+    public function setStudentRelationship(
+        string $studentRelationship
+    ): self {
+        $this->studentRelationship = $studentRelationship;
+
+        return $this;
     }
 }

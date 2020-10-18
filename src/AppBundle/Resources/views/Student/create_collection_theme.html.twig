@@ -1,0 +1,59 @@
+{% block advisors_widget %}
+    <div class="row">
+        <div class="col-md-3">
+            <dl>
+                <dt>Relación con el alumno</dt>
+                <dd>{{ form_widget(form.studentRelationship) }}</dd>
+            </dl>
+
+            <dl>
+                <dt>Fecha de nacimiento</dt>
+                <dd>{{ form_widget(form.birthDate) }}</dd>
+            </dl>
+            <dl>
+                <dt>Dirección</dt>
+                <dd>{{ form_widget(form.address) }}</dd>
+            </dl>
+        </div>
+        <div class="col-md-3">
+            <dl>
+                <dt>Nombre</dt>
+                <dd>{{ form_widget(form.firstName) }}</dd>
+            </dl>
+            <dl>
+                <dt>Localidad</dt>
+                <dd>{{ form_widget(form.city) }}</dd>
+            </dl>
+            <dl>
+                <dt>Notas</dt>
+                <dd>{{ form_widget(form.notes) }}</dd>
+            </dl>
+        </div>
+        <div class="col-md-3">
+            <dl>
+                <dt>Apellido</dt>
+                <dd>{{ form_widget(form.lastName) }}</dd>
+            </dl>
+            <dl>
+                <dt>Documento de identidad</dt>
+                <dd>{{ form_widget(form.idNumber) }}</dd>
+            </dl>
+        </div>
+        <div class="col-md-3">
+            <dl>
+                <dt>Correo electrónico</dt>
+                <dd>{{ form_widget(form.email) }}</dd>
+            </dl>
+            <dl>
+                <dt>Número de Teléfono</dt>
+                <dd>{{ form_widget(form.phoneNumber) }}</dd>
+            </dl>
+            <a href="#" class="advisor-remove btn btn-default" title="Eliminar Tutor">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="advisor-duplicate btn btn-default" title="Duplicar">
+                <i class="fa fa-copy"></i>
+            </a>
+        </div>
+    </div>
+{% endblock %}

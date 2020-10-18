@@ -12,7 +12,6 @@ use Doctrine\Persistence\ObjectManager;
 class LoadProvinceData extends AbstractFixture implements DependentFixtureInterface
 {
     const CORDOBA = 'p_cordoba';
-
     const SAN_LUIS = 'p_san_luis';
 
     /**

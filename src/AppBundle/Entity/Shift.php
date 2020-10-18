@@ -69,7 +69,6 @@ class Shift
      */
     private $classrooms;
 
-
     public function __construct()
     {
         $this->classrooms = new ArrayCollection();

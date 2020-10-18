@@ -65,4 +65,54 @@
             </div>
         </div>
     </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Tutores
+        </div>
+        <div class="card-body">
+            {% if student.advisors is empty %}
+                <div class="alert alert-light text-center" role="alert">
+                    No se encontraron resultados
+                </div>
+            {% else %}
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Fecha de creación</th>
+                        <th scope="col">Relación con el alumno</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Documento de identidad</th>
+                        <th scope="col">Correo electrónico</th>
+                        <th scope="col">Número de teléfono</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for advisor in student.advisors %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('advisor_detail', {id: advisor.id}) }}">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </td>
+                            <td>{{ advisor.createdAt | date('d-m-Y H:i') }}</td>
+                            <td>{{ advisor.studentRelationship }}</td>
+                            <td>{{ advisor.firstName }}</td>
+                            <td>{{ advisor.lastName }}</td>
+                            <td>{{ advisor.idNumber }}</td>
+                            <td>{{ advisor.email }}</td>
+                            <td>{{ advisor.phoneNumber }}</td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

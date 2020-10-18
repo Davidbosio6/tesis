@@ -2,12 +2,13 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Advisor;
 use AppBundle\Entity\City;
-use AppBundle\Entity\Student;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,24 +16,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * Class StudentType.
+ * Class AdvisorType.
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class StudentType extends AbstractType
+class AdvisorType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('firstName', TextType::class)
             ->add('lastName', TextType::class)
+            ->add('email', EmailType::class)
             ->add('idNumber', NumberType::class)
-            ->add('address', TextType::class)
-            ->add('notes', TextareaType::class, ['required' => false])
             ->add('birthDate', DateType::class, [
                 'html5' => true,
                 'widget' => 'single_text'
             ])
+            ->add('phoneNumber', NumberType::class)
             ->add('city', EntityType::class, [
                 'class' => City::class,
                 'choice_label' => 'name',
@@ -41,24 +42,36 @@ class StudentType extends AbstractType
                     return $city->getProvince()->getName();
                 }
             ])
-            ->add('advisors', CollectionType::class, [
-                'entry_type' => AdvisorType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true,
-                'entry_options' => [
-                    'label' => false,
-                ],
-                'by_reference' => false,
-                'attr' => ['class' => 'advisors']
+            ->add('studentRelationship', ChoiceType::class, [
+                'placeholder' => '-- Seleccione una --',
+                'choices' => $this->getStudentRelationship()
             ])
+            ->add('address', TextType::class)
+            ->add('notes', TextareaType::class, ['required' => false])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'advisors';
+    }
+
+    public function getStudentRelationship()
+    {
+        return [
+            'Madre' => 'Madre',
+            'Padre' => 'Padre',
+            'Hermana/o' => 'Hermana/o'
+        ];
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Student::class
+            'data_class' => Advisor::class
         ]);
     }
 }
