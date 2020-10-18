@@ -1,5 +1,11 @@
 {% extends 'AppBundle:Layout:admin_base.html.twig' %}
 
+{%
+    form_theme form
+    'jquery.collection.html.twig'
+    'AppBundle:Student:create_collection_theme.html.twig'
+%}
+
 {% block body %}
     {{ form_start(form) }}
 
@@ -61,6 +67,21 @@
 
     <br>
 
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Tutores
+        </div>
+        <div class="card-body">
+            <div class="col-md-12">
+                <dl>
+                    <dd>{{ form_widget(form.advisors) }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
     <div class="row">
         <div class="col-md-12">
             <button type="submit" name="submit" class="btn btn-dark pull-right">
@@ -71,3 +92,21 @@
 
     {{ form_end(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+    <script type="text/javascript">
+        $('.advisors').collection({
+            min: 1,
+            prefix: 'advisor',
+            preserve_names: true,
+            allow_duplicate: true,
+            add: `
+                <a href="#" class="advisor btn btn-default" title="Agregar Tutor">
+                    <i class="fa fa-plus-circle"></i>
+                </a>
+            `
+        });
+    </script>
+{% endblock javascripts %}
