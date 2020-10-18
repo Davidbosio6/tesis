@@ -29,12 +29,20 @@
                         <dt>Fecha de creación</dt>
                         <dd>{{ shift.createdAt | date('d/m/Y H:i') }}</dd>
                     </dl>
+                    <dl>
+                        <dt>Hora de inicio</dt>
+                        <dd>{{ shift.startHour | date('H:i') }}</dd>
+                    </dl>
                 </div>
 
                 <div class="col-md-4">
                     <dl>
                         <dt>Fecha de actualización</dt>
                         <dd>{{ shift.updatedAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Hora de fin</dt>
+                        <dd>{{ shift.endHour | date('H:i') }}</dd>
                     </dl>
                 </div>
 
