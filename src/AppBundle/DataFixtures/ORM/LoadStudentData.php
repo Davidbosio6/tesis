@@ -4,6 +4,7 @@ namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Advisor;
 use AppBundle\Entity\City;
+use AppBundle\Entity\Classroom;
 use AppBundle\Entity\Student;
 use DateTime;
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -30,6 +31,11 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         /** @var Advisor $advisor4 */
         $advisor4 = $this->getReference(LoadAdvisorData::ADVISOR_4);
 
+        /** @var Classroom $classroom1 */
+        $classroom1 = $this->getReference(LoadClassroomData::CELESTE);
+        /** @var Classroom $classroom2 */
+        $classroom2 = $this->getReference(LoadClassroomData::VERDE);
+
         $student = new Student();
         $student->setIdNumber(86201589);
         $student->setBirthdate(new DateTime('now -3 years'));
@@ -39,6 +45,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setCity($city);
         $student->addAdvisor($advisor1);
         $student->addAdvisor($advisor2);
+        $student->setClassroom($classroom1);
         $manager->persist($student);
 
         $student = new Student();
@@ -50,6 +57,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setCity($city);
         $student->addAdvisor($advisor3);
         $student->addAdvisor($advisor4);
+        $student->setClassroom($classroom2);
         $manager->persist($student);
 
         $manager->flush();
@@ -62,7 +70,8 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
     {
         return [
             LoadCityData::class,
-            LoadTeacherData::class
+            LoadAdvisorData::class,
+            LoadClassroomData::class
         ];
     }
 }

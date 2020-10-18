@@ -5,6 +5,11 @@
         <div class="col-md-10">
             <h3>{{ classroom.name }}</h3>
         </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('shift_edit', {id: classroom.shift.id}) }}">
+                <i class="fa fa-edit" aria-hidden="true"></i> Editar
+            </a>
+        </div>
     </div>
 
     <hr>
@@ -48,7 +53,7 @@
                     </dl>
                     <dl>
                         <dt>Capacidad disponible</dt>
-                        <dd>{{ classroom.capacity - 12 }}</dd>
+                        <dd>{{ classroom.capacity - classroom.students | length }}</dd>
                     </dl>
                 </div>
             </div>

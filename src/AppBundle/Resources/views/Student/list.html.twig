@@ -38,7 +38,7 @@
                     <td>{{ student.firstName }}</td>
                     <td>{{ student.lastName }}</td>
                     <td>{{ student.idNumber }}</td>
-                    <td>Amarilla - Turno Mañana</td>
+                    <td>{{ student.classroom.name }} - {{ student.classroom.shift.name }}</td>
 
                 </tr>
             {% endfor %}

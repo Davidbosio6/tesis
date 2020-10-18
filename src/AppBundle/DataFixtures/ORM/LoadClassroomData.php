@@ -12,6 +12,10 @@ use Doctrine\Persistence\ObjectManager;
 
 class LoadClassroomData extends AbstractFixture implements FixtureInterface, DependentFixtureInterface
 {
+    const CELESTE = 'c_celeste';
+
+    const VERDE = 'c_verde';
+
     /**
      * {@inheritdoc}
      */
@@ -28,6 +32,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         $classroom->setCapacity(26);
         $classroom->setShift($shift1);
         $manager->persist($classroom);
+        $this->addReference(self::CELESTE, $classroom);
 
         $classroom = new Classroom();
         $classroom->setName('Verde');
@@ -35,6 +40,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         $classroom->setDescription('Sala de 3');
         $classroom->setShift($shift2);
         $manager->persist($classroom);
+        $this->addReference(self::VERDE, $classroom);
 
         $classroom = new Classroom();
         $classroom->setName('Amarilla');

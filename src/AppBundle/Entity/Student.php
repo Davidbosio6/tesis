@@ -85,6 +85,16 @@ class Student
     /**
      * @var Classroom
      *
+     * @ORM\ManyToOne(targetEntity="Classroom", inversedBy="students")
+     * @ORM\JoinColumn(name="classroom_id", referencedColumnName="id", nullable=false)
+     *
+     * @Assert\NotNull()
+     */
+    private $classroom;
+
+    /**
+     * @var Advisor
+     *
      * @ORM\OneToMany(targetEntity="Advisor", mappedBy="student", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="advisor_id", referencedColumnName="id", nullable=true)
      *
@@ -300,6 +310,27 @@ class Student
     public function getNotes(): ?string
     {
         return $this->notes;
+    }
+
+    /**
+     * @param Classroom $classroom
+     *
+     * @return self
+     */
+    public function setClassroom(
+        Classroom $classroom
+    ): self {
+        $this->classroom = $classroom;
+
+        return $this;
+    }
+
+    /**
+     * @return Classroom
+     */
+    public function getClassroom(): ?Classroom
+    {
+        return $this->classroom;
     }
 
     /**
