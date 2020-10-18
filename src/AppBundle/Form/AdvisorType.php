@@ -64,7 +64,8 @@ class AdvisorType extends AbstractType
         return [
             'Madre' => 'Madre',
             'Padre' => 'Padre',
-            'Hermana/o' => 'Hermana/o'
+            'Hermana/o' => 'Hermana/o',
+            'Abuela/o' => 'Abuela/o'
         ];
     }
 

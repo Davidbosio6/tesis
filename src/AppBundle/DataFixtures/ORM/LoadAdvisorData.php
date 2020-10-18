@@ -22,11 +22,10 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
      */
     public function load(ObjectManager $manager)
     {
-        /** @var City $city */
-        $city = $this->getReference(LoadCityData::RIO_CUARTO);
-
         /** @var City $city1 */
-        $city1 = $this->getReference(LoadCityData::CNEL_MOLDES);
+        $city1 = $this->getReference(LoadCityData::RIO_CUARTO);
+        /** @var City $city2 */
+        $city2 = $this->getReference(LoadCityData::CNEL_MOLDES);
 
         $advisor = new Advisor();
         $advisor->setIdNumber(29304987);
@@ -37,7 +36,7 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
         $advisor->setPhoneNumber('3582402903');
         $advisor->setFirstName('Malena');
         $advisor->setLastName('Villa');
-        $advisor->setCity($city);
+        $advisor->setCity($city1);
         $manager->persist($advisor);
         $this->addReference(self::ADVISOR_1, $advisor);
 
@@ -50,7 +49,7 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
         $advisor->setPhoneNumber('3582039401');
         $advisor->setFirstName('Juan');
         $advisor->setLastName('Ingaramo');
-        $advisor->setCity($city1);
+        $advisor->setCity($city2);
         $manager->persist($advisor);
         $this->addReference(self::ADVISOR_2, $advisor);
 
@@ -63,7 +62,7 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
         $advisor->setPhoneNumber('3582402910');
         $advisor->setFirstName('Santiago');
         $advisor->setLastName('Celli');
-        $advisor->setCity($city1);
+        $advisor->setCity($city2);
         $manager->persist($advisor);
         $this->addReference(self::ADVISOR_3, $advisor);
 
@@ -76,7 +75,7 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
         $advisor->setPhoneNumber('3582402910');
         $advisor->setFirstName('Feli');
         $advisor->setLastName('Colina');
-        $advisor->setCity($city1);
+        $advisor->setCity($city2);
         $manager->persist($advisor);
         $this->addReference(self::ADVISOR_4, $advisor);
 
