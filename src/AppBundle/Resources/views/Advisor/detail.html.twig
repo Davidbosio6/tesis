@@ -1,0 +1,80 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>{{ advisor.firstName }} {{ advisor.lastName }}</h3>
+        </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('student_edit', {id: advisor.student.id}) }}">
+                <i class="fa fa-edit" aria-hidden="true"></i> Editar
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Datos del profesor
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de creación</dt>
+                        <dd>{{ advisor.createdAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Fecha de nacimiento</dt>
+                        <dd>{{ advisor.birthDate | date('d/m/Y') }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Número de Teléfono</dt>
+                        <dd>{{ advisor.phoneNumber }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Notas</dt>
+                        <dd>{{ advisor.notes ? advisor.notes : '-' }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de actualización</dt>
+                        <dd>{{ advisor.updatedAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Relación con el alumno</dt>
+                        <dd>{{ advisor.studentRelationship }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Localidad</dt>
+                        <dd>
+                            <a href="{{ path('city_detail', {id: advisor.city.id}) }}">
+                                {{ advisor.city.name }}
+                            </a>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Documento de identidad</dt>
+                        <dd>{{ advisor.idNumber }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Alumno a cargo</dt>
+                        <dd>
+                            <a href="{{ path('student_detail', {id: advisor.student.id}) }}">
+                                {{ advisor.student.firstName }} {{ advisor.student.lastName }}
+                            </a>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>Domicilio</dt>
+                        <dd>{{ advisor.address }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
