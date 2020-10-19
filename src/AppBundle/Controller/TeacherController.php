@@ -31,7 +31,10 @@ class TeacherController extends AbstractController
         $teacher = new Teacher();
         $form = $this->createForm(
             TeacherType::class,
-            $teacher
+            $teacher,
+            [
+                'type' => 'create'
+            ]
         );
 
         $form->handleRequest($request);
@@ -148,19 +151,15 @@ class TeacherController extends AbstractController
     ): Response {
         $form = $this->createForm(
             TeacherType::class,
-            $teacher
+            $teacher,
+            [
+                'type' => 'edit'
+            ]
         );
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $this->getPasswordEncoderService()->encodePassword(
-                $teacher->getUser(),
-                $teacher->getUser()->getPlainPassword()
-            );
-
-            $teacher->getUser()->setPassword($password);
-
             $em = $this->getEntityManager();
             $em->flush();
 
