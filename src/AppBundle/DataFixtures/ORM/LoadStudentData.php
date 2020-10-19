@@ -40,8 +40,8 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setIdNumber(86201589);
         $student->setBirthdate(new DateTime('now -3 years'));
         $student->setAddress('Mendoza 32');
-        $student->setFirstName('Lorena');
-        $student->setLastName('Diaz');
+        $student->setFirstName('Francisca');
+        $student->setLastName('Gil');
         $student->setCity($city);
         $student->addAdvisor($advisor1);
         $student->addAdvisor($advisor2);
