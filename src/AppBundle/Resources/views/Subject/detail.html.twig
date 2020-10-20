@@ -40,4 +40,46 @@
             </div>
         </div>
     </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Profesores asociados
+        </div>
+        <div class="card-body">
+            {% if subject.teachers is empty %}
+                <div class="alert alert-light text-center" role="alert">
+                    No se encontraron resultados
+                </div>
+            {% else %}
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Fecha de creación</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Documento de identidad</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for teacher in subject.teachers %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('teacher_detail', {id: teacher.id}) }}">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </td>
+                            <td>{{ teacher.createdAt | date('d-m-Y H:i') }}</td>
+                            <td>{{ teacher.firstName }}</td>
+                            <td>{{ teacher.lastName }}</td>
+                            <td>{{ teacher.idNumber }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
