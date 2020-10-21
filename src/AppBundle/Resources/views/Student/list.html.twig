@@ -23,7 +23,7 @@
             <th scope="col">Apellido</th>
             <th scope="col">Documento de identidad</th>
             <th scope="col">Sala</th>
-
+            <th scope="col">Plan</th>
         </tr>
         </thead>
         <tbody>
@@ -39,7 +39,7 @@
                     <td>{{ student.lastName }}</td>
                     <td>{{ student.idNumber }}</td>
                     <td>{{ student.classroom.name }} - {{ student.classroom.shift.name }}</td>
-
+                    <td>{{ student.plan.name }}</td>
                 </tr>
             {% endfor %}
         </tbody>

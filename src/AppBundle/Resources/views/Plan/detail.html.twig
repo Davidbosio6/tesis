@@ -1,0 +1,52 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>{{ plan.name }}</h3>
+        </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('plan_edit', {id: plan.id}) }}">
+                <i class="fa fa-edit" aria-hidden="true"></i> Editar
+            </a>
+            <a class="btn btn-dark pull-right" href="{{ path('plan_delete', {id: plan.id}) }}"
+               onclick="return confirm('Esta acción no tiene vuelta atrás ¿Está seguro?')">
+                <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Datos del plan
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de creación</dt>
+                        <dd>{{ plan.createdAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Valor</dt>
+                        <dd>${{ plan.value }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de actualización</dt>
+                        <dd>{{ plan.updatedAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Descripción</dt>
+                        <dd>{{ plan.description }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

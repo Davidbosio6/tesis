@@ -34,8 +34,12 @@
                         <dd>{{ student.birthDate | date('d/m/Y') }}</dd>
                     </dl>
                     <dl>
-                        <dt>Domicilio</dt>
-                        <dd>{{ student.address }}</dd>
+                        <dt>Plan</dt>
+                        <dd>
+                            <a href="{{ path('plan_detail', {id: student.plan.id}) }}">
+                                {{ student.plan.name }}
+                            </a>
+                        </dd>
                     </dl>
                 </div>
                 <div class="col-md-4">
@@ -52,8 +56,8 @@
                         </dd>
                     </dl>
                     <dl>
-                        <dt>Notas</dt>
-                        <dd>{{ student.notes ? student.notes : '-' }}</dd>
+                        <dt>Domicilio</dt>
+                        <dd>{{ student.address }}</dd>
                     </dl>
                 </div>
                 <div class="col-md-4">
@@ -68,6 +72,10 @@
                     <dl>
                         <dt>Documento de identidad</dt>
                         <dd>{{ student.idNumber }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Notas</dt>
+                        <dd>{{ student.notes ? student.notes : '-' }}</dd>
                     </dl>
                 </div>
             </div>
