@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-md-10">
-            <h3>Editar Alumno</h3>
+            <h3>Editar Plan</h3>
         </div>
     </div>
 
@@ -19,63 +19,28 @@
 
     <div class="card">
         <div class="card-header text-white bg-dark">
-            Datos del alumno
+            Datos del plan
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
                     <dl>
                         <dt>Nombre</dt>
-                        <dd>{{ form_widget(form.firstName) }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Fecha de nacimiento</dt>
-                        <dd>{{ form_widget(form.birthDate) }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Sala</dt>
-                        <dd>{{ form_widget(form.classroom) }}</dd>
+                        <dd>{{ form_widget(form.name) }}</dd>
                     </dl>
                 </div>
                 <div class="col-md-4">
                     <dl>
-                        <dt>Apellido</dt>
-                        <dd>{{ form_widget(form.lastName) }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Localidad</dt>
-                        <dd>{{ form_widget(form.city) }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Notas</dt>
-                        <dd>{{ form_widget(form.notes) }}</dd>
+                        <dt>Descripción</dt>
+                        <dd>{{ form_widget(form.description) }}</dd>
                     </dl>
                 </div>
                 <div class="col-md-4">
                     <dl>
-                        <dt>Documento de identidad</dt>
-                        <dd>{{ form_widget(form.idNumber) }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Domicilio</dt>
-                        <dd>{{ form_widget(form.address) }}</dd>
+                        <dt>Valor</dt>
+                        <dd>{{ form_widget(form.value) }}</dd>
                     </dl>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <br>
-
-    <div class="card">
-        <div class="card-header text-white bg-dark">
-            Tutores
-        </div>
-        <div class="card-body">
-            <div class="col-md-12">
-                <dl>
-                    <dd>{{ form_widget(form.advisors) }}</dd>
-                </dl>
             </div>
         </div>
     </div>
