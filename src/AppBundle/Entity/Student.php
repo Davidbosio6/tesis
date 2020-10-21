@@ -102,6 +102,16 @@ class Student
      */
     private $advisors;
 
+    /**
+     * @var Plan
+     *
+     * @ORM\ManyToOne(targetEntity="Plan", inversedBy="students")
+     * @ORM\JoinColumn(name="plan_id", referencedColumnName="id", nullable=false)
+     *
+     * @Assert\NotNull()
+     */
+    private $plan;
+
     public function __construct()
     {
         $this->advisors = new ArrayCollection();
@@ -361,5 +371,26 @@ class Student
     public function getAdvisors()
     {
         return $this->advisors;
+    }
+
+    /**
+     * @param Plan $plan
+     *
+     * @return self
+     */
+    public function setPlan(
+        Plan $plan
+    ): self {
+        $this->plan = $plan;
+
+        return $this;
+    }
+
+    /**
+     * @return Plan
+     */
+    public function getPlan(): ?Plan
+    {
+        return $this->plan;
     }
 }

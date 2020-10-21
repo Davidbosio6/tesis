@@ -1,0 +1,43 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Planes y cuotas</h3>
+        </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('plan_create') }}">
+                <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Plan
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fecha de creación</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Valor</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for plan in table %}
+                <tr>
+                    <td>
+                        <a href="{{ path('plan_detail', {id: plan.id}) }}">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </td>
+                    <td>{{ plan.createdAt | date('d-m-Y H:i') }}</td>
+                    <td>{{ plan.name }}</td>
+                    <td>${{ plan.value }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% include "AppBundle:Layout:navigation.html.twig" with {"table" : table} %}
+{% endblock %}

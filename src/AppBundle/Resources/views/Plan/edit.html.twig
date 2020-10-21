@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-md-10">
-            <h3>Nuevo Alumno</h3>
+            <h3>Editar Alumno</h3>
         </div>
     </div>
 
@@ -47,8 +47,8 @@
                         <dd>{{ form_widget(form.city) }}</dd>
                     </dl>
                     <dl>
-                        <dt>Plan</dt>
-                        <dd>{{ form_widget(form.plan) }}</dd>
+                        <dt>Notas</dt>
+                        <dd>{{ form_widget(form.notes) }}</dd>
                     </dl>
                 </div>
                 <div class="col-md-4">
@@ -59,10 +59,6 @@
                     <dl>
                         <dt>Domicilio</dt>
                         <dd>{{ form_widget(form.address) }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Notas</dt>
-                        <dd>{{ form_widget(form.notes) }}</dd>
                     </dl>
                 </div>
             </div>
@@ -96,21 +92,3 @@
 
     {{ form_end(form) }}
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/jquery.collection.js') }}"></script>
-    <script type="text/javascript">
-        $('.advisors').collection({
-            min: 1,
-            prefix: 'advisor',
-            preserve_names: true,
-            allow_duplicate: true,
-            add: `
-                <a href="#" class="advisor btn btn-default" title="Agregar Tutor">
-                    <i class="fa fa-plus-circle"></i>
-                </a>
-            `
-        });
-    </script>
-{% endblock javascripts %}

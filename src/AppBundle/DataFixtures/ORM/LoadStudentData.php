@@ -5,6 +5,7 @@ namespace AppBundle\DataFixtures\ORM;
 use AppBundle\Entity\Advisor;
 use AppBundle\Entity\City;
 use AppBundle\Entity\Classroom;
+use AppBundle\Entity\Plan;
 use AppBundle\Entity\Student;
 use DateTime;
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -19,8 +20,8 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
      */
     public function load(ObjectManager $manager)
     {
-        /** @var City $city */
-        $city = $this->getReference(LoadCityData::CNEL_MOLDES);
+        /** @var City $city1 */
+        $city1 = $this->getReference(LoadCityData::CNEL_MOLDES);
 
         /** @var Advisor $advisor1 */
         $advisor1 = $this->getReference(LoadAdvisorData::ADVISOR_1);
@@ -36,16 +37,20 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         /** @var Classroom $classroom2 */
         $classroom2 = $this->getReference(LoadClassroomData::VERDE);
 
+        /** @var Plan $plan1 */
+        $plan1 = $this->getReference(LoadPlanData::PLAN_BASICO);
+
         $student = new Student();
         $student->setIdNumber(86201589);
         $student->setBirthdate(new DateTime('now -3 years'));
         $student->setAddress('Mendoza 32');
         $student->setFirstName('Francisca');
         $student->setLastName('Gil');
-        $student->setCity($city);
+        $student->setCity($city1);
         $student->addAdvisor($advisor1);
         $student->addAdvisor($advisor2);
         $student->setClassroom($classroom1);
+        $student->setPlan($plan1);
         $manager->persist($student);
 
         $student = new Student();
@@ -54,9 +59,10 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setAddress('Maipú 1209');
         $student->setFirstName('Ramiro');
         $student->setLastName('Fernandez');
-        $student->setCity($city);
+        $student->setCity($city1);
         $student->addAdvisor($advisor3);
         $student->addAdvisor($advisor4);
+        $student->setPlan($plan1);
         $student->setClassroom($classroom2);
         $manager->persist($student);
 
@@ -71,7 +77,8 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         return [
             LoadCityData::class,
             LoadAdvisorData::class,
-            LoadClassroomData::class
+            LoadClassroomData::class,
+            LoadPlanData::class
         ];
     }
 }
