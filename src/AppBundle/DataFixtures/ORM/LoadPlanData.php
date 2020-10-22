@@ -39,7 +39,7 @@ class LoadPlanData extends AbstractFixture implements FixtureInterface
 
         $plan = new Plan();
         $plan->setName('Plan Básico');
-        $plan->setDescription('Merienda incluida');
+        $plan->setDescription('Merienda incluida.');
         $plan->setDescription1('-');
         $plan->setDescription2('-');
         $plan->setAmount(1000);
@@ -50,8 +50,8 @@ class LoadPlanData extends AbstractFixture implements FixtureInterface
 
         $plan = new Plan();
         $plan->setName('Plan Intermedio');
-        $plan->setDescription('Merienda incluida');
-        $plan->setDescription1('Seguimiento personalizado');
+        $plan->setDescription('Merienda incluida.');
+        $plan->setDescription1('Seguimiento personalizado.');
         $plan->setDescription2('-');
         $plan->setAmount(1500);
         $plan->setShowPlan(true);
@@ -60,8 +60,8 @@ class LoadPlanData extends AbstractFixture implements FixtureInterface
 
         $plan = new Plan();
         $plan->setName('Plan Premium');
-        $plan->setDescription('Merienda incluida');
-        $plan->setDescription1('Seguimiento personalizado');
+        $plan->setDescription('Merienda incluida.');
+        $plan->setDescription1('Seguimiento personalizado.');
         $plan->setDescription2('Acompañamiento docente permanente.');
         $plan->setAmount(2000);
         $plan->setShowPlan(true);
