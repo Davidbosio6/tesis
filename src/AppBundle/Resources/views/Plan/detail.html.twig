@@ -34,8 +34,8 @@
                         <dd>{{ plan.description }}</dd>
                     </dl>
                     <dl>
-                        <dt>Se muestra en Planes y Cuotas</dt>
-                        <dd>{{ plan.showPlan ? 'Si' : 'No' }}</dd>
+                        <dt>Cantidad de alumnos</dt>
+                        <dd>{{ plan.students | length }}</dd>
                     </dl>
                 </div>
                 <div class="col-md-4">
@@ -48,14 +48,8 @@
                         <dd>{{ plan.description1 }}</dd>
                     </dl>
                     <dl>
-                        <dt>Destacado</dt>
-                        <dd>
-                            {% if plan.showPlan == 0 %}
-                                No aplica
-                            {% else %}
-                                {{ plan.isHighlighted ? 'Si' : 'No' }}
-                            {% endif %}
-                        </dd>
+                        <dt>Se muestra en Planes y Cuotas</dt>
+                        <dd>{{ plan.showPlan ? 'Si' : 'No' }}</dd>
                     </dl>
                 </div>
                 <div class="col-md-4">
@@ -66,6 +60,16 @@
                     <dl>
                         <dt>Tercera Descripción</dt>
                         <dd>{{ plan.description1 }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Destacado</dt>
+                        <dd>
+                            {% if plan.showPlan == 0 %}
+                                No aplica
+                            {% else %}
+                                {{ plan.isHighlighted ? 'Si' : 'No' }}
+                            {% endif %}
+                        </dd>
                     </dl>
                 </div>
             </div>

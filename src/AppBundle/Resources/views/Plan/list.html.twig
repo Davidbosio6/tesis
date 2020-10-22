@@ -21,6 +21,7 @@
             <th scope="col">Fecha de creación</th>
             <th scope="col">Nombre</th>
             <th scope="col">Monto</th>
+            <th scope="col">Cantidad de alumnos</th>
             <th scope="col">Se muestra en Planes y Cuotas</th>
             <th scope="col">Destacado</th>
         </tr>
@@ -36,8 +37,8 @@
                     <td>{{ plan.createdAt | date('d-m-Y H:i') }}</td>
                     <td>{{ plan.name }}</td>
                     <td>${{ plan.amount }}</td>
+                    <td>{{ plan.students | length }}</td>
                     <td>{{ plan.showPlan ? 'Si' : 'No' }}</td>
-
                     <td>
                         {% if plan.showPlan == 0 %}
                             No aplica
