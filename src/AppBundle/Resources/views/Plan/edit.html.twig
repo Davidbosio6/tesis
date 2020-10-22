@@ -28,17 +28,25 @@
                         <dt>Nombre</dt>
                         <dd>{{ form_widget(form.name) }}</dd>
                     </dl>
+                    <dl>
+                        <dt>Mostrar plan</dt>
+                        <dd>{{ form_widget(form.showPlan) }}</dd>
+                    </dl>
                 </div>
                 <div class="col-md-4">
                     <dl>
                         <dt>Descripción</dt>
                         <dd>{{ form_widget(form.description) }}</dd>
                     </dl>
+                    <dl>
+                        <dt>Destacada</dt>
+                        <dd>{{ form_widget(form.isHighlighted) }}</dd>
+                    </dl>
                 </div>
                 <div class="col-md-4">
                     <dl>
-                        <dt>Valor</dt>
-                        <dd>{{ form_widget(form.value) }}</dd>
+                        <dt>Monto</dt>
+                        <dd>{{ form_widget(form.amount) }}</dd>
                     </dl>
                 </div>
             </div>

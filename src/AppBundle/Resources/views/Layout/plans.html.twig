@@ -1,0 +1,40 @@
+{% extends 'AppBundle:Layout:guest_base.html.twig' %}
+
+{% block title %}{{ siteName }}{% endblock %}
+{% block siteName %}{{ siteName }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4 mb-3">Planes y cuotas</h1>
+
+        <hr>
+
+        <div class="row">
+            {% for plan in plans %}
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100">
+                        {% if plan.isHighlighted %}
+                            <h3 class="card-header bg-primary text-white">{{ plan.name }}</h3>
+                        {% else %}
+                            <h3 class="card-header">{{ plan.name }}</h3>
+                        {% endif %}
+                        <div class="card-body">
+                            <div class="display-4">${{ plan.value }}</div>
+                            <div class="font-italic">por mes</div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{ plan.description }}</li>
+                            <li class="list-group-item">{{ plan.description1 }}</li>
+                            <li class="list-group-item">{{ plan.description2 }}</li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            &nbsp &nbsp
+            <div class="font-italic">**Contactanos para obtener información sobre becas. Contacto <a href={{ path('contact') }}>aquí</a></div>
+        </div>
+    </div>
+{% endblock %}

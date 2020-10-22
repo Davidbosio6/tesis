@@ -20,7 +20,9 @@
             <th scope="col">#</th>
             <th scope="col">Fecha de creación</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Valor</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Se muestra en Planes y Cuotas</th>
+            <th scope="col">Destacado</th>
         </tr>
         </thead>
         <tbody>
@@ -33,7 +35,16 @@
                     </td>
                     <td>{{ plan.createdAt | date('d-m-Y H:i') }}</td>
                     <td>{{ plan.name }}</td>
-                    <td>${{ plan.value }}</td>
+                    <td>${{ plan.amount }}</td>
+                    <td>{{ plan.showPlan ? 'Si' : 'No' }}</td>
+
+                    <td>
+                        {% if plan.showPlan == 0 %}
+                            No aplica
+                        {% else %}
+                            {{ plan.isHighlighted ? 'Si' : 'No' }}
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
