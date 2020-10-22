@@ -30,14 +30,8 @@
                         <dd>{{ plan.createdAt | date('d/m/Y H:i') }}</dd>
                     </dl>
                     <dl>
-                        <dt>Monto</dt>
-                        <dd>${{ plan.amount }}</dd>
-                    </dl>
-                </div>
-                <div class="col-md-4">
-                    <dl>
-                        <dt>Fecha de actualización</dt>
-                        <dd>{{ plan.updatedAt | date('d/m/Y H:i') }}</dd>
+                        <dt>Primera Descripción</dt>
+                        <dd>{{ plan.description }}</dd>
                     </dl>
                     <dl>
                         <dt>Se muestra en Planes y Cuotas</dt>
@@ -46,8 +40,12 @@
                 </div>
                 <div class="col-md-4">
                     <dl>
-                        <dt>Descripción</dt>
-                        <dd>{{ plan.description }}</dd>
+                        <dt>Fecha de actualización</dt>
+                        <dd>{{ plan.updatedAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Segunda Descripción</dt>
+                        <dd>{{ plan.description1 }}</dd>
                     </dl>
                     <dl>
                         <dt>Destacado</dt>
@@ -58,6 +56,16 @@
                                 {{ plan.isHighlighted ? 'Si' : 'No' }}
                             {% endif %}
                         </dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Monto</dt>
+                        <dd>${{ plan.amount }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Tercera Descripción</dt>
+                        <dd>{{ plan.description1 }}</dd>
                     </dl>
                 </div>
             </div>

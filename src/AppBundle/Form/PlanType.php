@@ -22,6 +22,8 @@ class PlanType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('description', TextType::class)
+            ->add('description1', TextType::class)
+            ->add('description2', TextType::class)
             ->add('amount', NumberType::class)
             ->add('showPlan', ChoiceType::class, [
                 'choices' => [

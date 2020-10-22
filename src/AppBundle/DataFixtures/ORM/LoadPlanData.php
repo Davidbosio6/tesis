@@ -20,6 +20,8 @@ class LoadPlanData extends AbstractFixture implements FixtureInterface
         $plan = new Plan();
         $plan->setName('Beca 100%');
         $plan->setDescription('Beca municipal');
+        $plan->setDescription1('-');
+        $plan->setDescription2('-');
         $plan->setAmount(0);
         $plan->setShowPlan(false);
         $plan->setIsHighLighted(false);
@@ -28,6 +30,8 @@ class LoadPlanData extends AbstractFixture implements FixtureInterface
         $plan = new Plan();
         $plan->setName('Beca 50%');
         $plan->setDescription('Beca municipal');
+        $plan->setDescription1('-');
+        $plan->setDescription2('-');
         $plan->setAmount(500);
         $plan->setShowPlan(false);
         $plan->setIsHighLighted(false);
