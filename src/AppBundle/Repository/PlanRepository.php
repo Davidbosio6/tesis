@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Plan;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
@@ -21,5 +22,24 @@ class PlanRepository extends EntityRepository
         $qb = $this->createQueryBuilder('plan');
 
         return $qb->getQuery();
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return Plan[]|null
+     */
+    public function findAllByShowPlan(bool $value)
+    {
+        $qb = $this->createQueryBuilder('plan');
+
+        return $qb->where(
+            $qb->expr()->andX(
+                $qb->expr()->eq('plan.showPlan', ':value')
+            )
+        )
+            ->setParameter('value', $value)
+            ->getQuery()
+            ->getResult();
     }
 }

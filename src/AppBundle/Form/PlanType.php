@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Plan;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +22,23 @@ class PlanType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('description', TextType::class)
-            ->add('value', NumberType::class)
+            ->add('description1', TextType::class)
+            ->add('description2', TextType::class)
+            ->add('amount', NumberType::class)
+            ->add('showPlan', ChoiceType::class, [
+                'choices' => [
+                    'No' => 0,
+                    'Si' => 1
+
+                ]
+            ])
+            ->add('isHighlighted', ChoiceType::class, [
+                'choices' => [
+                    'No' => 0,
+                    'Si' => 1
+
+                ]
+            ])
         ;
     }
 

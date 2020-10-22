@@ -31,17 +31,57 @@
                 </div>
                 <div class="col-md-4">
                     <dl>
-                        <dt>Descripción</dt>
+                        <dt>Monto</dt>
+                        <dd>{{ form_widget(form.amount) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Mostrar plan</dt>
+                        <dd>{{ form_widget(form.showPlan) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Destacado</dt>
+                        <dd>{{ form_widget(form.isHighlighted) }}</dd>
+                    </dl>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Primera Descripción</dt>
                         <dd>{{ form_widget(form.description) }}</dd>
                     </dl>
                 </div>
                 <div class="col-md-4">
                     <dl>
-                        <dt>Valor</dt>
-                        <dd>{{ form_widget(form.value) }}</dd>
+                        <dt>Segunda Descripción</dt>
+                        <dd>{{ form_widget(form.description1) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Tercera Descripción</dt>
+                        <dd>{{ form_widget(form.description2) }}</dd>
                     </dl>
                 </div>
             </div>
+
+            <small>
+                <i>
+                    Consideraciones:
+                    <ul>
+                        <li>Si el atributo <strong>Mostrar plan</strong> es igual a <strong>Si</strong> este plan se mostrará para todos los usuarios en el apartado Planes y Cuotas.</li>
+                        <li>Si el atributo <strong>Destacado</strong> es igual a <strong>Si</strong> este plan se mostrará para como destacado en color azul en el apartado Planes y Cuotas.</li>
+                        <li>Los atributos relacionados a <strong>Descripción</strong> serán listado el detalle de cada Plan en el apartado Planes y cuotas.</li>
+                    </ul>
+                </i>
+            </small>
         </div>
     </div>
 

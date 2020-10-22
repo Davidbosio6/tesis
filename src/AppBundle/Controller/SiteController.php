@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Plan;
 use AppBundle\Entity\Settings;
+use AppBundle\Repository\PlanRepository;
 use AppBundle\Repository\SettingsRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -79,6 +81,22 @@ class SiteController extends AbstractController
             'error' => $error,
             'siteName' => $this->getSiteName()
 
+        ]);
+    }
+
+    /**
+     * @return Response
+     *
+     * @Route("/plans", name="plans")
+     */
+    public function plansAction()
+    {
+        /** @var PlanRepository $repository */
+        $repository = $this->getRepository(Plan::class);
+
+        return $this->render('AppBundle:Layout:plans.html.twig', [
+            'siteName' => $this->getSiteName(),
+            'plans' => $repository->findAllByShowPlan(true)
         ]);
     }
 
