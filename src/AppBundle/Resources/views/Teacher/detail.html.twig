@@ -34,18 +34,22 @@
                         <dd>{{ teacher.birthDate | date('d/m/Y') }}</dd>
                     </dl>
                     <dl>
-                        <dt>Asignatura</dt>
-                        <dd>
-                            <a href="{{ path('subject_detail', {id: teacher.subject.id}) }}">
-                                {{ teacher.subject.name }}
-                            </a>
-                        </dd>
+                        <dt>Número de Teléfono</dt>
+                        <dd>{{ teacher.phoneNumber }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Notas</dt>
+                        <dd>{{ teacher.notes ? teacher.notes : '-' }}</dd>
                     </dl>
                 </div>
                 <div class="col-md-4">
                     <dl>
                         <dt>Fecha de actualización</dt>
                         <dd>{{ teacher.updatedAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Edad</dt>
+                        <dd>{{ yearsOld }}</dd>
                     </dl>
                     <dl>
                         <dt>Localidad</dt>
@@ -55,10 +59,6 @@
                             </a>
                         </dd>
                     </dl>
-                    <dl>
-                        <dt>Número de Teléfono</dt>
-                        <dd>{{ teacher.phoneNumber }}</dd>
-                    </dl>
                 </div>
                 <div class="col-md-4">
                     <dl>
@@ -66,12 +66,16 @@
                         <dd>{{ teacher.idNumber }}</dd>
                     </dl>
                     <dl>
-                        <dt>Domicilio</dt>
-                        <dd>{{ teacher.address }}</dd>
+                        <dt>Asignatura</dt>
+                        <dd>
+                            <a href="{{ path('subject_detail', {id: teacher.subject.id}) }}">
+                                {{ teacher.subject.name }}
+                            </a>
+                        </dd>
                     </dl>
                     <dl>
-                        <dt>Notas</dt>
-                        <dd>{{ teacher.notes ? teacher.notes : '-' }}</dd>
+                        <dt>Domicilio</dt>
+                        <dd>{{ teacher.address }}</dd>
                     </dl>
                 </div>
             </div>
