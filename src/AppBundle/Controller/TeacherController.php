@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Teacher;
+use AppBundle\Form\ResetPasswordType;
 use AppBundle\Form\TeacherType;
 use AppBundle\Repository\TeacherRepository;
 use DateTime;
@@ -20,11 +21,11 @@ use Symfony\Component\HttpFoundation\Response;
 class TeacherController extends AbstractController
 {
     /**
+     * @Route("/create", name="teacher_create")
+     *
      * @param Request $request
      *
      * @return Response
-     *
-     * @Route("/create", name="teacher_create")
      */
     public function createAction(
         Request $request
@@ -66,11 +67,11 @@ class TeacherController extends AbstractController
     }
 
     /**
+     * @Route("/list", name="teacher_list")
+     *
      * @param Request $request
      *
      * @return Response
-     *
-     * @Route("/list", name="teacher_list")
      */
     public function listAction(
         Request $request
@@ -102,11 +103,11 @@ class TeacherController extends AbstractController
     }
 
     /**
+     * @Route("/detail/{id}", name="teacher_detail")
+     *
      * @param Teacher $teacher
      *
      * @return Response
-     *
-     * @Route("/detail/{id}", name="teacher_detail")
      */
     public function detailAction(
         Teacher $teacher
@@ -175,6 +176,53 @@ class TeacherController extends AbstractController
 
         return $this->render(
             'AppBundle:Teacher:edit.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/reset-password/{id}", name="teacher_reset_password")
+     *
+     * @param Request $request
+     * @param Teacher $teacher
+     *
+     * @return Response
+     */
+    public function resetPasswordAction(
+        Teacher $teacher,
+        Request $request
+    ): Response {
+        $form = $this->createForm(
+            ResetPasswordType::class,
+            $teacher->getUser()
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $password = $this->getPasswordEncoderService()->encodePassword(
+                $teacher->getUser(),
+                $teacher->getUser()->getPlainPassword()
+            );
+
+            $teacher->getUser()->setPassword($password);
+
+            $em = $this->getEntityManager();
+            $em->persist($teacher);
+            $em->flush();
+
+            $this->addFlash('success', 'La contraseña se cambió con éxito!');
+
+            return $this->redirectToRoute(
+                'teacher_detail',
+                ['id' => $teacher->getId()]
+            );
+        }
+
+        return $this->render(
+            'AppBundle:Teacher:reset_password.html.twig',
             [
                 'form' => $form->createView(),
             ]
