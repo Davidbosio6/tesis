@@ -41,6 +41,10 @@
                             </a>
                         </dd>
                     </dl>
+                    <dl>
+                        <dt>Notas</dt>
+                        <dd>{{ student.notes ? student.notes : '-' }}</dd>
+                    </dl>
                 </div>
                 <div class="col-md-4">
                     <dl>
@@ -48,10 +52,10 @@
                         <dd>{{ student.updatedAt | date('d/m/Y H:i') }}</dd>
                     </dl>
                     <dl>
-                        <dt>Localidad</dt>
+                        <dt>Sala</dt>
                         <dd>
-                            <a href="{{ path('city_detail', {id: student.city.id}) }}">
-                                {{ student.city.name }}
+                            <a href="{{ path('classroom_detail', {id: student.classroom.id}) }}">
+                                {{ student.classroom.name }} - {{ student.classroom.shift.name }}
                             </a>
                         </dd>
                     </dl>
@@ -62,20 +66,20 @@
                 </div>
                 <div class="col-md-4">
                     <dl>
-                        <dt>Sala</dt>
+                        <dt>Sexo</dt>
+                        <dd>{{ student.sex }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Localidad</dt>
                         <dd>
-                            <a href="{{ path('classroom_detail', {id: student.classroom.id}) }}">
-                                {{ student.classroom.name }} - {{ student.classroom.shift.name }}
+                            <a href="{{ path('city_detail', {id: student.city.id}) }}">
+                                {{ student.city.name }}
                             </a>
                         </dd>
                     </dl>
                     <dl>
                         <dt>Documento de identidad</dt>
                         <dd>{{ student.idNumber }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Notas</dt>
-                        <dd>{{ student.notes ? student.notes : '-' }}</dd>
                     </dl>
                 </div>
             </div>

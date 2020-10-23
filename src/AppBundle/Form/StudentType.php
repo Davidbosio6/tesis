@@ -8,6 +8,7 @@ use AppBundle\Entity\Plan;
 use AppBundle\Entity\Student;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -68,6 +69,14 @@ class StudentType extends AbstractType
             ])
             ->add('address', TextType::class)
             ->add('notes', TextareaType::class, ['required' => false])
+            ->add('sex', ChoiceType::class, [
+                'choices' => [
+                    'Femenino' => 'Femenino',
+                    'Masculino' => 'Masculino',
+                    'No define' => 'No define'
+
+                ]
+            ])
         ;
     }
 
