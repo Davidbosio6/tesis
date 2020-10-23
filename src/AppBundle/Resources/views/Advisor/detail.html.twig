@@ -30,12 +30,12 @@
                         <dd>{{ advisor.birthDate | date('d/m/Y') }}</dd>
                     </dl>
                     <dl>
-                        <dt>Número de Teléfono</dt>
-                        <dd>{{ advisor.phoneNumber }}</dd>
+                        <dt>Edad</dt>
+                        <dd>{{ yearsOld }}</dd>
                     </dl>
                     <dl>
-                        <dt>Notas</dt>
-                        <dd>{{ advisor.notes ? advisor.notes : '-' }}</dd>
+                        <dt>Número de Teléfono</dt>
+                        <dd>{{ advisor.phoneNumber }}</dd>
                     </dl>
                 </div>
                 <div class="col-md-4">
@@ -54,6 +54,10 @@
                                 {{ advisor.city.name }}
                             </a>
                         </dd>
+                    </dl>
+                    <dl>
+                        <dt>Notas</dt>
+                        <dd>{{ advisor.notes ? advisor.notes : '-' }}</dd>
                     </dl>
                 </div>
                 <div class="col-md-4">

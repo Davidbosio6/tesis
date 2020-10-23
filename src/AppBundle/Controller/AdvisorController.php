@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Advisor;
+use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,6 +30,7 @@ class AdvisorController extends AbstractController
             'AppBundle:Advisor:detail.html.twig',
             [
                 'advisor' => $advisor,
+                'yearsOld' => (new DateTime('now'))->diff($advisor->getBirthdate())->format('%y'),
             ]
         );
     }

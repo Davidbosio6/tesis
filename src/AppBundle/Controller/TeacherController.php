@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Teacher;
 use AppBundle\Form\TeacherType;
 use AppBundle\Repository\TeacherRepository;
+use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -114,6 +115,7 @@ class TeacherController extends AbstractController
             'AppBundle:Teacher:detail.html.twig',
             [
                 'teacher' => $teacher,
+                'yearsOld' => (new DateTime('now'))->diff($teacher->getBirthdate())->format('%y'),
             ]
         );
     }
