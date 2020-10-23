@@ -73,6 +73,11 @@ class Student
     private $notes;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $sex;
+
+    /**
      * @var City
      *
      * @ORM\ManyToOne(targetEntity="City", inversedBy="students")
@@ -392,5 +397,26 @@ class Student
     public function getPlan(): ?Plan
     {
         return $this->plan;
+    }
+
+    /**
+     * @param string|null $sex
+     *
+     * @return self
+     */
+    public function setSex(
+        string $sex = null
+    ): self {
+        $this->sex = $sex;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSex(): ?string
+    {
+        return $this->sex;
     }
 }
