@@ -194,7 +194,6 @@ class TeacherController extends AbstractController
         Teacher $teacher,
         Request $request
     ): Response {
-
         $form = $this->createForm(
             ResetPasswordType::class,
             $teacher->getUser()
