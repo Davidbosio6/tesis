@@ -5,6 +5,7 @@ namespace AppBundle\DataFixtures\ORM;
 use AppBundle\Entity\Advisor;
 use AppBundle\Entity\City;
 use AppBundle\Entity\Classroom;
+use AppBundle\Entity\MedicalHistory;
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\Student;
 use DateTime;
@@ -40,6 +41,11 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         /** @var Plan $plan1 */
         $plan1 = $this->getReference(LoadPlanData::PLAN_BASICO);
 
+        /** @var MedicalHistory $medicalHistory1 */
+        $medicalHistory1 = $this->getReference(LoadMedicalHistoryData::MEDICAL_HISTORY_1);
+        /** @var MedicalHistory $medicalHistory2 */
+        $medicalHistory2 = $this->getReference(LoadMedicalHistoryData::MEDICAL_HISTORY_2);
+
         $student = new Student();
         $student->setIdNumber(86201589);
         $student->setBirthdate(new DateTime('now -3 years'));
@@ -52,6 +58,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->addAdvisor($advisor2);
         $student->setClassroom($classroom1);
         $student->setPlan($plan1);
+        $student->setMedicalHistory($medicalHistory1);
         $manager->persist($student);
 
         $student = new Student();
@@ -64,8 +71,9 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setCity($city1);
         $student->addAdvisor($advisor3);
         $student->addAdvisor($advisor4);
-        $student->setPlan($plan1);
         $student->setClassroom($classroom2);
+        $student->setPlan($plan1);
+        $student->setMedicalHistory($medicalHistory2);
         $manager->persist($student);
 
         $manager->flush();
@@ -80,7 +88,8 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
             LoadCityData::class,
             LoadAdvisorData::class,
             LoadClassroomData::class,
-            LoadPlanData::class
+            LoadPlanData::class,
+            LoadMedicalHistoryData::class
         ];
     }
 }
