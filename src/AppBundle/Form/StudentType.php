@@ -77,6 +77,7 @@ class StudentType extends AbstractType
 
                 ]
             ])
+            ->add('medicalHistory', MedicalHistoryType::class)
         ;
     }
 

@@ -77,6 +77,95 @@
 
     <div class="card">
         <div class="card-header text-white bg-dark">
+            Ficha médica
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Peso</dt>
+                        <dd>{{ form_widget(form.medicalHistory.weight) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Alérgico a</dt>
+                        <dd>{{ form_widget(form.medicalHistory.allergy) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Altura</dt>
+                        <dd>{{ form_widget(form.medicalHistory.height) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Enfermedades crónicas</dt>
+                        <dd>{{ form_widget(form.medicalHistory.chronicIllness) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Grupo sanguíneo</dt>
+                        <dd>{{ form_widget(form.medicalHistory.bloodType) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Medicamentos</dt>
+                        <dd>{{ form_widget(form.medicalHistory.medicine) }}</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Asma</dt>
+                        <dd>{{ form_widget(form.medicalHistory.asma) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Diabetes</dt>
+                        <dd>{{ form_widget(form.medicalHistory.diabetes) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Sinusitis</dt>
+                        <dd>{{ form_widget(form.medicalHistory.sinusitis) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Celiaco</dt>
+                        <dd>{{ form_widget(form.medicalHistory.celiaco) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Bronquitis</dt>
+                        <dd>{{ form_widget(form.medicalHistory.bronquitis) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Otitis</dt>
+                        <dd>{{ form_widget(form.medicalHistory.otitis) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Tos convulsiva</dt>
+                        <dd>{{ form_widget(form.medicalHistory.tosConvulsiva) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Migraña</dt>
+                        <dd>{{ form_widget(form.medicalHistory.migrania) }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
             Tutores
         </div>
         <div class="card-body">

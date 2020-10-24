@@ -117,6 +117,14 @@ class Student
      */
     private $plan;
 
+    /**
+     * @var MedicalHistory
+     *
+     * @ORM\OneToOne(targetEntity="MedicalHistory", inversedBy="student", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="medical_history_id", referencedColumnName="id", nullable=true)
+     */
+    private $medicalHistory;
+
     public function __construct()
     {
         $this->advisors = new ArrayCollection();
@@ -418,5 +426,26 @@ class Student
     public function getSex(): ?string
     {
         return $this->sex;
+    }
+
+    /**
+     * @param MedicalHistory $medicalHistory
+     *
+     * @return self
+     */
+    public function setMedicalHistory (
+        MedicalHistory $medicalHistory
+    ): self {
+        $this->medicalHistory = $medicalHistory;
+
+        return $this;
+    }
+
+    /**
+     * @return MedicalHistory
+     */
+    public function getMedicalHistory (): ?MedicalHistory
+    {
+        return $this->medicalHistory;
     }
 }
