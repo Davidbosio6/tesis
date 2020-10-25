@@ -77,7 +77,9 @@ class StudentType extends AbstractType
 
                 ]
             ])
-            ->add('medicalHistory', MedicalHistoryType::class)
+            ->add('medicalHistory', MedicalHistoryType::class, [
+                'action' => $options['mode']
+            ])
         ;
     }
 
@@ -85,6 +87,10 @@ class StudentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Student::class
+        ]);
+
+        $resolver->setRequired([
+            'mode'
         ]);
     }
 }

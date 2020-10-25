@@ -31,7 +31,10 @@ class StudentController extends AbstractController
         $student = new Student();
         $form = $this->createForm(
             StudentType::class,
-            $student
+            $student,
+            [
+                'mode' => 'create'
+            ]
         );
 
         $form->handleRequest($request);
@@ -141,7 +144,10 @@ class StudentController extends AbstractController
     ): Response {
         $form = $this->createForm(
             StudentType::class,
-            $student
+            $student,
+            [
+                'mode' => 'edit'
+            ]
         );
 
         $form->handleRequest($request);
