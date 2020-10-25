@@ -28,61 +28,72 @@ class MedicalHistoryType extends AbstractType
             ->add('medicine', TextareaType::class, ['required' => false])
             ->add('asma', ChoiceType::class, [
                 'choices' => [
-                    'Si' => 1,
-                    'No' => 0
+                    'No' => 0,
+                    'Si' => 1
                 ],
                 'expanded' => true
             ])
             ->add('sinusitis', ChoiceType::class, [
                 'choices' => [
-                    'Si' => 1,
-                    'No' => 0
+                    'No' => 0,
+                    'Si' => 1
                 ],
                 'expanded' => true,
             ])
             ->add('bronquitis', ChoiceType::class, [
                 'choices' => [
-                    'Si' => 1,
-                    'No' => 0
+                    'No' => 0,
+                    'Si' => 1
                 ],
                 'expanded' => true,
             ])
             ->add('otitis', ChoiceType::class, [
                 'choices' => [
-                    'Si' => 1,
-                    'No' => 0
+                    'No' => 0,
+                    'Si' => 1
                 ],
                 'expanded' => true,
             ])
             ->add('tosConvulsiva', ChoiceType::class, [
                 'choices' => [
-                    'Si' => 1,
-                    'No' => 0
+                    'No' => 0,
+                    'Si' => 1
                 ],
                 'expanded' => true,
             ])
             ->add('migrania', ChoiceType::class, [
                 'choices' => [
-                    'Si' => 1,
-                    'No' => 0
+                    'No' => 0,
+                    'Si' => 1
                 ],
                 'expanded' => true,
             ])
             ->add('diabetes', ChoiceType::class, [
                 'choices' => [
-                    'Si' => 1,
-                    'No' => 0
+                    'No' => 0,
+                    'Si' => 1
                 ],
                 'expanded' => true,
             ])
             ->add('celiaco', ChoiceType::class, [
                 'choices' => [
-                    'Si' => 1,
-                    'No' => 0
+                    'No' => 0,
+                    'Si' => 1
                 ],
                 'expanded' => true,
             ])
         ;
+
+        if ($options['action'] === 'create') {
+            $builder->get('asma')->setData(0);
+            $builder->get('sinusitis')->setData(0);
+            $builder->get('bronquitis')->setData(0);
+            $builder->get('otitis')->setData(0);
+            $builder->get('tosConvulsiva')->setData(0);
+            $builder->get('migrania')->setData(0);
+            $builder->get('diabetes')->setData(0);
+            $builder->get('celiaco')->setData(0);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)

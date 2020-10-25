@@ -35,7 +35,7 @@ class TeacherController extends AbstractController
             TeacherType::class,
             $teacher,
             [
-                'type' => 'create'
+                'mode' => 'create'
             ]
         );
 
@@ -156,7 +156,7 @@ class TeacherController extends AbstractController
             TeacherType::class,
             $teacher,
             [
-                'type' => 'edit'
+                'mode' => 'edit'
             ]
         );
 

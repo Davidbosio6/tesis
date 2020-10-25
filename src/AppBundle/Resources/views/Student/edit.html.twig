@@ -189,3 +189,21 @@
 
     {{ form_end(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+    <script type="text/javascript">
+        $('.advisors').collection({
+            min: 1,
+            prefix: 'advisor',
+            preserve_names: true,
+            allow_duplicate: true,
+            add: `
+                <a href="#" class="advisor btn btn-default" title="Agregar Tutor">
+                    <i class="fa fa-plus-circle"></i>
+                </a>
+            `
+        });
+    </script>
+{% endblock javascripts %}

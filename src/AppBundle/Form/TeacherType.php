@@ -43,7 +43,7 @@ class TeacherType extends AbstractType
             ->add('address', TextType::class)
             ->add('notes', TextareaType::class, ['required' => false])
             ->add('user', UserType::class, [
-                'action' => $options['type']
+                'action' => $options['mode']
             ])
             ->add('subject', EntityType::class, [
                 'class' => Subject::class,
@@ -60,7 +60,7 @@ class TeacherType extends AbstractType
         ]);
 
         $resolver->setRequired([
-            'type'
+            'mode'
         ]);
     }
 }
