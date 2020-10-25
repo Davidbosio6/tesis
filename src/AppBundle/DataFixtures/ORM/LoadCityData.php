@@ -14,6 +14,7 @@ class LoadCityData extends AbstractFixture implements DependentFixtureInterface
     const SAMPACHO = 'c_sampacho';
     const CNEL_MOLDES = 'c_cnel_moldes';
     const RIO_CUARTO = 'c_rio_cuarto';
+    const VILLA_MERCEDES = 'c_villa_mercedes';
 
     /**
      * {@inheritdoc}
@@ -81,6 +82,7 @@ class LoadCityData extends AbstractFixture implements DependentFixtureInterface
         $city->setPostalCode('5730');
         $city->setProvince($sanLuisProvince);
         $manager->persist($city);
+        $this->addReference(self::VILLA_MERCEDES, $city);
 
         $manager->flush();
     }
