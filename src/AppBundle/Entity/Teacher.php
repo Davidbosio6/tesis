@@ -77,6 +77,11 @@ class Teacher
     private $notes;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $photo;
+
+    /**
      * @var User
      *
      * @ORM\OneToOne(targetEntity="User", inversedBy="teacher", cascade={"persist", "remove"})
@@ -371,5 +376,26 @@ class Teacher
     public function getSubject(): ?Subject
     {
         return $this->subject;
+    }
+
+    /**
+     * @param string|null $photo
+     *
+     * @return self
+     */
+    public function setPhoto(
+        string $photo = null
+    ): self {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
     }
 }

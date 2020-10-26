@@ -164,6 +164,18 @@ class TeacherController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getEntityManager();
+
+            if (!empty($form['photo']->getData())) {
+                $fileName = sprintf('teacher_%s.png', $teacher->getId());
+
+                $form['photo']->getData()->move(
+                    $this->getParameter('kernel.project_dir') . '/web/public/teachers',
+                    $fileName
+                );
+
+                $teacher->setPhoto($fileName);
+            }
+
             $em->flush();
 
             $this->addFlash('success', 'El profesor se editó con éxito!');
