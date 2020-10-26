@@ -78,6 +78,11 @@ class Student
     private $sex;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $photo;
+
+    /**
      * @var City
      *
      * @ORM\ManyToOne(targetEntity="City", inversedBy="students")
@@ -408,12 +413,12 @@ class Student
     }
 
     /**
-     * @param string|null $sex
+     * @param string $sex
      *
      * @return self
      */
     public function setSex(
-        string $sex = null
+        string $sex
     ): self {
         $this->sex = $sex;
 
@@ -426,6 +431,27 @@ class Student
     public function getSex(): ?string
     {
         return $this->sex;
+    }
+
+    /**
+     * @param string|null $photo
+     *
+     * @return self
+     */
+    public function setPhoto(
+        string $photo = null
+    ): self {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
     }
 
     /**

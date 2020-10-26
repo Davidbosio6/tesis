@@ -41,6 +41,18 @@ class StudentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getEntityManager();
+
+            if (!empty($form['photo']->getData())) {
+                $fileName = sprintf('student_%s.png', $student->getId());
+
+                $form['photo']->getData()->move(
+                    $this->getParameter('kernel.project_dir') . '/web/public/students',
+                    $fileName
+                );
+
+                $student->setPhoto($fileName);
+            }
+
             $em->persist($student);
             $em->flush();
 
@@ -154,6 +166,18 @@ class StudentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getEntityManager();
+
+            if (!empty($form['photo']->getData())) {
+                $fileName = sprintf('student_%s.png', $student->getId());
+
+                $form['photo']->getData()->move(
+                    $this->getParameter('kernel.project_dir') . '/web/public/students',
+                    $fileName
+                );
+
+                $student->setPhoto($fileName);
+            }
+
             $em->flush();
 
             $this->addFlash('success', 'El alumno se editó con éxito!');
