@@ -61,6 +61,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setPhoneNumber('3582413125');
         $teacher->setFirstName('David');
         $teacher->setLastName('Bosio');
+        $teacher->setPhoto('teacher_1.png');
         $teacher->setUser($user1);
         $teacher->setCity($city1);
         $teacher->setSubject($subject1);
@@ -73,6 +74,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setPhoneNumber('3582414579');
         $teacher->setFirstName('Elizabeth');
         $teacher->setLastName('Grant');
+        $teacher->setPhoto('teacher_2.png');
         $teacher->setUser($user2);
         $teacher->setCity($city2);
         $teacher->setSubject($subject2);
@@ -85,6 +87,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setPhoneNumber('3582434579');
         $teacher->setFirstName('Samuel');
         $teacher->setLastName('Smith');
+        $teacher->setPhoto('teacher_3.png');
         $teacher->setUser($user3);
         $teacher->setCity($city3);
         $teacher->setSubject($subject3);
@@ -97,6 +100,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setPhoneNumber('3582456789');
         $teacher->setFirstName('Adam');
         $teacher->setLastName('Levine');
+        $teacher->setPhoto('teacher_4.png');
         $teacher->setUser($user4);
         $teacher->setCity($city2);
         $teacher->setSubject($subject4);
@@ -109,6 +113,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setPhoneNumber('3582412321');
         $teacher->setFirstName('Dalila');
         $teacher->setLastName('Molina');
+        $teacher->setPhoto('teacher_5.png');
         $teacher->setUser($user5);
         $teacher->setCity($city3);
         $teacher->setSubject($subject5);
@@ -121,6 +126,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setPhoneNumber('3582404982');
         $teacher->setFirstName('Selena');
         $teacher->setLastName('Gomez');
+        $teacher->setPhoto('teacher_6.png');
         $teacher->setUser($user6);
         $teacher->setCity($city4);
         $teacher->setSubject($subject6);

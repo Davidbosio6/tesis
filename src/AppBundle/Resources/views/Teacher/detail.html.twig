@@ -27,7 +27,14 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
+                    {% if teacher.photo is empty %}
+                        <img class="img-fluid rounded mb-2" width="252" src="{{ asset('public/teachers/empty.png') }}" alt="empty">
+                    {% else %}
+                        <img class="img-fluid rounded mb-2" width="252" src="{{ asset('public/teachers/' ~ teacher.photo) }}" alt="{{ teacher.photo }}">
+                    {% endif %}
+                </div>
+                <div class="col-md-3">
                     <dl>
                         <dt>Fecha de creación</dt>
                         <dd>{{ teacher.createdAt | date('d/m/Y H:i') }}</dd>
@@ -45,7 +52,7 @@
                         <dd>{{ teacher.notes ? teacher.notes : '-' }}</dd>
                     </dl>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <dl>
                         <dt>Fecha de actualización</dt>
                         <dd>{{ teacher.updatedAt | date('d/m/Y H:i') }}</dd>
@@ -63,7 +70,7 @@
                         </dd>
                     </dl>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <dl>
                         <dt>Documento de identidad</dt>
                         <dd>{{ teacher.idNumber }}</dd>
