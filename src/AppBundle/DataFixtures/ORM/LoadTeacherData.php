@@ -108,7 +108,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setAddress('Sucre 2900');
         $teacher->setPhoneNumber('3582412321');
         $teacher->setFirstName('Dalila');
-        $teacher->setLastName('Fernandez');
+        $teacher->setLastName('Molina');
         $teacher->setUser($user5);
         $teacher->setCity($city3);
         $teacher->setSubject($subject5);

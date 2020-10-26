@@ -24,7 +24,15 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
+                    {% if student.photo is empty %}
+                        <img class="img-fluid rounded mb-2" width="252" src="{{ asset('public/students/empty.png') }}" alt="empty">
+                    {% else %}
+                        <img class="img-fluid rounded mb-2" width="252" src="{{ asset('public/students/' ~ student.photo) }}" alt="{{ student.photo }}">
+                    {% endif %}
+                </div>
+
+                <div class="col-md-3">
                     <dl>
                         <dt>Fecha de creación</dt>
                         <dd>{{ student.createdAt | date('d/m/Y H:i') }}</dd>
@@ -46,7 +54,8 @@
                         <dd>{{ student.notes ? student.notes : '-' }}</dd>
                     </dl>
                 </div>
-                <div class="col-md-4">
+
+                <div class="col-md-3">
                     <dl>
                         <dt>Fecha de actualización</dt>
                         <dd>{{ student.updatedAt | date('d/m/Y H:i') }}</dd>
@@ -64,7 +73,8 @@
                         <dd>{{ student.address }}</dd>
                     </dl>
                 </div>
-                <div class="col-md-4">
+
+                <div class="col-md-3">
                     <dl>
                         <dt>Sexo</dt>
                         <dd>{{ student.sex }}</dd>
