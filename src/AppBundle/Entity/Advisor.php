@@ -87,6 +87,11 @@ class Advisor
     private $notes;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $photo;
+
+    /**
      * @var City
      *
      * @ORM\ManyToOne(targetEntity="City", inversedBy="advisors")
@@ -390,5 +395,26 @@ class Advisor
         $this->studentRelationship = $studentRelationship;
 
         return $this;
+    }
+
+    /**
+     * @param string|null $photo
+     *
+     * @return self
+     */
+    public function setPhoto(
+        string $photo = null
+    ): self {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
     }
 }

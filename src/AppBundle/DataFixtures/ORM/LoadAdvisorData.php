@@ -36,6 +36,7 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
         $advisor->setPhoneNumber('3582402903');
         $advisor->setFirstName('Malena');
         $advisor->setLastName('Villa');
+        $advisor->setPhoto('advisor_1.png');
         $advisor->setCity($city1);
         $manager->persist($advisor);
         $this->addReference(self::ADVISOR_1, $advisor);
@@ -49,6 +50,7 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
         $advisor->setPhoneNumber('3582039401');
         $advisor->setFirstName('Juan');
         $advisor->setLastName('Ingaramo');
+        $advisor->setPhoto('advisor_2.png');
         $advisor->setCity($city2);
         $manager->persist($advisor);
         $this->addReference(self::ADVISOR_2, $advisor);
@@ -62,6 +64,7 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
         $advisor->setPhoneNumber('3582402910');
         $advisor->setFirstName('Santiago');
         $advisor->setLastName('Celli');
+        $advisor->setPhoto('advisor_3.png');
         $advisor->setCity($city2);
         $manager->persist($advisor);
         $this->addReference(self::ADVISOR_3, $advisor);
@@ -75,6 +78,7 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
         $advisor->setPhoneNumber('3582402910');
         $advisor->setFirstName('Feli');
         $advisor->setLastName('Colina');
+        $advisor->setPhoto('advisor_4.png');
         $advisor->setCity($city2);
         $manager->persist($advisor);
         $this->addReference(self::ADVISOR_4, $advisor);
