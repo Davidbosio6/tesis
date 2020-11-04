@@ -10,6 +10,11 @@
                 <i class="fa fa-edit" aria-hidden="true"></i> Editar
             </a>
         </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('advisor_change_photo', {id: advisor.id}) }}">
+                <i class="fa fa-camera" aria-hidden="true"></i> Cambiar Foto
+            </a>
+        </div>
     </div>
 
     <hr>
@@ -20,7 +25,14 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
+                    {% if advisor.photo is empty %}
+                        <img class="img-fluid rounded mb-2" width="252" src="{{ asset('public/advisors/empty.png') }}" alt="empty">
+                    {% else %}
+                        <img class="img-fluid rounded mb-2" width="252" src="{{ asset('public/advisors/' ~ advisor.photo) }}" alt="{{ advisor.photo }}">
+                    {% endif %}
+                </div>
+                <div class="col-md-3">
                     <dl>
                         <dt>Fecha de creación</dt>
                         <dd>{{ advisor.createdAt | date('d/m/Y H:i') }}</dd>
@@ -38,7 +50,7 @@
                         <dd>{{ advisor.phoneNumber }}</dd>
                     </dl>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <dl>
                         <dt>Fecha de actualización</dt>
                         <dd>{{ advisor.updatedAt | date('d/m/Y H:i') }}</dd>
@@ -60,7 +72,7 @@
                         <dd>{{ advisor.notes ? advisor.notes : '-' }}</dd>
                     </dl>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <dl>
                         <dt>Documento de identidad</dt>
                         <dd>{{ advisor.idNumber }}</dd>
