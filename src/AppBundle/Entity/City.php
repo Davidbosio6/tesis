@@ -74,10 +74,18 @@ class City
      */
     private $students;
 
+    /**
+     * @var Student[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Advisor", mappedBy="city")
+     */
+    private $advisors;
+
     public function __construct()
     {
         $this->teachers = new ArrayCollection();
         $this->students = new ArrayCollection();
+        $this->advisors = new ArrayCollection();
     }
 
     /**
@@ -255,5 +263,33 @@ class City
     public function getStudents()
     {
         return $this->students;
+    }
+
+    /**
+     * @param Advisor $advisor
+     *
+     * @return self
+     */
+    public function addAdvisor(Advisor $advisor)
+    {
+        $this->advisors[] = $advisor;
+
+        return $this;
+    }
+
+    /**
+     * @param Advisor $advisor
+     */
+    public function removeAdvisor(Advisor $advisor)
+    {
+        $this->advisors->removeElement($advisor);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAdvisors()
+    {
+        return $this->advisors;
     }
 }
