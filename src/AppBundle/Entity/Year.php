@@ -3,7 +3,9 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Year.
@@ -42,6 +44,20 @@ class Year
      * @ORM\Column(type="string")
      */
     private $name;
+
+    /**
+     * @var Shift
+     *
+     * @ORM\OneToMany(targetEntity="Shift", mappedBy="year")
+     *
+     * @Assert\Count(min=1)
+     */
+    private $shifts;
+
+    public function __construct()
+    {
+        $this->shifts = new ArrayCollection();
+    }
 
     /**
      * Gets triggered every time on persist.
@@ -120,5 +136,35 @@ class Year
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    /**
+     * @param Shift $shift
+     *
+     * @return self
+     */
+    public function addShift(Shift $shift): self
+    {
+        $this->shifts[] = $shift;
+        $shift->setYear($this);
+
+        return $this;
+    }
+
+    /**
+     * @param Shift $shift
+     */
+    public function removeShift(Shift $shift)
+    {
+        $this->shifts->removeElement($shift);
+        $shift->setYear(null);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getShifts()
+    {
+        return $this->shifts;
     }
 }

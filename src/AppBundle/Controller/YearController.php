@@ -31,12 +31,19 @@ class YearController extends AbstractController
         $year = new Year();
         $form = $this->createForm(
             YearType::class,
-            $year
+            $year,
+            [
+                'mode' => 'create'
+            ]
         );
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($form->get('shifts')->getData() as $shift) {
+                $year->addShift($shift);
+            }
+
             $em = $this->getEntityManager();
             $em->persist($year);
             $em->flush();
@@ -142,7 +149,10 @@ class YearController extends AbstractController
     ): Response {
         $form = $this->createForm(
             YearType::class,
-            $year
+            $year,
+            [
+                'mode' => 'edit'
+            ]
         );
 
         $form->handleRequest($request);

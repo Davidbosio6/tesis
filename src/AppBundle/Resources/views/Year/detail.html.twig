@@ -40,4 +40,48 @@
             </div>
         </div>
     </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Turnos asociados
+        </div>
+        <div class="card-body">
+            {% if year.shifts is empty %}
+                <div class="alert alert-light text-center" role="alert">
+                    No se encontraron resultados
+                </div>
+            {% else %}
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Fecha de creación</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Hora de inicio</th>
+                        <th scope="col">Hora de fin</th>
+                        <th scope="col">Cantidad de salas</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for shift in year.shifts %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('shift_detail', {id: shift.id}) }}">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </td>
+                            <td>{{ shift.createdAt | date('d-m-Y H:i') }}</td>
+                            <td>{{ shift.name }}</td>
+                            <td>{{ shift.startHour | date('H:i') }}</td>
+                            <td>{{ shift.endHour | date('H:i') }}</td>
+                            <td>{{ shift.classrooms | length }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

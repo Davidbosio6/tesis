@@ -69,6 +69,14 @@ class Shift
      */
     private $classrooms;
 
+    /**
+     * @var Year
+     *
+     * @ORM\ManyToOne(targetEntity="Year", inversedBy="shifts")
+     * @ORM\JoinColumn(name="year_id", referencedColumnName="id", nullable=true)
+     */
+    private $year;
+
     public function __construct()
     {
         $this->classrooms = new ArrayCollection();
@@ -244,5 +252,26 @@ class Shift
     public function getClassrooms()
     {
         return $this->classrooms;
+    }
+
+    /**
+     * @param Year|null $year
+     *
+     * @return self
+     */
+    public function setYear(
+        Year $year = null
+    ): self {
+        $this->year = $year;
+
+        return $this;
+    }
+
+    /**
+     * @return Year
+     */
+    public function getYear(): ?Year
+    {
+        return $this->year;
     }
 }
