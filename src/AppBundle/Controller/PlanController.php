@@ -119,6 +119,16 @@ class PlanController extends AbstractController
         Plan $plan
     ): Response {
         $em = $this->getEntityManager();
+
+        if (!$plan->getStudents()->isEmpty()) {
+            $this->addFlash('error', 'El registro no se ha podido eliminar ya que se encuentra asociado a uno o más alumnos');
+
+            return $this->redirectToRoute(
+                'plan_detail',
+                ['id' => $plan->getId()]
+            );
+        }
+
         $em->remove($plan);
         $em->flush();
 
