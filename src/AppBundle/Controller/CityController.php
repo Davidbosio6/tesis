@@ -119,6 +119,16 @@ class CityController extends AbstractController
         City $city
     ): Response {
         $em = $this->getEntityManager();
+
+        if (!$city->getTeachers()->isEmpty() || !$city->getAdvisors()->isEmpty() || !$city->getStudents()->isEmpty()) {
+            $this->addFlash('error', 'Esta ciudad no se ha podido eliminar ya que se encuentra asociado a uno o más registros');
+
+            return $this->redirectToRoute(
+                'city_detail',
+                ['id' => $city->getId()]
+            );
+        }
+
         $em->remove($city);
         $em->flush();
 
