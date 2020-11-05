@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * ShiftRepository.
@@ -21,5 +22,17 @@ class ShiftRepository extends EntityRepository
         $qb = $this->createQueryBuilder('shift');
 
         return $qb->getQuery();
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function findAllWithoutYear()
+    {
+        $qb = $this->createQueryBuilder('shift');
+
+        return $qb->where(
+            $qb->expr()->isNull('shift.year')
+        );
     }
 }

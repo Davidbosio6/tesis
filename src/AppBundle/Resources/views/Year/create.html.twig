@@ -24,6 +24,23 @@
                     </dl>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Turnos</dt>
+                        {% if form.shifts.vars.choices is not empty %}
+                            <dd>{{ form_widget(form.shifts) }}</dd>
+                        {% else %}
+                            {{ form_widget(form.shifts) }} -
+                        {% endif %}
+                    </dl>
+                    <small>
+                        <i>
+                            Nota: Para cargar un ciclo lectivo es necesario tener al menos un turno creado y ese turno no estar asignado a otro ciclo lectivo.
+                        </i>
+                    </small>
+                </div>
+            </div>
         </div>
     </div>
 
