@@ -119,6 +119,16 @@ class SubjectController extends AbstractController
         Subject $subject
     ): Response {
         $em = $this->getEntityManager();
+
+        if (!$subject->getTeachers()->isEmpty()) {
+            $this->addFlash('error', 'Este registro no se ha podido eliminar ya que se encuentra asociado a uno o más profesores');
+
+            return $this->redirectToRoute(
+                'subject_detail',
+                ['id' => $subject->getId()]
+            );
+        }
+
         $em->remove($subject);
         $em->flush();
 
