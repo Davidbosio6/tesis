@@ -22,7 +22,7 @@ class LoadShiftData extends AbstractFixture implements FixtureInterface, Depende
     public function load(ObjectManager $manager)
     {
         /** @var Year $year1 */
-        $year1 = $this->getReference(LoadYearData::YEAR_2019);
+        $year1 = $this->getReference(LoadYearData::YEAR_2020);
 
         $shift = new Shift();
         $shift->setName('Turno Mañana');
