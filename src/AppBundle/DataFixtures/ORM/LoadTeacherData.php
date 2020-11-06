@@ -94,7 +94,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $manager->persist($teacher);
 
         $teacher = new Teacher();
-        $teacher->setIdNumber(21482902);
+        $teacher->setIdNumber(21412979);
         $teacher->setBirthdate(new DateTime('+5 months -23 years'));
         $teacher->setAddress('Obispo Oro 1220');
         $teacher->setPhoneNumber('3582456789');

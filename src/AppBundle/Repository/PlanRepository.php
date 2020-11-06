@@ -34,9 +34,7 @@ class PlanRepository extends EntityRepository
         $qb = $this->createQueryBuilder('plan');
 
         return $qb->where(
-            $qb->expr()->andX(
-                $qb->expr()->eq('plan.showPlan', ':value')
-            )
+            $qb->expr()->eq('plan.showPlan', ':value')
         )
             ->setParameter('value', $value)
             ->getQuery()

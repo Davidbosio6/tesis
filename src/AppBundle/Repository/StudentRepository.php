@@ -22,4 +22,29 @@ class StudentRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+    /**
+     * @param string $filter
+     *
+     * @return Query
+     */
+    public function findAllByFilter(string $filter)
+    {
+        $qb = $this->createQueryBuilder('student')
+            ->join('student.classroom', 'classroom')
+            ->join('student.plan', 'plan')
+            ->join('classroom.shift', 'shift');
+
+        return $qb->where(
+            $qb->expr()->orX(
+                $qb->expr()->like('student.firstName', ':value'),
+                $qb->expr()->like('student.lastName', ':value'),
+                $qb->expr()->like('student.idNumber', ':value'),
+                $qb->expr()->like('shift.name', ':value'),
+                $qb->expr()->like('plan.name', ':value')
+            )
+        )
+            ->setParameter('value', "%" . trim($filter) . "%")
+            ->getQuery();
+    }
 }

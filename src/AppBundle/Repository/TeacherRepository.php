@@ -22,4 +22,29 @@ class TeacherRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+    /**
+     * @param string $filter
+     *
+     * @return Query
+     */
+    public function findAllByFilter(string $filter)
+    {
+        $qb = $this->createQueryBuilder('teacher')
+        ->join('teacher.subject', 'subject')
+        ->join('teacher.user', 'user');
+
+        return $qb->where(
+            $qb->expr()->orX(
+                $qb->expr()->like('teacher.firstName', ':value'),
+                $qb->expr()->like('teacher.lastName', ':value'),
+                $qb->expr()->like('teacher.idNumber', ':value'),
+                $qb->expr()->like('user.username', ':value'),
+                $qb->expr()->like('user.email', ':value'),
+                $qb->expr()->like('teacher.phoneNumber', ':value')
+            )
+        )
+            ->setParameter('value', "%" . trim($filter) . "%")
+            ->getQuery();
+    }
 }

@@ -1,0 +1,33 @@
+<div class="col-md-4">
+    <form method="GET">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text"
+                     id="btnGroupAddon"><i class="fa fa-search"></i>
+                </div>
+            </div>
+            <input type="text"
+                   class="form-control"
+                   id="filter"
+                   name="filter"
+                   autocomplete="off"
+                   value="{{ app.request.get('filter') }}"
+                   placeholder="Ingresa un dato para filtrar"
+                   aria-label="Input group example"
+                   aria-describedby="btnGroupAddon">
+            <div class="input-group-append">
+                <button class="btn btn-primary"
+                        type="submit"
+                        id="button-addon2">
+                    Filtrar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+{% if app.request.get('filter') %}
+    <a class="btn btn-dark"
+       href="{{ route }}">
+        Limpiar
+    </a>
+{% endif %}

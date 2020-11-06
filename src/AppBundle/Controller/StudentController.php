@@ -85,7 +85,11 @@ class StudentController extends AbstractController
         /** @var StudentRepository $repository */
         $repository = $this->getRepository(Student::class);
 
-        $query = $repository->findAllQuery();
+        if (!empty($request->query->get('filter'))) {
+            $query = $repository->findAllByFilter($request->query->get('filter'));
+        } else {
+            $query = $repository->findAllQuery();
+        }
 
         $data = $this->getKnpPaginatorService()->paginate(
             $query,

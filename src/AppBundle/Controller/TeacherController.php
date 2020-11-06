@@ -82,7 +82,11 @@ class TeacherController extends AbstractController
         /** @var TeacherRepository $repository */
         $repository = $this->getRepository(Teacher::class);
 
-        $query = $repository->findAllQuery();
+        if (!empty($request->query->get('filter'))) {
+            $query = $repository->findAllByFilter($request->query->get('filter'));
+        } else {
+            $query = $repository->findAllQuery();
+        }
 
         $data = $this->getKnpPaginatorService()->paginate(
             $query,
