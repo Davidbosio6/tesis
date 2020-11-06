@@ -56,6 +56,25 @@ class SettingsRepository extends EntityRepository
     }
 
     /**
+     * @param string $filter
+     *
+     * @return Query
+     */
+    public function findAllByFilter(string $filter)
+    {
+        $qb = $this->createQueryBuilder('settings');
+
+        return $qb->where(
+            $qb->expr()->orX(
+                $qb->expr()->like('settings.name', ':value'),
+                $qb->expr()->like('settings.value', ':value')
+            )
+        )
+            ->setParameter('value', "%" . trim($filter) . "%")
+            ->getQuery();
+    }
+
+    /**
      * @param string $code
      *
      * @return Settings|null

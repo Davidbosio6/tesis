@@ -22,4 +22,20 @@ class YearRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+    /**
+     * @param string $filter
+     *
+     * @return Query
+     */
+    public function findAllByFilter(string $filter)
+    {
+        $qb = $this->createQueryBuilder('year');
+
+        return $qb->where(
+                $qb->expr()->like('year.name', ':value')
+        )
+            ->setParameter('value', "%" . trim($filter) . "%")
+            ->getQuery();
+    }
 }

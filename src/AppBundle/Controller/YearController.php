@@ -77,7 +77,11 @@ class YearController extends AbstractController
         /** @var YearRepository $repository */
         $repository = $this->getRepository(Year::class);
 
-        $query = $repository->findAllQuery();
+        if (!empty($request->query->get('filter'))) {
+            $query = $repository->findAllByFilter($request->query->get('filter'));
+        } else {
+            $query = $repository->findAllQuery();
+        }
 
         $data = $this->getKnpPaginatorService()->paginate(
             $query,
