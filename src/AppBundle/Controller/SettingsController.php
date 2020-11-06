@@ -34,7 +34,11 @@ class SettingsController extends AbstractController
         /** @var SettingsRepository $repository */
         $repository = $this->getRepository(Settings::class);
 
-        $query = $repository->findAllQuery();
+        if (!empty($request->query->get('filter'))) {
+            $query = $repository->findAllByFilter($request->query->get('filter'));
+        } else {
+            $query = $repository->findAllQuery();
+        }
 
         $data = $this->getKnpPaginatorService()->paginate(
             $query,

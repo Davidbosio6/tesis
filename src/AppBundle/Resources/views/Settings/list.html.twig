@@ -9,6 +9,12 @@
 
     <hr>
 
+    <div class="row">
+        {% include "AppBundle:Layout:filter.html.twig" with {"route" : path('settings_list') } %}
+    </div>
+
+    <br>
+
     <table class="table">
         <thead class="thead-dark">
         <tr>
