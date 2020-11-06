@@ -70,7 +70,11 @@ class CityController extends AbstractController
         /** @var CityRepository $repository */
         $repository = $this->getRepository(City::class);
 
-        $query = $repository->findAllQuery();
+        if (!empty($request->query->get('filter'))) {
+            $query = $repository->findAllByFilter($request->query->get('filter'));
+        } else {
+            $query = $repository->findAllQuery();
+        }
 
         $data = $this->getKnpPaginatorService()->paginate(
             $query,

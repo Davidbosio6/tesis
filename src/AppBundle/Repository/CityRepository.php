@@ -22,4 +22,27 @@ class CityRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+    /**
+     * @param string $filter
+     *
+     * @return Query
+     */
+    public function findAllByFilter(string $filter)
+    {
+        $qb = $this->createQueryBuilder('city')
+            ->join('city.province', 'province')
+            ->join('province.country', 'country');
+
+        return $qb->where(
+            $qb->expr()->orX(
+                $qb->expr()->like('city.name', ':value'),
+                $qb->expr()->like('city.postalCode', ':value'),
+                $qb->expr()->like('province.name', ':value'),
+                $qb->expr()->like('country.name', ':value'),
+            )
+        )
+            ->setParameter('value', "%" . trim($filter) . "%")
+            ->getQuery();
+    }
 }
