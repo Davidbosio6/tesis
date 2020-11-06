@@ -25,6 +25,26 @@ class ShiftRepository extends EntityRepository
     }
 
     /**
+     * @param string $filter
+     *
+     * @return Query
+     */
+    public function findAllByFilter(string $filter)
+    {
+        $qb = $this->createQueryBuilder('shift');
+
+        return $qb->where(
+            $qb->expr()->orX(
+                $qb->expr()->like('shift.name', ':value'),
+                $qb->expr()->like('shift.startHour', ':value'),
+                $qb->expr()->like('shift.endHour', ':value')
+            )
+        )
+            ->setParameter('value', "%" . trim($filter) . "%")
+            ->getQuery();
+    }
+
+    /**
      * @return QueryBuilder
      */
     public function findAllWithoutYear()
