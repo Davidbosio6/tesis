@@ -22,4 +22,20 @@ class SubjectRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+    /**
+     * @param string $filter
+     *
+     * @return Query
+     */
+    public function findAllByFilter(string $filter)
+    {
+        $qb = $this->createQueryBuilder('subject');
+
+        return $qb->where(
+            $qb->expr()->like('subject.name', ':value')
+        )
+            ->setParameter('value', "%" . trim($filter) . "%")
+            ->getQuery();
+    }
 }

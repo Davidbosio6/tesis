@@ -25,6 +25,25 @@ class PlanRepository extends EntityRepository
     }
 
     /**
+     * @param string $filter
+     *
+     * @return Query
+     */
+    public function findAllByFilter(string $filter)
+    {
+        $qb = $this->createQueryBuilder('plan');
+
+        return $qb->where(
+            $qb->expr()->orX(
+                $qb->expr()->like('plan.name', ':value'),
+                $qb->expr()->like('plan.amount', ':value')
+            )
+        )
+            ->setParameter('value', "%" . trim($filter) . "%")
+            ->getQuery();
+    }
+
+    /**
      * @param bool $value
      *
      * @return Plan[]|null

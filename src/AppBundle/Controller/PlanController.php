@@ -70,7 +70,11 @@ class PlanController extends AbstractController
         /** @var PlanRepository $repository */
         $repository = $this->getRepository(Plan::class);
 
-        $query = $repository->findAllQuery();
+        if (!empty($request->query->get('filter'))) {
+            $query = $repository->findAllByFilter($request->query->get('filter'));
+        } else {
+            $query = $repository->findAllQuery();
+        }
 
         $data = $this->getKnpPaginatorService()->paginate(
             $query,
