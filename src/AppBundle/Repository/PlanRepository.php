@@ -35,6 +35,7 @@ class PlanRepository extends EntityRepository
 
         return $qb->where(
             $qb->expr()->orX(
+                $qb->expr()->like('plan.id', ':value'),
                 $qb->expr()->like('plan.name', ':value'),
                 $qb->expr()->like('plan.amount', ':value')
             )

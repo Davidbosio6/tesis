@@ -24,6 +24,7 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Fecha de creación</th>
             <th scope="col">Nombre</th>
             <th scope="col">Hora de inicio</th>
@@ -32,6 +33,15 @@
         </tr>
         </thead>
         <tbody>
+        {% if table is empty %}
+        <tr>
+            <td colspan="100">
+                <div class="alert alert-light text-center" role="alert">
+                    No se encontraron resultados
+                </div>
+            </td>
+        </tr>
+        {% else %}
             {% for shift in table %}
                 <tr>
                     <td>
@@ -39,13 +49,15 @@
                             <i class="fa fa-search"></i>
                         </a>
                     </td>
-                    <td>{{ shift.createdAt | date('d-m-Y H:i') }}</td>
+                    <td>{{ shift.id }}</td>
+                    <td>{{ shift.createdAt | date('d-m-Y') }}</td>
                     <td>{{ shift.name }}</td>
                     <td>{{ shift.startHour | date('H:i') }}</td>
                     <td>{{ shift.endHour | date('H:i') }}</td>
                     <td>{{ shift.classrooms | length }}</td>
                 </tr>
             {% endfor %}
+        {% endif %}
         </tbody>
     </table>
 

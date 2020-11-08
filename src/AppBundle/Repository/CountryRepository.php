@@ -33,7 +33,10 @@ class CountryRepository extends EntityRepository
         $qb = $this->createQueryBuilder('country');
 
         return $qb->where(
-            $qb->expr()->like('country.name', ':value')
+            $qb->expr()->orX(
+                $qb->expr()->like('country.id', ':value'),
+                $qb->expr()->like('country.name', ':value')
+            )
         )
             ->setParameter('value', "%" . trim($filter) . "%")
             ->getQuery();

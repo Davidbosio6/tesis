@@ -93,8 +93,8 @@ class TeacherController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'teacher.firstName',
-                'defaultSortDirection' => 'ASC'
+                'defaultSortFieldName' => 'teacher.id',
+                'defaultSortDirection' => 'DESC'
             ]
         );
 

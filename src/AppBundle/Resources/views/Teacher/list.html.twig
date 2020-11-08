@@ -24,6 +24,7 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Fecha de creación</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
@@ -36,6 +37,15 @@
         </tr>
         </thead>
         <tbody>
+        {% if table is empty %}
+        <tr>
+            <td colspan="100">
+                <div class="alert alert-light text-center" role="alert">
+                    No se encontraron resultados
+                </div>
+            </td>
+        </tr>
+        {% else %}
             {% for teacher in table %}
                 <tr>
                     <td>
@@ -43,7 +53,8 @@
                             <i class="fa fa-search"></i>
                         </a>
                     </td>
-                    <td>{{ teacher.createdAt | date('d-m-Y H:i') }}</td>
+                    <td>{{ teacher.id }}</td>
+                    <td>{{ teacher.createdAt | date('d-m-Y') }}</td>
                     <td>{{ teacher.firstName }}</td>
                     <td>{{ teacher.lastName }}</td>
                     <td>{{ teacher.idNumber }}</td>
@@ -54,6 +65,7 @@
 
                 </tr>
             {% endfor %}
+        {% endif %}
         </tbody>
     </table>
 

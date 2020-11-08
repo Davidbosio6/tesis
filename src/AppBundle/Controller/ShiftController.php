@@ -81,8 +81,8 @@ class ShiftController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'shift.name',
-                'defaultSortDirection' => 'ASC'
+                'defaultSortFieldName' => 'shift.id',
+                'defaultSortDirection' => 'DESC'
             ]
         );
 

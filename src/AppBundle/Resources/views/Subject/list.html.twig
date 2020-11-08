@@ -24,11 +24,21 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Fecha de creación</th>
             <th scope="col">Nombre</th>
         </tr>
         </thead>
         <tbody>
+        {% if table is empty %}
+        <tr>
+            <td colspan="100">
+                <div class="alert alert-light text-center" role="alert">
+                    No se encontraron resultados
+                </div>
+            </td>
+        </tr>
+        {% else %}
             {% for subject in table %}
                 <tr>
                     <td>
@@ -36,10 +46,12 @@
                             <i class="fa fa-search"></i>
                         </a>
                     </td>
-                    <td>{{ subject.createdAt | date('d-m-Y H:i') }}</td>
+                    <td>{{ subject.id }}</td>
+                    <td>{{ subject.createdAt | date('d-m-Y') }}</td>
                     <td>{{ subject.name }}</td>
                 </tr>
             {% endfor %}
+        {% endif %}
         </tbody>
     </table>
 

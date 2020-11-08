@@ -81,8 +81,8 @@ class CountryController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'country.name',
-                'defaultSortDirection' => 'ASC'
+                'defaultSortFieldName' => 'country.id',
+                'defaultSortDirection' => 'DESC'
             ]
         );
 

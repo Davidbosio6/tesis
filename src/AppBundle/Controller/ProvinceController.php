@@ -81,8 +81,8 @@ class ProvinceController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'province.name',
-                'defaultSortDirection' => 'ASC'
+                'defaultSortFieldName' => 'province.id',
+                'defaultSortDirection' => 'DESC'
             ]
         );
 

@@ -37,6 +37,7 @@ class StudentRepository extends EntityRepository
 
         return $qb->where(
             $qb->expr()->orX(
+                $qb->expr()->like('student.id', ':value'),
                 $qb->expr()->like('student.firstName', ':value'),
                 $qb->expr()->like('student.lastName', ':value'),
                 $qb->expr()->like('student.idNumber', ':value'),

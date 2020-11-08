@@ -24,6 +24,7 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Fecha de creación</th>
             <th scope="col">Nombre</th>
             <th scope="col">Monto</th>
@@ -33,6 +34,15 @@
         </tr>
         </thead>
         <tbody>
+        {% if table is empty %}
+        <tr>
+            <td colspan="100">
+                <div class="alert alert-light text-center" role="alert">
+                    No se encontraron resultados
+                </div>
+            </td>
+        </tr>
+        {% else %}
             {% for plan in table %}
                 <tr>
                     <td>
@@ -40,7 +50,8 @@
                             <i class="fa fa-search"></i>
                         </a>
                     </td>
-                    <td>{{ plan.createdAt | date('d-m-Y H:i') }}</td>
+                    <td>{{ plan.id }}</td>
+                    <td>{{ plan.createdAt | date('d-m-Y') }}</td>
                     <td>{{ plan.name }}</td>
                     <td>${{ plan.amount }}</td>
                     <td>{{ plan.students | length }}</td>
@@ -54,6 +65,7 @@
                     </td>
                 </tr>
             {% endfor %}
+        {% endif %}
         </tbody>
     </table>
 

@@ -88,8 +88,8 @@ class YearController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'year.name',
-                'defaultSortDirection' => 'ASC'
+                'defaultSortFieldName' => 'year.id',
+                'defaultSortDirection' => 'DESC'
             ]
         );
 

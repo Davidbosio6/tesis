@@ -36,6 +36,7 @@ class TeacherRepository extends EntityRepository
 
         return $qb->where(
             $qb->expr()->orX(
+                $qb->expr()->like('teacher.id', ':value'),
                 $qb->expr()->like('teacher.firstName', ':value'),
                 $qb->expr()->like('teacher.lastName', ':value'),
                 $qb->expr()->like('teacher.idNumber', ':value'),

@@ -81,8 +81,8 @@ class SubjectController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'subject.name',
-                'defaultSortDirection' => 'ASC'
+                'defaultSortFieldName' => 'subject.id',
+                'defaultSortDirection' => 'DESC'
             ]
         );
 

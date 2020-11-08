@@ -81,8 +81,8 @@ class CityController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'city.name',
-                'defaultSortDirection' => 'ASC'
+                'defaultSortFieldName' => 'city.id',
+                'defaultSortDirection' => 'DESC'
             ]
         );
 

@@ -96,8 +96,8 @@ class StudentController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'student.firstName',
-                'defaultSortDirection' => 'ASC'
+                'defaultSortFieldName' => 'student.id',
+                'defaultSortDirection' => 'DESC'
             ]
         );
 

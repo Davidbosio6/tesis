@@ -35,6 +35,7 @@ class ProvinceRepository extends EntityRepository
 
         return $qb->where(
             $qb->expr()->orX(
+                $qb->expr()->like('province.id', ':value'),
                 $qb->expr()->like('province.name', ':value'),
                 $qb->expr()->like('country.name', ':value')
             )
