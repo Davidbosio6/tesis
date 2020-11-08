@@ -53,10 +53,12 @@ class StudentController extends AbstractController
                 $student->setPhoto($fileName);
             }
 
+            $em->persist($student);
+            $em->flush();
+
             $hashedId = strtoupper(hash('crc32', $student->getId()));
             $student->setCodeId($hashedId);
 
-            $em->persist($student);
             $em->flush();
 
             $this->addFlash('success', 'El alumno se creó con éxito!');

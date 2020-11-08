@@ -34,7 +34,7 @@ class Student
     private $createdAt;
 
     /**
-     * @ORM\Column(type="string", length=9)
+     * @ORM\Column(type="string", length=9, nullable=true)
      */
     private $codeId;
 
