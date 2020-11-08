@@ -34,6 +34,15 @@
         </tr>
         </thead>
         <tbody>
+        {% if table is empty %}
+        <tr>
+            <td colspan="100">
+                <div class="alert alert-light text-center" role="alert">
+                    No se encontraron resultados
+                </div>
+            </td>
+        </tr>
+        {% else %}
             {% for plan in table %}
                 <tr>
                     <td>
@@ -56,6 +65,7 @@
                     </td>
                 </tr>
             {% endfor %}
+        {% endif %}
         </tbody>
     </table>
 

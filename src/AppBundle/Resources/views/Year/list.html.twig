@@ -31,6 +31,15 @@
         </tr>
         </thead>
         <tbody>
+        {% if table is empty %}
+        <tr>
+            <td colspan="100">
+                <div class="alert alert-light text-center" role="alert">
+                    No se encontraron resultados
+                </div>
+            </td>
+        </tr>
+        {% else %}
             {% for year in table %}
                 <tr>
                     <td>
@@ -44,6 +53,7 @@
                     <td>{{ year.shifts | length }}</td>
                 </tr>
             {% endfor %}
+        {% endif %}
         </tbody>
     </table>
 
