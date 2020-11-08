@@ -19,6 +19,7 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Fecha de creación</th>
             <th scope="col">Nombre</th>
             <th scope="col">Valor</th>
@@ -32,6 +33,7 @@
                             <i class="fa fa-edit"></i>
                         </a>
                     </td>
+                    <td>{{ settings.id }}</td>
                     <td>{{ settings.createdAt | date('d-m-Y H:i') }}</td>
                     <td>{{ settings.name }}</td>
                     <td>{{ settings.value }}</td>

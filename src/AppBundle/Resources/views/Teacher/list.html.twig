@@ -24,6 +24,7 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Fecha de creación</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
@@ -43,6 +44,7 @@
                             <i class="fa fa-search"></i>
                         </a>
                     </td>
+                    <td>{{ teacher.id }}</td>
                     <td>{{ teacher.createdAt | date('d-m-Y H:i') }}</td>
                     <td>{{ teacher.firstName }}</td>
                     <td>{{ teacher.lastName }}</td>

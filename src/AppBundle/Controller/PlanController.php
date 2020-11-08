@@ -81,8 +81,8 @@ class PlanController extends AbstractController
             $page,
             $limit,
             [
-                'defaultSortFieldName' => 'plan.amount',
-                'defaultSortDirection' => 'ASC'
+                'defaultSortFieldName' => 'plan.id',
+                'defaultSortDirection' => 'DESC'
             ]
         );
 

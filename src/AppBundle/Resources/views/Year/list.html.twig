@@ -24,6 +24,7 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Fecha de creación</th>
             <th scope="col">Nombre</th>
             <th scope="col">Cantidad de turnos</th>
@@ -37,6 +38,7 @@
                             <i class="fa fa-search"></i>
                         </a>
                     </td>
+                    <td>{{ year.id }}</td>
                     <td>{{ year.createdAt | date('d-m-Y H:i') }}</td>
                     <td>{{ year.name }}</td>
                     <td>{{ year.shifts | length }}</td>
