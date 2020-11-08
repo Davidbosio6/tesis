@@ -66,6 +66,7 @@ class SettingsRepository extends EntityRepository
 
         return $qb->where(
             $qb->expr()->orX(
+                $qb->expr()->like('settings.id', ':value'),
                 $qb->expr()->like('settings.name', ':value'),
                 $qb->expr()->like('settings.value', ':value')
             )

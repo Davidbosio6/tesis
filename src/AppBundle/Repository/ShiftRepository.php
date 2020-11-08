@@ -35,6 +35,7 @@ class ShiftRepository extends EntityRepository
 
         return $qb->where(
             $qb->expr()->orX(
+                $qb->expr()->like('shift.id', ':value'),
                 $qb->expr()->like('shift.name', ':value'),
                 $qb->expr()->like('shift.startHour', ':value'),
                 $qb->expr()->like('shift.endHour', ':value')

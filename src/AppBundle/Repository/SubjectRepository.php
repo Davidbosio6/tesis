@@ -33,7 +33,10 @@ class SubjectRepository extends EntityRepository
         $qb = $this->createQueryBuilder('subject');
 
         return $qb->where(
-            $qb->expr()->like('subject.name', ':value')
+            $qb->expr()->orX(
+                $qb->expr()->like('subject.id', ':value'),
+                $qb->expr()->like('subject.name', ':value')
+            )
         )
             ->setParameter('value', "%" . trim($filter) . "%")
             ->getQuery();

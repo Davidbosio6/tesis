@@ -36,6 +36,7 @@ class CityRepository extends EntityRepository
 
         return $qb->where(
             $qb->expr()->orX(
+                $qb->expr()->like('city.id', ':value'),
                 $qb->expr()->like('city.name', ':value'),
                 $qb->expr()->like('city.postalCode', ':value'),
                 $qb->expr()->like('province.name', ':value'),

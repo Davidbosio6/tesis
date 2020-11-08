@@ -33,7 +33,10 @@ class YearRepository extends EntityRepository
         $qb = $this->createQueryBuilder('year');
 
         return $qb->where(
-            $qb->expr()->like('year.name', ':value')
+            $qb->expr()->orX(
+                $qb->expr()->like('year.id', ':value'),
+                $qb->expr()->like('year.name', ':value')
+            )
         )
             ->setParameter('value', "%" . trim($filter) . "%")
             ->getQuery();
