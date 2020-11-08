@@ -28,6 +28,7 @@
             <th scope="col">Fecha de creación</th>
             <th scope="col">Nombre</th>
             <th scope="col">Pais</th>
+            <th scope="col">Cantidad de ciudades</th>
         </tr>
         </thead>
         <tbody>
@@ -51,6 +52,7 @@
                     <td>{{ province.createdAt | date('d-m-Y') }}</td>
                     <td>{{ province.name }}</td>
                     <td>{{ province.country.name }}</td>
+                    <td>{{ province.cities | length }}</td>
                 </tr>
             {% endfor %}
         {% endif %}
