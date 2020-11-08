@@ -34,6 +34,11 @@ class Student
     private $createdAt;
 
     /**
+     * @ORM\Column(type="string", length=9, nullable=true)
+     */
+    private $codeId;
+
+    /**
      * @var DateTime
      *
      * @ORM\Column(type="datetime")
@@ -191,6 +196,27 @@ class Student
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @param string $codeId
+     *
+     * @return self
+     */
+    public function setCodeId(
+        string $codeId
+    ): self {
+        $this->codeId = $codeId;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCodeId(): ?string
+    {
+        return $this->codeId;
     }
 
     /**

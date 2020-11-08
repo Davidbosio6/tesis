@@ -56,6 +56,11 @@ class StudentController extends AbstractController
             $em->persist($student);
             $em->flush();
 
+            $hashedId = strtoupper(hash('crc32', $student->getId()));
+            $student->setCodeId($hashedId);
+
+            $em->flush();
+
             $this->addFlash('success', 'El alumno se creó con éxito!');
 
             return $this->redirectToRoute('student_list');

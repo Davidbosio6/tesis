@@ -47,6 +47,8 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $medicalHistory2 = $this->getReference(LoadMedicalHistoryData::MEDICAL_HISTORY_2);
 
         $student = new Student();
+        $hashedId = strtoupper(hash('crc32', 1));
+        $student->setCodeId($hashedId);
         $student->setIdNumber(86201589);
         $student->setBirthdate(new DateTime('now -3 years'));
         $student->setAddress('Mendoza 32');
@@ -63,6 +65,8 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $manager->persist($student);
 
         $student = new Student();
+        $hashedId = strtoupper(hash('crc32', 2));
+        $student->setCodeId($hashedId);
         $student->setIdNumber(85106439);
         $student->setBirthdate(new DateTime('+1 month -3 years'));
         $student->setAddress('Maipú 1209');
