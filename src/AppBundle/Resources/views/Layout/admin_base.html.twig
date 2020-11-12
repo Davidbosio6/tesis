@@ -62,18 +62,8 @@
                             Turnos y Salas
                         </a>
 
-                        <a class="nav-link" href={{ path('settings_list') }}>
-                            <div class="sb-nav-link-icon"><i class="fas fa-highlighter"></i></div>
-                            Personalización
-                        </a>
-
-                        <a class="nav-link" href={{ path('plan_list') }}>
-                            <div class="sb-nav-link-icon"><i class="fas fa-credit-card"></i></div>
-                            Planes y Cuotas
-                        </a>
-
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon">&nbsp<i class="fas fa-clipboard"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-clipboard"></i></div>
                             &nbspGenerales
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -85,8 +75,25 @@
                                 <a class="nav-link" href={{ path('country_list') }}>Países</a>
                             </nav>
                         </div>
+
+                        <div class="sb-sidenav-menu-heading">Personalización</div>
+
+                        <a class="nav-link" href={{ path('plan_list') }}>
+                            <div class="sb-nav-link-icon"><i class="fas fa-credit-card"></i></div>
+                            Planes y Cuotas
+                        </a>
+
+                        <a class="nav-link" href={{ path('about_list') }}>
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Sobre nosotros
+                        </a>
+
+                        <a class="nav-link" href={{ path('settings_list') }}>
+                            <div class="sb-nav-link-icon"><i class="fas fa-highlighter"></i></div>
+                            Otros
+                        </a>
+                        </div>
                     </div>
-                </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Sesión activa:</div>
                     {{ app.user.teacher.firstName }} {{ app.user.teacher.lastName }}

@@ -1,0 +1,61 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Editar Sección</h3>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Datos de la sección
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Titulo</dt>
+                        <dd>{{ form_widget(form.tittle) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Contenido</dt>
+                        <dd>{{ form_widget(form.content) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Mostrar sección</dt>
+                        <dd>{{ form_widget(form.showAbout) }}</dd>
+                    </dl>
+                </div>
+            </div>
+            <small>
+                <i>
+                    Consideraciones:
+                    <ul>
+                        <li>Si el atributo <strong>Mostrar sección</strong> es igual a <strong>Si</strong> esta sección se mostrará para todos los usuarios en el apartado Sobre nosotros.</li>
+                    </ul>
+                </i>
+            </small>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" name="submit" class="btn btn-dark pull-right">
+                Guardar
+            </button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}

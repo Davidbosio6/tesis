@@ -1,0 +1,61 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Sobre nosotros - Secciones</h3>
+        </div>
+        <div style="margin-right: 1em;">
+            <a class="btn btn-dark pull-right" href="{{ path('about_create') }}">
+                <i class="fa fa-plus" aria-hidden="true"></i> Nueva Sección
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        {% include "AppBundle:Layout:filter.html.twig" with {"route" : path('about_list') } %}
+    </div>
+
+    <br>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">ID</th>
+            <th scope="col">Fecha de creación</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Se muestra en Sobre Nosotros</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if table is empty %}
+        <tr>
+            <td colspan="100">
+                <div class="alert alert-light text-center" role="alert">
+                    No se encontraron resultados
+                </div>
+            </td>
+        </tr>
+        {% else %}
+            {% for about in table %}
+                <tr>
+                    <td>
+                        <a href="{{ path('about_detail', {id: about.id}) }}">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </td>
+                    <td>{{ about.id }}</td>
+                    <td>{{ about.createdAt | date('d-m-Y') }}</td>
+                    <td>{{ about.tittle }}</td>
+                    <td>{{ plan.showAbout ? 'Si' : 'No' }}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+
+    {% include "AppBundle:Layout:navigation.html.twig" with {"table" : table} %}
+{% endblock %}

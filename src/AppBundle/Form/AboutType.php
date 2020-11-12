@@ -2,48 +2,38 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Plan;
+use AppBundle\Entity\About;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * Class PlanType.
+ * Class AboutType.
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class PlanType extends AbstractType
+class AboutType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('description', TextType::class)
-            ->add('description1', TextType::class)
-            ->add('description2', TextType::class)
-            ->add('amount', NumberType::class)
-            ->add('showPlan', ChoiceType::class, [
+            ->add('tittle', TextType::class)
+            ->add('content', TextareaType::class)
+            ->add('showAbout', ChoiceType::class, [
                 'choices' => [
                     'No' => 0,
                     'Si' => 1
                 ]
-            ])
-            ->add('isHighlighted', ChoiceType::class, [
-                'choices' => [
-                    'No' => 0,
-                    'Si' => 1
-                ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Plan::class
+            'data_class' => About::class
         ]);
     }
 }
