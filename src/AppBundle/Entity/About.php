@@ -44,6 +44,11 @@ class About
     private $tittle;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private $content;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $showAbout;
@@ -125,6 +130,27 @@ class About
     public function getTittle(): ?string
     {
         return $this->tittle;
+    }
+
+    /**
+     * @param string $content
+     *
+     * @return self
+     */
+    public function setContent(
+        string $content
+    ): self {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): ?string
+    {
+        return $this->content;
     }
 
     /**

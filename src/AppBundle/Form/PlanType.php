@@ -29,14 +29,12 @@ class PlanType extends AbstractType
                 'choices' => [
                     'No' => 0,
                     'Si' => 1
-
                 ]
             ])
             ->add('isHighlighted', ChoiceType::class, [
                 'choices' => [
                     'No' => 0,
                     'Si' => 1
-
                 ]
             ])
         ;

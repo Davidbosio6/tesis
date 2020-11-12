@@ -3,13 +3,13 @@
 {% block body %}
     <div class="row">
         <div class="col-md-10">
-            <h3>{{ plan.name }}</h3>
+            <h3>{{ about.tittle }}</h3>
         </div>
         <div style="margin-right: 1em;">
-            <a class="btn btn-dark pull-right" href="{{ path('plan_edit', {id: plan.id}) }}">
+            <a class="btn btn-dark pull-right" href="{{ path('about_edit', {id: about.id}) }}">
                 <i class="fa fa-edit" aria-hidden="true"></i> Editar
             </a>
-            <a class="btn btn-dark pull-right" href="{{ path('plan_delete', {id: plan.id}) }}"
+            <a class="btn btn-dark pull-right" href="{{ path('about_delete', {id: about.id}) }}"
                onclick="return confirm('Esta acción no tiene vuelta atrás ¿Está seguro?')">
                 <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
             </a>
@@ -20,56 +20,30 @@
 
     <div class="card">
         <div class="card-header text-white bg-dark">
-            Datos del plan
+            Datos de la sección
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
                     <dl>
                         <dt>Fecha de creación</dt>
-                        <dd>{{ plan.createdAt | date('d/m/Y H:i') }}</dd>
+                        <dd>{{ about.createdAt | date('d/m/Y H:i') }}</dd>
                     </dl>
                     <dl>
-                        <dt>Primera Descripción</dt>
-                        <dd>{{ plan.description }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Cantidad de alumnos</dt>
-                        <dd>{{ plan.students | length }}</dd>
+                        <dt>Contenido</dt>
+                        <dd>{{ about.content }}</dd>
                     </dl>
                 </div>
                 <div class="col-md-4">
                     <dl>
                         <dt>Fecha de actualización</dt>
-                        <dd>{{ plan.updatedAt | date('d/m/Y H:i') }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Segunda Descripción</dt>
-                        <dd>{{ plan.description1 }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Se muestra en Planes y Cuotas</dt>
-                        <dd>{{ plan.showPlan ? 'Si' : 'No' }}</dd>
+                        <dd>{{ about.updatedAt | date('d/m/Y H:i') }}</dd>
                     </dl>
                 </div>
                 <div class="col-md-4">
                     <dl>
-                        <dt>Monto</dt>
-                        <dd>${{ plan.amount }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Tercera Descripción</dt>
-                        <dd>{{ plan.description1 }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Destacado</dt>
-                        <dd>
-                            {% if plan.showPlan == 0 %}
-                                No aplica
-                            {% else %}
-                                {{ plan.isHighlighted ? 'Si' : 'No' }}
-                            {% endif %}
-                        </dd>
+                        <dt>Se muestra en <a href="{{ path('about')}}" target="_blank">Sobre nosotros</a></dt>
+                        <dd>{{ about.showAbout ? 'Si' : 'No' }}</dd>
                     </dl>
                 </div>
             </div>

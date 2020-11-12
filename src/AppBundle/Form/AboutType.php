@@ -4,6 +4,8 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\About;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,7 +21,13 @@ class AboutType extends AbstractType
     {
         $builder
             ->add('tittle', TextType::class)
-        ;
+            ->add('content', TextareaType::class)
+            ->add('showAbout', ChoiceType::class, [
+                'choices' => [
+                    'No' => 0,
+                    'Si' => 1
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -27,6 +27,7 @@
             <th scope="col">ID</th>
             <th scope="col">Fecha de creación</th>
             <th scope="col">Titulo</th>
+            <th scope="col">Se muestra en Sobre Nosotros</th>
         </tr>
         </thead>
         <tbody>
@@ -49,6 +50,7 @@
                     <td>{{ about.id }}</td>
                     <td>{{ about.createdAt | date('d-m-Y') }}</td>
                     <td>{{ about.tittle }}</td>
+                    <td>{{ plan.showPlan ? 'Si' : 'No' }}</td>
                 </tr>
             {% endfor %}
         {% endif %}

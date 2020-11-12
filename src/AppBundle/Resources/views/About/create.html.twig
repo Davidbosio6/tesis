@@ -23,7 +23,27 @@
                         <dd>{{ form_widget(form.tittle) }}</dd>
                     </dl>
                 </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Contenido</dt>
+                        <dd>{{ form_widget(form.content) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Mostrar sección</dt>
+                        <dd>{{ form_widget(form.showAbout) }}</dd>
+                    </dl>
+                </div>
             </div>
+            <small>
+                <i>
+                    Consideraciones:
+                    <ul>
+                        <li>Si el atributo <strong>Mostrar sección</strong> es igual a <strong>Si</strong> esta sección se mostrará para todos los usuarios en el apartado Sobre nosotros.</li>
+                    </ul>
+                </i>
+            </small>
         </div>
     </div>
 
