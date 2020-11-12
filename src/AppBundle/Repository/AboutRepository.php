@@ -36,8 +36,7 @@ class AboutRepository extends EntityRepository
         return $qb->where(
             $qb->expr()->orX(
                 $qb->expr()->like('about.id', ':value'),
-                $qb->expr()->like('about.name', ':value'),
-                $qb->expr()->like('about.amount', ':value')
+                $qb->expr()->like('about.tittle', ':value')
             )
         )
             ->setParameter('value', "%" . trim($filter) . "%")
