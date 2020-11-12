@@ -2,8 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\About;
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\Settings;
+use AppBundle\Repository\AboutRepository;
 use AppBundle\Repository\PlanRepository;
 use AppBundle\Repository\SettingsRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -35,8 +37,12 @@ class SiteController extends AbstractController
      */
     public function aboutAction()
     {
+        /** @var AboutRepository $repository */
+        $repository = $this->getRepository(About::class);
+
         return $this->render('AppBundle:Layout:about.html.twig', [
-            'siteName' => $this->getSiteName()
+            'siteName' => $this->getSiteName(),
+            'sections' => $repository->findAllByShowAbout(true)
         ]);
     }
 
