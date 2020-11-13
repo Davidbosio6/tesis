@@ -25,3 +25,10 @@ security:
             logout:
                 path: /logout
                 target: /
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/about$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/contact$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/plans$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, role: ROLE_USER }
