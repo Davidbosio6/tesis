@@ -66,6 +66,13 @@ class User implements UserInterface, Serializable
     private $plainPassword;
 
     /**
+     * @ORM\Column(name="roles", type="json_array")
+     *
+     * @Assert\NotBlank()
+     */
+    private $roles;
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive = true;
@@ -264,11 +271,24 @@ class User implements UserInterface, Serializable
     }
 
     /**
-     * @return array
+     * @param string $roles
+     *
+     * @return self
      */
-    public function getRoles(): array
+    public function setRoles(
+        string $roles
+    ): self {
+        $this->roles = explode(',', $roles);
+
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getRoles(): ?array
     {
-        return ['ROLE_USER'];
+        return $this->roles;
     }
 
     /**

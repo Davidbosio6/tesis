@@ -26,6 +26,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface
         $user->setUsername('dbosio');
         $user->setEmail("dbosio@noemail.com");
         $user->setPassword('$2y$13$dGZXgjzOqmLdoiriiLNOte5prVlnSghTrJSr962dCz6Q8RC91TDQe');
+        $user->setRoles('ROLE_USER,ROLE_ADMIN');
         $user->setIsActive(true);
         $manager->persist($user);
         $this->addReference(self::USER_1, $user);
@@ -34,6 +35,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface
         $user->setUsername('lgrant');
         $user->setEmail("lgant@noemail.com");
         $user->setPassword('$2y$13$dGZXgjzOqmLdoiriiLNOte5prVlnSghTrJSr962dCz6Q8RC91TDQe');
+        $user->setRoles('ROLE_USER');
         $user->setIsActive(true);
         $manager->persist($user);
         $this->addReference(self::USER_2, $user);
@@ -42,6 +44,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface
         $user->setUsername('ssmith');
         $user->setEmail("ssmith@noemail.com");
         $user->setPassword('$2y$13$dGZXgjzOqmLdoiriiLNOte5prVlnSghTrJSr962dCz6Q8RC91TDQe');
+        $user->setRoles('ROLE_USER');
         $user->setIsActive(true);
         $manager->persist($user);
         $this->addReference(self::USER_3, $user);
@@ -50,6 +53,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface
         $user->setUsername('alevine');
         $user->setEmail("alevine@noemail.com");
         $user->setPassword('$2y$13$dGZXgjzOqmLdoiriiLNOte5prVlnSghTrJSr962dCz6Q8RC91TDQe');
+        $user->setRoles('ROLE_USER');
         $user->setIsActive(true);
         $manager->persist($user);
         $this->addReference(self::USER_4, $user);
@@ -58,6 +62,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface
         $user->setUsername('dfernandez');
         $user->setEmail("dfernandez@noemail.com");
         $user->setPassword('$2y$13$dGZXgjzOqmLdoiriiLNOte5prVlnSghTrJSr962dCz6Q8RC91TDQe');
+        $user->setRoles('ROLE_USER');
         $user->setIsActive(true);
         $manager->persist($user);
         $this->addReference(self::USER_5, $user);
@@ -66,6 +71,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface
         $user->setUsername('sgomez');
         $user->setEmail("sgomez@noemail.com");
         $user->setPassword('$2y$13$dGZXgjzOqmLdoiriiLNOte5prVlnSghTrJSr962dCz6Q8RC91TDQe');
+        $user->setRoles('ROLE_USER');
         $user->setIsActive(true);
         $manager->persist($user);
         $this->addReference(self::USER_6, $user);

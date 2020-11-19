@@ -27,8 +27,13 @@ security:
                 target: /
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/about$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/contact$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/plans$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/about$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/contact$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/plans$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/teacher/create, roles: ROLE_ADMIN }
+        - { path: ^/teacher/delete/*, roles: ROLE_ADMIN }
+        - { path: ^/teacher/edit/*, roles: ROLE_ADMIN }
+        - { path: ^/teacher/reset-password/*, roles: ROLE_ADMIN }
         - { path: ^/, role: ROLE_USER }

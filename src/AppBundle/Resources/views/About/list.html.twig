@@ -50,7 +50,7 @@
                     <td>{{ about.id }}</td>
                     <td>{{ about.createdAt | date('d-m-Y') }}</td>
                     <td>{{ about.tittle }}</td>
-                    <td>{{ plan.showAbout ? 'Si' : 'No' }}</td>
+                    <td>{{ about.showAbout ? 'Si' : 'No' }}</td>
                 </tr>
             {% endfor %}
         {% endif %}

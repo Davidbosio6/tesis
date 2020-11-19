@@ -5,11 +5,14 @@
         <div class="col-md-10">
             <h3>Profesores</h3>
         </div>
-        <div style="margin-right: 1em;">
-            <a class="btn btn-dark pull-right" href="{{ path('teacher_create') }}">
-                <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Profesor
-            </a>
-        </div>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <div style="margin-right: 1em;">
+                <a class="btn btn-dark pull-right" href="{{ path('teacher_create') }}">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Profesor
+                </a>
+            </div>
+        {% endif %}
     </div>
 
     <hr>

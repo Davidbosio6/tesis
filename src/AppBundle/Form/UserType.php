@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -23,8 +24,17 @@ class UserType extends AbstractType
             ->add('username', TextType::class)
             ->add('email', EmailType::class);
 
+
         if ($options['action'] === 'create') {
-            $builder->add('plainPassword', PasswordType::class);
+            $builder->add('plainPassword', PasswordType::class)
+            ->add('roles', ChoiceType::class, [
+                'placeholder' => '-- Seleccione una opción --',
+                'choices' => [
+                    'No' => 'ROLE_USER',
+                    'Si' => 'ROLE_USER,ROLE_ADMIN'
+
+                ]
+            ]);
         }
     }
 

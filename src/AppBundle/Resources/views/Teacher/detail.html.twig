@@ -5,18 +5,21 @@
         <div class="col-md-9">
             <h3>{{ teacher.firstName }} {{ teacher.lastName }}</h3>
         </div>
-        <div style="margin-right: 1em;">
-            <a class="btn btn-dark pull-right" href="{{ path('teacher_edit', {id: teacher.id}) }}">
-                <i class="fa fa-edit" aria-hidden="true"></i> Editar
-            </a>
-            <a class="btn btn-dark pull-right" href="{{ path('teacher_reset_password', {id: teacher.id}) }}">
-                <i class="fa fa-id-card-alt" aria-hidden="true"></i> Cambiar contraseña
-            </a>
-            <a class="btn btn-dark pull-right" href="{{ path('teacher_delete', {id: teacher.id}) }}"
-               onclick="return confirm('Esta acción no tiene vuelta atrás ¿Está seguro?')">
-                <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
-            </a>
-        </div>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <div style="margin-right: 1em;">
+                <a class="btn btn-dark pull-right" href="{{ path('teacher_edit', {id: teacher.id}) }}">
+                    <i class="fa fa-edit" aria-hidden="true"></i> Editar
+                </a>
+                <a class="btn btn-dark pull-right" href="{{ path('teacher_reset_password', {id: teacher.id}) }}">
+                    <i class="fa fa-id-card-alt" aria-hidden="true"></i> Cambiar contraseña
+                </a>
+                <a class="btn btn-dark pull-right" href="{{ path('teacher_delete', {id: teacher.id}) }}"
+                   onclick="return confirm('Esta acción no tiene vuelta atrás ¿Está seguro?')">
+                    <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+                </a>
+            </div>
+        {% endif %}
     </div>
 
     <hr>
