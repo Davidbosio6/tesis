@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Student;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
@@ -47,5 +48,22 @@ class StudentRepository extends EntityRepository
         )
             ->setParameter('value', "%" . trim($filter) . "%")
             ->getQuery();
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return Student[]|null
+     */
+    public function findAllBySex(string $value)
+    {
+        $qb = $this->createQueryBuilder('student');
+
+        return $qb->where(
+            $qb->expr()->like('student.sex', ':value')
+        )
+            ->setParameter('value', $value)
+            ->getQuery()
+            ->getResult();
     }
 }
