@@ -5,9 +5,13 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\About;
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\Settings;
+use AppBundle\Entity\Shift;
+use AppBundle\Entity\Student;
 use AppBundle\Repository\AboutRepository;
 use AppBundle\Repository\PlanRepository;
 use AppBundle\Repository\SettingsRepository;
+use AppBundle\Repository\ShiftRepository;
+use AppBundle\Repository\StudentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -113,6 +117,28 @@ class SiteController extends AbstractController
      */
     public function dashboardAction()
     {
-        return $this->render('AppBundle:Layout:dashboard.html.twig');
+        /** @var StudentRepository $studentRepository */
+        $studentRepository = $this->getRepository(Student::class);
+        $male = $studentRepository->findAllBySex('Masculino');
+        $female = $studentRepository->findAllBySex('Femenino');
+        $undefined = $studentRepository->findAllBySex('No define');
+
+        /** @var ShiftRepository $shiftRepository */
+        $shiftRepository = $this->getRepository(Shift::class);
+        $shifts = $shiftRepository->findAll();
+        $shiftNames = [];
+        $classrooms= [];
+        /** @var Shift $shift */
+        foreach ($shifts as $shift) {
+            $shiftNames[] = $shift->getName();
+            $classrooms[] = $shift->getClassrooms()->count();
+        }
+
+
+        return $this->render('AppBundle:Layout:dashboard.html.twig', [
+            'sexes' => sprintf("%s, %s, %s", count($male), count($female), count($undefined)),
+            'shiftNames' => json_encode($shiftNames),
+            'classrooms' => json_encode($classrooms),
+        ]);
     }
 }
