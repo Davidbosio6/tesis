@@ -107,7 +107,7 @@ class AbstractController extends Controller
             $installment = new Installment();
             $installment->setAmount($student->getPlan()->getAmount())
                 ->setState(Installment::PENDING_STATE)
-                ->setMonth($monthTranslate[intval($monthNumber)])
+                ->setMonth('Cuota ' . $monthTranslate[intval($monthNumber)])
                 ->setDueDate($date)
                 ->setStudent($student);
 
@@ -141,6 +141,7 @@ class AbstractController extends Controller
                 $jsonResponse = json_decode((string)$response->getBody());
 
                 $installment->setCheckoutUrl($jsonResponse->checkout_url);
+                $student->setInstallmentsGenerated(true);
             } catch (Exception $e) {
                 $this->getEntityManager()->remove($installment);
 

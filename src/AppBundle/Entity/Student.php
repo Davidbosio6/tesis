@@ -94,6 +94,11 @@ class Student
     private $generateInstallments;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $installmentsGenerated;
+
+    /**
      * @var City
      *
      * @ORM\ManyToOne(targetEntity="City", inversedBy="students")
@@ -516,11 +521,32 @@ class Student
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getGenerateInstallments(): ?string
     {
         return $this->generateInstallments;
+    }
+
+    /**
+     * @param bool $installmentsGenerated
+     *
+     * @return self
+     */
+    public function setInstallmentsGenerated(
+        bool $installmentsGenerated
+    ): self {
+        $this->installmentsGenerated = $installmentsGenerated;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getInstallmentsGenerated(): ?bool
+    {
+        return $this->installmentsGenerated;
     }
 
     /**

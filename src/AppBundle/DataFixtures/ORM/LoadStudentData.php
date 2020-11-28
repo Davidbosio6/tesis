@@ -56,6 +56,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setLastName('Gil');
         $student->setSex('Femenino');
         $student->setPhoto('student_1.png');
+        $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->addAdvisor($advisor1);
         $student->addAdvisor($advisor2);
@@ -74,6 +75,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setLastName('Fernandez');
         $student->setSex('Masculino');
         $student->setPhoto('student_2.png');
+        $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->addAdvisor($advisor3);
         $student->addAdvisor($advisor4);
