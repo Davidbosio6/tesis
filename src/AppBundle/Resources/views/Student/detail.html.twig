@@ -141,7 +141,61 @@
                             <td>{{ advisor.idNumber }}</td>
                             <td>{{ advisor.email }}</td>
                             <td>{{ advisor.phoneNumber }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
 
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Pago de cuotas
+        </div>
+        <div class="card-body">
+            {% if student.installments is empty %}
+                <div class="alert alert-light text-center" role="alert">
+                    Este alumno no tiene cuotas generadas <br>
+                    <a class="btn btn-primary pull-right" href="{{ path('installment_generate', {id: student.id}) }}">
+                        <i class="fa fa-cogs" aria-hidden="true"></i> Generar
+                    </a>
+                </div>
+            {% else %}
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Fecha de creación</th>
+                        <th scope="col">Periodo</th>
+                        <th scope="col">Monto</th>
+                        <th scope="col">Fecha de vencimiento</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for installment in student.installments %}
+                        <tr>
+                            <td>{{ installment.id }}</td>
+                            <td>{{ installment.createdAt | date('d-m-Y H:i') }}</td>
+                            <td>{{ installment.month }}</td>
+                            <td>${{ installment.amount }}</td>
+                            <td>{{ installment.dueDate | date('d-m-Y') }}</td>
+                            <td>{{ installment.state }}</td>
+                            <td>
+                                <h5>
+                                    <span class="badge badge-primary">
+                                        <a href="{{ installment.checkoutUrl }}" target="_blank">
+                                            <span class="text-white">
+                                                   <i class="fa fa-expand-arrows-alt" aria-hidden="true"></i> Abrir checkout
+                                            </span>
+                                    </a>
+                                    </span>
+                                </h5>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

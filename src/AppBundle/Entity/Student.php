@@ -135,9 +135,17 @@ class Student
      */
     private $medicalHistory;
 
+    /**
+     * @var Advisor
+     *
+     * @ORM\OneToMany(targetEntity="Installment", mappedBy="student")
+     */
+    private $installments;
+
     public function __construct()
     {
         $this->advisors = new ArrayCollection();
+        $this->installments = new ArrayCollection();
     }
 
     /**
@@ -280,6 +288,14 @@ class Student
         $this->lastName = $lastName;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        return $this->firstName . ' ' . $this->lastName;
     }
 
     /**
@@ -485,7 +501,7 @@ class Student
      *
      * @return self
      */
-    public function setMedicalHistory (
+    public function setMedicalHistory(
         MedicalHistory $medicalHistory
     ): self {
         $this->medicalHistory = $medicalHistory;
@@ -499,5 +515,35 @@ class Student
     public function getMedicalHistory (): ?MedicalHistory
     {
         return $this->medicalHistory;
+    }
+
+    /**
+     * @param Installment $installment
+     *
+     * @return self
+     */
+    public function addInstallment(Installment $installment): self
+    {
+        $this->installments[] = $installment;
+        $installment->setStudent($this);
+
+        return $this;
+    }
+
+    /**
+     * @param Installment $installment
+     */
+    public function removeInstallment(Installment $installment)
+    {
+        $this->installments->removeElement($installment);
+        $installment->setStudent(null);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getInstallments()
+    {
+        return $this->installments;
     }
 }
