@@ -88,6 +88,12 @@ class Student
     private $photo;
 
     /**
+     * This attribute is not saved in the database,
+     * only is used in student creation.
+     */
+    private $generateInstallments;
+
+    /**
      * @var City
      *
      * @ORM\ManyToOne(targetEntity="City", inversedBy="students")
@@ -494,6 +500,27 @@ class Student
     public function getPhoto(): ?string
     {
         return $this->photo;
+    }
+
+    /**
+     * @param string $generateInstallments
+     *
+     * @return self
+     */
+    public function setGenerateInstallments(
+        string $generateInstallments
+    ): self {
+        $this->generateInstallments = $generateInstallments;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGenerateInstallments(): ?string
+    {
+        return $this->generateInstallments;
     }
 
     /**

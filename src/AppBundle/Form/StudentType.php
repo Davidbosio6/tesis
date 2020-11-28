@@ -86,6 +86,15 @@ class StudentType extends AbstractType
                 'action' => $options['mode']
             ])
         ;
+
+        if ($options['mode'] === 'create') {
+            $builder->add('generateInstallments', ChoiceType::class, [
+                'choices' => [
+                    'Si' => 1,
+                    'No' => 0
+                ]
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)

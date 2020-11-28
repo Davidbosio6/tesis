@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Student;
 use AppBundle\Form\StudentType;
 use AppBundle\Repository\StudentRepository;
+use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,6 +52,14 @@ class StudentController extends AbstractController
                 );
 
                 $student->setPhoto($fileName);
+            }
+
+            if (!empty($student->getGenerateInstallments())) {
+                try {
+                    $this->generateInstallments($student);
+                } catch (Exception $e) {
+                    $this->addFlash('warning', 'Ocurrió un error mientras se generaban las cuotas!');
+                }
             }
 
             $em->persist($student);
