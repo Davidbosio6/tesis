@@ -156,7 +156,7 @@
             Pago de cuotas
         </div>
         <div class="card-body">
-            {% if student.installments is empty %}
+            {% if student.installmentsGenerated is empty %}
                 <div class="alert alert-light text-center" role="alert">
                     Este alumno no tiene cuotas generadas <br>
                     <a class="btn btn-primary pull-right" href="{{ path('installment_generate', {id: student.id}) }}">

@@ -3,9 +3,7 @@
 namespace AppBundle\Entity;
 
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Installment.
@@ -19,7 +17,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Installment
 {
-
     const PENDING_STATE = 'Pendiente';
     const PAID_STATE = 'Pagada';
 
@@ -63,7 +60,6 @@ class Installment
      * @ORM\Column(type="string")
      */
     private $checkoutUrl;
-
 
     /**
      * @var DateTime
