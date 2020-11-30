@@ -66,4 +66,21 @@ class StudentRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @param string $value
+     *
+     * @return Student[]|null
+     */
+    public function findAllByInstallmentsGenerated(string $value)
+    {
+        $qb = $this->createQueryBuilder('student');
+
+        return $qb->where(
+            $qb->expr()->eq('student.installmentsGenerated', ':value')
+        )
+            ->setParameter('value', $value)
+            ->getQuery()
+            ->getResult();
+    }
 }
