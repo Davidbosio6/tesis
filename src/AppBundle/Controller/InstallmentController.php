@@ -77,7 +77,7 @@ class InstallmentController extends AbstractController
             return $this->redirectToRoute('installment_list');
         }
 
-        $this->addFlash('success', 'Cuotas generadas con para ' . count($students) . 'Usuarios');
+        $this->addFlash('success', 'Cuotas generadas con para ' . count($students) . ' Usuarios');
 
         return $this->redirectToRoute('installment_list');
     }

@@ -181,10 +181,16 @@
                         <tr>
                             <td>{{ installment.id }}</td>
                             <td>{{ installment.createdAt | date('d-m-Y H:i') }}</td>
-                            <td>{{ installment.month }}</td>
+                            <td>{{ installment.description }}</td>
                             <td>${{ installment.amount }}</td>
                             <td>{{ installment.dueDate | date('d-m-Y') }}</td>
-                            <td>{{ installment.state }}</td>
+                            <td class="
+                                {% if installment.state == 'Pendiente' %}alert alert-warning
+                                {% elseif installment.state == 'Pagada' %}alert alert-success
+                                {% endif %}
+                            ">
+                                {{ installment.state }}
+                            </td>
                             <td>
                                 <h5>
                                     <span class="badge badge-primary">

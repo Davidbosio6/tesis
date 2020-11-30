@@ -57,7 +57,7 @@ class Installment
     /**
      * @ORM\Column(type="string")
      */
-    private $month;
+    private $description;
 
     /**
      * @ORM\Column(type="string")
@@ -181,14 +181,14 @@ class Installment
     }
 
     /**
-     * @param string $month
+     * @param string $description
      *
      * @return self
      */
-    public function setMonth(
-        string $month
+    public function setDescription(
+        string $description
     ): self {
-        $this->month = $month;
+        $this->description = $description;
 
         return $this;
     }
@@ -196,9 +196,9 @@ class Installment
     /**
      * @return string
      */
-    public function getMonth(): ?string
+    public function getDescription(): ?string
     {
-        return $this->month;
+        return $this->description;
     }
 
     /**

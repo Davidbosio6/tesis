@@ -11,4 +11,98 @@
             </a>
         </div>
     </div>
+
+    <canvas id="myChart" width="400" height="400"></canvas>
+
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                ],
+                datasets: [{
+                    label: 'Pendiente',
+                    data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)'
+                    ],
+                    borderColor: [
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)'
+                    ],
+                    borderWidth: 1
+                },{
+                    label: 'Pagada',
+                    data: [18, 19, 3, 5, 2, 3, 18, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)'
+                    ],
+                    borderColor: [
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+{% endblock javascripts %}

@@ -24,15 +24,15 @@
         <div class="col-xl-3 col-md-6">
             <div class="card">
                 <div class="view overlay">
-                    <img class="card-img-top" src="{{ asset('assets/img/dashboard3.jpg') }}" alt="Card image cap">
+                    <img class="card-img-top" src="{{ asset('assets/img/dashboard4.jpg') }}" alt="Card image cap">
                     <a>
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
 
                 <div class="card-body">
-                    <a href="{{ path('subject_create') }}" class="black-text d-flex justify-content-end">
-                        <h5>Crear Asignatura <i class="fas fa-angle-double-right"></i></h5>
+                    <a href="{{ path('installment_list') }}" class="black-text d-flex justify-content-end">
+                        <h5>Gestionar Cotas <i class="fas fa-angle-double-right"></i></h5>
                     </a>
                 </div>
             </div>
@@ -93,8 +93,17 @@
             </div>
         </div>
     </div>
-
-
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area mr-1"></i>
+                    Cuotas
+                </div>
+                <div class="card-body"><canvas id="installmentsChart" width="100%" height="40"></canvas></div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
@@ -124,22 +133,24 @@
             }
         });
 
-        var clasroom = document.getElementById("classroomChart").getContext('2d');
-        var classroomChart = new Chart(clasroom, {
+        var classroom = document.getElementById("classroomChart").getContext('2d');
+        var classroomChart = new Chart(classroom, {
             type: 'pie',
             data: {
                 labels: {{ shiftNames | raw }},
                 datasets: [{
                     data: {{ classrooms |raw }},
                     backgroundColor: [
-                        "#46BFBD",
+                        "#9457ce",
                         "#b4b402",
+                        "#46BFBD",
                         "#f7464a",
                         "#f57715",
                     ],
                     hoverBackgroundColor: [
-                        "#5AD3D1",
+                        "#b779f5",
                         "#c7c756",
+                        "#5AD3D1",
                         "#ff6c70",
                         "#f1944c",
                     ]
@@ -147,6 +158,92 @@
             },
             options: {
                 responsive: true
+            }
+        });
+
+        var installments = document.getElementById('installmentsChart').getContext('2d');
+        var installmentsChart = new Chart(installments, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                ],
+                datasets: [{
+                    label: 'Pendiente',
+                    data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)',
+                        'rgb(255,218,86)'
+                    ],
+                    borderColor: [
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)',
+                        'rgb(160,138,55)'
+                    ],
+                    borderWidth: 1
+                },{
+                    label: 'Pagada',
+                    data: [18, 19, 3, 5, 2, 3, 18, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)',
+                        'rgb(190,255,86)'
+                    ],
+                    borderColor: [
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)',
+                        'rgb(78,113,45)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
             }
         });
     </script>

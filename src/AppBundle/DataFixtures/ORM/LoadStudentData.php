@@ -16,6 +16,10 @@ use Doctrine\Persistence\ObjectManager;
 
 class LoadStudentData extends AbstractFixture implements DependentFixtureInterface
 {
+    const STUDENT_1 = 'student_1';
+
+    const STUDENT_2 = 'student_2';
+
     /**
      * {@inheritdoc}
      */
@@ -56,7 +60,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setLastName('Gil');
         $student->setSex('Femenino');
         $student->setPhoto('student_1.png');
-        $student->setInstallmentsGenerated(false);
+        $student->setInstallmentsGenerated(true);
         $student->setCity($city1);
         $student->addAdvisor($advisor1);
         $student->addAdvisor($advisor2);
@@ -64,6 +68,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setPlan($plan1);
         $student->setMedicalHistory($medicalHistory1);
         $manager->persist($student);
+        $this->addReference(self::STUDENT_1, $student);
 
         $student = new Student();
         $hashedId = strtoupper(hash('crc32', 2));
@@ -75,7 +80,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setLastName('Fernandez');
         $student->setSex('Masculino');
         $student->setPhoto('student_2.png');
-        $student->setInstallmentsGenerated(false);
+        $student->setInstallmentsGenerated(true);
         $student->setCity($city1);
         $student->addAdvisor($advisor3);
         $student->addAdvisor($advisor4);
@@ -83,6 +88,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setPlan($plan1);
         $student->setMedicalHistory($medicalHistory2);
         $manager->persist($student);
+        $this->addReference(self::STUDENT_2, $student);
 
         $manager->flush();
     }

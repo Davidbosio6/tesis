@@ -107,7 +107,7 @@ class AbstractController extends Controller
             $installment = new Installment();
             $installment->setAmount($student->getPlan()->getAmount())
                 ->setState(Installment::PENDING_STATE)
-                ->setMonth('Cuota ' . $monthTranslate[intval($monthNumber)])
+                ->setDescription('Cuota ' . $monthTranslate[intval((new DateTime())->modify('+' . $i . 'month')->format('m'))])
                 ->setDueDate($date)
                 ->setStudent($student);
 
@@ -115,7 +115,7 @@ class AbstractController extends Controller
 
             $body = [
                 'payment_request' => [
-                    'description' => $installment->getMonth(),
+                    'description' => $installment->getDescription(),
                     'first_due_date' => $installment->getDueDate()->format('d-m-Y'),
                     'first_total' => floatval($installment->getAmount()),
                     'payer_name' => $student->getFullName()
