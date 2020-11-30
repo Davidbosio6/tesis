@@ -1,0 +1,56 @@
+{% extends 'AppBundle:Layout:guest_base.html.twig' %}
+
+{% block title %}{{ siteName }}{% endblock %}
+{% block siteName %}{{ siteName }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4 mb-3">Paga tu cuota</h1>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <img class="img-fluid rounded mb-4"
+                     src="{{ asset('assets/img/installments-1.jpg') }}" alt="">
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h4>Consulta el estado de tu deuda</h4>
+                <br>
+                <p>
+                    Complete el formulario para conocer el estado de su deuda
+                </p>
+
+                {% for flash_message in app.session.flashBag.get('error') %}
+                    <div class="alert alert-danger alert-dismissible mgt-35 mgb-0" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ flash_message | trans }}
+                    </div>
+                {% endfor %}
+
+                {{ form_start(form) }}
+                {{ form_widget(form.codeId) }}
+
+                <br>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" name="submit" class="btn btn-dark pull-right">
+                            Siguiente
+                        </button>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+
+                <br>
+
+                <div class="font-italic">
+                    **Si usted desconoce su <strong>ID de Alumno</strong> puede ponerse en contacto con nosotros para obtener información. Contacto
+                    <a href={{ path('contact') }}>aquí</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

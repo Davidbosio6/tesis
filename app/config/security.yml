@@ -30,6 +30,7 @@ security:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/about$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/contact$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/installments/pay*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/plans$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/teacher/create, roles: ROLE_ADMIN }
