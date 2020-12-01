@@ -2,12 +2,15 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-9">
             <h3>Gestión de cuotas</h3>
         </div>
         <div style="margin-right: 1em;">
             <a class="btn btn-dark pull-right" href="{{ path('installment_generate_all') }}">
                 <i class="fa fa-cogs" aria-hidden="true"></i> Generar
+            </a>
+            <a class="btn btn-dark pull-right" href="{{ path('installment_sync_up') }}">
+                <i class="fa fa-sync" aria-hidden="true"></i> Sincronizar Pagos
             </a>
         </div>
     </div>

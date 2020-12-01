@@ -52,6 +52,11 @@ class Installment
     private $state;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $transactionId;
+
+    /**
      * @ORM\Column(type="string")
      */
     private $description;
@@ -200,6 +205,27 @@ class Installment
     public function getDescription(): ?string
     {
         return $this->description;
+    }
+
+    /**
+     * @param int $transactionId
+     *
+     * @return self
+     */
+    public function setTransactionId(
+        int $transactionId
+    ): self {
+        $this->transactionId = $transactionId;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTransactionId(): ?int
+    {
+        return $this->transactionId;
     }
 
     /**
