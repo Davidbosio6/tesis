@@ -141,6 +141,7 @@ class AbstractController extends Controller
                 $jsonResponse = json_decode((string)$response->getBody());
 
                 $installment->setCheckoutUrl($jsonResponse->checkout_url);
+                $installment->setPdfUrl($jsonResponse->pdf_url);
                 $student->setInstallmentsGenerated(true);
             } catch (Exception $e) {
                 $this->getEntityManager()->remove($installment);
