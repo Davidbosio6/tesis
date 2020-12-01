@@ -1,0 +1,66 @@
+{% extends 'AppBundle:Layout:guest_base.html.twig' %}
+
+{% block title %}{{ siteName }}{% endblock %}
+{% block siteName %}{{ siteName }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4 mb-3">Paga tu cuota</h1>
+
+        <hr>
+
+        <div class="card">
+            <div class="card-header text-white bg-dark">
+                Seleccione una cuota
+            </div>
+            <div class="card-body">
+                {% if student.installmentsGenerated is empty %}
+                    <div class="alert alert-light text-center" role="alert">
+                        Este alumno no tiene cuotas generadas <br>
+                        <a class="btn btn-primary pull-right" href="{{ path('installment_generate', {id: student.id}) }}">
+                            <i class="fa fa-cogs" aria-hidden="true"></i> Generar
+                        </a>
+                    </div>
+                {% else %}
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Periodo</th>
+                            <th scope="col">Monto</th>
+                            <th scope="col">Fecha de vencimiento</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for installment in student.installments %}
+                            <tr>
+                                <td>{{ installment.description }}</td>
+                                <td>${{ installment.amount }}</td>
+                                <td>{{ installment.dueDate | date('d-m-Y') }}</td>
+                                <td class="
+                                {% if installment.state == 'Pendiente' %}alert alert-warning
+                                {% elseif installment.state == 'Pagada' %}alert alert-success
+                                {% endif %}">
+                                    {{ installment.state }}
+                                </td>
+                                <td>
+                                    <h5>
+                                        <span class="badge badge-primary">
+                                            <a href="{{ installment.checkoutUrl }}" target="_blank">
+                                                <span class="text-white">
+                                                       <i class="fa fa-expand-arrows-alt" aria-hidden="true"></i> Pagar
+                                                </span>
+                                        </a>
+                                        </span>
+                                    </h5>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

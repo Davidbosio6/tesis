@@ -7,12 +7,14 @@ use AppBundle\Entity\Plan;
 use AppBundle\Entity\Settings;
 use AppBundle\Entity\Shift;
 use AppBundle\Entity\Student;
+use AppBundle\Form\CodeIdType;
 use AppBundle\Repository\AboutRepository;
 use AppBundle\Repository\PlanRepository;
 use AppBundle\Repository\SettingsRepository;
 use AppBundle\Repository\ShiftRepository;
 use AppBundle\Repository\StudentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -23,11 +25,11 @@ use Symfony\Component\HttpFoundation\Response;
 class SiteController extends AbstractController
 {
     /**
-     * @return Response
-     *
      * @Route("/", name="index")
+     *
+     * @return Response
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         return $this->render('AppBundle:Layout:index.html.twig', [
             'siteName' => $this->getSiteName()
@@ -35,11 +37,11 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @return Response
-     *
      * @Route("/about", name="about")
+     *
+     * @return Response
      */
-    public function aboutAction()
+    public function aboutAction(): Response
     {
         /** @var AboutRepository $repository */
         $repository = $this->getRepository(About::class);
@@ -51,11 +53,11 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @return Response
-     *
      * @Route("/contact", name="contact")
+     *
+     * @return Response
      */
-    public function contactAction()
+    public function contactAction(): Response
     {
         /** @var SettingsRepository $repository */
         $repository = $this->getRepository(Settings::class);
@@ -76,11 +78,11 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @return Response
-     *
      * @Route("/login", name="login")
+     *
+     * @return Response
      */
-    public function loginAction()
+    public function loginAction(): Response
     {
         $error = $this->getAuthenticationUtilsService()->getLastAuthenticationError();
 
@@ -95,11 +97,11 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @return Response
-     *
      * @Route("/plans", name="plans")
+     *
+     * @return Response
      */
-    public function plansAction()
+    public function plansAction(): Response
     {
         /** @var PlanRepository $repository */
         $repository = $this->getRepository(Plan::class);
@@ -111,11 +113,11 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @return Response
-     *
      * @Route("/dashboard", name="dashboard")
+     *
+     * @return Response
      */
-    public function dashboardAction()
+    public function dashboardAction(): Response
     {
         /** @var StudentRepository $studentRepository */
         $studentRepository = $this->getRepository(Student::class);
@@ -139,6 +141,65 @@ class SiteController extends AbstractController
             'sexes' => sprintf("%s, %s, %s", count($male), count($female), count($undefined)),
             'shiftNames' => json_encode($shiftNames),
             'classrooms' => json_encode($classrooms),
+        ]);
+    }
+
+    /**
+     * @Route("/installments/pay/select-user", name="installments_pay_select_user")
+     *
+     * @param  Request $request
+     *
+     * @return Response
+     */
+    public function InstallmentsPaySelectUserAction(
+        Request $request
+    ): Response {
+        $form = $this->createForm(
+            CodeIdType::class
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Student $student */
+            $student = $this->getRepository(Student::class)->findOneBy([
+                'codeId' => $form->get('codeId')->getData()
+            ]);
+
+            if (empty($student)) {
+                $this->addFlash('error', 'El ID ingresado es incorrecto');
+
+                return $this->render('AppBundle:Site:installments_pay_select_user.html.twig', [
+                    'siteName' => $this->getSiteName(),
+                    'form' => $form->createView()
+                ]);
+            }
+
+            return $this->redirectToRoute(
+                'installments_pay_select_installment',
+                ['codeId' => $student->getCodeId()]
+            );
+        }
+
+        return $this->render('AppBundle:Site:installments_pay_select_user.html.twig', [
+            'siteName' => $this->getSiteName(),
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/installments/pay/{{codeId}}/select-installment", name="installments_pay_select_installment")
+     *
+     * @param  Student $student
+     *
+     * @return Response
+     */
+    public function InstallmentsPaySelectInstallmentAction(
+        Student $student
+    ): Response {
+        return $this->render('AppBundle:Site:installments_pay_select_installment.html.twig', [
+            'siteName' => $this->getSiteName(),
+            'student' => $student,
         ]);
     }
 }
