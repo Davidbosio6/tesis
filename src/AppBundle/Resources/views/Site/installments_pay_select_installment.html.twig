@@ -51,14 +51,30 @@
                                                 <span class="text-white">
                                                        <i class="fa fa-expand-arrows-alt" aria-hidden="true"></i> Pagar
                                                 </span>
-                                        </a>
+                                            </a>
                                         </span>
+
+                                        {% if installment.state == 'Pendiente' %}
+                                            <span class="badge badge-primary">
+                                                <a href="{{ installment.pdfUrl }}" target="_blank">
+                                                    <span class="text-white">
+                                                           <i class="fa fa-expand-arrows-alt" aria-hidden="true"></i> Imprimir cupón
+                                                    </span>
+                                                </a>
+                                            </span>
+                                        {% endif %}
                                     </h5>
                                 </td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
+
+                    <br>
+
+                    <div class="font-italic">
+                        **El cambio de <strong>Estado</strong> puede tardar hasta 24hs en verse reflejado
+                    </div>
                 {% endif %}
             </div>
         </div>

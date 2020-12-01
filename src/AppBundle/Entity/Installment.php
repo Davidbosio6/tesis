@@ -62,6 +62,11 @@ class Installment
     private $checkoutUrl;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $pdfUrl;
+
+    /**
      * @var DateTime
      *
      * @ORM\Column(type="datetime")
@@ -216,6 +221,27 @@ class Installment
     public function getCheckoutUrl(): ?string
     {
         return $this->checkoutUrl;
+    }
+
+    /**
+     * @param string $pdfUrl
+     *
+     * @return self
+     */
+    public function setPdfUrl(
+        string $pdfUrl
+    ): self {
+        $this->pdfUrl = $pdfUrl;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPdfUrl(): ?string
+    {
+        return $this->pdfUrl;
     }
 
     /**
