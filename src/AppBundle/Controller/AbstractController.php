@@ -140,6 +140,7 @@ class AbstractController extends Controller
 
                 $jsonResponse = json_decode((string)$response->getBody());
 
+                $installment->setTransactionId($jsonResponse->id);
                 $installment->setCheckoutUrl($jsonResponse->checkout_url);
                 $installment->setPdfUrl($jsonResponse->pdf_url);
                 $student->setInstallmentsGenerated(true);
@@ -153,5 +154,48 @@ class AbstractController extends Controller
                 throw new Exception('Ocurrió un error mientras se generaban las cuotas!');
             }
         }
+    }
+
+    /**
+     * @param Installment[] $installments
+     * @return int
+     *
+     * @throws Exception
+     */
+    public function syncUpInstallments(
+        array $installments
+    ): int {
+        $installmentsPaid = 0;
+        foreach ($installments as $installment){
+            try {
+                $client = new HttpClient([
+                    'base_uri' => 'https://sandboxapi.pagos360.com/',
+                    'exceptions' => true,
+                    'headers' => [
+                        'Content-Type' => 'application/json',
+                        'Authorization' => 'Bearer ' . $this->getParameter('pagos360_api_key')
+                    ]
+                ]);
+
+                $response = $client->request(
+                    'GET',
+                    'payment-request/'.$installment->getTransactionId()
+                );
+
+                $jsonResponse = json_decode((string)$response->getBody());
+
+                if ($jsonResponse->state === 'paid') {
+                    $installment->setState(Installment::PAID_STATE);
+                    $installmentsPaid++;
+                }
+
+            } catch (Exception $e) {
+                //TODO save exception
+            } catch (Throwable $e) {
+                //TODO save exception
+            }
+        }
+
+       return $installmentsPaid;
     }
 }

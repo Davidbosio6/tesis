@@ -27,6 +27,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
             ->setAmount($student1->getPlan()->getAmount())
             ->setState(Installment::PAID_STATE)
             ->setDescription('Cuota Octubre')
+            ->setTransactionId(984252)
             ->setPdfUrl('https://sandboxapi.pagos360.com/payment-request/pdf/a5b2b864-31c6-11eb-a2e5-160dac5dea65')
             ->setCheckoutUrl('https://sandboxcheckout.pagos360.com/payment-request/a5b2b864-31c6-11eb-a2e5-160dac5dea65')
             ->setDueDate($this->generateDueDate(10));
@@ -37,6 +38,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
             ->setAmount($student1->getPlan()->getAmount())
             ->setState(Installment::PAID_STATE)
             ->setDescription('Cuota Noviembre')
+            ->setTransactionId(984252)
             ->setPdfUrl('https://sandboxapi.pagos360.com/payment-request/pdf/a5b2b864-31c6-11eb-a2e5-160dac5dea65')
             ->setCheckoutUrl('https://sandboxcheckout.pagos360.com/payment-request/a5b2b864-31c6-11eb-a2e5-160dac5dea65')
             ->setDueDate($this->generateDueDate(11));
@@ -47,6 +49,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
             ->setAmount($student1->getPlan()->getAmount())
             ->setState(Installment::PENDING_STATE)
             ->setDescription('Cuota Diciembre')
+            ->setTransactionId(984254)
             ->setPdfUrl('https://sandboxapi.pagos360.com/payment-request/pdf/a3af7358-31d6-11eb-a4a3-160dac5dea65')
             ->setCheckoutUrl('https://sandboxcheckout.pagos360.com/payment-request/a3af7358-31d6-11eb-a4a3-160dac5dea65')
             ->setDueDate($this->generateDueDate(12));
@@ -57,6 +60,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
             ->setAmount($student2->getPlan()->getAmount())
             ->setState(Installment::PAID_STATE)
             ->setDescription('Cuota Octubre')
+            ->setTransactionId(984252)
             ->setPdfUrl('https://sandboxapi.pagos360.com/payment-request/pdf/a5b2b864-31c6-11eb-a2e5-160dac5dea65')
             ->setCheckoutUrl('https://sandboxcheckout.pagos360.com/payment-request/a5b2b864-31c6-11eb-a2e5-160dac5dea65')
             ->setDueDate($this->generateDueDate(10));
@@ -67,6 +71,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
             ->setAmount($student2->getPlan()->getAmount())
             ->setState(Installment::PAID_STATE)
             ->setDescription('Cuota Noviembre')
+            ->setTransactionId(984252)
             ->setPdfUrl('https://sandboxapi.pagos360.com/payment-request/pdf/a5b2b864-31c6-11eb-a2e5-160dac5dea65')
             ->setCheckoutUrl('https://sandboxcheckout.pagos360.com/payment-request/a5b2b864-31c6-11eb-a2e5-160dac5dea65')
             ->setDueDate($this->generateDueDate(11));
@@ -77,7 +82,8 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
             ->setAmount($student2->getPlan()->getAmount())
             ->setState(Installment::PENDING_STATE)
             ->setDescription('Cuota Diciembre')
-            ->setPdfUrl('https://sandboxapi.pagos360.com/payment-request/pdf/a5b2b864-31c6-11eb-a2e5-160dac5dea65')
+            ->setTransactionId(984255)
+            ->setPdfUrl('https://sandboxapi.pagos360.com/payment-request/pdf/a40593b4-31d6-11eb-b77c-160dac5dea65')
             ->setCheckoutUrl('https://sandboxcheckout.pagos360.com/payment-request/a40593b4-31d6-11eb-b77c-160dac5dea65')
             ->setDueDate($this->generateDueDate(12));
         $manager->persist($installment);

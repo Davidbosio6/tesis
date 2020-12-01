@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Installment;
 use AppBundle\Entity\Student;
+use AppBundle\Repository\InstallmentRepository;
 use AppBundle\Repository\StudentRepository;
 use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -78,6 +80,24 @@ class InstallmentController extends AbstractController
         }
 
         $this->addFlash('success', 'Cuotas generadas con para ' . count($students) . ' Usuarios');
+
+        return $this->redirectToRoute('installment_list');
+    }
+
+    /**
+     * @Route("/sync-up", name="installment_sync_up")
+     *
+     * @return Response
+     */
+    public function syncUpAction(): Response {
+        /** @var InstallmentRepository $repository */
+        $repository = $this->getRepository(Installment::class);
+        $installments = $repository->findBy([
+            'state' => 'Pendiente'
+        ]);
+
+        $response = $this->syncUpInstallments($installments);
+        $this->addFlash('success', 'Se han sincronizado ' . $response . ' pagos');
 
         return $this->redirectToRoute('installment_list');
     }
