@@ -179,7 +179,7 @@ class AbstractController extends Controller
 
                 $response = $client->request(
                     'GET',
-                    'payment-request/'.$installment->getTransactionId()
+                    'payment-request/' . $installment->getTransactionId()
                 );
 
                 $jsonResponse = json_decode((string)$response->getBody());
