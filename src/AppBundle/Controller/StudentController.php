@@ -9,6 +9,7 @@ use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 /**
  * Class StudentController.
@@ -54,6 +55,7 @@ class StudentController extends AbstractController
                 $student->setPhoto($fileName);
             }
 
+            $student->setInstallmentsGenerated(false);
             if (!empty($student->getGenerateInstallments())) {
                 try {
                     $this->generateInstallments($student);
@@ -67,6 +69,19 @@ class StudentController extends AbstractController
 
             $hashedId = strtoupper(hash('crc32', $student->getId()));
             $student->setCodeId($hashedId);
+
+            if (!empty($student->getAdvisors())) {
+                foreach ($student->getAdvisors() as $advisor) {
+                    try {
+                        $this->getSendgridSdkService()->sendWelcomeEmail(
+                            $student,
+                            $advisor
+                        );
+                    } catch (Exception | Throwable $e) {
+                        //@TODO save exception
+                    }
+                }
+            }
 
             $em->flush();
 

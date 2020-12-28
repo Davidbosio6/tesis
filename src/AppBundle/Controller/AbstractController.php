@@ -6,6 +6,7 @@ use AppBundle\Entity\Installment;
 use AppBundle\Entity\Settings;
 use AppBundle\Entity\Student;
 use AppBundle\Repository\SettingsRepository;
+use AppBundle\Service\SendgridSdk;
 use DateTime;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
@@ -67,6 +68,15 @@ class AbstractController extends Controller
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->get('knp_paginator');
+    }
+
+    /**
+     * @return SendgridSdk
+     */
+    protected function getSendgridSdkService(): SendgridSdk
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return $this->get('app.service.sendgrid_sdk');
     }
 
     /**
@@ -144,11 +154,7 @@ class AbstractController extends Controller
                 $installment->setCheckoutUrl($jsonResponse->checkout_url);
                 $installment->setPdfUrl($jsonResponse->pdf_url);
                 $student->setInstallmentsGenerated(true);
-            } catch (Exception $e) {
-                $this->getEntityManager()->remove($installment);
-
-                throw new Exception('Ocurrió un error mientras se generaban las cuotas!');
-            } catch (Throwable $e) {
+            } catch (Exception | Throwable $e) {
                 $this->getEntityManager()->remove($installment);
 
                 throw new Exception('Ocurrió un error mientras se generaban las cuotas!');
@@ -189,9 +195,7 @@ class AbstractController extends Controller
                     $installmentsPaid++;
                 }
 
-            } catch (Exception $e) {
-                //TODO save exception
-            } catch (Throwable $e) {
+            } catch (Exception | Throwable $e) {
                 //TODO save exception
             }
         }
