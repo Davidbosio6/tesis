@@ -34,6 +34,13 @@ framework:
     php_errors:
         log: true
 
+jms_di_extra:
+    doctrine_integration: false
+    locations:
+        all_bundles: false
+        bundles: [AppBundle]
+        directories: ["%kernel.root_dir%/../src"]
+
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'

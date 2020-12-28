@@ -251,6 +251,14 @@ class Advisor
     }
 
     /**
+     * @return string
+     */
+    public function getFullName(): ?string
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+
+    /**
      * @param City $city
      *
      * @return self
