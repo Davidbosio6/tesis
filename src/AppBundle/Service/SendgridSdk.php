@@ -20,15 +20,13 @@ class SendgridSdk
      *
      * @DI\InjectParams({
      *     "apiKey" = @DI\Inject("%sendgrid_api_key%")
-     *
-     *     })
+     * })
      */
     public function __constructor(
         string $apiKey
     ) {
         $this->apikey = $apiKey;
     }
-
 
     public function sendWelcomeEmail(
         Student $student,
@@ -90,5 +88,4 @@ class SendgridSdk
             ['body' => json_encode($body)]
         );
     }
-
 }
