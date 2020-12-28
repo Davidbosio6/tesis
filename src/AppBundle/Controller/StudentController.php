@@ -58,7 +58,7 @@ class StudentController extends AbstractController
             $student->setInstallmentsGenerated(false);
             if (!empty($student->getGenerateInstallments())) {
                 try {
-                    $this->generateInstallments($student);
+                    $this->getPagos360SdkService()->generateInstallments($student);
                 } catch (Exception $e) {
                     $this->addFlash('warning', 'Ocurrió un error mientras se generaban las cuotas!');
                 }

@@ -30,7 +30,7 @@ class InstallmentController extends AbstractController
         Student $student
     ): Response {
         try {
-            $this->generateInstallments($student);
+            $this->getPagos360SdkService()->generateInstallments($student);
         } catch (Exception $e) {
             $this->addFlash('error', $e->getMessage());
 
@@ -69,7 +69,7 @@ class InstallmentController extends AbstractController
             $students = $studentRepository->findAllByInstallmentsGenerated(false);
 
             foreach ($students as $student) {
-                $this->generateInstallments($student);
+                $this->getPagos360SdkService()->generateInstallments($student);
             }
 
             $this->getEntityManager()->flush();
@@ -96,7 +96,7 @@ class InstallmentController extends AbstractController
             'state' => 'Pendiente'
         ]);
 
-        $response = $this->syncUpInstallments($installments);
+        $response = $this->getPagos360SdkService()->syncUpInstallments($installments);
         $this->addFlash('success', 'Se han sincronizado ' . $response . ' pagos');
 
         return $this->redirectToRoute('installment_list');

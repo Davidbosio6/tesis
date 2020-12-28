@@ -2,28 +2,23 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Installment;
 use AppBundle\Entity\Settings;
-use AppBundle\Entity\Student;
 use AppBundle\Repository\SettingsRepository;
+use AppBundle\Service\Pagos360Sdk;
 use AppBundle\Service\SendgridSdk;
-use DateTime;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
-use Exception;
-use GuzzleHttp\Client as HttpClient;
 use Knp\Component\Pager\Paginator as KnpPaginator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Throwable;
 
 /**
  * Class AbstractController.
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class AbstractController extends Controller
+abstract class AbstractController extends Controller
 {
     /**
      * @return ObjectManager
@@ -80,6 +75,15 @@ class AbstractController extends Controller
     }
 
     /**
+     * @return Pagos360Sdk
+     */
+    protected function getPagos360SdkService(): Pagos360Sdk
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return $this->get('app.service.pagos360_sdk');
+    }
+
+    /**
      * @return string
      */
     public function getSiteName(): string
@@ -89,117 +93,5 @@ class AbstractController extends Controller
         $siteName = $repository->findOneByCode(SettingsRepository::SITE_NAME_CODE);
 
         return $siteName->getValue();
-    }
-
-    /**
-     * @param Student $student
-     */
-    public function generateInstallments(
-        Student $student
-    ): void {
-        $monthNumber = (new DateTime())->format('m');
-        $installmentQuantity = 12 - $monthNumber;
-
-        $monthTranslate = [
-            1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
-            5 => 'Mayo', 6 => 'Junio', 7 => 'Julio', 8 => 'Agosto',
-            9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre'
-        ];
-
-        for ($i = 1; $i <= $installmentQuantity; $i++) {
-            $date = date_create(sprintf(
-                '%s-%s-%s',
-                (new DateTime())->format('Y'),
-                (new DateTime())->modify('+' . $i . 'month')->format('m'),
-                15,
-            ));
-
-            $installment = new Installment();
-            $installment->setAmount($student->getPlan()->getAmount())
-                ->setState(Installment::PENDING_STATE)
-                ->setDescription('Cuota ' . $monthTranslate[intval((new DateTime())->modify('+' . $i . 'month')->format('m'))])
-                ->setDueDate($date)
-                ->setStudent($student);
-
-            $this->getEntityManager()->persist($installment);
-
-            $body = [
-                'payment_request' => [
-                    'description' => $installment->getDescription(),
-                    'first_due_date' => $installment->getDueDate()->format('d-m-Y'),
-                    'first_total' => floatval($installment->getAmount()),
-                    'payer_name' => $student->getFullName()
-                ]
-            ];
-
-            try {
-                $client = new HttpClient([
-                    'base_uri' => 'https://sandboxapi.pagos360.com/',
-                    'exceptions' => true,
-                    'headers' => [
-                        'Content-Type' => 'application/json',
-                        'Authorization' => 'Bearer ' . $this->getParameter('pagos360_api_key')
-                    ]
-                ]);
-
-                $response = $client->request(
-                    'POST',
-                    'payment-request',
-                    ['body' => json_encode($body)]
-                );
-
-                $jsonResponse = json_decode((string)$response->getBody());
-
-                $installment->setTransactionId($jsonResponse->id);
-                $installment->setCheckoutUrl($jsonResponse->checkout_url);
-                $installment->setPdfUrl($jsonResponse->pdf_url);
-                $student->setInstallmentsGenerated(true);
-            } catch (Exception | Throwable $e) {
-                $this->getEntityManager()->remove($installment);
-
-                throw new Exception('Ocurrió un error mientras se generaban las cuotas!');
-            }
-        }
-    }
-
-    /**
-     * @param Installment[] $installments
-     * @return int
-     *
-     * @throws Exception
-     */
-    public function syncUpInstallments(
-        array $installments
-    ): int {
-        $installmentsPaid = 0;
-        foreach ($installments as $installment){
-            try {
-                $client = new HttpClient([
-                    'base_uri' => 'https://sandboxapi.pagos360.com/',
-                    'exceptions' => true,
-                    'headers' => [
-                        'Content-Type' => 'application/json',
-                        'Authorization' => 'Bearer ' . $this->getParameter('pagos360_api_key')
-                    ]
-                ]);
-
-                $response = $client->request(
-                    'GET',
-                    'payment-request/' . $installment->getTransactionId()
-                );
-
-                $jsonResponse = json_decode((string)$response->getBody());
-
-                if ($jsonResponse->state === 'paid') {
-                    $installment->setState(Installment::PAID_STATE);
-                    $installmentsPaid++;
-                }
-
-            } catch (Exception | Throwable $e) {
-                //TODO save exception
-            }
-        }
-
-       return $installmentsPaid;
     }
 }
