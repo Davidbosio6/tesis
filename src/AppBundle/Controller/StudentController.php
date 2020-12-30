@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Student;
+use AppBundle\Form\StudentPreSignUpType;
 use AppBundle\Form\StudentType;
 use AppBundle\Repository\StudentRepository;
 use Exception;
@@ -20,6 +21,47 @@ use Throwable;
  */
 class StudentController extends AbstractController
 {
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Route("/pre-sign-up", name="student_pre_sign_up")
+     */
+    public function preSignUp(
+        Request $request
+    ): Response {
+        $student = new Student();
+        $form = $this->createForm(
+            StudentPreSignUpType::class,
+            $student
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getEntityManager();
+            $em->persist($student);
+            $em->flush();
+
+            $hashedId = strtoupper(hash('crc32', $student->getId()));
+            $student->setCodeId($hashedId);
+
+            $em->flush();
+
+            $this->addFlash('success', 'Operación realizada con éxito!');
+
+            return $this->redirectToRoute('dashboard');
+        }
+
+        return $this->render(
+            'AppBundle:Student:pre-sign-up.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
     /**
      * @param Request $request
      *
@@ -55,7 +97,6 @@ class StudentController extends AbstractController
                 $student->setPhoto($fileName);
             }
 
-            $student->setInstallmentsGenerated(false);
             if (!empty($student->getGenerateInstallments())) {
                 try {
                     $this->getPagos360SdkService()->generateInstallments($student);

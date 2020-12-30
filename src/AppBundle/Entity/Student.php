@@ -96,15 +96,13 @@ class Student
     /**
      * @ORM\Column(type="boolean")
      */
-    private $installmentsGenerated;
+    private $installmentsGenerated = false;
 
     /**
      * @var City
      *
      * @ORM\ManyToOne(targetEntity="City", inversedBy="students")
-     * @ORM\JoinColumn(name="city_id", referencedColumnName="id", nullable=false)
-     *
-     * @Assert\NotNull()
+     * @ORM\JoinColumn(name="city_id", referencedColumnName="id", nullable=true)
      */
     private $city;
 
@@ -112,9 +110,7 @@ class Student
      * @var Classroom
      *
      * @ORM\ManyToOne(targetEntity="Classroom", inversedBy="students")
-     * @ORM\JoinColumn(name="classroom_id", referencedColumnName="id", nullable=false)
-     *
-     * @Assert\NotNull()
+     * @ORM\JoinColumn(name="classroom_id", referencedColumnName="id")
      */
     private $classroom;
 
@@ -123,8 +119,6 @@ class Student
      *
      * @ORM\OneToMany(targetEntity="Advisor", mappedBy="student", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="advisor_id", referencedColumnName="id", nullable=true)
-     *
-     * @Assert\Count(min=1)
      */
     private $advisors;
 
@@ -147,7 +141,7 @@ class Student
     private $medicalHistory;
 
     /**
-     * @var Advisor
+     * @var Installment[]
      *
      * @ORM\OneToMany(targetEntity="Installment", mappedBy="student")
      */
@@ -394,12 +388,12 @@ class Student
     }
 
     /**
-     * @param Classroom $classroom
+     * @param Classroom|null $classroom
      *
      * @return self
      */
     public function setClassroom(
-        Classroom $classroom
+        Classroom $classroom = null
     ): self {
         $this->classroom = $classroom;
 
@@ -407,7 +401,7 @@ class Student
     }
 
     /**
-     * @return Classroom
+     * @return Classroom|null
      */
     public function getClassroom(): ?Classroom
     {
