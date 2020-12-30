@@ -32,8 +32,7 @@ class Pagos360Sdk
     public function __constructor(
         string $apiKey,
         EntityManager $em
-    )
-    {
+    ) {
         $this->apikey = $apiKey;
         $this->em = $em;
     }

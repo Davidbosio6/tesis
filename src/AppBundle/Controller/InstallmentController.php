@@ -30,7 +30,7 @@ class InstallmentController extends AbstractController
         Student $student
     ): Response {
         try {
-            $this->getPagos360SdkService()->generateInstallments($student);
+           $this->getPagos360SdkService()->generateInstallments($student);
         } catch (Exception $e) {
             $this->addFlash('error', $e->getMessage());
 
