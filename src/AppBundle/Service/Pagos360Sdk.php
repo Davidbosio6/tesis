@@ -43,7 +43,7 @@ class Pagos360Sdk
     public function generateInstallments(
         Student $student
     ): void {
-        $monthNumber = (new DateTime('+1 month'))->format('m');
+        $monthNumber = (new DateTime())->format('m');
         $installmentQuantity = 12 - $monthNumber;
 
         $monthTranslate = [
