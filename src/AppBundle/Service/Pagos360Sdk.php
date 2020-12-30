@@ -32,8 +32,7 @@ class Pagos360Sdk
     public function __constructor(
         string $apiKey,
         EntityManager $em
-    )
-    {
+    ) {
         $this->apikey = $apiKey;
         $this->em = $em;
     }
@@ -44,7 +43,7 @@ class Pagos360Sdk
     public function generateInstallments(
         Student $student
     ): void {
-        $monthNumber = (new DateTime())->format('m');
+        $monthNumber = (new DateTime('+1 month'))->format('m');
         $installmentQuantity = 12 - $monthNumber;
 
         $monthTranslate = [
