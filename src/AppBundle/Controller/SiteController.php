@@ -31,7 +31,7 @@ class SiteController extends AbstractController
      */
     public function indexAction(): Response
     {
-        return $this->render('AppBundle:Layout:index.html.twig', [
+        return $this->render('AppBundle:Site:index.html.twig', [
             'siteName' => $this->getSiteName()
         ]);
     }
@@ -46,7 +46,7 @@ class SiteController extends AbstractController
         /** @var AboutRepository $repository */
         $repository = $this->getRepository(About::class);
 
-        return $this->render('AppBundle:Layout:about.html.twig', [
+        return $this->render('AppBundle:Site:about.html.twig', [
             'siteName' => $this->getSiteName(),
             'sections' => $repository->findAllByShowAbout(true)
         ]);
@@ -67,7 +67,7 @@ class SiteController extends AbstractController
         $scheduleDays = $repository->findOneByCode(SettingsRepository::CONTACT_SCHEDULE_DAYS_CODE);
         $scheduleHours = $repository->findOneByCode(SettingsRepository::CONTACT_SCHEDULE_HOURS_CODE);
 
-        return $this->render('AppBundle:Layout:contact.html.twig', [
+        return $this->render('AppBundle:Site:contact.html.twig', [
             'siteName' => $this->getSiteName(),
             'location' => $location->getValue(),
             'phone' => $phone->getValue(),
@@ -88,7 +88,7 @@ class SiteController extends AbstractController
 
         $lastUsername = $this->getAuthenticationUtilsService()->getLastUsername();
 
-        return $this->render('AppBundle:Layout:login.html.twig', [
+        return $this->render('AppBundle:Site:login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
             'siteName' => $this->getSiteName()
@@ -106,7 +106,7 @@ class SiteController extends AbstractController
         /** @var PlanRepository $repository */
         $repository = $this->getRepository(Plan::class);
 
-        return $this->render('AppBundle:Layout:plans.html.twig', [
+        return $this->render('AppBundle:Site:plans.html.twig', [
             'siteName' => $this->getSiteName(),
             'plans' => $repository->findAllByShowPlan(true)
         ]);
@@ -137,7 +137,7 @@ class SiteController extends AbstractController
         }
 
 
-        return $this->render('AppBundle:Layout:dashboard.html.twig', [
+        return $this->render('AppBundle:Site:dashboard.html.twig', [
             'sexes' => sprintf("%s, %s, %s", count($male), count($female), count($undefined)),
             'shiftNames' => json_encode($shiftNames),
             'classrooms' => json_encode($classrooms),
