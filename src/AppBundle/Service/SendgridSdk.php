@@ -82,7 +82,7 @@ class SendgridSdk
             ]
         ]);
 
-        $res = $client->request(
+        $client->request(
             'POST',
             'send',
             ['body' => json_encode($body)]

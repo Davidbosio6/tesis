@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use JMS\DiExtraBundle\Annotation as DI;
 
 /**
- * Class StudentPreSignUpType.
+ * Class SelectUserForSignUpType.
  *
  * @DI\Service("app.form.select_user_for_sign_up_type")
  * @DI\Tag("form.type")
@@ -47,8 +47,7 @@ class SelectUserForSignUpType extends AbstractType
                     'placeholder' => '--- Seleccionar Alumno ---',
                     'choices' => $this->getChoices()
                 ]
-            )
-        ;
+            );
     }
 
     private function getChoices(): array

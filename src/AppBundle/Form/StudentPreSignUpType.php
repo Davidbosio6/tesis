@@ -50,8 +50,7 @@ class StudentPreSignUpType extends AbstractType
                     'No define' => 'No define'
 
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

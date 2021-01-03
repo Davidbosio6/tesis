@@ -93,16 +93,16 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @param Student $student
      * @param Request $request
+     * @param Student $student
      *
      * @return Response
      *
      * @Route("/sign-up/{id}", name="student_sign_up")
      */
     public function signUpAction(
-        Student $student,
-        Request $request
+        Request $request,
+        Student $student
     ): Response {
         $form = $this->createForm(
             SignUpType::class,
@@ -151,7 +151,7 @@ class StudentController extends AbstractController
 
             $em->flush();
 
-            $this->addFlash('success', 'El alumno se creó con éxito!');
+            $this->addFlash('success', 'El alumno se inscribió con éxito!');
 
             return $this->redirectToRoute('student_list');
         }
