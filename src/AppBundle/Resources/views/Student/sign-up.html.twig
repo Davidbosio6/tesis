@@ -1,0 +1,233 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{%
+    form_theme form
+    'jquery.collection.html.twig'
+    'AppBundle:Student:create_collection_theme.html.twig'
+%}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Inscripción</h3>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            {{ student.fullName }}
+        </div>
+        <div class="card-body" style="background-color: #EBEBE4; color: #495057">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de nacimiento</dt>
+                        <dd>{{ student.birthDate | date('d/m/Y') }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Código alumno</dt>
+                        <dd>{{ student.codeId }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Notas</dt>
+                        <dd>{{ student.notes ? student.notes : '-' }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Documento de identidad</dt>
+                        <dd>{{ student.idNumber }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Sexo</dt>
+                        <dd>{{ student.sex }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Localidad</dt>
+                        <dd>
+                            {{ student.city.name }}
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>Domicilio</dt>
+                        <dd>{{ student.address }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Datos del alumno
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Plan</dt>
+                        <dd>{{ form_widget(form.plan) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Foto de perfil</dt>
+                        <dd>{{ form_widget(form.photo) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Sala</dt>
+                        <dd>{{ form_widget(form.classroom) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Generar cuotas</dt>
+                        <dd>{{ form_widget(form.generateInstallments) }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Ficha médica
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Peso</dt>
+                        <dd>{{ form_widget(form.medicalHistory.weight) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Alérgico a</dt>
+                        <dd>{{ form_widget(form.medicalHistory.allergy) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Altura</dt>
+                        <dd>{{ form_widget(form.medicalHistory.height) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Enfermedades crónicas</dt>
+                        <dd>{{ form_widget(form.medicalHistory.chronicIllness) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Grupo sanguíneo</dt>
+                        <dd>{{ form_widget(form.medicalHistory.bloodType) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Medicamentos</dt>
+                        <dd>{{ form_widget(form.medicalHistory.medicine) }}</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Asma</dt>
+                        <dd>{{ form_widget(form.medicalHistory.asma) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Diabetes</dt>
+                        <dd>{{ form_widget(form.medicalHistory.diabetes) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Sinusitis</dt>
+                        <dd>{{ form_widget(form.medicalHistory.sinusitis) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Celiaco</dt>
+                        <dd>{{ form_widget(form.medicalHistory.celiaco) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Bronquitis</dt>
+                        <dd>{{ form_widget(form.medicalHistory.bronquitis) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Otitis</dt>
+                        <dd>{{ form_widget(form.medicalHistory.otitis) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Tos convulsiva</dt>
+                        <dd>{{ form_widget(form.medicalHistory.tosConvulsiva) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Migraña</dt>
+                        <dd>{{ form_widget(form.medicalHistory.migrania) }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Tutores
+        </div>
+        <div class="card-body">
+            <div class="col-md-12">
+                <dl>
+                    <dd>{{ form_widget(form.advisors) }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" name="submit" class="btn btn-dark pull-right">
+                Guardar
+            </button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+    <script type="text/javascript">
+        $('.advisors').collection({
+            min: 1,
+            prefix: 'advisor',
+            preserve_names: true,
+            allow_duplicate: true,
+            add: `
+                <a href="#" class="advisor btn btn-default" title="Agregar Tutor">
+                    <i class="fa fa-plus-circle"></i>
+                </a>
+            `
+        });
+    </script>
+{% endblock javascripts %}

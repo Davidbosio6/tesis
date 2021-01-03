@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Student;
+use AppBundle\Form\SelectUserForSignUpType;
+use AppBundle\Form\SignUpType;
 use AppBundle\Form\StudentPreSignUpType;
 use AppBundle\Form\StudentType;
 use AppBundle\Repository\StudentRepository;
@@ -28,7 +30,7 @@ class StudentController extends AbstractController
      *
      * @Route("/pre-sign-up", name="student_pre_sign_up")
      */
-    public function preSignUp(
+    public function preSignUpAction(
         Request $request
     ): Response {
         $student = new Student();
@@ -57,6 +59,107 @@ class StudentController extends AbstractController
         return $this->render(
             'AppBundle:Student:pre-sign-up.html.twig',
             [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Route("/select-user-for-sign-up", name="student_select_user_for_sign_up")
+     */
+    public function selectUserForSignUpAction(
+        Request $request
+    ): Response {
+        $form = $this->createForm(SelectUserForSignUpType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute(
+                'student_sign_up',
+                ['id' => $form->get('student')->getData()]
+            );
+        }
+
+        return $this->render(
+            'AppBundle:Student:select-user-for-sign-up.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @param Student $student
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Route("/sign-up/{id}", name="student_sign_up")
+     */
+    public function signUpAction(
+        Student $student,
+        Request $request
+    ): Response {
+        $form = $this->createForm(
+            SignUpType::class,
+            $student,
+            [
+                'mode' => 'create'
+            ]
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getEntityManager();
+
+            if (!empty($form['photo']->getData())) {
+                $fileName = sprintf('student_%s.png', $student->getId());
+
+                $form['photo']->getData()->move(
+                    $this->getParameter('kernel.project_dir') . '/web/public/students',
+                    $fileName
+                );
+
+                $student->setPhoto($fileName);
+            }
+
+            if (!empty($student->getGenerateInstallments())) {
+                try {
+                    $this->getPagos360SdkService()->generateInstallments($student);
+                } catch (Exception $e) {
+                    $this->addFlash('warning', 'Ocurrió un error mientras se generaban las cuotas!');
+                }
+            }
+
+            if (!empty($student->getAdvisors())) {
+                foreach ($student->getAdvisors() as $advisor) {
+                    try {
+                        $this->getSendgridSdkService()->sendWelcomeEmail(
+                            $student,
+                            $advisor
+                        );
+                    } catch (Exception | Throwable $e) {
+                        //@TODO save exception
+                    }
+                }
+            }
+
+            $em->flush();
+
+            $this->addFlash('success', 'El alumno se creó con éxito!');
+
+            return $this->redirectToRoute('student_list');
+        }
+
+        return $this->render(
+            'AppBundle:Student:sign-up.html.twig',
+            [
+                'student' => $student,
                 'form' => $form->createView(),
             ]
         );

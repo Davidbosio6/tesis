@@ -3,7 +3,6 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\City;
-use AppBundle\Entity\Plan;
 use AppBundle\Entity\Student;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -41,10 +40,6 @@ class StudentPreSignUpType extends AbstractType
                 'group_by' => function (City $city) {
                     return $city->getProvince()->getName();
                 }
-            ])
-            ->add('plan', EntityType::class, [
-                'class' => Plan::class,
-                'choice_label' => 'name'
             ])
             ->add('address', TextType::class)
             ->add('notes', TextareaType::class, ['required' => false])

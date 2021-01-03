@@ -126,9 +126,7 @@ class Student
      * @var Plan
      *
      * @ORM\ManyToOne(targetEntity="Plan", inversedBy="students")
-     * @ORM\JoinColumn(name="plan_id", referencedColumnName="id", nullable=false)
-     *
-     * @Assert\NotNull()
+     * @ORM\JoinColumn(name="plan_id", referencedColumnName="id", nullable=true)
      */
     private $plan;
 

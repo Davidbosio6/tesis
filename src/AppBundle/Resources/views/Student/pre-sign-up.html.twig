@@ -23,12 +23,12 @@
                         <dd>{{ form_widget(form.firstName) }}</dd>
                     </dl>
                     <dl>
-                        <dt>Fecha de nacimiento</dt>
-                        <dd>{{ form_widget(form.birthDate) }}</dd>
+                        <dt>Documento de identidad</dt>
+                        <dd>{{ form_widget(form.idNumber) }}</dd>
                     </dl>
                     <dl>
-                        <dt>Plan</dt>
-                        <dd>{{ form_widget(form.plan) }}</dd>
+                        <dt>Fecha de nacimiento</dt>
+                        <dd>{{ form_widget(form.birthDate) }}</dd>
                     </dl>
                 </div>
 
@@ -38,12 +38,12 @@
                         <dd>{{ form_widget(form.lastName) }}</dd>
                     </dl>
                     <dl>
-                        <dt>Localidad</dt>
-                        <dd>{{ form_widget(form.city) }}</dd>
-                    </dl>
-                    <dl>
                         <dt>Domicilio</dt>
                         <dd>{{ form_widget(form.address) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Notas</dt>
+                        <dd>{{ form_widget(form.notes) }}</dd>
                     </dl>
                 </div>
 
@@ -53,13 +53,8 @@
                         <dd>{{ form_widget(form.sex) }}</dd>
                     </dl>
                     <dl>
-                        <dt>Documento de identidad</dt>
-                        <dd>{{ form_widget(form.idNumber) }}</dd>
-                    </dl>
-
-                    <dl>
-                        <dt>Notas</dt>
-                        <dd>{{ form_widget(form.notes) }}</dd>
+                        <dt>Localidad</dt>
+                        <dd>{{ form_widget(form.city) }}</dd>
                     </dl>
                 </div>
             </div>
@@ -78,21 +73,3 @@
 
     {{ form_end(form) }}
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/jquery.collection.js') }}"></script>
-    <script type="text/javascript">
-        $('.advisors').collection({
-            min: 1,
-            prefix: 'advisor',
-            preserve_names: true,
-            allow_duplicate: true,
-            add: `
-                <a href="#" class="advisor btn btn-default" title="Agregar Tutor">
-                    <i class="fa fa-plus-circle"></i>
-                </a>
-            `
-        });
-    </script>
-{% endblock javascripts %}
