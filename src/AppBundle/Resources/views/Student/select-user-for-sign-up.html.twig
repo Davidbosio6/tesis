@@ -1,0 +1,55 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Inscripción</h3>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="card mb-4">
+                <div class="card-header text-white bg-dark">
+                    Seleccionar alumno pre-inscripto
+                </div>
+
+                <div class="card-body" style="height: 120px">
+                    <dl>
+                        <dd>{{ form_widget(form.student) }}</dd>
+                    </dl>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button type="submit" name="submit" class="btn btn-dark pull-right">
+                                Siguiente
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4">
+            <div class="card mb-4">
+                <div class="card-header text-white bg-dark">
+                    Inscribir nuevo alumno
+                </div>
+
+                <div class="card-body" style="height: 120px">
+                    <a class="btn btn-dark pull-right" href="{{ path('student_create') }}" style="margin-top: 20px; margin-left: 170px">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Alumno
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    {{ form_end(form) }}
+{% endblock %}

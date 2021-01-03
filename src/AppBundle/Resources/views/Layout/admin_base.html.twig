@@ -41,17 +41,20 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Inicio
                         </a>
+
+                        <a class="nav-link" href={{ path('student_pre_sign_up') }}>
+                            <div class="sb-nav-link-icon"><i class="fas fa-align-justify"></i></div>
+                            Pre-Inscripción
+                        </a>
+
+                        <a class="nav-link" href={{ path('student_select_user_for_sign_up') }}>
+                            <div class="sb-nav-link-icon"><i class="fas fa-align-justify"></i></div>
+                            Inscripción
+                        </a>
+
                         <a class="nav-link" href={{ path('year_list') }}>
                             <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
                             Ciclos lectivos
-                        </a>
-                        <a class="nav-link" href={{ path('teacher_list') }}>
-                            <div class="sb-nav-link-icon"><i class="fas fa-id-card"></i></div>
-                            Profesores
-                        </a>
-                        <a class="nav-link" href={{ path('student_list') }}>
-                            <div class="sb-nav-link-icon"><i class="fas fa-id-badge"></i></div>
-                            Alumnos
                         </a>
 
                         <a class="nav-link" href={{ path('installment_list') }}>
@@ -60,6 +63,16 @@
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Configuraciones</div>
+
+                        <a class="nav-link" href={{ path('teacher_list') }}>
+                            <div class="sb-nav-link-icon"><i class="fas fa-id-card"></i></div>
+                            Profesores
+                        </a>
+
+                        <a class="nav-link" href={{ path('student_list') }}>
+                            <div class="sb-nav-link-icon"><i class="fas fa-id-badge"></i></div>
+                            Alumnos
+                        </a>
 
                         <a class="nav-link" href={{ path('shift_list') }}>
                             <div class="sb-nav-link-icon"><i class="fas fa-id-badge"></i></div>

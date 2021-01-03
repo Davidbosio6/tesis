@@ -1,0 +1,75 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Pre-Inscripción</h3>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Datos del alumno
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Nombre</dt>
+                        <dd>{{ form_widget(form.firstName) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Documento de identidad</dt>
+                        <dd>{{ form_widget(form.idNumber) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Fecha de nacimiento</dt>
+                        <dd>{{ form_widget(form.birthDate) }}</dd>
+                    </dl>
+                </div>
+
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Apellido</dt>
+                        <dd>{{ form_widget(form.lastName) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Domicilio</dt>
+                        <dd>{{ form_widget(form.address) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Notas</dt>
+                        <dd>{{ form_widget(form.notes) }}</dd>
+                    </dl>
+                </div>
+
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Sexo</dt>
+                        <dd>{{ form_widget(form.sex) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Localidad</dt>
+                        <dd>{{ form_widget(form.city) }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" name="submit" class="btn btn-dark pull-right">
+                Guardar
+            </button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}
