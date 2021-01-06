@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Advisor;
 use AppBundle\Entity\Student;
+use AppBundle\Form\SelectEmailType;
 use AppBundle\Form\SelectUserForSignUpType;
 use AppBundle\Form\SignUpType;
 use AppBundle\Form\StudentPreSignUpType;
@@ -137,11 +139,13 @@ class StudentController extends AbstractController
             }
 
             if (!empty($student->getAdvisors())) {
+                /** @var Advisor $advisor */
                 foreach ($student->getAdvisors() as $advisor) {
                     try {
                         $this->getSendgridSdkService()->sendWelcomeEmail(
                             $student,
-                            $advisor
+                            $advisor->getEmail(),
+                            $advisor->getFullName()
                         );
                     } catch (Exception | Throwable $e) {
                         //@TODO save exception
@@ -215,11 +219,13 @@ class StudentController extends AbstractController
             $student->setCodeId($hashedId);
 
             if (!empty($student->getAdvisors())) {
+                /** @var Advisor $advisor */
                 foreach ($student->getAdvisors() as $advisor) {
                     try {
                         $this->getSendgridSdkService()->sendWelcomeEmail(
                             $student,
-                            $advisor
+                            $advisor->getEmail(),
+                            $advisor->getFullName()
                         );
                     } catch (Exception | Throwable $e) {
                         //@TODO save exception
@@ -301,11 +307,11 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="student_delete")
-     *
      * @param Student $student
      *
      * @return Response
+     *
+     * @Route("/delete/{id}", name="student_delete")
      */
     public function deleteAction(
         Student $student
@@ -320,12 +326,12 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="student_edit")
-     *
      * @param Student $student
      * @param Request $request
      *
      * @return Response
+     *
+     * @Route("/edit/{id}", name="student_edit")
      */
     public function editAction(
         Student $student,
@@ -367,6 +373,43 @@ class StudentController extends AbstractController
 
         return $this->render(
             'AppBundle:Student:edit.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @param Request $request
+     * @param Student $student
+     *
+     * @return Response
+     *
+     * @Route("/forward-welcome-email/{id}", name="student_forward_welcome_email")
+     */
+    public function forwardWelcomeEmailAction(
+        Request $request,
+        Student $student
+    ): Response {
+        $form = $this->createForm(SelectEmailType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getSendgridSdkService()->sendWelcomeEmail(
+                $student,
+                $form->get('email')->getData()
+            );
+
+            $this->addFlash('success', 'Correo enviado con éxito!');
+
+            return $this->redirectToRoute(
+                'student_detail',
+                ['id' => $student->getId()]
+            );
+        }
+
+        return $this->render(
+            'AppBundle:Student:select-email.html.twig',
             [
                 'form' => $form->createView(),
             ]
