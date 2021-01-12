@@ -2,7 +2,6 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Entity\Advisor;
 use AppBundle\Entity\Student;
 use Exception;
 use JMS\DiExtraBundle\Annotation as DI;
@@ -28,12 +27,18 @@ class SendgridSdk
         $this->apikey = $apiKey;
     }
 
+    /**
+     * @param Student $student
+     * @param string $email
+     * @param string|null $advisorName
+     */
     public function sendWelcomeEmail(
         Student $student,
-        Advisor $advisor
+        string $email,
+        string $advisorName = null
     ) {
         $dynamicTemplateData = [
-            'advisor_name' => $advisor->getFullName(),
+            'advisor_name' => $advisorName,
             'student_name' => $student->getFullName(),
             'id_number' => $student->getIdNumber(),
             'plan_name' => $student->getPlan()->getName(),
@@ -43,7 +48,7 @@ class SendgridSdk
         $this->send(
             'd-e6121572180d4f0ba404514f9450dbdf',
             $dynamicTemplateData,
-            $advisor->getEmail()
+            $email
         );
     }
 

@@ -1,0 +1,44 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{%
+    form_theme form
+    'jquery.collection.html.twig'
+    'AppBundle:Student:create_collection_theme.html.twig'
+%}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Reenviar Correo de bienvenida </h3>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Correo electrónico
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <dd>{{ form_widget(form.email) }}</dd>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" name="submit" class="btn btn-dark pull-right">
+                Enviar
+            </button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}
