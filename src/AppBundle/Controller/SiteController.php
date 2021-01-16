@@ -136,7 +136,6 @@ class SiteController extends AbstractController
             $classrooms[] = $shift->getClassrooms()->count();
         }
 
-
         return $this->render('AppBundle:Site:dashboard.html.twig', [
             'sexes' => sprintf("%s, %s, %s", count($male), count($female), count($undefined)),
             'shiftNames' => json_encode($shiftNames),
@@ -165,8 +164,6 @@ class SiteController extends AbstractController
             $student = $this->getRepository(Student::class)->findOneBy([
                 'codeId' => $form->get('codeId')->getData()
             ]);
-
-
 
             if (empty($student)) {
                 $this->addFlash('error', 'El ID ingresado es incorrecto');
