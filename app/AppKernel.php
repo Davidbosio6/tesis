@@ -1,5 +1,6 @@
 <?php
 
+use Gregwar\CaptchaBundle\GregwarCaptchaBundle;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
@@ -18,6 +19,7 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new GregwarCaptchaBundle(),
             new AppBundle\AppBundle(),
         ];
 

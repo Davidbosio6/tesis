@@ -87,3 +87,7 @@ knp_paginator:
     template:
         pagination: 'KnpPaginatorBundle:Pagination:twitter_bootstrap_v4_pagination.html.twig'
         sortable: 'KnpPaginatorBundle:Pagination:sortable_link.html.twig'
+
+gregwar_captcha:
+    width: 150
+    height: 75

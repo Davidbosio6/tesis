@@ -52,3 +52,7 @@ body {
 button:hover{
   background-color: #7DB569;
 }
+
+#code_id_captcha{
+  margin-top:20px;
+}
