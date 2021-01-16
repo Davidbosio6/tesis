@@ -30,8 +30,20 @@
                     </div>
                 {% endfor %}
 
+                {% if form_errors(form.captcha) is not empty  %}
+                    <div class="alert alert-danger alert-dismissible mgt-35 mgb-0" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        El CAPTCHA ingresado no es valido.
+                    </div>
+                {% endif %}
+
                 {{ form_start(form) }}
                 {{ form_widget(form.codeId) }}
+                <br>
+
+                {{ form_widget(form.captcha) }}
 
                 <br>
 
@@ -54,3 +66,14 @@
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $( "#code_id_captcha" ).attr("placeholder", "Escriba el texto de la imagen");
+            $( "#code_id_captcha" ).attr('autocomplete', 'off');
+        });
+    </script>
+{% endblock javascripts %}

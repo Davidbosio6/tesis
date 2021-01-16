@@ -166,6 +166,8 @@ class SiteController extends AbstractController
                 'codeId' => $form->get('codeId')->getData()
             ]);
 
+
+
             if (empty($student)) {
                 $this->addFlash('error', 'El ID ingresado es incorrecto');
 
