@@ -17,6 +17,9 @@
                 <i class="fas fa-user-cog"></i>  <i class="fas fa-sort-down"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="{{ path('student_show_medical_history', {id: student.id}) }}" target="_blank">
+                    <i class="	fas fa-file-medical-alt"></i> Ver ficha médica
+                </a>
                 <a class="dropdown-item" href="{{ path('student_forward_welcome_email', {id: student.id}) }}">
                     <i class="fas fa-paper-plane"></i> Reenviar correo de bienvenida
                 </a>
