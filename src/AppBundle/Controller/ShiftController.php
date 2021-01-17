@@ -124,6 +124,17 @@ class ShiftController extends AbstractController
     ): Response {
         $em = $this->getEntityManager();
 
+        foreach ($shift->getClassrooms() as $classroom) {
+            if (!$classroom->getStudents()->isEmpty()) {
+                $this->addFlash('error', 'Este turno no se ha podido eliminar ya que se encuentra asociado a uno o mas alumnos');
+
+                return $this->redirectToRoute(
+                    'shift_detail',
+                    ['id' => $shift->getId()]
+                );
+            }
+        }
+
         $em->remove($shift);
         $em->flush();
 
