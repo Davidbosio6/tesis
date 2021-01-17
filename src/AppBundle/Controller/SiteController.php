@@ -168,7 +168,7 @@ class SiteController extends AbstractController
             if (empty($student)) {
                 $this->addFlash('error', 'El ID ingresado es incorrecto');
 
-                return $this->render('AppBundle:Site:installments_pay_select_user.html.twig', [
+                return $this->render('AppBundle:Site:installments-pay-select-user.html.twig', [
                     'siteName' => $this->getSiteName(),
                     'form' => $form->createView()
                 ]);
@@ -180,7 +180,7 @@ class SiteController extends AbstractController
             );
         }
 
-        return $this->render('AppBundle:Site:installments_pay_select_user.html.twig', [
+        return $this->render('AppBundle:Site:installments-pay-select-user.html.twig', [
             'siteName' => $this->getSiteName(),
             'form' => $form->createView()
         ]);
@@ -196,7 +196,7 @@ class SiteController extends AbstractController
     public function InstallmentsPaySelectInstallmentAction(
         Student $student
     ): Response {
-        return $this->render('AppBundle:Site:installments_pay_select_installment.html.twig', [
+        return $this->render('AppBundle:Site:installments-pay-select-installment.html.twig', [
             'siteName' => $this->getSiteName(),
             'student' => $student,
         ]);

@@ -238,7 +238,7 @@ class TeacherController extends AbstractController
         }
 
         return $this->render(
-            'AppBundle:Teacher:reset_password.html.twig',
+            'AppBundle:Teacher:reset-password.html.twig',
             [
                 'form' => $form->createView(),
             ]

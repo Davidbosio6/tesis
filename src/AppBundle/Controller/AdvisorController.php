@@ -78,7 +78,7 @@ class AdvisorController extends AbstractController
         }
 
         return $this->render(
-            'AppBundle:Advisor:change_photo.html.twig',
+            'AppBundle:Advisor:change-photo.html.twig',
             [
                 'form' => $form->createView(),
             ]
