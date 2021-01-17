@@ -415,4 +415,22 @@ class StudentController extends AbstractController
             ]
         );
     }
+
+    /**
+     * @param Student $student
+     *
+     * @return Response
+     *
+     * @Route("/medical-history/{id}", name="student_show_medical_history")
+     */
+    public function showMedicalHistoryAction(
+        Student $student
+    ): Response {
+        return $this->render(
+            'AppBundle:Student:medical-history.html.twig',
+            [
+                'student' => $student,
+            ]
+        );
+    }
 }
