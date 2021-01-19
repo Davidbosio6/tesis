@@ -11,52 +11,51 @@
 </head>
 
 <body class="sb-nav-fixed">
-<div class="card" style="width: 70%; text-align: center; margin: auto">
-    <div class="card-header text-white" style="background-color: #649154">
-        AUTORIZACIÓN DE SALIDA
-    </div>
-    <div class="card-body" style="text-align: left">
-        <div class="card">
-            <div class="card-body" style="text-align: left">
-                Estimados Padres y/o Tutores: <br>
-                &nbsp; &nbsp; &nbsp; El dia {{ when | date('d/m/Y') }} los/as
-                alumnos/as realizarán una visita a {{ where }} ubicado/a
-                en {{ address }}. La actividad se realizará dentro del horario
-                de clases. Para realizar dicha actividad es necesario que se
-                envíe al colegio la autorizacion firmada.<br>
-                <br>
-
-                <div style="float: right">Atentamente <i><strong>Semillitas de
-                            amor.</strong></i></div>
-            </div>
+    <div class="card" style="width: 70%; text-align: center; margin: auto">
+        <div class="card-header text-white" style="background-color: #649154">
+            AUTORIZACIÓN DE SALIDA
         </div>
+        <div class="card-body" style="text-align: left">
+            <div class="card">
+                <div class="card-body" style="text-align: left">
+                    Estimados Padres y/o Tutores: <br>
+                    &nbsp; &nbsp; &nbsp; El dia {{ when | date('d/m/Y') }} los/as
+                    alumnos/as realizarán una visita a {{ where }} ubicado/a
+                    en {{ address }}. La actividad se realizará dentro del horario
+                    de clases. Para realizar dicha actividad es necesario que se
+                    envíe al colegio la autorizacion firmada.<br>
+                    <br>
 
-        <br>
+                    <div style="float: right">Atentamente <i><strong>Semillitas de amor.</strong></i></div>
+                </div>
+            </div>
 
-        <div class="card">
-            <div class="card-body" style="text-align: left">
-                Yo .......................................................... autorizo a ..........................................................
-                alumno/a del Centro de Cuidados Infantiles <strong>Semillitas de amor</strong> a realizar una visita a {{ where }} ubicado/a en {{ address }} el dia {{ when | date('d/m/Y') }}, dentro del
-                horario de clases ({{ startHour | date('H:i') }}- {{ endHour | date('H:i') }}).
+            <br>
 
-                <br><br><br><br>
+            <div class="card">
+                <div class="card-body" style="text-align: left">
+                    Yo .......................................................... autorizo a ..........................................................
+                    alumno/a del Centro de Cuidados Infantiles <strong>Semillitas de amor</strong> a realizar una visita a {{ where }} ubicado/a en {{ address }} el dia {{ when | date('d/m/Y') }}, dentro del
+                    horario de clases ({{ startHour | date('H:i') }}- {{ endHour | date('H:i') }}).
 
-                <div align="center">
-                    _________________________&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_________________________ <br>
-                    &nbsp; &nbsp; &nbsp; Firma &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Aclaración
+                    <br><br><br><br>
+
+                    <div align="center">
+                        _________________________&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_________________________ <br>
+                        &nbsp; &nbsp; &nbsp; Firma &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Aclaración
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<br>
+    <br>
 
-<div style="text-align: center;">
-    <button class="custom-button" id="btn-print">
-        <i class="fa fa-print"></i> Imprimir
-    </button>
-</div>
+    <div style="text-align: center;">
+        <button class="custom-button" id="btn-print">
+            <i class="fa fa-print"></i> Imprimir
+        </button>
+    </div>
 </body>
 
 {% block javascripts %}
