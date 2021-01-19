@@ -8,6 +8,7 @@ use AppBundle\Entity\Settings;
 use AppBundle\Entity\Shift;
 use AppBundle\Entity\Student;
 use AppBundle\Form\CodeIdType;
+use AppBundle\Form\WayOutAuthorizationType;
 use AppBundle\Repository\AboutRepository;
 use AppBundle\Repository\PlanRepository;
 use AppBundle\Repository\SettingsRepository;
@@ -199,6 +200,37 @@ class SiteController extends AbstractController
         return $this->render('AppBundle:Site:installments-pay-select-installment.html.twig', [
             'siteName' => $this->getSiteName(),
             'student' => $student,
+        ]);
+    }
+
+    /**
+     * @Route("/new-way-out-authorization", name="site_new_way_out_authorization")
+     *
+     * @param  Request $request
+     *
+     * @return Response
+     */
+    public function newWayOutAuthorization(
+        Request $request
+    ): Response {
+        $form = $this->createForm(
+            WayOutAuthorizationType::class
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->render('AppBundle:Site:way-out-authorization.html.twig', [
+                'when' => $form->get('when')->getData(),
+                'where' => $form->get('where')->getData(),
+                'address' => $form->get('address')->getData(),
+                'startHour' => $form->get('startHour')->getData(),
+                'endHour' => $form->get('endHour')->getData()
+            ]);
+        }
+
+        return $this->render('AppBundle:Site:new-way-out-authorization.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }

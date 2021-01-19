@@ -184,7 +184,7 @@
     <br>
 
     <div style="text-align: center;">
-        <button class="custom-button" onclick="javascript:print();" mat-flat-button>
+        <button class="custom-button" id="btn-print">
             <i class="fa fa-print"></i> Imprimir
         </button>
     </div>
@@ -196,4 +196,16 @@
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
     <script src="{{ asset('assets/js/font-awesome.min.js') }}"></script>
     <script src="{{ asset('assets/js/chart.js') }}"></script>
+
+    <script>
+        $("#btn-print").on("click", function (ev) {
+
+            $("#btn-print").css('display', 'none');
+            print();
+        })
+
+        window.onafterprint = function(){
+            $("#btn-print").css('display', 'inline-block');
+        }
+    </script>
 {% endblock %}
