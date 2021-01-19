@@ -1,0 +1,61 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Nueva autorización de salida</h3>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Datos de la autorización
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <dl>
+                        <dt>¿Cuándo?</dt>
+                        <dd>{{ form_widget(form.when) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>¿Dónde?</dt>
+                        <dd>{{ form_widget(form.where) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Ubicado en</dt>
+                        <dd>{{ form_widget(form.address) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Hora de inicio</dt>
+                        <dd>{{ form_widget(form.startHour) }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Hora de fin</dt>
+                        <dd>{{ form_widget(form.endHour) }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" name="submit" class="btn btn-dark pull-right">
+                Guardar
+            </button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock javascripts %}

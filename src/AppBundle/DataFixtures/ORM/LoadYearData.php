@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class LoadYearData extends AbstractFixture implements FixtureInterface
 {
-    const YEAR_2020 = 'y_2020';
+    const YEAR_2021 = 'y_2021';
 
     /**
      * {@inheritdoc}
@@ -18,13 +18,13 @@ class LoadYearData extends AbstractFixture implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $year = new Year();
-        $year->setName('2019');
+        $year->setName('2020');
         $manager->persist($year);
 
         $year = new Year();
-        $year->setName('2020');
+        $year->setName('2021');
         $manager->persist($year);
-        $this->addReference(self::YEAR_2020, $year);
+        $this->addReference(self::YEAR_2021, $year);
 
         $manager->flush();
     }
