@@ -145,10 +145,18 @@ class Student
      */
     private $installments;
 
+    /**
+     * @var ProgressHistory[]
+     *
+     * @ORM\OneToMany(targetEntity="ProgressHistory", mappedBy="student")
+     */
+    private $progressHistories;
+
     public function __construct()
     {
         $this->advisors = new ArrayCollection();
         $this->installments = new ArrayCollection();
+        $this->progressHistories = new ArrayCollection();
     }
 
     /**
@@ -590,5 +598,35 @@ class Student
     public function getInstallments()
     {
         return $this->installments;
+    }
+
+    /**
+     * @param ProgressHistory $progressHistory
+     *
+     * @return self
+     */
+    public function addProgressHistory(ProgressHistory $progressHistory): self
+    {
+        $this->progressHistories[] = $progressHistory;
+        $progressHistory->setStudent($this);
+
+        return $this;
+    }
+
+    /**
+     * @param ProgressHistory $progressHistory
+     */
+    public function removeProgressHistory(ProgressHistory $progressHistory)
+    {
+        $this->progressHistories->removeElement($progressHistory);
+        $progressHistory->setStudent(null);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getProgressHistories(): ArrayCollection
+    {
+        return $this->progressHistories;
     }
 }

@@ -1,0 +1,52 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    <div class="card-body">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h3>Historial de progresos</h3>
+                    </div>
+
+                    <div style="margin-right: 1em;">
+                        <a class="btn-sm btn-dark pull-right" title="Nuevo"
+                           href="{{ path('progress_history_create', {id: student.id}) }}"> Nuevo
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                {% for progressHistory in data %}
+                    <div class="card-body col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <strong><i>{{ progressHistory.tittle }}</i></strong>
+                                    </div>
+                                    <div style="margin-right: 1em;">
+                                        <a class="btn-sm btn-dark pull-right" title="Editar" href="{{ path('progress_history_edit', {studentId: student.id, progressHistoryId: progressHistory.id}) }}">
+                                            <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                                        </a>
+                                        &nbsp;
+                                        <a class="btn-sm btn-dark pull-right" title="Eliminar" href="{{ path('progress_history_delete', {studentId: student.id, progressHistoryId: progressHistory.id}) }}">
+                                            <i class="fas fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                {{ progressHistory.description }}<br>
+                                <div style="display: flex; justify-content: flex-end">
+                                    <i>{{ progressHistory.createdAt | date('d-m-Y') }}</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% include "AppBundle:Layout:navigation.html.twig" with {"table" : data} %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
