@@ -1,0 +1,46 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Editar Progreso</h3>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card-body col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_widget(form.tittle) }}
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-10">
+                        {{ form_widget(form.description) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" name="submit" class="btn btn-dark pull-right">
+                Guardar
+            </button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}
