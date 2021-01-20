@@ -8,12 +8,19 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
+/**
+ * Class LoadCityData.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class LoadCityData extends AbstractFixture implements DependentFixtureInterface
 {
     const SAMPACHO = 'c_sampacho';
+
     const CNEL_MOLDES = 'c_cnel_moldes';
+
     const RIO_CUARTO = 'c_rio_cuarto';
+
     const VILLA_MERCEDES = 'c_villa_mercedes';
 
     /**
@@ -90,7 +97,7 @@ class LoadCityData extends AbstractFixture implements DependentFixtureInterface
     /**
      * {@inheritdoc}
      */
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             LoadProvinceData::class,

@@ -66,7 +66,11 @@ class ProgressHistory
      */
     public function onPrePersist()
     {
-        $this->createdAt = new DateTime();
+
+        if (empty($this->createdAt)) {
+            $this->createdAt = new DateTime();
+        }
+
         $this->updatedAt = new DateTime();
     }
 
@@ -86,6 +90,19 @@ class ProgressHistory
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @param DateTime $createdAt
+     *
+     * @return self
+     */
+    public function setCreatedAt(
+        DateTime $createdAt
+    ): self {
+        $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**

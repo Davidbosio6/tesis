@@ -7,14 +7,23 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
+/**
+ * Class LoadUserData.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class LoadUserData extends AbstractFixture implements FixtureInterface
 {
     const USER_1 = 'u_user1';
+
     const USER_2 = 'u_user2';
+
     const USER_3 = 'u_user3';
+
     const USER_4 = 'u_user4';
+
     const USER_5 = 'u_user5';
+
     const USER_6 = 'u_user6';
 
     /**

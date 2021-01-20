@@ -6,7 +6,11 @@ use AppBundle\Entity\About;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
 
-
+/**
+ * Class LoadAboutData.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class LoadAboutData extends AbstractFixture
 {
     /**

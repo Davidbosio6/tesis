@@ -9,7 +9,11 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
+/**
+ * Class LoadClassroomData.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class LoadClassroomData extends AbstractFixture implements FixtureInterface, DependentFixtureInterface
 {
     const CELESTE = 'c_celeste';
@@ -69,7 +73,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
     /**
      * {@inheritdoc}
      */
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             LoadShiftData::class

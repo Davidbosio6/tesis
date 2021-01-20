@@ -9,12 +9,19 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
+/**
+ * Class LoadAdvisorData.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterface
 {
     const ADVISOR_1 = 'a_advisor_1';
+
     const ADVISOR_2 = 'a_advisor_2';
+
     const ADVISOR_3 = 'a_advisor_3';
+
     const ADVISOR_4 = 'a_advisor_4';
 
     /**
@@ -89,7 +96,7 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
     /**
      * {@inheritdoc}
      */
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             LoadCityData::class,

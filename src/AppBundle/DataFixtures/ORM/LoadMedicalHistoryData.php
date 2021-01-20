@@ -7,10 +7,15 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
+/**
+ * Class LoadMedicalHistoryData.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class LoadMedicalHistoryData extends AbstractFixture implements FixtureInterface
 {
     const MEDICAL_HISTORY_1 = "medical_history_1";
+
     const MEDICAL_HISTORY_2 = "medical_history_2";
 
     /**

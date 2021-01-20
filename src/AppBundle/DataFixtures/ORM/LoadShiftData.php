@@ -10,7 +10,11 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
+/**
+ * Class LoadShiftData.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class LoadShiftData extends AbstractFixture implements FixtureInterface, DependentFixtureInterface
 {
     const TURNO_MANIANA = 's_maniana';
@@ -46,7 +50,7 @@ class LoadShiftData extends AbstractFixture implements FixtureInterface, Depende
     /**
      * {@inheritdoc}
      */
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             LoadYearData::class,

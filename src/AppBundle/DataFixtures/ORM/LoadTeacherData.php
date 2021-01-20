@@ -11,7 +11,11 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
+/**
+ * Class LoadTeacherData.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class LoadTeacherData extends AbstractFixture implements DependentFixtureInterface
 {
     /**
@@ -138,7 +142,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
     /**
      * {@inheritdoc}
      */
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             LoadUserData::class,
