@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -109,6 +110,19 @@ class Teacher
      * @Assert\NotNull()
      */
     private $subject;
+
+    /**
+     * @var Course
+     *
+     * @ORM\OneToMany(targetEntity="Course", mappedBy="teacher", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id", nullable=true)
+     */
+    private $courses;
+
+    public function __construct()
+    {
+        $this->courses = new ArrayCollection();
+    }
 
     /**
      * Gets triggered every time on persist.
@@ -397,5 +411,35 @@ class Teacher
     public function getPhoto(): ?string
     {
         return $this->photo;
+    }
+
+    /**
+     * @param Course $course
+     *
+     * @return self
+     */
+    public function addCourse(Course $course): self
+    {
+        $this->courses[] = $course;
+        $course->setTeacher($this);
+
+        return $this;
+    }
+
+    /**
+     * @param Course $course
+     */
+    public function removeCourse(Course $course)
+    {
+        $this->courses->removeElement($course);
+        $course->setTeacher(null);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCourses()
+    {
+        return $this->courses;
     }
 }

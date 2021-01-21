@@ -1,5 +1,11 @@
 {% extends 'AppBundle:Layout:admin_base.html.twig' %}
 
+{%
+    form_theme form
+    'jquery.collection.html.twig'
+    'AppBundle:Teacher:create-collection-theme.html.twig'
+%}
+
 {% block body %}
     {{ form_start(form) }}
 
@@ -71,6 +77,21 @@
 
     <div class="card">
         <div class="card-header text-white bg-dark">
+            Titulos/Posgrados
+        </div>
+        <div class="card-body">
+            <div class="col-md-12">
+                <dl>
+                    <dd>{{ form_widget(form.courses) }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
             Datos del Usuario
         </div>
         <div class="card-body">
@@ -113,3 +134,21 @@
 
     {{ form_end(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+    <script type="text/javascript">
+        $('.courses').collection({
+            min: 1,
+            prefix: 'course',
+            preserve_names: true,
+            allow_duplicate: true,
+            add: `
+                <a href="#" class="course btn btn-default" title="Agregar Curso">
+                    <i class="fa fa-plus-circle"></i>
+                </a>
+            `
+        });
+    </script>
+{% endblock javascripts %}
