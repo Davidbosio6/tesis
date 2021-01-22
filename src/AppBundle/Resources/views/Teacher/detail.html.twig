@@ -99,6 +99,32 @@
 
     <div class="card">
         <div class="card-header text-white bg-dark">
+            Titulos/Posgrados
+        </div>
+        <div class="card-body">
+            {% for course in teacher.courses %}
+                <div class="card-body col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <strong><i>{{ course.name }}</i></strong>
+
+                            <hr>
+
+                            <ul>
+                                <li>{{ course.school }}</li>
+                                <li>{{ course.startAt | date('d/m/Y') ~ ' - ' ~ course.endAt | date('d/m/Y') }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
             Datos del usuario
         </div>
         <div class="card-body">
