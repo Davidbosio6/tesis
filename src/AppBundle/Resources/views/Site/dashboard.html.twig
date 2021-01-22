@@ -74,6 +74,20 @@
     <br>
 
     <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area mr-1"></i>
+                    Cronograma
+                </div>
+                <div class="card-body" id="calendar" style="width: 100%"></div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
         <div class="col-xl-4">
             <div class="card mb-4">
                 <div class="card-header">
@@ -107,6 +121,33 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
+
+        window.onload = () => {
+            let calendarElt = document.querySelector('#calendar');
+
+            let calendar = new FullCalendar.Calendar(calendarElt, {
+                initialView: 'timeGridWeek',
+                locale: 'es',
+                weekends: false,
+                allDaySlot: false,
+                headerToolbar: {
+                    left:   '',
+                    center: '',
+                    right:  ''
+                },
+                slotMinTime: "12:00:00",
+                slotMaxTime: "21:00:00",
+                slotLabelFormat: {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    meridiem: 'short'
+                },
+            });
+
+            calendar.render()
+        }
+
+
         var student = document.getElementById("studentChart").getContext('2d');
         var studentChart = new Chart(student, {
             type: 'pie',
