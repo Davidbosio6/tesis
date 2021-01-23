@@ -69,6 +69,14 @@ class Classroom
      */
     private $students;
 
+    /**
+     * @var Calendar
+     *
+     * @ORM\OneToOne(targetEntity="Calendar", inversedBy="classroom", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="calendar_id", referencedColumnName="id", nullable=true)
+     */
+    private $calendar;
+
     public function __construct()
     {
          $this->students = new ArrayCollection();
@@ -209,7 +217,7 @@ class Classroom
     }
 
     /**
-     * @return Shift
+     * @return Shift|null
      */
     public function getShift(): ?Shift
     {
@@ -242,5 +250,26 @@ class Classroom
     public function getStudents()
     {
         return $this->students;
+    }
+
+    /**
+     * @param Calendar|null $calendar
+     *
+     * @return self
+     */
+    public function setCalendar(
+        Calendar $calendar = null
+    ): self {
+        $this->calendar = $calendar;
+
+        return $this;
+    }
+
+    /**
+     * @return Calendar|null
+     */
+    public function getCalendar(): ?Calendar
+    {
+        return $this->calendar;
     }
 }

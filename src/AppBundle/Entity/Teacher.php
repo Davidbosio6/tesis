@@ -246,6 +246,14 @@ class Teacher
     }
 
     /**
+     * @return string|null
+     */
+    public function getFullName(): ?string
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+
+    /**
      * @param User $user
      *
      * @return self

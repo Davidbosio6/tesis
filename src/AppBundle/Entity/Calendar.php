@@ -3,19 +3,20 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Course.
+ * Class Calendar.
  *
  * @ORM\HasLifecycleCallbacks
  *
- * @ORM\Table(name="course")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CourseRepository")
+ * @ORM\Table(name="calendar")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CalendarRepository")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class Course
+class Calendar
 {
     /**
      * @ORM\Column(type="integer")
@@ -41,33 +42,27 @@ class Course
     /**
      * @ORM\Column(type="string")
      */
-    private $name;
+    private $googleId;
 
     /**
-     * @ORM\Column(type="string")
-     */
-    private $school;
-
-    /**
-     * @var DateTime
+     * @var Classroom
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\OneToOne(targetEntity="Classroom", mappedBy="calendar")
      */
-    private $startAt;
+    private $classroom;
 
     /**
-     * @var DateTime
+     * @var Event
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="calendar", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="calendar_id", referencedColumnName="id", nullable=true)
      */
-    private $endAt;
+    private $events;
 
-    /**
-     * @var Teacher
-     *
-     * @ORM\ManyToOne(targetEntity="Teacher", inversedBy="courses")
-     */
-    private $teacher;
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     /**
      * Gets triggered every time on persist.
@@ -128,14 +123,35 @@ class Course
     }
 
     /**
-     * @param string $name
+     * @param Classroom|null $classroom
      *
      * @return self
      */
-    public function setName(
-        string $name
+    public function setClassroom(
+        Classroom $classroom = null
     ): self {
-        $this->name = $name;
+        $this->classroom = $classroom;
+
+        return $this;
+    }
+
+    /**
+     * @return Classroom|null
+     */
+    public function getClassroom(): ?Classroom
+    {
+        return $this->classroom;
+    }
+
+    /**
+     * @param string $googleId
+     *
+     * @return self
+     */
+    public function setGoogleId(
+        string $googleId
+    ): self {
+        $this->googleId = $googleId;
 
         return $this;
     }
@@ -143,92 +159,38 @@ class Course
     /**
      * @return string|null
      */
-    public function getName(): ?string
+    public function getGoogleId(): ?string
     {
-        return $this->name;
+        return $this->googleId;
     }
 
     /**
-     * @param string $school
+     * @param Event $event
      *
      * @return self
      */
-    public function setSchool(
-        string $school
-    ): self {
-        $this->school = $school;
+    public function addEvent(Event $event): self
+    {
+        $this->events[] = $event;
+        $event->setCalendar($this);
 
         return $this;
     }
 
     /**
-     * @return string|null
+     * @param Event $event
      */
-    public function getSchool(): ?string
+    public function removeEvent(Event $event)
     {
-        return $this->school;
+        $this->events->removeElement($event);
+        $event->setCalendar(null);
     }
 
     /**
-     * @param DateTime $startAt
-     *
-     * @return self
+     * @return ArrayCollection
      */
-    public function setStartAt(
-        DateTime $startAt
-    ): self {
-        $this->startAt = $startAt;
-
-        return $this;
-    }
-
-    /**
-     * @return DateTime|null
-     */
-    public function getStartAt(): ?DateTime
+    public function getEvents()
     {
-        return $this->startAt;
-    }
-
-    /**
-     * @param DateTime $endAt
-     *
-     * @return self
-     */
-    public function setEndAt(
-        DateTime $endAt
-    ): self {
-        $this->endAt = $endAt;
-
-        return $this;
-    }
-
-    /**
-     * @return DateTime|null
-     */
-    public function getEndAt(): ?DateTime
-    {
-        return $this->endAt;
-    }
-
-    /**
-     * @param Teacher $teacher
-     *
-     * @return self
-     */
-    public function setTeacher(
-        Teacher $teacher
-    ): self {
-        $this->teacher = $teacher;
-
-        return $this;
-    }
-
-    /**
-     * @return Teacher|null
-     */
-    public function getTeacher(): ?Teacher
-    {
-        return $this->teacher;
+        return $this->events;
     }
 }

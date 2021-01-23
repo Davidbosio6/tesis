@@ -63,6 +63,28 @@
     <br>
 
     <div class="card">
+        <div class="card-header text-white bg-dark ">
+            Cronograma
+        </div>
+        <div class="card-body">
+            <div class="row">
+                {% if classroom.calendar is not null %}
+                    <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%23ffffff&amp;ctz=America%2FArgentina%2FCordoba&amp;src={{ classroom.calendar.googleID }}&amp;color=%23616161&amp;mode=WEEK&amp;showTitle=0&amp;showNav=1&amp;showDate=1&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+                {% else %}
+                    <div class="alert alert-light text-center col-md-12" role="alert">
+                        La sala no tiene un cronograma <br>
+                        <a class="btn btn-primary pull-right" href="{{ path('calendar_create', {id: classroom.id}) }}">
+                            <i class="far fa-calendar-check" aria-hidden="true"></i> Asignar
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
         <div class="card-header text-white bg-dark">
             Alumnos asociados
         </div>

@@ -3,21 +3,19 @@
 namespace AppBundle\Entity;
 
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Shift.
+ * Class Event.
  *
  * @ORM\HasLifecycleCallbacks
  *
- * @ORM\Table(name="shift")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ShiftRepository")
+ * @ORM\Table(name="event")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EventRepository")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class Shift
+class Event
 {
     /**
      * @ORM\Column(type="integer")
@@ -56,31 +54,11 @@ class Shift
     private $endHour;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $notes;
-
-    /**
-     * @var Classroom
+     * @var Calendar
      *
-     * @ORM\OneToMany(targetEntity="Classroom", mappedBy="shift", cascade={"persist", "remove"})
-     *
-     * @Assert\Count(min=1)
+     * @ORM\ManyToOne(targetEntity="Calendar", inversedBy="events")
      */
-    private $classrooms;
-
-    /**
-     * @var Year
-     *
-     * @ORM\ManyToOne(targetEntity="Year", inversedBy="shifts")
-     * @ORM\JoinColumn(name="year_id", referencedColumnName="id", nullable=true)
-     */
-    private $year;
-
-    public function __construct()
-    {
-        $this->classrooms = new ArrayCollection();
-    }
+    private $calendar;
 
     /**
      * Gets triggered every time on persist.
@@ -154,11 +132,32 @@ class Shift
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    /**
+     * @param Calendar $calendar
+     *
+     * @return self
+     */
+    public function setCalendar(
+        Calendar $calendar
+    ): self {
+        $this->calendar = $calendar;
+
+        return $this;
+    }
+
+    /**
+     * @return Calendar|null
+     */
+    public function getCalendar(): ?Calendar
+    {
+        return $this->calendar;
     }
 
     /**
@@ -175,7 +174,7 @@ class Shift
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|null
      */
     public function getStartHour(): ?DateTime
     {
@@ -201,77 +200,5 @@ class Shift
     public function getEndHour(): ?DateTime
     {
         return $this->endHour;
-    }
-
-    /**
-     * @param string|null $notes
-     *
-     * @return self
-     */
-    public function setNotes(
-        string $notes = null
-    ): self {
-        $this->notes = $notes;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNotes(): ?string
-    {
-        return $this->notes;
-    }
-
-    /**
-     * @param Classroom $classroom
-     *
-     * @return self
-     */
-    public function addClassroom(Classroom $classroom): self
-    {
-        $this->classrooms[] = $classroom;
-        $classroom->setShift($this);
-
-        return $this;
-    }
-
-    /**
-     * @param Classroom $classroom
-     */
-    public function removeClassroom(Classroom $classroom)
-    {
-        $this->classrooms->removeElement($classroom);
-        $classroom->setShift(null);
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getClassrooms()
-    {
-        return $this->classrooms;
-    }
-
-    /**
-     * @param Year|null $year
-     *
-     * @return self
-     */
-    public function setYear(
-        Year $year = null
-    ): self {
-        $this->year = $year;
-
-        return $this;
-    }
-
-    /**
-     * @return Year
-     */
-    public function getYear(): ?Year
-    {
-        return $this->year;
     }
 }
