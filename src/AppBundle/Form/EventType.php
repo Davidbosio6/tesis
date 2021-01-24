@@ -53,6 +53,12 @@ class EventType extends AbstractType
                     'choices' => $this->getChoices()
                 ]
             )
+            ->add('startHour', TimeType::class,
+                [
+                    'html5' => true,
+                    'widget' => 'single_text'
+                ]
+            )
             ->add('endHour', TimeType::class,
                 [
                     'html5' => true,
