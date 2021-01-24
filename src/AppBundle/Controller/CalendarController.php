@@ -36,7 +36,11 @@ class CalendarController extends AbstractController
         $calendar = new Calendar();
         $form = $this->createForm(
             CalendarType::class,
-            $calendar
+            $calendar,
+            [
+                'startHour' => $classroom->getShift()->getStartHour()->format('H'),
+                'endHour' => $classroom->getShift()->getEndHour()->format('H')
+            ]
         );
 
         $form->handleRequest($request);
