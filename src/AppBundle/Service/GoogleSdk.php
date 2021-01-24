@@ -4,7 +4,10 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Calendar;
 use AppBundle\Entity\Event;
+use AppBundle\Entity\Settings;
+use AppBundle\Repository\SettingsRepository;
 use DateTime;
+use Doctrine\ORM\EntityManager;
 use Google_Client;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
@@ -16,6 +19,21 @@ use JMS\DiExtraBundle\Annotation as DI;
  */
 class GoogleSdk
 {
+    private $em;
+
+    /**
+     * @param EntityManager $em
+     *
+     * @DI\InjectParams({
+     *     "em" = @DI\Inject("doctrine.orm.entity_manager")
+     * })
+     */
+    public function __constructor(
+        EntityManager $em
+    ) {
+        $this->em = $em;
+    }
+
     /**
      * @param Calendar $calendar
      * @param string $dir
@@ -31,11 +49,19 @@ class GoogleSdk
         $client->useApplicationDefaultCredentials();
         $client->setApprovalPrompt('force');
 
+        /** @var SettingsRepository $repository */
+        $repository = $this->em->getRepository(Settings::class);
+        $untilDate = $repository->findOneByCode(SettingsRepository::CALENDAR_LAST_DAY_CODE)->getValue();
+        $sinceDate = $repository->findOneByCode(SettingsRepository::CALENDAR_INIT_DAY_CODE)->getValue();
+
+        $arrayUntilDate = explode('-', $untilDate);
+        $until = $arrayUntilDate[2] . $arrayUntilDate[1] . $arrayUntilDate[0];
+
         $calendarService = new Google_Service_Calendar($client);
         /** @var Event $event */
         foreach ($calendar->getEvents() as $event) {
             $startDateTime = sprintf('%sT%s-03:00',
-                (new DateTime())->modify('next '. $event->getDayWeek())->format('Y-m-d'),
+                DateTime::createFromFormat('m-d-Y', $sinceDate)->modify('next ' . $event->getDayWeek())->format('Y-m-d'),
                 $event->getStartHour()->format('H:i:s')
             );
 
@@ -44,7 +70,7 @@ class GoogleSdk
             $startEvent->setTimeZone('America/Argentina/Buenos_Aires');
 
             $endDateTime = sprintf('%sT%s-03:00',
-                (new DateTime())->modify('next '. $event->getDayWeek())->format('Y-m-d'),
+                DateTime::createFromFormat('m-d-Y', $sinceDate)->modify('next ' . $event->getDayWeek())->format('Y-m-d'),
                 $event->getEndHour()->format('H:i:s')
             );
 
@@ -54,12 +80,11 @@ class GoogleSdk
 
             $googleEvent = new Google_Service_Calendar_Event();
             $googleEvent->setSummary($event->getName());
-            $googleEvent->setRecurrence(array('RRULE:FREQ=WEEKLY;UNTIL=20220701T170000Z'));
+            $googleEvent->setRecurrence(['RRULE:FREQ=WEEKLY;UNTIL=' . $until . 'T170000Z']);
             $googleEvent->setStart($startEvent);
             $googleEvent->setEnd($endEvent);
 
             $response = $calendarService->events->insert($calendar->getGoogleId(), $googleEvent);
-
             $event->setEventId($response->id);
         }
     }
@@ -83,8 +108,6 @@ class GoogleSdk
         $client->setApprovalPrompt('force');
 
         $calendarService = new Google_Service_Calendar($client);
-
         $calendarService->events->delete($calendar->getGoogleId(), $eventId);
-
     }
 }

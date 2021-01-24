@@ -7,7 +7,6 @@ use AppBundle\Repository\SettingsRepository;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
 
-
 class LoadSettingsData extends AbstractFixture
 {
     /**
@@ -68,7 +67,7 @@ class LoadSettingsData extends AbstractFixture
         $settings->setName('Inicio de clases');
         $settings->setValue('01-03-2021');
         $settings->setDescription('Dato utilizado para la creación de cronogramas. Formato dd-mm-yyyy');
-        $settings->setCode(SettingsRepository::CALENDAR_LAST_DAY_CODE);
+        $settings->setCode(SettingsRepository::CALENDAR_INIT_DAY_CODE);
         $manager->persist($settings);
 
         $manager->flush();

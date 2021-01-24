@@ -51,6 +51,11 @@ class SettingsRepository extends EntityRepository
     const CALENDAR_LAST_DAY_CODE = 'calendar_last_day';
 
     /**
+     * This constant represents a settings code in database
+     */
+    const CALENDAR_INIT_DAY_CODE = 'calendar_init_day';
+
+    /**
      * @return Query
      */
     public function findAllQuery(): Query
