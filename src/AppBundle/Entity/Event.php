@@ -44,6 +44,11 @@ class Event
     private $name;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $dayWeek;
+
+    /**
      * @ORM\Column(type="time")
      */
     private $startHour;
@@ -52,6 +57,14 @@ class Event
      * @ORM\Column(type="time")
      */
     private $endHour;
+
+    /**
+     * NOTE: This ID represents the google event ID. Is used to delete a google
+     * event when a calendar is deleted.
+     *
+     * @ORM\Column(type="string")
+     */
+    private $eventId;
 
     /**
      * @var Calendar
@@ -140,24 +153,45 @@ class Event
     }
 
     /**
-     * @param Calendar $calendar
+     * @param string $dayWeek
      *
      * @return self
      */
-    public function setCalendar(
-        Calendar $calendar
+    public function setDayWeek(
+        string $dayWeek
     ): self {
-        $this->calendar = $calendar;
+        $this->dayWeek = $dayWeek;
 
         return $this;
     }
 
     /**
-     * @return Calendar|null
+     * @return string|null
      */
-    public function getCalendar(): ?Calendar
+    public function getDayWeek(): ?string
     {
-        return $this->calendar;
+        return $this->dayWeek;
+    }
+
+    /**
+     * @param string $eventId
+     *
+     * @return self
+     */
+    public function setEventId(
+        string $eventId
+    ): self {
+        $this->eventId = $eventId;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEventId(): ?string
+    {
+        return $this->eventId;
     }
 
     /**
@@ -200,5 +234,26 @@ class Event
     public function getEndHour(): ?DateTime
     {
         return $this->endHour;
+    }
+
+    /**
+     * @param Calendar $calendar
+     *
+     * @return self
+     */
+    public function setCalendar(
+        Calendar $calendar
+    ): self {
+        $this->calendar = $calendar;
+
+        return $this;
+    }
+
+    /**
+     * @return Calendar|null
+     */
+    public function getCalendar(): ?Calendar
+    {
+        return $this->calendar;
     }
 }

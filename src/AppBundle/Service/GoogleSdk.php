@@ -24,9 +24,7 @@ class GoogleSdk
         Calendar $calendar,
         string $dir
     ): void {
-        $url = $dir . '/web/public/credentials.json';
-
-        putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $url);
+        putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $dir . '/web/public/credentials.json');
 
         $client = new Google_Client();
         $client->setScopes(Google_Service_Calendar::CALENDAR_EVENTS);
@@ -37,7 +35,7 @@ class GoogleSdk
         /** @var Event $event */
         foreach ($calendar->getEvents() as $event) {
             $startDateTime = sprintf('%sT%s-03:00',
-                (new DateTime())->format('Y-m-d'),
+                (new DateTime())->modify('next '. $event->getDayWeek())->format('Y-m-d'),
                 $event->getStartHour()->format('H:i:s')
             );
 
@@ -46,7 +44,7 @@ class GoogleSdk
             $startEvent->setTimeZone('America/Argentina/Buenos_Aires');
 
             $endDateTime = sprintf('%sT%s-03:00',
-                (new DateTime())->format('Y-m-d'),
+                (new DateTime())->modify('next '. $event->getDayWeek())->format('Y-m-d'),
                 $event->getEndHour()->format('H:i:s')
             );
 
@@ -60,7 +58,9 @@ class GoogleSdk
             $googleEvent->setStart($startEvent);
             $googleEvent->setEnd($endEvent);
 
-            $calendarService->events->insert($calendar->getGoogleId(), $googleEvent);
+            $response = $calendarService->events->insert($calendar->getGoogleId(), $googleEvent);
+
+            $event->setEventId($response->id);
         }
     }
 }

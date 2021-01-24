@@ -19,6 +19,37 @@
 
     <div class="card">
         <div class="card-header text-white bg-dark">
+            Datos de la sala
+        </div>
+        <div class="card-body" style="background-color: #EBEBE4; color: #495057">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de creación</dt>
+                        <dd>{{ classroom.createdAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Capacidad</dt>
+                        <dd>{{ classroom.capacity }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dt>Turno</dt>
+                    <dd>
+                        {{ classroom.shift.name}}
+                        ({{ classroom.shift.startHour | date('H:i') }} - {{ classroom.shift.endHour | date('H:i') }})
+                    </dd>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
             Datos del Cronograma
         </div>
         <div class="card-body">
@@ -47,6 +78,8 @@
             </div>
         </div>
     </div>
+
+    <br>
 
     <div class="row">
         <div class="col-md-12">

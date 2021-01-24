@@ -49,8 +49,22 @@ class EventType extends AbstractType
                 'name',
                 ChoiceType::class,
                 [
-                    'placeholder' => '--- Seleccione un nombre ---',
-                    'choices' => $this->getChoices()
+                    'placeholder' => '--- Seleccione una opción ---',
+                    'choices' => $this->getNameChoices()
+                ]
+            )->add(
+                'dayWeek',
+                ChoiceType::class,
+                [
+                    'placeholder' => '--- Seleccione una opción ---',
+                    'choices' => [
+                        'Lunes' => 'Monday',
+                        'Martes' => 'Tuesday',
+                        'Miercoles' => 'Wednesday',
+                        'Jueves' => 'Thursday',
+                        'Viernes' => 'Friday'
+
+                    ]
                 ]
             )
             ->add('startHour', TimeType::class,
@@ -68,7 +82,7 @@ class EventType extends AbstractType
         ;
     }
 
-    private function getChoices(): array
+    private function getNameChoices(): array
     {
         /** @var TeacherRepository $teacherRepository */
         $teacherRepository = $this->em->getRepository(Teacher::class);

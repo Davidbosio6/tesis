@@ -73,6 +73,7 @@ class CalendarController extends AbstractController
             'AppBundle:Calendar:create.html.twig',
             [
                 'form' => $form->createView(),
+                'classroom' => $classroom
             ]
         );
     }

@@ -5,6 +5,13 @@
                 <div class="row">
                     <div class="col-md-3">
                         <dl>
+                            <dt>Dia de la semana</dt>
+                            <dd>{{ form_widget(form.dayWeek) }}</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-md-3">
+                        <dl>
                             <dt>Nombre</dt>
                             <dd>{{ form_widget(form.name) }}</dd>
                         </dl>
@@ -23,7 +30,6 @@
                             <dd>{{ form_widget(form.endHour) }}</dd>
                         </dl>
                     </div>
-
                     <div class="col-md-3">
                         <a href="#" class="event-remove btn btn-default" title="Eliminar Curso">
                             <i class="fa fa-trash" aria-hidden="true"></i>
