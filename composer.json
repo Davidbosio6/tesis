@@ -19,6 +19,7 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-migrations-bundle": "^2.0",
         "doctrine/orm": "^2.5",
+        "google/apiclient": "^2.0",
         "gregwar/captcha-bundle": "2",
         "guzzlehttp/guzzle": "^7.0",
         "incenteev/composer-parameter-handler": "^2.0",

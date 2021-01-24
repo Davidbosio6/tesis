@@ -6,16 +6,16 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Settings.
+ * Class Event.
  *
  * @ORM\HasLifecycleCallbacks
  *
- * @ORM\Table(name="settings")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\SettingsRepository")
+ * @ORM\Table(name="event")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EventRepository")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class Settings
+class Event
 {
     /**
      * @ORM\Column(type="integer")
@@ -46,17 +46,32 @@ class Settings
     /**
      * @ORM\Column(type="string")
      */
-    private $value;
+    private $dayWeek;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="time")
      */
-    private $description;
+    private $startHour;
 
     /**
+     * @ORM\Column(type="time")
+     */
+    private $endHour;
+
+    /**
+     * NOTE: This ID represents the google event ID. Is used to delete a google
+     * event when a calendar is deleted.
+     *
      * @ORM\Column(type="string")
      */
-    private $code;
+    private $eventId;
+
+    /**
+     * @var Calendar
+     *
+     * @ORM\ManyToOne(targetEntity="Calendar", inversedBy="events")
+     */
+    private $calendar;
 
     /**
      * Gets triggered every time on persist.
@@ -138,14 +153,14 @@ class Settings
     }
 
     /**
-     * @param string $value
+     * @param string $dayWeek
      *
      * @return self
      */
-    public function setValue(
-        string $value
+    public function setDayWeek(
+        string $dayWeek
     ): self {
-        $this->value = $value;
+        $this->dayWeek = $dayWeek;
 
         return $this;
     }
@@ -153,20 +168,20 @@ class Settings
     /**
      * @return string|null
      */
-    public function getValue(): ?string
+    public function getDayWeek(): ?string
     {
-        return $this->value;
+        return $this->dayWeek;
     }
 
     /**
-     * @param string $code
+     * @param string $eventId
      *
      * @return self
      */
-    public function setCode(
-        string $code
+    public function setEventId(
+        string $eventId
     ): self {
-        $this->code = $code;
+        $this->eventId = $eventId;
 
         return $this;
     }
@@ -174,29 +189,71 @@ class Settings
     /**
      * @return string|null
      */
-    public function getCode(): ?string
+    public function getEventId(): ?string
     {
-        return $this->code;
+        return $this->eventId;
     }
 
     /**
-     * @param string $description
+     * @param DateTime $startHour
      *
      * @return self
      */
-    public function setDescription(
-        string $description
+    public function setStartHour(
+        DateTime $startHour
     ): self {
-        $this->description = $description;
+        $this->startHour = $startHour;
 
         return $this;
     }
 
     /**
-     * @return string|null
+     * @return DateTime|null
      */
-    public function getDescription(): ?string
+    public function getStartHour(): ?DateTime
     {
-        return $this->description;
+        return $this->startHour;
+    }
+
+    /**
+     * @param DateTime $endHour
+     *
+     * @return self
+     */
+    public function setEndHour(
+        DateTime $endHour
+    ): self {
+        $this->endHour = $endHour;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTime|null
+     */
+    public function getEndHour(): ?DateTime
+    {
+        return $this->endHour;
+    }
+
+    /**
+     * @param Calendar $calendar
+     *
+     * @return self
+     */
+    public function setCalendar(
+        Calendar $calendar
+    ): self {
+        $this->calendar = $calendar;
+
+        return $this;
+    }
+
+    /**
+     * @return Calendar|null
+     */
+    public function getCalendar(): ?Calendar
+    {
+        return $this->calendar;
     }
 }

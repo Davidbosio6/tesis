@@ -183,7 +183,7 @@ class Course
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|null
      */
     public function getStartAt(): ?DateTime
     {
@@ -204,7 +204,7 @@ class Course
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|null
      */
     public function getEndAt(): ?DateTime
     {

@@ -3,19 +3,20 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Settings.
+ * Class Calendar.
  *
  * @ORM\HasLifecycleCallbacks
  *
- * @ORM\Table(name="settings")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\SettingsRepository")
+ * @ORM\Table(name="calendar")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CalendarRepository")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class Settings
+class Calendar
 {
     /**
      * @ORM\Column(type="integer")
@@ -41,22 +42,27 @@ class Settings
     /**
      * @ORM\Column(type="string")
      */
-    private $name;
+    private $googleId;
 
     /**
-     * @ORM\Column(type="string")
+     * @var Classroom
+     *
+     * @ORM\OneToOne(targetEntity="Classroom", mappedBy="calendar")
      */
-    private $value;
+    private $classroom;
 
     /**
-     * @ORM\Column(type="string")
+     * @var Event
+     *
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="calendar", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="calendar_id", referencedColumnName="id", nullable=true)
      */
-    private $description;
+    private $events;
 
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $code;
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     /**
      * Gets triggered every time on persist.
@@ -117,14 +123,35 @@ class Settings
     }
 
     /**
-     * @param string $name
+     * @param Classroom|null $classroom
      *
      * @return self
      */
-    public function setName(
-        string $name
+    public function setClassroom(
+        Classroom $classroom = null
     ): self {
-        $this->name = $name;
+        $this->classroom = $classroom;
+
+        return $this;
+    }
+
+    /**
+     * @return Classroom|null
+     */
+    public function getClassroom(): ?Classroom
+    {
+        return $this->classroom;
+    }
+
+    /**
+     * @param string $googleId
+     *
+     * @return self
+     */
+    public function setGoogleId(
+        string $googleId
+    ): self {
+        $this->googleId = $googleId;
 
         return $this;
     }
@@ -132,71 +159,38 @@ class Settings
     /**
      * @return string|null
      */
-    public function getName(): ?string
+    public function getGoogleId(): ?string
     {
-        return $this->name;
+        return $this->googleId;
     }
 
     /**
-     * @param string $value
+     * @param Event $event
      *
      * @return self
      */
-    public function setValue(
-        string $value
-    ): self {
-        $this->value = $value;
+    public function addEvent(Event $event): self
+    {
+        $this->events[] = $event;
+        $event->setCalendar($this);
 
         return $this;
     }
 
     /**
-     * @return string|null
+     * @param Event $event
      */
-    public function getValue(): ?string
+    public function removeEvent(Event $event)
     {
-        return $this->value;
+        $this->events->removeElement($event);
+        $event->setCalendar(null);
     }
 
     /**
-     * @param string $code
-     *
-     * @return self
+     * @return ArrayCollection
      */
-    public function setCode(
-        string $code
-    ): self {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getCode(): ?string
+    public function getEvents()
     {
-        return $this->code;
-    }
-
-    /**
-     * @param string $description
-     *
-     * @return self
-     */
-    public function setDescription(
-        string $description
-    ): self {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getDescription(): ?string
-    {
-        return $this->description;
+        return $this->events;
     }
 }
