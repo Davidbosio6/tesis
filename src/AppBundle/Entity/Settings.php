@@ -51,6 +51,11 @@ class Settings
     /**
      * @ORM\Column(type="string")
      */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     private $code;
 
     /**
@@ -125,7 +130,7 @@ class Settings
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getName(): ?string
     {
@@ -146,7 +151,7 @@ class Settings
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getValue(): ?string
     {
@@ -167,10 +172,31 @@ class Settings
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getCode(): ?string
     {
         return $this->code;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return self
+     */
+    public function setDescription(
+        string $description
+    ): self {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
     }
 }

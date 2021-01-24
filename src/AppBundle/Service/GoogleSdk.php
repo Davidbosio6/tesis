@@ -63,4 +63,28 @@ class GoogleSdk
             $event->setEventId($response->id);
         }
     }
+
+    /**
+     * @param Calendar $calendar
+     * @param string $eventId
+     * @param string $dir
+     */
+    public function deleteEvent(
+        Calendar $calendar,
+        string $eventId,
+        string $dir
+
+    ): void {
+        putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $dir . '/web/public/credentials.json');
+
+        $client = new Google_Client();
+        $client->setScopes(Google_Service_Calendar::CALENDAR_EVENTS);
+        $client->useApplicationDefaultCredentials();
+        $client->setApprovalPrompt('force');
+
+        $calendarService = new Google_Service_Calendar($client);
+
+        $calendarService->events->delete($calendar->getGoogleId(), $eventId);
+
+    }
 }

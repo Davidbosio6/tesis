@@ -52,29 +52,24 @@
         <div class="card-header text-white bg-dark">
             Datos del Cronograma
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-4">
-                    <dl>
-                        <dt>Google ID</dt>
-                        <dd>{{ form_widget(form.googleId) }}</dd>
-                    </dl>
+        <div class="card-body col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <dl>
+                                    <dt>Google ID</dt>
+                                    <dd>{{ form_widget(form.googleId) }}</dd>
+                                </dl>
+                            </div>
+
+                            <dl>
+                                <dd>{{ form_widget(form.events) }}</dd>
+                            </dl>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <br>
-
-    <div class="card">
-        <div class="card-header text-white bg-dark">
-            Eventos
-        </div>
-        <div class="card-body">
-            <div class="col-md-12">
-                <dl>
-                    <dd>{{ form_widget(form.events) }}</dd>
-                </dl>
             </div>
         </div>
     </div>

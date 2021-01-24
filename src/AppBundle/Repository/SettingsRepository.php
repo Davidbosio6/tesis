@@ -46,9 +46,14 @@ class SettingsRepository extends EntityRepository
     const CONTACT_SCHEDULE_HOURS_CODE = 'contact_schedules_hours';
 
     /**
+     * This constant represents a settings code in database
+     */
+    const CALENDAR_LAST_DAY_CODE = 'calendar_last_day';
+
+    /**
      * @return Query
      */
-    public function findAllQuery()
+    public function findAllQuery(): Query
     {
         $qb = $this->createQueryBuilder('settings');
 
@@ -60,7 +65,7 @@ class SettingsRepository extends EntityRepository
      *
      * @return Query
      */
-    public function findAllByFilter(string $filter)
+    public function findAllByFilter(string $filter): Query
     {
         $qb = $this->createQueryBuilder('settings');
 
@@ -80,7 +85,7 @@ class SettingsRepository extends EntityRepository
      *
      * @return Settings|null
      */
-    public function findOneByCode(string $code)
+    public function findOneByCode(string $code): ?Settings
     {
         $qb = $this->createQueryBuilder('settings');
         $qb->where($qb->expr()->eq('settings.code', ':code'))->setParameter(

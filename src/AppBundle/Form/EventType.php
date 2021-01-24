@@ -70,13 +70,15 @@ class EventType extends AbstractType
             ->add('startHour', TimeType::class,
                 [
                     'html5' => true,
-                    'widget' => 'single_text'
+                    'widget' => 'choice',
+                    'minutes' => [00,10,20,30,40,50]
                 ]
             )
             ->add('endHour', TimeType::class,
                 [
                     'html5' => true,
-                    'widget' => 'single_text'
+                    'widget' => 'choice',
+                    'minutes' => [00,10,20,30,40,50]
                 ]
             )
         ;
