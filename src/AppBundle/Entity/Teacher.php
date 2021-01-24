@@ -196,7 +196,7 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getIdNumber(): ?string
     {
@@ -204,7 +204,7 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getFirstName(): ?string
     {
@@ -225,7 +225,7 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getLastName(): ?string
     {
@@ -267,7 +267,7 @@ class Teacher
     }
 
     /**
-     * @return User
+     * @return User|null
      */
     public function getUser(): ?User
     {
@@ -288,7 +288,7 @@ class Teacher
     }
 
     /**
-     * @return City
+     * @return City|null
      */
     public function getCity(): ?City
     {
@@ -309,7 +309,7 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getPhoneNumber(): ?string
     {
@@ -330,7 +330,7 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getAddress(): ?string
     {
@@ -351,7 +351,7 @@ class Teacher
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|null
      */
     public function getBirthdate(): ?DateTime
     {
@@ -372,7 +372,7 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getNotes(): ?string
     {
@@ -393,7 +393,7 @@ class Teacher
     }
 
     /**
-     * @return Subject
+     * @return Subject|null
      */
     public function getSubject(): ?Subject
     {
@@ -414,7 +414,7 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getPhoto(): ?string
     {

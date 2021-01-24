@@ -17,8 +17,8 @@ class LoadSettingsData extends AbstractFixture
         $settings = new Settings();
         $settings->setName('Nombre del sitio');
         $settings->setValue('Semillitas de amor');
-        $settings->setCode(SettingsRepository::SITE_NAME_CODE);
         $settings->setDescription('Dato utilizado en la vista invitado');
+        $settings->setCode(SettingsRepository::SITE_NAME_CODE);
         $manager->persist($settings);
 
         $settings = new Settings();

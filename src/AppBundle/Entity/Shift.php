@@ -154,7 +154,7 @@ class Shift
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getName(): ?string
     {
@@ -268,7 +268,7 @@ class Shift
     }
 
     /**
-     * @return Year
+     * @return Year|null
      */
     public function getYear(): ?Year
     {

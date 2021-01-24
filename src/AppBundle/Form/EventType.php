@@ -3,9 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Event;
-use AppBundle\Entity\Subject;
 use AppBundle\Entity\Teacher;
-use AppBundle\Repository\SubjectRepository;
 use AppBundle\Repository\TeacherRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
@@ -71,17 +69,16 @@ class EventType extends AbstractType
                 [
                     'html5' => true,
                     'widget' => 'choice',
-                    'minutes' => [00,10,20,30,40,50]
+                    'minutes' => [00, 10, 20, 30, 40, 50]
                 ]
             )
             ->add('endHour', TimeType::class,
                 [
                     'html5' => true,
                     'widget' => 'choice',
-                    'minutes' => [00,10,20,30,40,50]
+                    'minutes' => [00, 10, 20, 30, 40, 50]
                 ]
-            )
-        ;
+            );
     }
 
     private function getNameChoices(): array
@@ -103,7 +100,7 @@ class EventType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'events';
     }

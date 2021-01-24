@@ -154,7 +154,7 @@ class Classroom
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getName(): ?string
     {
@@ -175,7 +175,7 @@ class Classroom
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDescription(): ?string
     {
@@ -196,7 +196,7 @@ class Classroom
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getCapacity(): ?int
     {
@@ -229,7 +229,7 @@ class Classroom
      *
      * @return self
      */
-    public function addStudent(Student $student)
+    public function addStudent(Student $student): self
     {
         $this->students[] = $student;
 

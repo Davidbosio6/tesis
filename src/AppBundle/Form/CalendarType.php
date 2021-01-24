@@ -30,8 +30,7 @@ class CalendarType extends AbstractType
                 ],
                 'by_reference' => false,
                 'attr' => ['class' => 'events']
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
