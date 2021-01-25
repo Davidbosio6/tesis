@@ -140,7 +140,7 @@ class SiteController extends AbstractController
         return $this->render('AppBundle:Site:dashboard.html.twig', [
             'sexes' => sprintf("%s, %s, %s", count($male), count($female), count($undefined)),
             'shiftNames' => json_encode($shiftNames),
-            'classrooms' => json_encode($classrooms),
+            'classrooms' => json_encode($classrooms)
         ]);
     }
 

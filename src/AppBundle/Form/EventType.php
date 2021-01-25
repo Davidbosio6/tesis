@@ -69,18 +69,29 @@ class EventType extends AbstractType
                 [
                     'html5' => true,
                     'widget' => 'choice',
-                    'minutes' => [00, 10, 20, 30, 40, 50]
+                    'minutes' => [00, 30],
+                    'hours' => $this->getHourChoices(
+                        $options['startHour'],
+                        $options['endHour']
+                    )
                 ]
             )
             ->add('endHour', TimeType::class,
                 [
                     'html5' => true,
                     'widget' => 'choice',
-                    'minutes' => [00, 10, 20, 30, 40, 50]
+                    'minutes' => [00, 30],
+                    'hours' => $this->getHourChoices(
+                        $options['startHour'],
+                        $options['endHour']
+                    )
                 ]
             );
     }
 
+    /**
+     * @return array
+     */
     private function getNameChoices(): array
     {
         /** @var TeacherRepository $teacherRepository */
@@ -98,6 +109,25 @@ class EventType extends AbstractType
     }
 
     /**
+     * @param string $startHour
+     * @param string $endHour
+     *
+     * @return array
+     */
+    private function getHourChoices(
+        string $startHour,
+        string $endHour
+    ): array {
+        $output = [];
+
+        for ($x = $startHour; $x <= $endHour; $x++) {
+            $output[] = $x;
+        }
+
+        return $output;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getBlockPrefix(): string
@@ -108,7 +138,10 @@ class EventType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Event::class
+            'data_class' => Event::class,
         ]);
+
+        $resolver->setRequired('startHour');
+        $resolver->setRequired('endHour');
     }
 }

@@ -27,9 +27,11 @@ class CalendarType extends AbstractType
                 'prototype' => true,
                 'entry_options' => [
                     'label' => false,
+                    'startHour' => $options['startHour'],
+                    'endHour' => $options['endHour'],
                 ],
                 'by_reference' => false,
-                'attr' => ['class' => 'events']
+                'attr' => ['class' => 'events'],
             ]);
     }
 
@@ -38,5 +40,8 @@ class CalendarType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Calendar::class
         ]);
+
+        $resolver->setRequired('startHour');
+        $resolver->setRequired('endHour');
     }
 }
