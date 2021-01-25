@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\About;
-use AppBundle\Entity\Calendar;
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\Settings;
 use AppBundle\Entity\Shift;
@@ -11,7 +10,6 @@ use AppBundle\Entity\Student;
 use AppBundle\Form\CodeIdType;
 use AppBundle\Form\WayOutAuthorizationType;
 use AppBundle\Repository\AboutRepository;
-use AppBundle\Repository\CalendarRepository;
 use AppBundle\Repository\PlanRepository;
 use AppBundle\Repository\SettingsRepository;
 use AppBundle\Repository\ShiftRepository;
@@ -139,21 +137,10 @@ class SiteController extends AbstractController
             $classrooms[] = $shift->getClassrooms()->count();
         }
 
-        /** @var CalendarRepository $calendarRepository */
-        $calendarRepository = $this->getRepository(Calendar::class);
-        $calendars = $calendarRepository->findAll();
-
-        $calendarSrc = 'src=';
-        /** @var Calendar $calendar */
-        foreach ($calendars as $calendar) {
-            $calendarSrc .= $calendar->getGoogleId() . '&amp;src=';
-        }
-
         return $this->render('AppBundle:Site:dashboard.html.twig', [
             'sexes' => sprintf("%s, %s, %s", count($male), count($female), count($undefined)),
             'shiftNames' => json_encode($shiftNames),
-            'classrooms' => json_encode($classrooms),
-            'calendarSrc' => substr($calendarSrc, 0, -5),
+            'classrooms' => json_encode($classrooms)
         ]);
     }
 
