@@ -6,16 +6,16 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Settings.
+ * Class Course.
  *
  * @ORM\HasLifecycleCallbacks
  *
- * @ORM\Table(name="settings")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\SettingsRepository")
+ * @ORM\Table(name="course")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CourseRepository")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
-class Settings
+class Course
 {
     /**
      * @ORM\Column(type="integer")
@@ -46,17 +46,28 @@ class Settings
     /**
      * @ORM\Column(type="string")
      */
-    private $value;
+    private $school;
 
     /**
-     * @ORM\Column(type="string")
+     * @var DateTime
+     *
+     * @ORM\Column(type="datetime")
      */
-    private $description;
+    private $startAt;
 
     /**
-     * @ORM\Column(type="string")
+     * @var DateTime
+     *
+     * @ORM\Column(type="datetime")
      */
-    private $code;
+    private $endAt;
+
+    /**
+     * @var Teacher
+     *
+     * @ORM\ManyToOne(targetEntity="Teacher", inversedBy="courses")
+     */
+    private $teacher;
 
     /**
      * Gets triggered every time on persist.
@@ -138,14 +149,14 @@ class Settings
     }
 
     /**
-     * @param string $value
+     * @param string $school
      *
      * @return self
      */
-    public function setValue(
-        string $value
+    public function setSchool(
+        string $school
     ): self {
-        $this->value = $value;
+        $this->school = $school;
 
         return $this;
     }
@@ -153,50 +164,71 @@ class Settings
     /**
      * @return string|null
      */
-    public function getValue(): ?string
+    public function getSchool(): ?string
     {
-        return $this->value;
+        return $this->school;
     }
 
     /**
-     * @param string $code
+     * @param DateTime $startAt
      *
      * @return self
      */
-    public function setCode(
-        string $code
+    public function setStartAt(
+        DateTime $startAt
     ): self {
-        $this->code = $code;
+        $this->startAt = $startAt;
 
         return $this;
     }
 
     /**
-     * @return string|null
+     * @return DateTime|null
      */
-    public function getCode(): ?string
+    public function getStartAt(): ?DateTime
     {
-        return $this->code;
+        return $this->startAt;
     }
 
     /**
-     * @param string $description
+     * @param DateTime $endAt
      *
      * @return self
      */
-    public function setDescription(
-        string $description
+    public function setEndAt(
+        DateTime $endAt
     ): self {
-        $this->description = $description;
+        $this->endAt = $endAt;
 
         return $this;
     }
 
     /**
-     * @return string|null
+     * @return DateTime|null
      */
-    public function getDescription(): ?string
+    public function getEndAt(): ?DateTime
     {
-        return $this->description;
+        return $this->endAt;
+    }
+
+    /**
+     * @param Teacher $teacher
+     *
+     * @return self
+     */
+    public function setTeacher(
+        Teacher $teacher
+    ): self {
+        $this->teacher = $teacher;
+
+        return $this;
+    }
+
+    /**
+     * @return Teacher|null
+     */
+    public function getTeacher(): ?Teacher
+    {
+        return $this->teacher;
     }
 }

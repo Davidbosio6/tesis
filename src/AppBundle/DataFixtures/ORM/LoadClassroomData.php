@@ -2,6 +2,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Calendar;
 use AppBundle\Entity\Classroom;
 use AppBundle\Entity\Shift;
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -30,11 +31,23 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         /** @var Shift $shift2 */
         $shift2 = $this->getReference(LoadShiftData::TURNO_TARDE);
 
+        /** @var Calendar $calendar1 */
+        $calendar1 = $this->getReference(LoadCalendarData::CALENDAR_1);
+        /** @var Calendar $calendar2 */
+        $calendar2 = $this->getReference(LoadCalendarData::CALENDAR_2);
+        /** @var Calendar $calendar3 */
+        $calendar3 = $this->getReference(LoadCalendarData::CALENDAR_3);
+        /** @var Calendar $calendar4 */
+        $calendar4 = $this->getReference(LoadCalendarData::CALENDAR_4);
+        /** @var Calendar $calendar5 */
+        $calendar5 = $this->getReference(LoadCalendarData::CALENDAR_5);
+
         $classroom = new Classroom();
         $classroom->setName('Celeste');
         $classroom->setDescription('Sala de 3');
         $classroom->setCapacity(26);
         $classroom->setShift($shift1);
+        $classroom->setCalendar($calendar3);
         $manager->persist($classroom);
         $this->addReference(self::CELESTE, $classroom);
 
@@ -43,6 +56,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         $classroom->setCapacity(30);
         $classroom->setDescription('Sala de 3');
         $classroom->setShift($shift2);
+        $classroom->setCalendar($calendar1);
         $manager->persist($classroom);
         $this->addReference(self::VERDE, $classroom);
 
@@ -51,6 +65,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         $classroom->setCapacity(13);
         $classroom->setDescription('Sala de 4');
         $classroom->setShift($shift1);
+        $classroom->setCalendar($calendar4);
         $manager->persist($classroom);
 
         $classroom = new Classroom();
@@ -58,6 +73,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         $classroom->setCapacity(28);
         $classroom->setDescription('Sala de 4');
         $classroom->setShift($shift2);
+        $classroom->setCalendar($calendar2);
         $manager->persist($classroom);
 
         $classroom = new Classroom();
@@ -65,6 +81,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         $classroom->setCapacity(28);
         $classroom->setDescription('Sala de 5');
         $classroom->setShift($shift1);
+        $classroom->setCalendar($calendar5);
         $manager->persist($classroom);
 
         $manager->flush();
@@ -76,7 +93,8 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
     public function getDependencies(): array
     {
         return [
-            LoadShiftData::class
+            LoadShiftData::class,
+            LoadCalendarData::class
         ];
     }
 }

@@ -251,7 +251,7 @@ class Advisor
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getFullName(): ?string
     {

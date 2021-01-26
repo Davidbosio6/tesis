@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Settings;
 use AppBundle\Repository\SettingsRepository;
+use AppBundle\Service\GoogleSdk;
 use AppBundle\Service\Pagos360Sdk;
 use AppBundle\Service\SendgridSdk;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -81,6 +82,15 @@ abstract class AbstractController extends Controller
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->get('app.service.pagos360_sdk');
+    }
+
+    /**
+     * @return GoogleSdk
+     */
+    protected function getGoogleSdkService(): GoogleSdk
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return $this->get('app.service.google_sdk');
     }
 
     /**

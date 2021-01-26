@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -111,6 +112,19 @@ class Teacher
     private $subject;
 
     /**
+     * @var Course
+     *
+     * @ORM\OneToMany(targetEntity="Course", mappedBy="teacher", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id", nullable=true)
+     */
+    private $courses;
+
+    public function __construct()
+    {
+        $this->courses = new ArrayCollection();
+    }
+
+    /**
      * Gets triggered every time on persist.
      *
      * @ORM\PrePersist
@@ -182,7 +196,7 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getIdNumber(): ?string
     {
@@ -190,7 +204,7 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getFirstName(): ?string
     {
@@ -211,7 +225,7 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getLastName(): ?string
     {
@@ -232,6 +246,14 @@ class Teacher
     }
 
     /**
+     * @return string|null
+     */
+    public function getFullName(): ?string
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+
+    /**
      * @param User $user
      *
      * @return self
@@ -245,7 +267,7 @@ class Teacher
     }
 
     /**
-     * @return User
+     * @return User|null
      */
     public function getUser(): ?User
     {
@@ -266,7 +288,7 @@ class Teacher
     }
 
     /**
-     * @return City
+     * @return City|null
      */
     public function getCity(): ?City
     {
@@ -287,7 +309,7 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getPhoneNumber(): ?string
     {
@@ -308,7 +330,7 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getAddress(): ?string
     {
@@ -329,7 +351,7 @@ class Teacher
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|null
      */
     public function getBirthdate(): ?DateTime
     {
@@ -350,7 +372,7 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getNotes(): ?string
     {
@@ -371,7 +393,7 @@ class Teacher
     }
 
     /**
-     * @return Subject
+     * @return Subject|null
      */
     public function getSubject(): ?Subject
     {
@@ -392,10 +414,40 @@ class Teacher
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getPhoto(): ?string
     {
         return $this->photo;
+    }
+
+    /**
+     * @param Course $course
+     *
+     * @return self
+     */
+    public function addCourse(Course $course): self
+    {
+        $this->courses[] = $course;
+        $course->setTeacher($this);
+
+        return $this;
+    }
+
+    /**
+     * @param Course $course
+     */
+    public function removeCourse(Course $course)
+    {
+        $this->courses->removeElement($course);
+        $course->setTeacher(null);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCourses()
+    {
+        return $this->courses;
     }
 }

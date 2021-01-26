@@ -7,6 +7,7 @@ use AppBundle\Entity\Subject;
 use AppBundle\Entity\Teacher;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -55,7 +56,17 @@ class TeacherType extends AbstractType
                 'required' => false,
                 'mapped' => false
             ])
-        ;
+            ->add('courses', CollectionType::class, [
+                'entry_type' => CourseType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'entry_options' => [
+                    'label' => false,
+                ],
+                'by_reference' => false,
+                'attr' => ['class' => 'courses']
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

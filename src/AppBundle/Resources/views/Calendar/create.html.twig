@@ -1,0 +1,106 @@
+{% extends 'AppBundle:Layout:admin_base.html.twig' %}
+
+{%
+    form_theme form
+    'jquery.collection.html.twig'
+    'AppBundle:Calendar:create-collection-theme.html.twig'
+%}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Crear Cronograma</h3>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Datos de la sala
+        </div>
+        <div class="card-body" style="background-color: #EBEBE4; color: #495057">
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fecha de creación</dt>
+                        <dd>{{ classroom.createdAt | date('d/m/Y H:i') }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Sala</dt>
+                        <dd>{{ classroom.name }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dt>Turno</dt>
+                    <dd>
+                        {{ classroom.shift.name}}
+                        ({{ classroom.shift.startHour | date('H:i') }} - {{ classroom.shift.endHour | date('H:i') }})
+                    </dd>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            Datos del Cronograma
+        </div>
+        <div class="card-body col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <dl>
+                                    <dt>Google ID</dt>
+                                    <dd>{{ form_widget(form.googleId) }}</dd>
+                                </dl>
+                            </div>
+
+                            <dl>
+                                <dd>{{ form_widget(form.events) }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" name="submit" class="btn btn-dark pull-right">
+                Guardar
+            </button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+    <script type="text/javascript">
+        $('.events').collection({
+            min: 1,
+            prefix: 'event',
+            preserve_names: true,
+            allow_duplicate: true,
+            add: `
+                <a href="#" class="event btn btn-default" title="Agregar Evento">
+                    <i class="fa fa-plus-circle"></i>
+                </a>
+            `
+        });
+    </script>
+{% endblock javascripts %}
