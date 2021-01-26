@@ -40,6 +40,8 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $advisor3 = $this->getReference(LoadAdvisorData::ADVISOR_3);
         /** @var Advisor $advisor4 */
         $advisor4 = $this->getReference(LoadAdvisorData::ADVISOR_4);
+        /** @var Advisor $advisor5 */
+        $advisor5 = $this->getReference(LoadAdvisorData::ADVISOR_5);
 
         /** @var Classroom $classroom1 */
         $classroom1 = $this->getReference(LoadClassroomData::CELESTE);
@@ -106,6 +108,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setPhoto('empty.png');
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
+        $student->addAdvisor($advisor5);
         $student->setClassroom($classroom1);
         $student->setPlan($plan1);
         $student->setMedicalHistory($medicalHistory3);

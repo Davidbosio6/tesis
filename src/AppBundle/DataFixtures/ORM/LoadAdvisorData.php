@@ -24,6 +24,8 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
 
     const ADVISOR_4 = 'a_advisor_4';
 
+    const ADVISOR_5 = 'a_advisor_5';
+
     /**
      * {@inheritdoc}
      */
@@ -89,6 +91,20 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
         $advisor->setCity($city2);
         $manager->persist($advisor);
         $this->addReference(self::ADVISOR_4, $advisor);
+
+        $advisor = new Advisor();
+        $advisor->setIdNumber(22204001);
+        $advisor->setEmail('ssilva@noemail.com');
+        $advisor->setBirthdate(new DateTime('+1 week -2 months -30 years'));
+        $advisor->setStudentRelationship('Padre');
+        $advisor->setAddress('Catamarca 132');
+        $advisor->setPhoneNumber('3582342278');
+        $advisor->setFirstName('Santiago');
+        $advisor->setLastName('Silva');
+        $advisor->setPhoto('empty.png');
+        $advisor->setCity($city1);
+        $manager->persist($advisor);
+        $this->addReference(self::ADVISOR_5, $advisor);
 
         $manager->flush();
     }
