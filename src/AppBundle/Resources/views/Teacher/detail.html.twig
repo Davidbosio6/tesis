@@ -102,22 +102,28 @@
             Titulos/Posgrados
         </div>
         <div class="card-body">
-            {% for course in teacher.courses %}
-                <div class="card-body col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <strong><i>{{ course.name }}</i></strong>
+            {% if teacher.courses is empty %}
+                <div class="alert alert-light text-center" role="alert">
+                    No se encontraron resultados
+                </div>
+            {% else %}
+                {% for course in teacher.courses %}
+                    <div class="card-body col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <strong><i>{{ course.name }}</i></strong>
 
-                            <hr>
+                                <hr>
 
-                            <ul>
-                                <li>{{ course.school }}</li>
-                                <li>{{ course.startAt | date('d/m/Y') ~ ' - ' ~ course.endAt | date('d/m/Y') }}</li>
-                            </ul>
+                                <ul>
+                                    <li>{{ course.school }}</li>
+                                    <li>{{ course.startAt | date('d/m/Y') ~ ' - ' ~ course.endAt | date('d/m/Y') }}</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 

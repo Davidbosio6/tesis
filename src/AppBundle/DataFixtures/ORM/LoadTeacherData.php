@@ -18,6 +18,13 @@ use Doctrine\Persistence\ObjectManager;
  */
 class LoadTeacherData extends AbstractFixture implements DependentFixtureInterface
 {
+    const TEACHER_1 = 't_teacher_1';
+    const TEACHER_2 = 't_teacher_2';
+    const TEACHER_3 = 't_teacher_3';
+    const TEACHER_4 = 't_teacher_4';
+    const TEACHER_5 = 't_teacher_5';
+    const TEACHER_6 = 't_teacher_6';
+
     /**
      * {@inheritdoc}
      */
@@ -69,6 +76,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setUser($user1);
         $teacher->setCity($city1);
         $teacher->setSubject($subject1);
+        $this->addReference(self::TEACHER_1, $teacher);
         $manager->persist($teacher);
 
         $teacher = new Teacher();
@@ -82,6 +90,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setUser($user2);
         $teacher->setCity($city2);
         $teacher->setSubject($subject2);
+        $this->addReference(self::TEACHER_2, $teacher);
         $manager->persist($teacher);
 
         $teacher = new Teacher();
@@ -95,6 +104,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setUser($user3);
         $teacher->setCity($city3);
         $teacher->setSubject($subject3);
+        $this->addReference(self::TEACHER_3, $teacher);
         $manager->persist($teacher);
 
         $teacher = new Teacher();
@@ -108,6 +118,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setUser($user4);
         $teacher->setCity($city2);
         $teacher->setSubject($subject4);
+        $this->addReference(self::TEACHER_4, $teacher);
         $manager->persist($teacher);
 
         $teacher = new Teacher();
@@ -121,6 +132,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setUser($user5);
         $teacher->setCity($city3);
         $teacher->setSubject($subject5);
+        $this->addReference(self::TEACHER_5, $teacher);
         $manager->persist($teacher);
 
         $teacher = new Teacher();
@@ -135,6 +147,7 @@ class LoadTeacherData extends AbstractFixture implements DependentFixtureInterfa
         $teacher->setCity($city4);
         $teacher->setSubject($subject6);
         $manager->persist($teacher);
+        $this->addReference(self::TEACHER_6, $teacher);
 
         $manager->flush();
     }
