@@ -26,6 +26,10 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
 
     const ADVISOR_5 = 'a_advisor_5';
 
+    const ADVISOR_6 = 'a_advisor_6';
+
+    const ADVISOR_7 = 'a_advisor_7';
+
     /**
      * {@inheritdoc}
      */
@@ -105,6 +109,34 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
         $advisor->setCity($city1);
         $manager->persist($advisor);
         $this->addReference(self::ADVISOR_5, $advisor);
+
+        $advisor = new Advisor();
+        $advisor->setIdNumber(23402890);
+        $advisor->setEmail('ccabello@noemail.com');
+        $advisor->setBirthdate(new DateTime('+2 week -4 months -45 years'));
+        $advisor->setStudentRelationship('Madre');
+        $advisor->setAddress('Mariano Moreno 29');
+        $advisor->setPhoneNumber('3581592978');
+        $advisor->setFirstName('Carolina');
+        $advisor->setLastName('Castro');
+        $advisor->setPhoto('empty.png');
+        $advisor->setCity($city1);
+        $manager->persist($advisor);
+        $this->addReference(self::ADVISOR_6, $advisor);
+
+        $advisor = new Advisor();
+        $advisor->setIdNumber(21493200);
+        $advisor->setEmail('jmanso@noemail.com');
+        $advisor->setBirthdate(new DateTime('+2 week -4 months -45 years'));
+        $advisor->setStudentRelationship('Padre');
+        $advisor->setAddress('Colon 1220');
+        $advisor->setPhoneNumber('3581592978');
+        $advisor->setFirstName('Javier');
+        $advisor->setLastName('Manso');
+        $advisor->setPhoto('empty.png');
+        $advisor->setCity($city1);
+        $manager->persist($advisor);
+        $this->addReference(self::ADVISOR_7, $advisor);
 
         $manager->flush();
     }
