@@ -17,11 +17,13 @@ class StudentRepository extends EntityRepository
     /**
      * @return Query
      */
-    public function findAllQuery()
+    public function findAllQuery(): Query
     {
         $qb = $this->createQueryBuilder('student');
 
-        return $qb->getQuery();
+        return $qb->where(
+            $qb->expr()->isNotNull('student.classroom')
+        )->getQuery();
     }
 
     /**
@@ -29,7 +31,7 @@ class StudentRepository extends EntityRepository
      *
      * @return Query
      */
-    public function findAllByFilter(string $filter)
+    public function findAllByFilter(string $filter): Query
     {
         $qb = $this->createQueryBuilder('student')
             ->join('student.classroom', 'classroom')
@@ -55,7 +57,7 @@ class StudentRepository extends EntityRepository
      *
      * @return Student[]|null
      */
-    public function findAllBySex(string $value)
+    public function findAllBySex(string $value): ?array
     {
         $qb = $this->createQueryBuilder('student');
 
@@ -72,7 +74,7 @@ class StudentRepository extends EntityRepository
      *
      * @return Student[]|null
      */
-    public function findAllByInstallmentsGenerated(string $value)
+    public function findAllByInstallmentsGenerated(string $value): ?array
     {
         $qb = $this->createQueryBuilder('student');
 

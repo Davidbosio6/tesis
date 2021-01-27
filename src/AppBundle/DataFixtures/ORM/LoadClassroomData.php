@@ -45,7 +45,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         $classroom = new Classroom();
         $classroom->setName('Celeste');
         $classroom->setDescription('Sala de 3');
-        $classroom->setCapacity(26);
+        $classroom->setCapacity(25);
         $classroom->setShift($shift1);
         $classroom->setCalendar($calendar3);
         $manager->persist($classroom);
@@ -53,7 +53,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
 
         $classroom = new Classroom();
         $classroom->setName('Verde');
-        $classroom->setCapacity(30);
+        $classroom->setCapacity(22);
         $classroom->setDescription('Sala de 3');
         $classroom->setShift($shift2);
         $classroom->setCalendar($calendar1);
@@ -70,7 +70,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
 
         $classroom = new Classroom();
         $classroom->setName('Violeta');
-        $classroom->setCapacity(28);
+        $classroom->setCapacity(23);
         $classroom->setDescription('Sala de 4');
         $classroom->setShift($shift2);
         $classroom->setCalendar($calendar2);
@@ -78,7 +78,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
 
         $classroom = new Classroom();
         $classroom->setName('Roja');
-        $classroom->setCapacity(28);
+        $classroom->setCapacity(25);
         $classroom->setDescription('Sala de 5');
         $classroom->setShift($shift1);
         $classroom->setCalendar($calendar5);

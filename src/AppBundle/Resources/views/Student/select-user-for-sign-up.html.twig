@@ -48,8 +48,21 @@
             </div>
         </div>
     </div>
-
-    <br>
-
     {{ form_end(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $("#select_user_for_sign_up_student").select2({
+            language: {
+                noResults: function () {
+                    return "No se encontraron resultados.";
+                },
+                searching: function () {
+                    return "Buscando...";
+                }
+            }
+        });
+    </script>
+{% endblock javascripts %}
