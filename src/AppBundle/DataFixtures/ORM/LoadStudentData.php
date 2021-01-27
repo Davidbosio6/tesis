@@ -54,6 +54,14 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
 
         /** @var Plan $plan1 */
         $plan1 = $this->getReference(LoadPlanData::PLAN_BASICO);
+        /** @var Plan $plan2 */
+        $plan2 = $this->getReference(LoadPlanData::PLAN_INTERMEDIO);
+        /** @var Plan $plan3 */
+        $plan3 = $this->getReference(LoadPlanData::PLAN_PREMIUM);
+        /** @var Plan $plan4 */
+        $plan4 = $this->getReference(LoadPlanData::PLAN_BECA_50);
+        /** @var Plan $plan5 */
+        $plan5 = $this->getReference(LoadPlanData::PLAN_BECA_100);
 
         /** @var MedicalHistory $medicalHistory1 */
         $medicalHistory1 = $this->getReference(LoadMedicalHistoryData::MEDICAL_HISTORY_1);
@@ -186,7 +194,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan3);
         $student->setMedicalHistory($medicalHistory49);
         $manager->persist($student);
 
@@ -203,7 +211,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan2);
         $student->setMedicalHistory($medicalHistory48);
         $manager->persist($student);
 
@@ -220,7 +228,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan4);
         $student->setMedicalHistory($medicalHistory47);
         $manager->persist($student);
 
@@ -254,7 +262,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan2);
         $student->setMedicalHistory($medicalHistory45);
         $manager->persist($student);
 
@@ -271,7 +279,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan5);
         $student->setMedicalHistory($medicalHistory44);
         $manager->persist($student);
 
@@ -288,7 +296,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan5);
         $student->setMedicalHistory($medicalHistory43);
         $manager->persist($student);
 
@@ -322,7 +330,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan2);
         $student->setMedicalHistory($medicalHistory41);
         $manager->persist($student);
 
@@ -339,7 +347,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan3);
         $student->setMedicalHistory($medicalHistory40);
         $manager->persist($student);
 
@@ -356,7 +364,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan4);
         $student->setMedicalHistory($medicalHistory39);
         $manager->persist($student);
 
@@ -373,7 +381,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan4);
         $student->setMedicalHistory($medicalHistory38);
         $manager->persist($student);
 
@@ -390,7 +398,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan2);
         $student->setMedicalHistory($medicalHistory37);
         $manager->persist($student);
 
@@ -407,7 +415,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan2);
         $student->setMedicalHistory($medicalHistory36);
         $manager->persist($student);
 
@@ -424,7 +432,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan2);
         $student->setMedicalHistory($medicalHistory35);
         $manager->persist($student);
 
@@ -458,7 +466,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan3);
         $student->setMedicalHistory($medicalHistory33);
         $manager->persist($student);
 
@@ -475,7 +483,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan4);
         $student->setMedicalHistory($medicalHistory32);
         $manager->persist($student);
 
@@ -492,7 +500,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan5);
         $student->setMedicalHistory($medicalHistory31);
         $manager->persist($student);
 
@@ -509,7 +517,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan5);
         $student->setMedicalHistory($medicalHistory30);
         $manager->persist($student);
 
@@ -526,7 +534,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan5);
         $student->setMedicalHistory($medicalHistory29);
         $manager->persist($student);
 
@@ -543,7 +551,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan4);
         $student->setMedicalHistory($medicalHistory28);
         $manager->persist($student);
 
@@ -577,7 +585,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan2);
         $student->setMedicalHistory($medicalHistory26);
         $manager->persist($student);
 
@@ -594,7 +602,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan3);
         $student->setMedicalHistory($medicalHistory25);
         $manager->persist($student);
 
@@ -611,7 +619,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan4);
         $student->setMedicalHistory($medicalHistory24);
         $manager->persist($student);
 
@@ -628,7 +636,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan4);
         $student->setMedicalHistory($medicalHistory23);
         $manager->persist($student);
 
@@ -645,7 +653,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan5);
         $student->setMedicalHistory($medicalHistory22);
         $manager->persist($student);
 
@@ -696,7 +704,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan2);
         $student->setMedicalHistory($medicalHistory19);
         $manager->persist($student);
 
@@ -713,7 +721,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan2);
         $student->setMedicalHistory($medicalHistory18);
         $manager->persist($student);
 
@@ -730,7 +738,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan2);
         $student->setMedicalHistory($medicalHistory17);
         $manager->persist($student);
 
@@ -747,7 +755,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan3);
         $student->setMedicalHistory($medicalHistory16);
         $manager->persist($student);
 
@@ -781,7 +789,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan3);
         $student->setMedicalHistory($medicalHistory14);
         $manager->persist($student);
 
@@ -798,7 +806,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan4);
         $student->setMedicalHistory($medicalHistory13);
         $manager->persist($student);
 
@@ -815,7 +823,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan4);
         $student->setMedicalHistory($medicalHistory12);
         $manager->persist($student);
 
@@ -832,7 +840,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan2);
         $student->setMedicalHistory($medicalHistory11);
         $manager->persist($student);
 
@@ -849,7 +857,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan5);
         $student->setMedicalHistory($medicalHistory10);
         $manager->persist($student);
 
@@ -866,7 +874,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan3);
         $student->setMedicalHistory($medicalHistory9);
         $manager->persist($student);
 
@@ -883,7 +891,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan4);
         $student->setMedicalHistory($medicalHistory8);
         $manager->persist($student);
 
@@ -900,7 +908,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan2);
         $student->setMedicalHistory($medicalHistory7);
         $manager->persist($student);
 
@@ -917,7 +925,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan3);
         $student->setMedicalHistory($medicalHistory6);
         $manager->persist($student);
 
@@ -935,7 +943,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setCity($city1);
         $student->addAdvisor($advisor7);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan5);
         $student->setMedicalHistory($medicalHistory5);
         $manager->persist($student);
 
@@ -953,7 +961,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setCity($city1);
         $student->addAdvisor($advisor6);
         $student->setClassroom($classroom2);
-        $student->setPlan($plan1);
+        $student->setPlan($plan2);
         $student->setMedicalHistory($medicalHistory4);
         $manager->persist($student);
 
@@ -971,7 +979,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setCity($city1);
         $student->addAdvisor($advisor5);
         $student->setClassroom($classroom1);
-        $student->setPlan($plan1);
+        $student->setPlan($plan3);
         $student->setMedicalHistory($medicalHistory3);
         $manager->persist($student);
 
@@ -990,7 +998,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->addAdvisor($advisor1);
         $student->addAdvisor($advisor2);
         $student->setClassroom($classroom1);
-        $student->setPlan($plan1);
+        $student->setPlan($plan5);
         $student->setMedicalHistory($medicalHistory1);
         $manager->persist($student);
         $this->addReference(self::STUDENT_1, $student);
