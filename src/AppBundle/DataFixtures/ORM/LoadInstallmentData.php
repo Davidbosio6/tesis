@@ -10,6 +10,11 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
+/**
+ * Class LoadInstallmentData.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class LoadInstallmentData extends AbstractFixture implements FixtureInterface, DependentFixtureInterface
 {
     /**
@@ -110,7 +115,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
     /**
      * {@inheritdoc}
      */
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             LoadStudentData::class,

@@ -7,6 +7,11 @@ use AppBundle\Repository\SettingsRepository;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
 
+/**
+ * Class LoadSettingsData.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class LoadSettingsData extends AbstractFixture
 {
     /**

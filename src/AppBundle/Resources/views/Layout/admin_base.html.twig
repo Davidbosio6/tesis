@@ -4,9 +4,11 @@
     <title>{% block title %}Administración{% endblock %}</title>
 
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/stylesheets/css/modern-business.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/stylesheets/css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/stylesheets/css/chart.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/stylesheets/modern-business.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/stylesheets/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/stylesheets/chart.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/stylesheets/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/stylesheets/jquery.min.css') }}" rel="stylesheet">
 
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('logo.png') }}"/>
@@ -172,6 +174,7 @@
                         <script src="{{ asset('assets/js/dashboard.js') }}"></script>
                         <script src="{{ asset('assets/js/font-awesome.min.js') }}"></script>
                         <script src="{{ asset('assets/js/chart.js') }}"></script>
+                        <script src="{{ asset('assets/js/select2.min.js') }}"></script>
                     {% endblock %}
                 </div>
             </main>

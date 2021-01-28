@@ -10,12 +10,18 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
+/**
+ * Class LoadClassroomData.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class LoadClassroomData extends AbstractFixture implements FixtureInterface, DependentFixtureInterface
 {
     const CELESTE = 'c_celeste';
-
     const VERDE = 'c_verde';
+    const AMARILLA = 'c_amarilla';
+    const VIOLETA = 'c_violeta';
+    const ROJA = 'c_roja';
 
     /**
      * {@inheritdoc}
@@ -38,11 +44,10 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         /** @var Calendar $calendar5 */
         $calendar5 = $this->getReference(LoadCalendarData::CALENDAR_5);
 
-
         $classroom = new Classroom();
         $classroom->setName('Celeste');
         $classroom->setDescription('Sala de 3');
-        $classroom->setCapacity(26);
+        $classroom->setCapacity(20);
         $classroom->setShift($shift1);
         $classroom->setCalendar($calendar3);
         $manager->persist($classroom);
@@ -50,7 +55,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
 
         $classroom = new Classroom();
         $classroom->setName('Verde');
-        $classroom->setCapacity(30);
+        $classroom->setCapacity(22);
         $classroom->setDescription('Sala de 3');
         $classroom->setShift($shift2);
         $classroom->setCalendar($calendar1);
@@ -64,22 +69,25 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         $classroom->setShift($shift1);
         $classroom->setCalendar($calendar4);
         $manager->persist($classroom);
+        $this->addReference(self::AMARILLA, $classroom);
 
         $classroom = new Classroom();
         $classroom->setName('Violeta');
-        $classroom->setCapacity(28);
+        $classroom->setCapacity(20);
         $classroom->setDescription('Sala de 4');
         $classroom->setShift($shift2);
         $classroom->setCalendar($calendar2);
         $manager->persist($classroom);
+        $this->addReference(self::VIOLETA, $classroom);
 
         $classroom = new Classroom();
         $classroom->setName('Roja');
-        $classroom->setCapacity(28);
+        $classroom->setCapacity(25);
         $classroom->setDescription('Sala de 5');
         $classroom->setShift($shift1);
         $classroom->setCalendar($calendar5);
         $manager->persist($classroom);
+        $this->addReference(self::ROJA, $classroom);
 
         $manager->flush();
     }

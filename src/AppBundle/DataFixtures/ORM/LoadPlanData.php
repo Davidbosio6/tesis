@@ -7,10 +7,18 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
+/**
+ * Class LoadPlanData.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class LoadPlanData extends AbstractFixture implements FixtureInterface
 {
+    const PLAN_BECA_100 = 'p_beca_100';
+    const PLAN_BECA_50 = 'p_beca_50';
     const PLAN_BASICO = 'p_plan_basico';
+    const PLAN_INTERMEDIO = 'p_plan_intermedio';
+    const PLAN_PREMIUM = 'p_plan_premium';
 
     /**
      * {@inheritdoc}
@@ -26,6 +34,7 @@ class LoadPlanData extends AbstractFixture implements FixtureInterface
         $plan->setShowPlan(false);
         $plan->setIsHighLighted(false);
         $manager->persist($plan);
+        $this->addReference(self::PLAN_BECA_100, $plan);
 
         $plan = new Plan();
         $plan->setName('Beca 50%');
@@ -36,6 +45,7 @@ class LoadPlanData extends AbstractFixture implements FixtureInterface
         $plan->setShowPlan(false);
         $plan->setIsHighLighted(false);
         $manager->persist($plan);
+        $this->addReference(self::PLAN_BECA_50, $plan);
 
         $plan = new Plan();
         $plan->setName('Plan Básico');
@@ -45,8 +55,8 @@ class LoadPlanData extends AbstractFixture implements FixtureInterface
         $plan->setAmount(1000);
         $plan->setShowPlan(true);
         $plan->setIsHighLighted(false);
-        $this->addReference(self::PLAN_BASICO, $plan);
         $manager->persist($plan);
+        $this->addReference(self::PLAN_BASICO, $plan);
 
         $plan = new Plan();
         $plan->setName('Plan Intermedio');
@@ -57,6 +67,7 @@ class LoadPlanData extends AbstractFixture implements FixtureInterface
         $plan->setShowPlan(true);
         $plan->setIsHighLighted(false);
         $manager->persist($plan);
+        $this->addReference(self::PLAN_INTERMEDIO, $plan);
 
         $plan = new Plan();
         $plan->setName('Plan Premium');
@@ -67,6 +78,7 @@ class LoadPlanData extends AbstractFixture implements FixtureInterface
         $plan->setShowPlan(true);
         $plan->setIsHighLighted(true);
         $manager->persist($plan);
+        $this->addReference(self::PLAN_PREMIUM, $plan);
 
         $manager->flush();
     }

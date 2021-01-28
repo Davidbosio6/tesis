@@ -8,7 +8,11 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
+/**
+ * Class LoadProvinceData.
+ *
+ * @author David Bosio <dbosio@pagos360.com>
+ */
 class LoadProvinceData extends AbstractFixture implements DependentFixtureInterface
 {
     const CORDOBA = 'p_cordoba';
@@ -145,7 +149,7 @@ class LoadProvinceData extends AbstractFixture implements DependentFixtureInterf
     /**
      * {@inheritdoc}
      */
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             LoadCountryData::class,

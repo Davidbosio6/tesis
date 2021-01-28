@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Advisor;
+use AppBundle\Entity\Classroom;
 use AppBundle\Entity\Student;
 use AppBundle\Form\SelectEmailType;
 use AppBundle\Form\SelectUserForSignUpType;
@@ -119,6 +120,10 @@ class StudentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getEntityManager();
 
+            /** @var Classroom $classroom */
+            $classroom = $em->getRepository(Classroom::class)->find($student->getClassroom());
+            $student->setClassroom($classroom);
+
             if (!empty($form['photo']->getData())) {
                 $fileName = sprintf('student_%s.png', $student->getId());
 
@@ -192,6 +197,10 @@ class StudentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getEntityManager();
+
+            /** @var Classroom $classroom */
+            $classroom = $em->getRepository(Classroom::class)->find($student->getClassroom());
+            $student->setClassroom($classroom);
 
             if (!empty($form['photo']->getData())) {
                 $fileName = sprintf('student_%s.png', $student->getId());
