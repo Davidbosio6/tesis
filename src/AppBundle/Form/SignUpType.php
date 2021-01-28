@@ -5,6 +5,8 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Classroom;
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\Student;
+use AppBundle\Repository\ClassroomRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -12,14 +14,35 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use JMS\DiExtraBundle\Annotation as DI;
 
 /**
  * Class SignUpType.
+ *
+ * @DI\Service("app.form.sign_up_type")
+ * @DI\Tag("form.type")
  *
  * @author David Bosio <dbosio@pagos360.com>
  */
 class SignUpType extends AbstractType
 {
+    /**
+     * @var EntityManager
+     */
+    protected $em;
+
+    /**
+     * @DI\InjectParams({
+     *     "em" = @DI\Inject("doctrine.orm.entity_manager"),
+     * })
+     *
+     * @param EntityManager $em
+     */
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -34,17 +57,12 @@ class SignUpType extends AbstractType
                 'by_reference' => false,
                 'attr' => ['class' => 'advisors']
             ])
-            ->add('classroom', EntityType::class, [
-                'class' => Classroom::class,
-                'choice_label' => 'name',
+            ->add('classroom', ChoiceType::class, [
                 'placeholder' => '-- Seleccione una sala --',
-                'group_by' => function (Classroom $classroom) {
-                    return $classroom->getShift()->getName();
-                }
+                'choices' => $this->getChoices()
             ])
             ->add('plan', EntityType::class, [
                 'class' => Plan::class,
-                'placeholder' => '-- Seleccione un plan --',
                 'choice_label' => 'name'
             ])
             ->add('generateInstallments', ChoiceType::class, [
@@ -60,6 +78,22 @@ class SignUpType extends AbstractType
             ->add('medicalHistory', MedicalHistoryType::class, [
                 'action' => $options['mode']
             ]);
+    }
+
+    private function getChoices(): array
+    {
+        /** @var ClassroomRepository $classroomRepository */
+        $classroomRepository = $this->em->getRepository(Classroom::class);
+
+        $output = [];
+        /** @var Classroom $classroom */
+        foreach ($classroomRepository->findAll() as $classroom) {
+            if ($classroom->getCapacity() > $classroom->getStudents()->count()) {
+                $output[$classroom->getShift()->getName() . " - " . $classroom->getName()] = $classroom->getId();
+            }
+        }
+
+        return $output;
     }
 
     public function configureOptions(OptionsResolver $resolver)

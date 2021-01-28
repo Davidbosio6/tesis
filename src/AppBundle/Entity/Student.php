@@ -394,22 +394,20 @@ class Student
     }
 
     /**
-     * @param Classroom|null $classroom
+     * @param Classroom|int|null $classroom
      *
      * @return self
      */
-    public function setClassroom(
-        Classroom $classroom = null
-    ): self {
+    public function setClassroom($classroom = null): self {
         $this->classroom = $classroom;
 
         return $this;
     }
 
     /**
-     * @return Classroom|null
+     * @return Classroom|int|null
      */
-    public function getClassroom(): ?Classroom
+    public function getClassroom()
     {
         return $this->classroom;
     }
