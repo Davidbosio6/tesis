@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\About;
+use AppBundle\Entity\Installment;
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\Settings;
 use AppBundle\Entity\Shift;
@@ -14,6 +15,7 @@ use AppBundle\Repository\PlanRepository;
 use AppBundle\Repository\SettingsRepository;
 use AppBundle\Repository\ShiftRepository;
 use AppBundle\Repository\StudentRepository;
+use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -197,9 +199,23 @@ class SiteController extends AbstractController
     public function InstallmentsPaySelectInstallmentAction(
         Student $student
     ): Response {
+
+        $installments = $student->getInstallments()->filter(
+            function (Installment $installment) {
+                $today = new DateTime();
+
+                if ($installment->getDueDate()->getTimestamp() < $today->getTimestamp()) {
+                    return $installment;
+                }
+                return null;
+            }
+        );
+
+
         return $this->render('AppBundle:Site:installments-pay-select-installment.html.twig', [
             'siteName' => $this->getSiteName(),
             'student' => $student,
+            'installments' => $installments,
         ]);
     }
 
