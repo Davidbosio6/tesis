@@ -64,6 +64,9 @@ class LoadMedicalHistoryData extends AbstractFixture implements FixtureInterface
     const MEDICAL_HISTORY_48 = "medical_history_48";
     const MEDICAL_HISTORY_49 = "medical_history_49";
     const MEDICAL_HISTORY_50 = "medical_history_50";
+    const MEDICAL_HISTORY_51 = "medical_history_51";
+    const MEDICAL_HISTORY_52 = "medical_history_52";
+    const MEDICAL_HISTORY_53 = "medical_history_53";
 
     /**
      * {@inheritdoc}
@@ -969,6 +972,60 @@ class LoadMedicalHistoryData extends AbstractFixture implements FixtureInterface
         $medicalHistory->setCeliaco(0);
         $manager->persist($medicalHistory);
         $this->addReference(self::MEDICAL_HISTORY_50, $medicalHistory);
+
+        $medicalHistory = new MedicalHistory();
+        $medicalHistory->setWeight('25 kg');
+        $medicalHistory->setHeight('0.58 mts');
+        $medicalHistory->setBloodType('A+');
+        $medicalHistory->setAllergy(null);
+        $medicalHistory->setChronicIllness(null);
+        $medicalHistory->setMedicine(null);
+        $medicalHistory->setAsma(1);
+        $medicalHistory->setSinusitis(0);
+        $medicalHistory->setBronquitis(0);
+        $medicalHistory->setOtitis(0);
+        $medicalHistory->setTosConvulsiva(0);
+        $medicalHistory->setMigrania(1);
+        $medicalHistory->setDiabetes(0);
+        $medicalHistory->setCeliaco(0);
+        $manager->persist($medicalHistory);
+        $this->addReference(self::MEDICAL_HISTORY_51, $medicalHistory);
+
+        $medicalHistory = new MedicalHistory();
+        $medicalHistory->setWeight('25 kg');
+        $medicalHistory->setHeight('0.58 mts');
+        $medicalHistory->setBloodType('A+');
+        $medicalHistory->setAllergy(null);
+        $medicalHistory->setChronicIllness(null);
+        $medicalHistory->setMedicine(null);
+        $medicalHistory->setAsma(1);
+        $medicalHistory->setSinusitis(0);
+        $medicalHistory->setBronquitis(0);
+        $medicalHistory->setOtitis(0);
+        $medicalHistory->setTosConvulsiva(0);
+        $medicalHistory->setMigrania(1);
+        $medicalHistory->setDiabetes(0);
+        $medicalHistory->setCeliaco(0);
+        $manager->persist($medicalHistory);
+        $this->addReference(self::MEDICAL_HISTORY_52, $medicalHistory);
+
+        $medicalHistory = new MedicalHistory();
+        $medicalHistory->setWeight('25 kg');
+        $medicalHistory->setHeight('0.58 mts');
+        $medicalHistory->setBloodType('A+');
+        $medicalHistory->setAllergy(null);
+        $medicalHistory->setChronicIllness(null);
+        $medicalHistory->setMedicine(null);
+        $medicalHistory->setAsma(1);
+        $medicalHistory->setSinusitis(0);
+        $medicalHistory->setBronquitis(0);
+        $medicalHistory->setOtitis(0);
+        $medicalHistory->setTosConvulsiva(0);
+        $medicalHistory->setMigrania(1);
+        $medicalHistory->setDiabetes(0);
+        $medicalHistory->setCeliaco(0);
+        $manager->persist($medicalHistory);
+        $this->addReference(self::MEDICAL_HISTORY_53, $medicalHistory);
 
         $manager->flush();
     }

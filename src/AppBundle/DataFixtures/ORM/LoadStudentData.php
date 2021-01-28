@@ -170,6 +170,63 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $medicalHistory49 = $this->getReference(LoadMedicalHistoryData::MEDICAL_HISTORY_49);
         /** @var MedicalHistory $medicalHistory50 */
         $medicalHistory50 = $this->getReference(LoadMedicalHistoryData::MEDICAL_HISTORY_50);
+        /** @var MedicalHistory $medicalHistory51 */
+        $medicalHistory51 = $this->getReference(LoadMedicalHistoryData::MEDICAL_HISTORY_51);
+        /** @var MedicalHistory $medicalHistory52 */
+        $medicalHistory52 = $this->getReference(LoadMedicalHistoryData::MEDICAL_HISTORY_52);
+        /** @var MedicalHistory $medicalHistory53 */
+        $medicalHistory53 = $this->getReference(LoadMedicalHistoryData::MEDICAL_HISTORY_53);
+
+        $student = new Student();
+        $hashedId = strtoupper(hash('crc32', 65));
+        $student->setCodeId($hashedId);
+        $student->setIdNumber(80637212);
+        $student->setBirthdate(new DateTime('+1 month -3 years'));
+        $student->setAddress('Mariano Moerno 120');
+        $student->setFirstName('Lucia');
+        $student->setLastName('Cabral');
+        $student->setSex('Femenino');
+        $student->setPhoto('empty.png');
+        $student->setInstallmentsGenerated(false);
+        $student->setCity($city1);
+        $student->setClassroom($classroom2);
+        $student->setPlan($plan1);
+        $student->setMedicalHistory($medicalHistory53);
+        $manager->persist($student);
+
+        $student = new Student();
+        $hashedId = strtoupper(hash('crc32', 64));
+        $student->setCodeId($hashedId);
+        $student->setIdNumber(80601202);
+        $student->setBirthdate(new DateTime('+1 month -3 years'));
+        $student->setAddress('La Rioja 32');
+        $student->setFirstName('Valentin');
+        $student->setLastName('Pereyra');
+        $student->setSex('Masculino');
+        $student->setPhoto('empty.png');
+        $student->setInstallmentsGenerated(false);
+        $student->setCity($city1);
+        $student->setClassroom($classroom2);
+        $student->setPlan($plan1);
+        $student->setMedicalHistory($medicalHistory52);
+        $manager->persist($student);
+
+        $student = new Student();
+        $hashedId = strtoupper(hash('crc32', 64));
+        $student->setCodeId($hashedId);
+        $student->setIdNumber(81019103);
+        $student->setBirthdate(new DateTime('+1 month -3 years'));
+        $student->setAddress('Martin Queno 614 32');
+        $student->setFirstName('Martina');
+        $student->setLastName('Oviedo');
+        $student->setSex('Femenino');
+        $student->setPhoto('empty.png');
+        $student->setInstallmentsGenerated(false);
+        $student->setCity($city1);
+        $student->setClassroom($classroom1);
+        $student->setPlan($plan1);
+        $student->setMedicalHistory($medicalHistory51);
+        $manager->persist($student);
 
         $student = new Student();
         $hashedId = strtoupper(hash('crc32', 63));
