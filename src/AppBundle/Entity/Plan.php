@@ -257,12 +257,12 @@ class Plan
     }
 
     /**
-     * @param string $amount
+     * @param float $amount
      *
      * @return self
      */
     public function setAmount(
-        string $amount
+        float $amount
     ): self {
         $this->amount = $amount;
 
@@ -270,9 +270,9 @@ class Plan
     }
 
     /**
-     * @return string
+     * @return float|null
      */
-    public function getAmount(): ?string
+    public function getAmount(): ?float
     {
         return $this->amount;
     }

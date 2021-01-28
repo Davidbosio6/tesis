@@ -30,7 +30,11 @@ class InstallmentController extends AbstractController
         Student $student
     ): Response {
         try {
-           $this->getPagos360SdkService()->generateInstallments($student);
+            if ($student->getPlan()->getAmount() > 0) {
+                $this->getPagos360SdkService()->generateInstallments($student);
+            }
+
+            $this->getEntityManager()->flush();
         } catch (Exception $e) {
             $this->addFlash('error', $e->getMessage());
 
@@ -69,7 +73,9 @@ class InstallmentController extends AbstractController
             $students = $studentRepository->findAllByInstallmentsGenerated(false);
 
             foreach ($students as $student) {
-                $this->getPagos360SdkService()->generateInstallments($student);
+                if ($student->getPlan()->getAmount() > 0) {
+                    $this->getPagos360SdkService()->generateInstallments($student);
+                }
             }
 
             $this->getEntityManager()->flush();

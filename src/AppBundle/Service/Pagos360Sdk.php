@@ -99,13 +99,14 @@ class Pagos360Sdk
                 $installment->setTransactionId($jsonResponse->id);
                 $installment->setCheckoutUrl($jsonResponse->checkout_url);
                 $installment->setPdfUrl($jsonResponse->pdf_url);
-                $student->setInstallmentsGenerated(true);
             } catch (Exception | Throwable $e) {
                 $this->em->remove($installment);
 
                 throw new Exception('Ocurrió un error mientras se generaban las cuotas!');
             }
         }
+
+        $student->setInstallmentsGenerated(true);
     }
 
     /**
