@@ -8,6 +8,7 @@ use AppBundle\Repository\InstallmentRepository;
 use AppBundle\Repository\StudentRepository;
 use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -55,10 +56,35 @@ class InstallmentController extends AbstractController
     /**
      * @Route("/list", name="installment_list")
      *
+     * @param Request $request
      * @return Response
      */
-    public function listAction(): Response {
-        return $this->render('AppBundle:Installment:list.html.twig');
+    public function listAction(
+        Request $request
+    ): Response {
+        $page = $request->query->get('page') ?? 1;
+        $limit = $request->query->get('limit') ?? 20;
+
+        /** @var InstallmentRepository $repository */
+        $repository = $this->getRepository(Installment::class);
+
+        $data = $this->getKnpPaginatorService()->paginate(
+            $repository->findAll(),
+            $page,
+            $limit,
+            [
+                'defaultSortFieldName' => 'id',
+                'defaultSortDirection' => 'DESC'
+            ]
+        );
+
+
+        return $this->render(
+            'AppBundle:Installment:list.html.twig',
+            [
+                'table' => $data,
+            ]
+        );
     }
 
     /**

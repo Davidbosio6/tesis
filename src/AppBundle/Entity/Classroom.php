@@ -272,4 +272,9 @@ class Classroom
     {
         return $this->calendar;
     }
+
+    public function __toString(): string
+    {
+     return $this->id;
+    }
 }
