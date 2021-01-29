@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * InstallmentRepository.
@@ -12,4 +13,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class InstallmentRepository extends EntityRepository
 {
+    /**
+     * @return Query
+     */
+    public function findAllQuery(): Query
+    {
+        $qb = $this->createQueryBuilder('installment');
+
+        return $qb->getQuery();
+    }
 }

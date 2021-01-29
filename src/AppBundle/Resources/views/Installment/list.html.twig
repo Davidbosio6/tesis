@@ -14,4 +14,71 @@
             </a>
         </div>
     </div>
+
+    <hr>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Fecha de creación</th>
+            <th scope="col">Alumno</th>
+            <th scope="col">Periodo</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Estado</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if table is empty %}
+            <tr>
+                <td colspan="100">
+                    <div class="alert alert-light text-center" role="alert">
+                        No se encontraron resultados
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            {% for installment in table %}
+                <tr>
+                    <td>{{ installment.id }}</td>
+                    <td>{{ installment.createdAt | date('d-m-Y') }}</td>
+                    <td>{{ installment.student.fullName }}</td>
+                    <td>{{ installment.dueDate | date('d-m-Y') }}</td>
+                    <td>${{ installment.amount }}</td>
+                    <td class="
+                                {% if installment.state == 'Pendiente' %}alert alert-warning
+                                {% elseif installment.state == 'Pagada' %}alert alert-success
+                                {% endif %}
+                            ">
+                        {{ installment.state }}
+                    </td>
+                    <td>
+                        <h5>
+                            <span class="badge badge-primary">
+                                <a href="{{ installment.checkoutUrl }}" target="_blank">
+                                    <span class="text-white">
+                                           <i class="fa fa-expand-arrows-alt" aria-hidden="true"></i> Abrir checkout
+                                    </span>
+                                </a>
+                            </span>
+
+                            {% if installment.state == 'Pendiente' %}
+                                <span class="badge badge-primary">
+                                    <a href="{{ installment.pdfUrl }}" target="_blank">
+                                        <span class="text-white">
+                                               <i class="fa fa-expand-arrows-alt" aria-hidden="true"></i> Imprimir cupón
+                                        </span>
+                                    </a>
+                                </span>
+                            {% endif %}
+                        </h5>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+
+    {% include "AppBundle:Layout:navigation.html.twig" with {"table" : table} %}
 {% endblock %}
