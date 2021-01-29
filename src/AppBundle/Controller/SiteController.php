@@ -11,6 +11,7 @@ use AppBundle\Entity\Student;
 use AppBundle\Form\CodeIdType;
 use AppBundle\Form\WayOutAuthorizationType;
 use AppBundle\Repository\AboutRepository;
+use AppBundle\Repository\InstallmentRepository;
 use AppBundle\Repository\PlanRepository;
 use AppBundle\Repository\SettingsRepository;
 use AppBundle\Repository\ShiftRepository;
@@ -139,10 +140,48 @@ class SiteController extends AbstractController
             $classrooms[] = $shift->getClassrooms()->count();
         }
 
+        /** @var InstallmentRepository $installmentRepository */
+        $installmentRepository = $this->getRepository(Installment::class);
+
+        $pendingInstallments = $installmentRepository->findAllByState('Pendiente');
+        $pendingArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        /** @var Installment $pendingInstallment */
+        foreach ($pendingInstallments as $pendingInstallment) {
+            $month = $pendingInstallment->getDueDate()->format('n');
+            $pendingArray[$month]++;
+        }
+
+        $paidInstallments = $installmentRepository->findAllByState('Pagada');
+        $paidArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        /** @var Installment $paidInstallment */
+        foreach ($paidInstallments as $paidInstallment) {
+            $month = $paidInstallment->getDueDate()->format('n');
+            $paidArray[$month]++;
+        }
+
+        $paidInstallments = $installmentRepository->findAllByState('Pagada');
+        $paidArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        /** @var Installment $paidInstallment */
+        foreach ($paidInstallments as $paidInstallment) {
+            $month = $paidInstallment->getDueDate()->format('n');
+            $paidArray[$month]++;
+        }
+
+        $expiredInstallments = $installmentRepository->findAllByState('Vencida');
+        $expiredArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        /** @var Installment $paidInstallment */
+        foreach ($expiredInstallments as $expiredInstallment) {
+            $month = $expiredInstallment->getDueDate()->format('n');
+            $expiredArray[$month]++;
+        }
+
         return $this->render('AppBundle:Site:dashboard.html.twig', [
             'sexes' => sprintf("%s, %s, %s", count($male), count($female), count($undefined)),
             'shiftNames' => json_encode($shiftNames),
-            'classrooms' => json_encode($classrooms)
+            'classrooms' => json_encode($classrooms),
+            'pendingArray' => json_encode($pendingArray),
+            'paidArray' => json_encode($paidArray),
+            'expiredArray' => json_encode($expiredArray)
         ]);
     }
 
