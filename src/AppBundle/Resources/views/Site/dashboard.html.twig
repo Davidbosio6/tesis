@@ -177,7 +177,7 @@
                 ],
                 datasets: [{
                     label: 'Pendiente',
-                    data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
+                    data: {{ pendingArray | raw }},
                     backgroundColor: [
                         'rgb(255,218,86)',
                         'rgb(255,218,86)',
@@ -209,7 +209,7 @@
                     borderWidth: 1
                 }, {
                     label: 'Pagada',
-                    data: [18, 19, 3, 5, 2, 3, 18, 19, 3, 5, 2, 3],
+                    data: {{ paidArray | raw }},
                     backgroundColor: [
                         'rgb(190,255,86)',
                         'rgb(190,255,86)',
@@ -242,7 +242,7 @@
                     borderWidth: 1
                 }, {
                     label: 'Vencida',
-                    data: [18, 19, 3, 5, 2, 3, 18, 19, 3, 5, 2, 3],
+                    data: {{ expiredArray | raw }},
                     backgroundColor: [
                         'rgb(255,86,86)',
                         'rgb(255,86,86)',

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Installment;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
@@ -21,5 +22,23 @@ class InstallmentRepository extends EntityRepository
         $qb = $this->createQueryBuilder('installment');
 
         return $qb->getQuery();
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return Installment[]|null
+     */
+    public function findAllByState(
+        string $value
+    ): ?array {
+        $qb = $this->createQueryBuilder('installment');
+
+        return $qb->where(
+            $qb->expr()->like('installment.state', ':value')
+        )
+            ->setParameter('value', $value)
+            ->getQuery()
+            ->getResult();
     }
 }
