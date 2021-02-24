@@ -44,26 +44,26 @@ class Pagos360Sdk
         Student $student
     ): void {
         $monthNumber = (new DateTime())->format('m');
-        $installmentQuantity = 12 - $monthNumber;
+        $monthNumber++;
 
-        $monthTranslate = [
+        $months = [
             1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
             5 => 'Mayo', 6 => 'Junio', 7 => 'Julio', 8 => 'Agosto',
             9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre'
         ];
 
-        for ($i = 1; $i <= $installmentQuantity; $i++) {
+        for ($i = intval($monthNumber); $i <= 12; $i++) {
             $date = date_create(sprintf(
                 '%s-%s-%s',
                 (new DateTime())->format('Y'),
-                (new DateTime())->modify('+' . $i . 'month')->format('m'),
+                $i,
                 15,
             ));
 
             $installment = new Installment();
             $installment->setAmount($student->getPlan()->getAmount())
                 ->setState(Installment::PENDING_STATE)
-                ->setDescription('Cuota ' . $monthTranslate[intval((new DateTime())->modify('+' . $i . 'month')->format('m'))])
+                ->setDescription('Cuota ' . $months[$i])
                 ->setDueDate($date)
                 ->setStudent($student);
 

@@ -20,9 +20,9 @@ use Doctrine\Persistence\ObjectManager;
  */
 class LoadStudentData extends AbstractFixture implements DependentFixtureInterface
 {
-    const STUDENT_1 = 'student_1';
-
-    const STUDENT_2 = 'student_2';
+    const STUDENT_51 = 'student_51';
+    const STUDENT_52 = 'student_52';
+    const STUDENT_53 = 'student_53';
 
     /**
      * {@inheritdoc}
@@ -1038,14 +1038,15 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setFirstName('Juan');
         $student->setLastName('Pereyra');
         $student->setSex('Masculino');
-        $student->setPhoto('empty.png');
-        $student->setInstallmentsGenerated(false);
+        $student->setPhoto('student_51.png');
+        $student->setInstallmentsGenerated(true);
         $student->setCity($city1);
         $student->addAdvisor($advisor5);
         $student->setClassroom($classroom3);
         $student->setPlan($plan3);
         $student->setMedicalHistory($medicalHistory3);
         $manager->persist($student);
+        $this->addReference(self::STUDENT_51, $student);
 
         $student = new Student();
         $hashedId = strtoupper(hash('crc32', 1));
@@ -1057,7 +1058,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setLastName('Gil');
         $student->setSex('Femenino');
         $student->setPhoto('student_1.png');
-        $student->setInstallmentsGenerated(true);
+        $student->setInstallmentsGenerated(false);
         $student->setCity($city1);
         $student->addAdvisor($advisor1);
         $student->addAdvisor($advisor2);
@@ -1065,7 +1066,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setPlan($plan5);
         $student->setMedicalHistory($medicalHistory1);
         $manager->persist($student);
-        $this->addReference(self::STUDENT_1, $student);
+        $this->addReference(self::STUDENT_52, $student);
 
         $student = new Student();
         $hashedId = strtoupper(hash('crc32', 2));
@@ -1085,7 +1086,7 @@ class LoadStudentData extends AbstractFixture implements DependentFixtureInterfa
         $student->setPlan($plan1);
         $student->setMedicalHistory($medicalHistory2);
         $manager->persist($student);
-        $this->addReference(self::STUDENT_2, $student);
+        $this->addReference(self::STUDENT_53, $student);
 
         //------------------------------------------------ PRE-SING-UP STUDENTS
 

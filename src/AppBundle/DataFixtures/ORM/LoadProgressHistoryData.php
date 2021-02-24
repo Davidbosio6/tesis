@@ -22,27 +22,27 @@ class LoadProgressHistoryData extends AbstractFixture implements FixtureInterfac
      */
     public function load(ObjectManager $manager)
     {
-        /** @var Student $student1 */
-        $student1 = $this->getReference(LoadStudentData::STUDENT_1);
+        /** @var Student $student52 */
+        $student52 = $this->getReference(LoadStudentData::STUDENT_52);
 
         $progressHistory = new ProgressHistory();
         $progressHistory->setTittle('Motriz');
         $progressHistory->setCreatedAt(new DateTime('now -3 months'));
         $progressHistory->setDescription('La alumna pudo tomar su desayuno sin ayuda');
-        $progressHistory->setStudent($student1);
+        $progressHistory->setStudent($student52);
         $manager->persist($progressHistory);
 
         $progressHistory = new ProgressHistory();
         $progressHistory->setTittle('Cognitivo');
         $progressHistory->setCreatedAt(new DateTime('now -3 months'));
         $progressHistory->setDescription('La alumna aprendió a contar hasta 10');
-        $progressHistory->setStudent($student1);
+        $progressHistory->setStudent($student52);
         $manager->persist($progressHistory);
 
         $progressHistory = new ProgressHistory();
         $progressHistory->setTittle('Cognitivo');
         $progressHistory->setDescription('La alumna aprendió a contar hasta 20');
-        $progressHistory->setStudent($student1);
+        $progressHistory->setStudent($student52);
         $manager->persist($progressHistory);
 
         $manager->flush();

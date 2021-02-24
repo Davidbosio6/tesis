@@ -105,7 +105,7 @@ class LoadAdvisorData extends AbstractFixture implements DependentFixtureInterfa
         $advisor->setPhoneNumber('3582342278');
         $advisor->setFirstName('Santiago');
         $advisor->setLastName('Silva');
-        $advisor->setPhoto('empty.png');
+        $advisor->setPhoto('advisor_5.png');
         $advisor->setCity($city1);
         $manager->persist($advisor);
         $this->addReference(self::ADVISOR_5, $advisor);
