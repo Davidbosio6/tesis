@@ -363,6 +363,10 @@ class StudentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getEntityManager();
 
+            /** @var Classroom $classroom */
+            $classroom = $em->getRepository(Classroom::class)->find($student->getClassroom());
+            $student->setClassroom($classroom);
+
             if (!empty($form['photo']->getData())) {
                 $fileName = sprintf('student_%s.png', $student->getId());
 

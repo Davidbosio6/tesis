@@ -57,7 +57,7 @@ class Pagos360Sdk
                 '%s-%s-%s',
                 (new DateTime())->format('Y'),
                 $i,
-                15,
+                15
             ));
 
             $installment = new Installment();

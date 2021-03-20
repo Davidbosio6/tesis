@@ -284,7 +284,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
             '%s-%s-%s',
             2020,
             $month,
-            15,
+            15
         ));
     }
 
