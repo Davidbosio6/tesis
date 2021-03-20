@@ -19,6 +19,7 @@ class Installment
 {
     const PENDING_STATE = 'Pendiente';
     const PAID_STATE = 'Pagada';
+    const EXPIRED_STATE = 'Vencida';
 
     /**
      * @ORM\Column(type="integer")

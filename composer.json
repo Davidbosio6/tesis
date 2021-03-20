@@ -21,6 +21,7 @@
         "doctrine/orm": "^2.5",
         "google/apiclient": "^2.0",
         "gregwar/captcha-bundle": "2",
+        "gregwar/captcha": "~1.1",
         "guzzlehttp/guzzle": "^7.0",
         "incenteev/composer-parameter-handler": "^2.0",
         "jms/di-extra-bundle": "dev-master",

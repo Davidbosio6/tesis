@@ -30,12 +30,12 @@ class SendgridSdk
     /**
      * @param Student $student
      * @param string $email
-     * @param string|null $advisorName
+     * @param string $advisorName
      */
     public function sendWelcomeEmail(
         Student $student,
         string $email,
-        string $advisorName = null
+        string $advisorName
     ) {
         $dynamicTemplateData = [
             'advisor_name' => $advisorName,

@@ -129,7 +129,9 @@ class InstallmentController extends AbstractController
         ]);
 
         $response = $this->getPagos360SdkService()->syncUpInstallments($installments);
-        $this->addFlash('success', 'Se han sincronizado ' . $response . ' pagos');
+        $this->addFlash('success', 'Se han sincronizado ' . $response . ' cuotas');
+
+        $this->getEntityManager()->flush();
 
         return $this->redirectToRoute('installment_list');
     }

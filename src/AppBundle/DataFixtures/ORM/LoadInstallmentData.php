@@ -30,7 +30,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
         $installment = new Installment();
         $installment->setStudent($student51)
             ->setAmount(2000)
-            ->setState(Installment::PENDING_STATE)
+            ->setState(Installment::PAID_STATE)
             ->setDescription('Cuota Febrero')
             ->setTransactionId(986489)
             ->setCheckoutUrl('https://sandboxcheckout.pagos360.com/payment-request/83c03616-6383-11eb-90d2-160dac5dea65')
@@ -41,7 +41,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
         $installment = new Installment();
         $installment->setStudent($student51)
             ->setAmount(2000)
-            ->setState(Installment::PENDING_STATE)
+            ->setState(Installment::PAID_STATE)
             ->setDescription('Cuota Marzo')
             ->setTransactionId(986490)
             ->setCheckoutUrl('https://sandboxapi.pagos360.com/payment-request/pdf/8413394c-6383-11eb-b104-160dac5dea65')
@@ -151,7 +151,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
         $installment = new Installment();
         $installment->setStudent($student53)
             ->setAmount(1000)
-            ->setState(Installment::PENDING_STATE)
+            ->setState(Installment::PAID_STATE)
             ->setDescription('Cuota Febrero')
             ->setTransactionId(986467)
             ->setCheckoutUrl('https://sandboxcheckout.pagos360.com/payment-request/a9bc2768-6373-11eb-bfa9-160dac5dea65')
@@ -162,7 +162,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
         $installment = new Installment();
         $installment->setStudent($student53)
             ->setAmount(1000)
-            ->setState(Installment::PENDING_STATE)
+            ->setState(Installment::PAID_STATE)
             ->setDescription('Cuota Marzo')
             ->setTransactionId(986468)
             ->setCheckoutUrl('https://sandboxcheckout.pagos360.com/payment-request/aa075e36-6373-11eb-8f68-160dac5dea65')

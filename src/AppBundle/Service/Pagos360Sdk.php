@@ -119,6 +119,7 @@ class Pagos360Sdk
         array $installments
     ): int {
         $installmentsPaid = 0;
+        $installmentsExpired = 0;
         foreach ($installments as $installment){
             try {
                 $client = new HttpClient([
@@ -142,11 +143,16 @@ class Pagos360Sdk
                     $installmentsPaid++;
                 }
 
+                if ($jsonResponse->state === 'expired') {
+                    $installment->setState(Installment::EXPIRED_STATE);
+                    $installmentsExpired++;
+                }
+
             } catch (Exception | Throwable $e) {
                 //TODO save exception
             }
         }
 
-        return $installmentsPaid;
+        return $installmentsPaid + $installmentsExpired;
     }
 }

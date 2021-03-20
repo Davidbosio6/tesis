@@ -408,13 +408,27 @@ class StudentController extends AbstractController
         Request $request,
         Student $student
     ): Response {
-        $form = $this->createForm(SelectEmailType::class);
+        $form = $this->createForm(
+            SelectEmailType::class,
+            null,
+            [
+                'student' => $student
+            ]
+        );
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var Advisor $advisor */
+            $advisor = $this->getRepository(Advisor::class)->find(
+                $form->get('advisor')->getData()
+            );
+
             $this->getSendgridSdkService()->sendWelcomeEmail(
                 $student,
-                $form->get('email')->getData()
+                $advisor->getEmail(),
+                $advisor->getFullName()
             );
 
             $this->addFlash('success', 'Correo enviado con éxito!');
