@@ -31,7 +31,6 @@ use JMS\DiExtraBundle\Annotation as DI;
  */
 class StudentType extends AbstractType
 {
-
     /**
      * @var EntityManager
      */

@@ -206,19 +206,39 @@
                             <td class="
                                 {% if installment.state == 'Pendiente' %}alert alert-warning
                                 {% elseif installment.state == 'Pagada' %}alert alert-success
+                                {% elseif installment.state == 'Vencida' %}alert alert-danger
                                 {% endif %}
                             ">
                                 {{ installment.state }}
                             </td>
                             <td>
                                 <h5>
-                                    <span class="badge badge-primary">
-                                        <a href="{{ installment.checkoutUrl }}" target="_blank">
-                                            <span class="text-white">
-                                                   <i class="fa fa-expand-arrows-alt" aria-hidden="true"></i> Abrir checkout
-                                            </span>
-                                    </a>
-                                    </span>
+                                    {% if installment.state == 'Pendiente' %}
+                                        <span class="badge badge-primary">
+                                            <a href="{{ installment.checkoutUrl }}" target="_blank">
+                                                <span class="text-white">
+                                                       <i class="fa fa-expand-arrows-alt" aria-hidden="true"></i> Abrir checkout
+                                                </span>
+                                            </a>
+                                        </span>
+
+                                        <span class="badge badge-primary">
+                                            <a href="{{ installment.pdfUrl }}" target="_blank">
+                                                <span class="text-white">
+                                                       <i class="fa fa-expand-arrows-alt" aria-hidden="true"></i> Imprimir cupón
+                                                </span>
+                                            </a>
+                                        </span>
+                                    {% endif %}
+                                    {% if installment.state == 'Vencida' and installment.reEstimated == false %}
+                                        <span class="badge badge-primary">
+                                            <a href="{{ path('installment_regenerate', {id: installment.id}) }}">
+                                                 <span class="text-white">
+                                                       <i class="fa fa-expand-arrows-alt" aria-hidden="true"></i> Generar nueva cuota
+                                                </span>
+                                            </a>
+                                        </span>
+                                    {% endif %}
                                 </h5>
                             </td>
                         </tr>

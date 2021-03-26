@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Installment;
 use AppBundle\Entity\Student;
+use AppBundle\Form\ProvinceType;
+use AppBundle\Form\RegenerateInstallmentType;
 use AppBundle\Repository\InstallmentRepository;
 use AppBundle\Repository\StudentRepository;
 use Exception;
@@ -50,6 +52,61 @@ class InstallmentController extends AbstractController
         return $this->redirectToRoute(
             'student_detail',
             ['id' => $student->getId()]
+        );
+    }
+
+    /**
+     * @Route("/regenerate/{id}", name="installment_regenerate")
+     *
+     * @param Request $request
+     * @param Installment $installment
+     *
+     * @return Response
+     */
+    public function regenerateAction(
+        Request $request,
+        Installment $installment
+    ): Response {
+        $form = $this->createForm(
+            RegenerateInstallmentType::class
+        );
+
+        $student = $installment->getStudent();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                if ($student->getPlan()->getAmount() > 0) {
+                    $this->getPagos360SdkService()->regenerateInstallment(
+                        $installment,
+                        $form->get('amount')->getData(),
+                        $form->get('dueDate')->getData()
+                    );
+                }
+
+                $this->getEntityManager()->flush();
+
+                $this->addFlash('success', 'Cuota regenerada con éxito!');
+
+                return $this->redirectToRoute(
+                    'student_detail',
+                    ['id' => $student->getId()]
+                );
+            } catch (Exception $e) {
+                $this->addFlash('error', $e->getMessage());
+
+                return $this->redirectToRoute(
+                    'student_detail',
+                    ['id' => $student->getId()]
+                );
+            }
+        }
+
+        return $this->render(
+            'AppBundle:Installment:regenerate.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
         );
     }
 
