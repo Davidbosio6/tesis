@@ -304,7 +304,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
     ): DateTime {
         return date_create(sprintf(
             '%s-%s-%s',
-            2020,
+            2021,
             $month,
             15
         ));

@@ -3,10 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Installment;
+use AppBundle\Entity\Settings;
 use AppBundle\Entity\Student;
-use AppBundle\Form\ProvinceType;
 use AppBundle\Form\RegenerateInstallmentType;
 use AppBundle\Repository\InstallmentRepository;
+use AppBundle\Repository\SettingsRepository;
 use AppBundle\Repository\StudentRepository;
 use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -102,10 +103,19 @@ class InstallmentController extends AbstractController
             }
         }
 
+        /** @var SettingsRepository $settingsRepository */
+        $settingsRepository = $this->getRepository(Settings::class);
+        $installmentPercent = $settingsRepository->findOneByCode(
+            SettingsRepository::INSTALLMENT_PERCENT_CODE
+        )->getValue();
+
+        $installmentAmount = $installment->getAmount();
+
         return $this->render(
             'AppBundle:Installment:regenerate.html.twig',
             [
                 'form' => $form->createView(),
+                'suggested_amount' => $installmentAmount + $installmentAmount * $installmentPercent / 100,
             ]
         );
     }

@@ -45,7 +45,7 @@
                     <td>{{ settings.id }}</td>
                     <td>{{ settings.name }}</td>
                     <td>{{ settings.value }}</td>
-                    <td>{{ settings.description }}</td>
+                    <td>{{ settings.description | raw }}</td>
                 </tr>
             {% endfor %}
         {% endif %}

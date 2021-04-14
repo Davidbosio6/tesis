@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Installment;
 use AppBundle\Entity\Plan;
+use AppBundle\Entity\Student;
 use AppBundle\Form\PlanType;
 use AppBundle\Repository\PlanRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -153,6 +155,8 @@ class PlanController extends AbstractController
         Plan $plan,
         Request $request
     ): Response {
+        $amountBeforeForm = $plan->getAmount();
+
         $form = $this->createForm(
             PlanType::class,
             $plan
@@ -162,6 +166,32 @@ class PlanController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getEntityManager();
+            $amountAfterForm = $plan->getAmount();
+
+            if ($amountAfterForm !== $amountBeforeForm && $amountAfterForm != 0) {
+                $students = $plan->getStudents();
+
+                if (!$students->isEmpty()) {
+                    /** @var Student $student */
+                    foreach ($students as $student) {
+                        $installments = $student->getInstallments();
+                        if (!$installments->isEmpty()) {
+                            /** @var Installment $installment */
+                            foreach ($installments as $installment) {
+                                if ($installment->getState() === Installment::PENDING_STATE) {
+                                    $this->getPagos360SdkService()->regenerateInstallmentFromPlan(
+                                        $installment,
+                                        $amountAfterForm
+                                    );
+
+                                    $em->remove($installment);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             $em->flush();
 
             $this->addFlash('success', 'El plan se editó con éxito!');
