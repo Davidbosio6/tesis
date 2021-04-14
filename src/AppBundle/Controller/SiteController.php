@@ -238,18 +238,17 @@ class SiteController extends AbstractController
     public function InstallmentsPaySelectInstallmentAction(
         Student $student
     ): Response {
-
         $installments = $student->getInstallments()->filter(
             function (Installment $installment) {
                 $today = new DateTime();
 
-                if ($installment->getDueDate()->getTimestamp() < $today->getTimestamp()) {
+                if ($installment->getMonth() <= (int)$today->format('n')) {
                     return $installment;
                 }
+
                 return null;
             }
         );
-
 
         return $this->render('AppBundle:Site:installments-pay-select-installment.html.twig', [
             'siteName' => $this->getSiteName(),

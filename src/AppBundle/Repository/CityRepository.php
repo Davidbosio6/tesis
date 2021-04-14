@@ -40,7 +40,7 @@ class CityRepository extends EntityRepository
                 $qb->expr()->like('city.name', ':value'),
                 $qb->expr()->like('city.postalCode', ':value'),
                 $qb->expr()->like('province.name', ':value'),
-                $qb->expr()->like('country.name', ':value'),
+                $qb->expr()->like('country.name', ':value')
             )
         )
             ->setParameter('value', "%" . trim($filter) . "%")

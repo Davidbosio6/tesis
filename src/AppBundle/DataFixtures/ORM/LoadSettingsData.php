@@ -48,6 +48,13 @@ class LoadSettingsData extends AbstractFixture
         $manager->persist($settings);
 
         $settings = new Settings();
+        $settings->setName('Re-estimación de cuotas');
+        $settings->setValue('10');
+        $settings->setDescription('Porcentaje utilizado para la sugerir la re-estimación de una cuota en estado <strong><i>vencida</i></strong>.');
+        $settings->setCode(SettingsRepository::INSTALLMENT_PERCENT_CODE);
+        $manager->persist($settings);
+
+        $settings = new Settings();
         $settings->setName('Dias de contacto');
         $settings->setValue('Lunes a Viernes');
         $settings->setDescription('Dato utilizado en la interfaz de Contacto');

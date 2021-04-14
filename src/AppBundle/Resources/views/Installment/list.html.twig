@@ -43,27 +43,39 @@
                 <tr>
                     <td>{{ installment.id }}</td>
                     <td>{{ installment.createdAt | date('d-m-Y') }}</td>
-                    <td>{{ installment.student.fullName }}</td>
+                    <td>
+                        <a href="{{ path('student_detail', {id: installment.student.id}) }}">
+                            {{ installment.student.fullName }}
+                        </a>
+                    </td>
                     <td>{{ installment.dueDate | date('d-m-Y') }}</td>
                     <td>${{ installment.amount }}</td>
                     <td class="
-                                {% if installment.state == 'Pendiente' %}alert alert-warning
-                                {% elseif installment.state == 'Pagada' %}alert alert-success
-                                {% endif %}
+                            {% if installment.state == 'Pendiente' %}alert alert-warning
+                            {% elseif installment.state == 'Pagada' %}alert alert-success
+                            {% elseif installment.state == 'Vencida' %}alert alert-danger
+                            {% endif %}
                             ">
                         {{ installment.state }}
                     </td>
                     <td>
                         <h5>
                             <span class="badge badge-primary">
-                                <a href="{{ installment.checkoutUrl }}" target="_blank">
+                                <a href="{{ path('student_detail', {id: installment.student.id}) }}">
                                     <span class="text-white">
-                                           <i class="fa fa-expand-arrows-alt" aria-hidden="true"></i> Abrir checkout
+                                           <i class="fa fa-search" aria-hidden="true"></i> Ver alumno
                                     </span>
                                 </a>
                             </span>
-
                             {% if installment.state == 'Pendiente' %}
+                                <span class="badge badge-primary">
+                                    <a href="{{ installment.checkoutUrl }}" target="_blank">
+                                        <span class="text-white">
+                                               <i class="fa fa-expand-arrows-alt" aria-hidden="true"></i> Abrir checkout
+                                        </span>
+                                    </a>
+                                </span>
+
                                 <span class="badge badge-primary">
                                     <a href="{{ installment.pdfUrl }}" target="_blank">
                                         <span class="text-white">

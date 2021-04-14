@@ -19,6 +19,7 @@ class Installment
 {
     const PENDING_STATE = 'Pendiente';
     const PAID_STATE = 'Pagada';
+    const EXPIRED_STATE = 'Vencida';
 
     /**
      * @ORM\Column(type="integer")
@@ -54,12 +55,22 @@ class Installment
     /**
      * @ORM\Column(type="integer")
      */
+    private $month;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
     private $transactionId;
 
     /**
      * @ORM\Column(type="string")
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $re_estimated = false;
 
     /**
      * @ORM\Column(type="string")
@@ -208,6 +219,27 @@ class Installment
     }
 
     /**
+     * @param int $month
+     *
+     * @return self
+     */
+    public function setMonth(
+        int $month
+    ): self {
+        $this->month = $month;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMonth(): ?int
+    {
+        return $this->month;
+    }
+
+    /**
      * @param int $transactionId
      *
      * @return self
@@ -226,6 +258,27 @@ class Installment
     public function getTransactionId(): ?int
     {
         return $this->transactionId;
+    }
+
+    /**
+     * @param bool $re_estimated
+     *
+     * @return self
+     */
+    public function setReEstimated(
+        bool $re_estimated
+    ): self {
+        $this->re_estimated = $re_estimated;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getReEstimated(): ?bool
+    {
+        return $this->re_estimated;
     }
 
     /**

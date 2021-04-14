@@ -65,6 +65,7 @@ class Pagos360Sdk
                 ->setState(Installment::PENDING_STATE)
                 ->setDescription('Cuota ' . $months[$i])
                 ->setDueDate($date)
+                ->setMonth($monthNumber)
                 ->setStudent($student);
 
             $this->em->persist($installment);
@@ -110,6 +111,135 @@ class Pagos360Sdk
     }
 
     /**
+     * @param Installment $installment
+     * @param float $amount
+     * @param DateTime $dueDate
+     */
+    public function regenerateInstallment(
+        Installment $installment,
+        float $amount,
+        DateTime $dueDate
+    ): void {
+        $months = [
+            1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
+            5 => 'Mayo', 6 => 'Junio', 7 => 'Julio', 8 => 'Agosto',
+            9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre'
+        ];
+
+        $newInstallment = new Installment();
+        $newInstallment->setAmount($amount)
+            ->setState(Installment::PENDING_STATE)
+            ->setDescription('Cuota ' . $months[$installment->getMonth()] . ' (Re-estimada)')
+            ->setDueDate($dueDate)
+            ->setMonth($installment->getMonth())
+            ->setStudent($installment->getStudent());
+
+        $this->em->persist($newInstallment);
+        $body = [
+            'payment_request' => [
+                'description' => $newInstallment->getDescription(),
+                'first_due_date' => $newInstallment->getDueDate()->format('d-m-Y'),
+                'first_total' => floatval($newInstallment->getAmount()),
+                'payer_name' => $installment->getStudent()->getFullName()
+            ]
+        ];
+
+        $installment->setReEstimated(true);
+
+        try {
+            $client = new HttpClient([
+                'base_uri' => 'https://sandboxapi.pagos360.com/',
+                'exceptions' => true,
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->apikey
+                ]
+            ]);
+
+            $response = $client->request(
+                'POST',
+                'payment-request',
+                ['body' => json_encode($body)]
+            );
+
+            $jsonResponse = json_decode((string)$response->getBody());
+
+            $newInstallment->setTransactionId($jsonResponse->id);
+            $newInstallment->setCheckoutUrl($jsonResponse->checkout_url);
+            $newInstallment->setPdfUrl($jsonResponse->pdf_url);
+        } catch (Exception | Throwable $e) {
+            $this->em->remove($newInstallment);
+            $installment->setReEstimated(false);
+
+            throw new Exception('Ocurrió un error mientras se generaba la cuota!');
+        }
+    }
+
+    /**
+     * @param Installment $installment
+     * @param float $amount
+     */
+    public function regenerateInstallmentFromPlan(
+        Installment $installment,
+        float $amount
+    ): void {
+        $months = [
+            1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
+            5 => 'Mayo', 6 => 'Junio', 7 => 'Julio', 8 => 'Agosto',
+            9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre'
+        ];
+
+        $newInstallment = new Installment();
+        $newInstallment->setAmount($amount)
+            ->setState(Installment::PENDING_STATE)
+            ->setDescription($installment->getDescription())
+            ->setDueDate($installment->getDueDate())
+            ->setMonth($installment->getMonth())
+            ->setStudent($installment->getStudent());
+
+        $this->em->persist($newInstallment);
+        $body = [
+            'payment_request' => [
+                'description' => $newInstallment->getDescription(),
+                'first_due_date' => $newInstallment->getDueDate()->format('d-m-Y'),
+                'first_total' => floatval($newInstallment->getAmount()),
+                'payer_name' => $installment->getStudent()->getFullName()
+            ]
+        ];
+
+        try {
+            $client = new HttpClient([
+                'base_uri' => 'https://sandboxapi.pagos360.com/',
+                'exceptions' => true,
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->apikey
+                ]
+            ]);
+
+            $response = $client->request(
+                'POST',
+                'payment-request',
+                ['body' => json_encode($body)]
+            );
+
+            $jsonResponse = json_decode((string)$response->getBody());
+
+            $newInstallment->setTransactionId($jsonResponse->id);
+            $newInstallment->setCheckoutUrl($jsonResponse->checkout_url);
+            $newInstallment->setPdfUrl($jsonResponse->pdf_url);
+        } catch (Exception | Throwable $e) {
+            $this->em->remove($newInstallment);
+
+            dump($response);die;
+
+            dump($e->getMessage());die;
+
+            throw new Exception('Ocurrió un error mientras se generaba la cuota!');
+        }
+    }
+
+    /**
      * @param Installment[] $installments
      * @return int
      *
@@ -119,6 +249,7 @@ class Pagos360Sdk
         array $installments
     ): int {
         $installmentsPaid = 0;
+        $installmentsExpired = 0;
         foreach ($installments as $installment){
             try {
                 $client = new HttpClient([
@@ -142,11 +273,16 @@ class Pagos360Sdk
                     $installmentsPaid++;
                 }
 
+                if ($jsonResponse->state === 'expired') {
+                    $installment->setState(Installment::EXPIRED_STATE);
+                    $installmentsExpired++;
+                }
+
             } catch (Exception | Throwable $e) {
                 //TODO save exception
             }
         }
 
-        return $installmentsPaid;
+        return $installmentsPaid + $installmentsExpired;
     }
 }

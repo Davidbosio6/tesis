@@ -141,6 +141,7 @@ class Student
     /**
      * @var Installment[]
      *
+     * @ORM\OrderBy({"month" = "ASC"})
      * @ORM\OneToMany(targetEntity="Installment", mappedBy="student")
      */
     private $installments;

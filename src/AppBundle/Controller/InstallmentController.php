@@ -3,8 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Installment;
+use AppBundle\Entity\Settings;
 use AppBundle\Entity\Student;
+use AppBundle\Form\RegenerateInstallmentType;
 use AppBundle\Repository\InstallmentRepository;
+use AppBundle\Repository\SettingsRepository;
 use AppBundle\Repository\StudentRepository;
 use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -50,6 +53,70 @@ class InstallmentController extends AbstractController
         return $this->redirectToRoute(
             'student_detail',
             ['id' => $student->getId()]
+        );
+    }
+
+    /**
+     * @Route("/regenerate/{id}", name="installment_regenerate")
+     *
+     * @param Request $request
+     * @param Installment $installment
+     *
+     * @return Response
+     */
+    public function regenerateAction(
+        Request $request,
+        Installment $installment
+    ): Response {
+        $form = $this->createForm(
+            RegenerateInstallmentType::class
+        );
+
+        $student = $installment->getStudent();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                if ($student->getPlan()->getAmount() > 0) {
+                    $this->getPagos360SdkService()->regenerateInstallment(
+                        $installment,
+                        $form->get('amount')->getData(),
+                        $form->get('dueDate')->getData()
+                    );
+                }
+
+                $this->getEntityManager()->flush();
+
+                $this->addFlash('success', 'Cuota regenerada con éxito!');
+
+                return $this->redirectToRoute(
+                    'student_detail',
+                    ['id' => $student->getId()]
+                );
+            } catch (Exception $e) {
+                $this->addFlash('error', $e->getMessage());
+
+                return $this->redirectToRoute(
+                    'student_detail',
+                    ['id' => $student->getId()]
+                );
+            }
+        }
+
+        /** @var SettingsRepository $settingsRepository */
+        $settingsRepository = $this->getRepository(Settings::class);
+        $installmentPercent = $settingsRepository->findOneByCode(
+            SettingsRepository::INSTALLMENT_PERCENT_CODE
+        )->getValue();
+
+        $installmentAmount = $installment->getAmount();
+
+        return $this->render(
+            'AppBundle:Installment:regenerate.html.twig',
+            [
+                'form' => $form->createView(),
+                'suggested_amount' => $installmentAmount + $installmentAmount * $installmentPercent / 100,
+            ]
         );
     }
 
@@ -129,7 +196,9 @@ class InstallmentController extends AbstractController
         ]);
 
         $response = $this->getPagos360SdkService()->syncUpInstallments($installments);
-        $this->addFlash('success', 'Se han sincronizado ' . $response . ' pagos');
+        $this->addFlash('success', 'Se han sincronizado ' . $response . ' cuotas');
+
+        $this->getEntityManager()->flush();
 
         return $this->redirectToRoute('installment_list');
     }
