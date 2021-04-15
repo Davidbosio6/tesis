@@ -46,7 +46,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
 
         $classroom = new Classroom();
         $classroom->setName('Celeste');
-        $classroom->setDescription('Sala de 3');
+        $classroom->setDescription('3 Años');
         $classroom->setCapacity(20);
         $classroom->setShift($shift1);
         $classroom->setCalendar($calendar3);
@@ -56,7 +56,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         $classroom = new Classroom();
         $classroom->setName('Verde');
         $classroom->setCapacity(22);
-        $classroom->setDescription('Sala de 3');
+        $classroom->setDescription('3 Años');
         $classroom->setShift($shift2);
         $classroom->setCalendar($calendar1);
         $manager->persist($classroom);
@@ -65,7 +65,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         $classroom = new Classroom();
         $classroom->setName('Amarilla');
         $classroom->setCapacity(13);
-        $classroom->setDescription('Sala de 4');
+        $classroom->setDescription('4 Años');
         $classroom->setShift($shift1);
         $classroom->setCalendar($calendar4);
         $manager->persist($classroom);
@@ -74,7 +74,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         $classroom = new Classroom();
         $classroom->setName('Violeta');
         $classroom->setCapacity(20);
-        $classroom->setDescription('Sala de 4');
+        $classroom->setDescription('4 Años');
         $classroom->setShift($shift2);
         $classroom->setCalendar($calendar2);
         $manager->persist($classroom);
@@ -83,7 +83,7 @@ class LoadClassroomData extends AbstractFixture implements FixtureInterface, Dep
         $classroom = new Classroom();
         $classroom->setName('Roja');
         $classroom->setCapacity(25);
-        $classroom->setDescription('Sala de 5');
+        $classroom->setDescription('5 Años');
         $classroom->setShift($shift1);
         $classroom->setCalendar($calendar5);
         $manager->persist($classroom);

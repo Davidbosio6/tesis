@@ -98,7 +98,6 @@ class GoogleSdk
         Calendar $calendar,
         string $eventId,
         string $dir
-
     ): void {
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $dir . '/web/public/credentials.json');
 

@@ -56,7 +56,7 @@ class CalendarController extends AbstractController
                     $this->getParameter('kernel.project_dir')
                 );
             } catch (Exception | Throwable $e) {
-                $this->addFlash('error', 'Ocurrió un error mientras se crear el registro');
+                $this->addFlash('error', 'Ocurrió un error mientras se intentaba crear el registro');
 
                 return $this->redirectToRoute(
                     'classroom_detail',
