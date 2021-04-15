@@ -65,7 +65,7 @@ class Pagos360Sdk
                 ->setState(Installment::PENDING_STATE)
                 ->setDescription('Cuota ' . $months[$i])
                 ->setDueDate($date)
-                ->setMonth($monthNumber)
+                ->setMonth($i)
                 ->setStudent($student);
 
             $this->em->persist($installment);

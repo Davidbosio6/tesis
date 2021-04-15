@@ -63,7 +63,9 @@ class SignUpType extends AbstractType
             ])
             ->add('plan', EntityType::class, [
                 'class' => Plan::class,
-                'choice_label' => 'name'
+                'choice_label' => function (Plan $plan) {
+                    return $plan->getName() . ' - $'. $plan->getAmount();
+                }
             ])
             ->add('generateInstallments', ChoiceType::class, [
                 'choices' => [

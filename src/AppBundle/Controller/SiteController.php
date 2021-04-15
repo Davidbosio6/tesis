@@ -242,7 +242,7 @@ class SiteController extends AbstractController
             function (Installment $installment) {
                 $today = new DateTime();
 
-                if ($installment->getMonth() <= (int)$today->format('n')) {
+                if ($installment->getMonth() <= (int)$today->format('n') + 1) {
                     return $installment;
                 }
 

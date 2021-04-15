@@ -59,6 +59,7 @@ class Province
      * @var City[]|ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="City", mappedBy="province")
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     private $cities;
 

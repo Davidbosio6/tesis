@@ -47,10 +47,6 @@ class AdvisorType extends AbstractType
                 'placeholder' => '-- Seleccione una --',
                 'choices' => $this->getStudentRelationship()
             ])
-            ->add('photo', FileType::class, [
-                'required' => false,
-                'mapped' => false
-            ])
             ->add('address', TextType::class)
             ->add('notes', TextareaType::class, ['required' => false])
         ;

@@ -20,9 +20,24 @@ class MedicalHistoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('weight', TextType::class)
-            ->add('height', TextType::class)
-            ->add('bloodType', TextType::class)
+            ->add('weight', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Ej: 30Kg',
+                    'autocomplete' => 'off',
+                ]
+            ])
+            ->add('height', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Ej: 1.20M',
+                    'autocomplete' => 'off',
+                ]
+            ])
+            ->add('bloodType', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Ej: A+',
+                    'autocomplete' => 'off',
+                ]
+            ])
             ->add('allergy', TextareaType::class, ['required' => false])
             ->add('chronicIllness', TextareaType::class, ['required' => false])
             ->add('medicine', TextareaType::class, ['required' => false])

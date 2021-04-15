@@ -54,7 +54,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
         $installment = new Installment();
         $installment->setStudent($student51)
             ->setAmount(2000)
-            ->setState(Installment::PENDING_STATE)
+            ->setState(Installment::PAID_STATE)
             ->setMonth(4)
             ->setDescription('Cuota Abril')
             ->setTransactionId(986491)
@@ -186,7 +186,7 @@ class LoadInstallmentData extends AbstractFixture implements FixtureInterface, D
         $installment = new Installment();
         $installment->setStudent($student53)
             ->setAmount(1000)
-            ->setState(Installment::PENDING_STATE)
+            ->setState(Installment::PAID_STATE)
             ->setMonth(4)
             ->setDescription('Cuota Abril')
             ->setTransactionId(986469)
